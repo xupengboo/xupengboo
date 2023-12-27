@@ -137,7 +137,7 @@ CALL insert_s2(10001, 10000);
 select * from s1;
 select * from s2;
 ```
-> 💡Tips：[https://zhuanlan.zhihu.com/p/623125075](https://zhuanlan.zhihu.com/p/623125075)
+> 💡参考：[https://zhuanlan.zhihu.com/p/623125075](https://zhuanlan.zhihu.com/p/623125075)
 
 ## MySQL 表格分区
 ### 什么情况下，考虑 表格分区？ 
