@@ -10,11 +10,11 @@
 ![image.png](https://cdn.nlark.com/yuque/0/2024/png/32707260/1704179123586-e1b323c4-96c9-4671-ab92-d7605d7c9def.png#averageHue=%23e5c192&clientId=u2e1fae89-0414-4&from=paste&height=365&id=u335403c9&originHeight=456&originWidth=717&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=29085&status=done&style=none&taskId=ub9c693e5-a930-4ca1-9636-1860da92ee9&title=&width=573.6)
 
 然后，看了看gitlab容器卷挂载目录data中，有一个prometheus目录居然占了29G，百度了一下，原来这个是用来监控的。。。所以，内容一直堆积堆积，导致磁盘满了。。。
-:::info
+
 GitLab中的 Prometheus 解释如下：
 GitLab中的Prometheus是一个用于监控和报警的开源系统，它能够收集并汇总时间序列数据，用于检测异常。同时，GitLab还提供了一些关于Prometheus的基础功能，包括数据聚合、存储时间等。这些功能可以帮助用户更好地了解其系统运行状况，并及时发现和解决潜在问题。
-:::
-/var/opt/gitlab/prometheus/data是 [Prometheus](https://so.csdn.net/so/search?q=Prometheus&spm=1001.2101.3001.7020) 生成的监控数据文件，可参考文档 Monitoring GitLab with Prometheus。
+
+`/var/opt/gitlab/prometheus/data`是 [Prometheus](https://so.csdn.net/so/search?q=Prometheus&spm=1001.2101.3001.7020) 生成的监控数据文件，可参考文档 Monitoring GitLab with Prometheus。
 ![image.png](https://cdn.nlark.com/yuque/0/2024/png/32707260/1704179781371-6488aff0-48ca-46c8-916d-cecd292ee67c.png#averageHue=%23252321&clientId=u2e1fae89-0414-4&from=paste&height=423&id=u791ddef0&originHeight=529&originWidth=779&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=76058&status=done&style=none&taskId=ufef2c9ac-469d-40e3-ad3b-5f4035103ed&title=&width=623.2)
 
 **解决办法：**
