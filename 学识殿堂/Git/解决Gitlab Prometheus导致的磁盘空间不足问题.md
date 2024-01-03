@@ -23,9 +23,11 @@ GitLab中的Prometheus是一个用于监控和报警的开源系统，它能够�
 **解决办法：**
 
 1. **先备份一下**，云服务器购买个存储库，备份一下，临时的话可以用先`按需计费`省钱。
-2. 因为，我已经备份了，所以我就可以肆无忌惮的删一点。就把`gitlab/data/prometheus/data/wal`里面的一大文件删了一部分保证gitlab的服务能启动起来。
+2. 因为，我已经备份了，所以我就可以肆无忌惮的删一点。就把`gitlab/data/prometheus/data/wal`里面的一大文件删了一部分，保证gitlab的服务能启动起来。
 
 ![image.png](https://cdn.nlark.com/yuque/0/2024/png/32707260/1704186118822-b54b3c57-aa89-45b1-bffb-a7e143ed5c6c.png#averageHue=%23272422&clientId=u3ad95638-42fe-4&from=paste&height=433&id=u9bb8b11e&originHeight=541&originWidth=855&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=59603&status=done&style=none&taskId=u712e5236-9e8b-4045-8ad5-c97ebea3c6f&title=&width=684)
+
+> 💡Tips：可能因为系统盘已经爆满，项目启动不起来，可以手动删除wal目录下面的一些大文件，先让磁盘有些空余，保险起见还是要提前备份一下。
 
 3. **修改一下**`**gitlab/config/gitlab.rb **`**配置文件。**
 
