@@ -146,8 +146,8 @@ select * from s2;
 ### MySQL 分区步骤
 MySQL 表格分区是一种将一个表格分成多个较小的、独立的区域，以提高查询性能和管理方便性的技术。下面是操作 MySQL 表格分区的一般步骤：
 
-1. **确保你的 MySQL 版本支持表格分区。**MySQL 5.6 及以上版本都支持表格分区。
-2. **创建表格时指定分区。**在 CREATE TABLE 语句中，使用 PARTITION BY 子句指定分区方法。常见的分区方法包括：
+1. **确保你的 MySQL 版本支持表格分区**。MySQL 5.6 及以上版本都支持表格分区。
+2. **创建表格时指定分区**。在 CREATE TABLE 语句中，使用 PARTITION BY 子句指定分区方法。常见的分区方法包括：
    - **RANGE：根据列的值的范围进行分区。**
    - **LIST：根据列的值的列表进行分区。**
    - **HASH：根据列的哈希值进行分区。**
@@ -213,7 +213,7 @@ INSERT INTO customers (id, name, year, partitioned_column) VALUES (1, 'John Doe'
 SELECT * FROM customers WHERE year = 2008;
 ```
 
-3. **调整分区。**你可以根据需要添加、删除或合并分区。例如，为顾客表格添加一个新的分区：
+3. **调整分区**。你可以根据需要添加、删除或合并分区。例如，为顾客表格添加一个新的分区：
 ```sql
 ALTER TABLE customers ADD PARTITION (PARTITION p4 VALUES LESS THAN (2015));
 ```
@@ -226,7 +226,7 @@ ALTER TABLE customers ADD PARTITION (PARTITION p4 VALUES LESS THAN (2015));
 show table status;
 ```
 
-使用 **`OPTIMIZE TABLE`**命令：是优化表格的命令。也可以优化和修复分区**。
+使用 **`OPTIMIZE TABLE`命令：是优化表格的命令。也可以优化和修复分区**。
 它的作用主要是**重建表索引，并压缩表碎片，使得数据物理排列更加紧密，从而加快查询速度**。此外，它还可以更新统计信息和缓存，从而减少数据读取次数和IO操作，大大提高数据库效率。
 场景：优化删除大量数据后的表，或者对含有可变长度行的表（含有VARCHAR, BLOB或TEXT列的表）进行很多更改后的优化。一般针对特定的表格，进行周期运行。
 
