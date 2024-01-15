@@ -1,5 +1,5 @@
 # hello-world
-> 作者：xyb
+> 作者：holmes
 >
 > 初衷：不妨初心，方得始终。
 
