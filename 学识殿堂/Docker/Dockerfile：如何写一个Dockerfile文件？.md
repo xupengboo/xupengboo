@@ -84,7 +84,7 @@ COPY /holmes/dist /usr/share/nginx/html/
 COPY --from=build /holmes-center-front/dist /usr/share/nginx/html/
 ```
 
-- **如果没添加--from=xxx，第一个参数就是指定宿主机相关文件，第二个参数是指定容器相关文件的，不要混淆。**为什么强调这个事情，因为，每次写dockerfile文件时，写着写着就混淆了，举个例子：
+- **如果没添加--from=xxx，第一个参数就是指定宿主机相关文件，第二个参数是指定容器相关文件的，不要混淆**。为什么强调这个事情，因为，每次写dockerfile文件时，写着写着就混淆了，举个例子：
 
 ```dockerfile
 ...
