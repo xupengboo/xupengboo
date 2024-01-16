@@ -30,7 +30,8 @@ explain select xxx from table_name;
 ```
 
 针对explain语句，以下解释：
-![image.png](https://cdn.nlark.com/yuque/0/2023/png/32707260/1700896596255-68008468-bb04-465c-8a82-003f24283c5f.png#averageHue=%23f4f3f2&clientId=u75738eea-fe0c-4&from=paste&height=189&id=u82d62784&originHeight=236&originWidth=1442&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=25359&status=done&style=none&taskId=ueec5dab1-69f7-4f38-8479-e6e91e5cfa2&title=&width=1153.6)
+
+![image (16)](https://github.com/ITholmes/hello-world/assets/70437837/2b00ca9b-edf8-4924-9334-53be0567ad0d)
 
 | 字段名 | 描述 |
 | --- | --- |
