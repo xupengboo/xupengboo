@@ -50,7 +50,7 @@ du -sh
 
 1. 执行lsblk命令，查看设备信息。
 
-![image.png](https://cdn.nlark.com/yuque/0/2024/png/32707260/1705285659107-5d0a8d59-75b9-4ee5-8443-6940c0f9d95d.png#averageHue=%232c201e&clientId=ua672623f-b44a-4&from=paste&height=100&id=u265e30cb&originHeight=125&originWidth=1077&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=26530&status=done&style=none&taskId=u20029773-ce3e-4431-a164-df533d5e1c0&title=&width=861.6)
+![1705389835428](https://github.com/ITholmes/hello-world/assets/70437837/9a0e2ec6-3cdc-442a-83cd-f3ae0da86088)
 
 根据上面内容就得知了，以下信息：
 首先，我有两个盘，一个vda是系统盘（目前有一个分区叫vda1），另一个是购买的vdb数据盘。
@@ -58,28 +58,27 @@ du -sh
 
 2. 执行df -h命令，查看文件系统的磁盘空间使用情况。
 
-![image.png](https://cdn.nlark.com/yuque/0/2024/png/32707260/1705285842127-126f8287-1cda-4e62-8484-776506e161ab.png#averageHue=%2322201f&clientId=ua672623f-b44a-4&from=paste&height=192&id=u045818e2&originHeight=240&originWidth=1097&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=31251&status=done&style=none&taskId=uf1f6f98a-b155-489f-abb4-87b58961792&title=&width=877.6)
+![image (1)](https://github.com/ITholmes/hello-world/assets/70437837/94ad32ea-3401-46d4-a1f7-728b23d53da4)
 
 确实没有vdb的相关文件信息。
 
 3. 执行mkfs.ext4 /dev/vdb ，文件类型和目录 看你的选择和自己盘位置所在。
 - 这个命令等于格式化，所以如果vdb有文件的话，最好是**提前备份一下**。
 
-- 如果格式化过，可以执行：blkid /dev/vdb 命令 看下有没有内容输出，如果没有内容输出说明这个盘可能没用过。![image.png](https://cdn.nlark.com/yuque/0/2024/png/32707260/1705286256283-aa010ad5-b0ab-4d9d-a6b8-ddc59fac4648.png#averageHue=%23292624&clientId=ua672623f-b44a-4&from=paste&height=65&id=HZ6Hm&originHeight=81&originWidth=465&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=8465&status=done&style=none&taskId=u27a62ce4-d9a0-402c-99a2-6d68a3ca46f&title=&width=372)
+- 如果格式化过，可以执行：blkid /dev/vdb 命令 看下有没有内容输出，如果没有内容输出说明这个盘可能没用过。![image (2)](https://github.com/ITholmes/hello-world/assets/70437837/7eb5a937-60e7-451e-8f38-95f408843783)
 
-  
+![image (3)](https://github.com/ITholmes/hello-world/assets/70437837/b202468a-a04a-4bb5-8f9d-e97467e465a6)
 
-  ![image.png](https://cdn.nlark.com/yuque/0/2024/png/32707260/1705286280056-a543c020-87af-4fec-b093-6c051294dc32.png#averageHue=%23232120&clientId=ua672623f-b44a-4&from=paste&height=243&id=u11efe0b3&originHeight=304&originWidth=809&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=33926&status=done&style=none&taskId=u61534c3e-926e-415f-b399-3c18efd8cb2&title=&width=647.2)
 
 4. 格式化后，执行 `mount /dev/vdb /mydata/mnt/data`进行挂载即可。
 5. 通过mount 命令 或者 df -h 命令查看挂载是否成功。
 
-![image.png](https://cdn.nlark.com/yuque/0/2024/png/32707260/1705286391080-c8013f7c-91a6-4b1c-8c3a-588207cbbbe5.png#averageHue=%23282321&clientId=ua672623f-b44a-4&from=paste&height=274&id=ub75d6894&originHeight=342&originWidth=1142&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=60302&status=done&style=none&taskId=u46c4418d-941c-4e4d-b63d-b22ddc82667&title=&width=913.6)
+![image (4)](https://github.com/ITholmes/hello-world/assets/70437837/7554b984-0439-478e-a678-583a5c060625)
 
 这样就完事了。 
 
 6. 提一点，有些人会遇到如下问题：
 
-![image.png](https://cdn.nlark.com/yuque/0/2024/png/32707260/1705286449708-bff26d42-d638-407c-a79f-b712d23285d2.png#averageHue=%232e2b26&clientId=ua672623f-b44a-4&from=paste&height=70&id=u9267b900&originHeight=87&originWidth=600&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=11838&status=done&style=none&taskId=uedda3ccc-c56a-44c3-99d8-715b0362a5f&title=&width=480)
+![image (5)](https://github.com/ITholmes/hello-world/assets/70437837/e3f2259f-c2b2-44cc-b837-e8eeeadd7b0b)
 
 只读 和 不知道文件类型的问题，我是因为没有执行 第3步 ，没有格式化系统盘的文件类型， 才有这个问题的出现，解决办法就是 参考一下 第3步 解决。
