@@ -7,7 +7,7 @@ VuePress是一个**基于Vue.js的静态网站生成器**，专注于文档网�
 - **易于配置**： VuePress提供了简单的配置文件，允许开发者轻松自定义文档网站的外观和行为。同时，它还支持主题插件，可以方便地切换和定制主题。
 - **自动化部署**： VuePress支持一键式的部署到各种托管服务，如GitHub Pages、Netlify等，使得将文档快速发布到线上变得简单。
 
-学习[JavaGuide](https://github.com/Snailclimb/JavaGuide)开源代码的时候，突然对VuePress产生了兴趣，整体上构建很简单，依据markdown文档就能生成一个网站。
+学习 [JavaGuide](https://github.com/Snailclimb/JavaGuide) 开源代码的时候，就对VuePress产生了兴趣，整体上构建很简单，依据markdown文档就能生成一个网站。
 
 怎么学习VuePress？
 - 看官方网站就行，写的很明白。
