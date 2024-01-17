@@ -72,7 +72,7 @@ http {
 
     server {
         listen       443;
-        server_name  holmes-center-front-86714-6-1323419690.sh.run.tcloudbase.com;
+        server_name  www.holmesfront.com;
 
         index  index.html index.htm;
         error_page  404              /404.html;
@@ -87,7 +87,7 @@ http {
           # proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
           rewrite ^/prod-api(/.*)$ $1 break;
           # 根据 微信云托管环境变量 配置
-          proxy_pass https://holmes-center-server-86714-6-1323419690.sh.run.tcloudbase.com/;
+          proxy_pass https://www.holmesserver.com/;
         }
 
         location = /login {
