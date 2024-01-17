@@ -1,6 +1,6 @@
 # 如何给Vue项目配置好一个nginx.conf文件？
 
-一般前端项目中，会有一个docker/nginx/nginx.conf文件，用于配置DockerFile或者Jenkins等等配置。
+一般前端项目中，会有一个docker/nginx/nginx.conf文件，用于配置DockerFile配置等。
 
 ![image](https://github.com/ITholmes/hello-world/assets/70437837/ffdc4da0-3ba9-4817-8560-541be2cad5fa)
 
