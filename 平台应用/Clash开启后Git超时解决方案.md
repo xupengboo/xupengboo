@@ -9,10 +9,9 @@ Clash 官方：[Clash](https://www.clash.la/releases/) / [Clash_CH](https://clas
 
 这里要纠正一个很多人的误区：即使clash开了全局代理，浏览器能上GitHub等网站，git默认还是不走代理的，所以会遇到超时等情况。按照我下面的配置好之后，目前git的各项操作都畅通无阻。
 
-首先clash开放的是7890端口，我的git走的是https上传，但git的https却没有走这里，所以我们通过：
-
 ![image](https://github.com/ITholmes/hello-world/assets/70437837/a9ba1690-f3c4-4984-bb8d-f8c00caf4060)
 
+首先clash开放的是7890端口，我的git走的是https上传，但git的https却没有走这里，所以我们通过：
 ```powershell
 git config --global http.proxy http://127.0.0.1:7890
 git config --global https.proxy https://127.0.0.1:7890
