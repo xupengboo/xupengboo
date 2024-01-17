@@ -36,7 +36,7 @@ CMD ["nginx", "-g", "daemon off;"]
 - 第二种方式：也可以通过`include /etc/nginx/conf.d/*.conf;`配置，单独配置。一般用来配置server等。
 ![image](https://github.com/ITholmes/hello-world/assets/70437837/4aac2c7d-5db1-48b6-bc26-000658837b99)
 
-2. 确定自己配置，需要几个server、监听的端口是多少、location该怎么配置等。
+2. 确定需要的配置，需要几个进程、几个server、监听的端口是多少、location该怎么配置等。
 ```nginx.conf
 user  nginx;
 worker_processes  1;
