@@ -6,7 +6,7 @@
 
 之后就是看案例：
 
-**前端项目 dockerfile文件**
+**前端项目(Nginx) DockerFile文件**
 
 - Vue项目，涉及node安装依赖、build打包等操作。
 
@@ -30,13 +30,13 @@ FROM nginx:latest
 COPY docker/nginx/nginx.conf /etc/nginx/nginx.conf
 # 从第一build阶段获取dist下的文件移动到容器中的 /usr/share/nginx/html/ 目录
 COPY --from=build /holmes-center-front/dist /usr/share/nginx/html/
-# 暴露 Nginx 监听的端口，一般为 80
-EXPOSE 80
+# 暴露 Nginx 监听的端口，一般为 80，但这里因为是https协议所以要暴露443端口！
+EXPOSE 443
 # 启动 Nginx 服务
 CMD ["nginx", "-g", "daemon off;"]
 ```
 
-**后端项目 dockerfile文件**
+**后端项目 DockerFile文件**
 
 - SpringBoot项目，涉及mvn命令执行，启动jar包等。
 
@@ -67,6 +67,25 @@ WORKDIR /holmes-center-server
 COPY --from=build /holmes-center-server/holmes-admin/target/*.jar .
 # 启动认证服务
 ENTRYPOINT ["java","-jar","-Dspring.profiles.active=prod","holmes-admin.jar"]
+```
+
+**Redis DockerFile文件**
+
+```DockerFile
+# 基础镜像
+FROM redis:5.0.10
+MAINTAINER holmes
+
+# 挂载目录
+VOLUME /home/holmes/redis
+# 创建目录
+RUN mkdir -p /home/holmes/redis
+# 指定路径
+WORKDIR /home/holmes/redis
+# 复制conf文件到路径
+COPY /docker/redis/redis.conf /home/holmes/redis/redis.conf
+# 启动redis服务
+ENTRYPOINT ["redis-server","/home/holmes/redis/redis.conf"]
 ```
 
 **下面就是说几个碰到的棘手的命令**：
