@@ -40,13 +40,13 @@ bin 文件是一个目录文件，属主和属组都为 root，属主有可读�
 
 # 2. Linux命令 之 文件目录管理
 
-> **关键词：`cd`, `ls`, `pwd`, `mkdir`, `rmdir`, `tree`, `touch`, `ln`, `rename`, `stat`, `file`, `chmod`, `chown`, `locate`, `find`, `cp`, `scp`, `mv`, `rm`。**
+>  **关键词：`cd`, `ls`, `pwd`, `mkdir`, `rmdir`, `tree`, `touch`, `ln`, `rename`, `stat`, `file`, `chmod`, `chown`, `locate`, `find`, `cp`, `scp`, `mv`, `rm`。**
 
 ## 2.1 目录管理
 
 ### 2.1.1 cd
 
-> cd 命令用来切换工作目录。
+>  cd 命令用来切换工作目录。
 
 示例：
 
@@ -62,7 +62,7 @@ cd ../..    # 切换到上两级目录
 
 ### 2.1.2 ls
 
->ls 命令用来显示目录信息。
+> ls 命令用来显示目录信息。
 
 ```shell
 ls        # 列出当前目录可见文件
@@ -76,11 +76,11 @@ ls --color=auto     # 列出文件并标记颜色分类
 
 ### 2.1.3 pwd
 
->pwd 命令用来显示当前目录的绝对路径。
+> pwd 命令用来显示当前目录的绝对路径。
 
 ### 2.1.4 mkdir
 
->mkdir 命令用来创建目录。
+> mkdir 命令用来创建目录。
 
 - -p 确保目录名称存在，不存在的就建一个。
 
@@ -94,7 +94,7 @@ mkdir -p -m 750 zp/test
 
 ### 2.1.5 rmdir
 
->rmdir 命令用来删除空目录。
+> rmdir 命令用来删除空目录。
 
 ```shell
 # 删除子目录 test 和其父目录 zp
@@ -103,7 +103,7 @@ rmdir -p zp/test
 
 ### 2.1.6 tree(需要安装)
 
->tree 命令以树状显示目录的内。
+> tree 命令以树状显示目录的内。
 
 示例：
 
@@ -120,7 +120,7 @@ tree /private -L 1
 tree -I node_modules            # 忽略当前目录文件夹 node_modules
 tree -P node_modules            # 列出当前目录文件夹 node_modules 的目录结构
 tree -P node_modules -L 2       # 显示目录 node_modules 两层的目录树结构
-tree -L 2 > /home/www/tree.txt  # 当前目录结果存到 tree.txt 文件中
+tree -L 2 >  /home/www/tree.txt  # 当前目录结果存到 tree.txt 文件中
 
 # 忽略多个文件夹
 tree -I 'node_modules|icon|font' -L 2
@@ -130,11 +130,11 @@ tree -I 'node_modules|icon|font' -L 2
 
 ### 2.2.1 touch
 
-> touch命令有两个功能：一是用来创建空文件，二是用于把已存在文件的时间标签更新为系统当前的时间（默认方式），它们的数据将原封不动地保留下来。
+>  touch命令有两个功能：一是用来创建空文件，二是用于把已存在文件的时间标签更新为系统当前的时间（默认方式），它们的数据将原封不动地保留下来。
 
 ### 2.2.2 ln
 
->ln 命令用来为文件创建`链接`。默认是硬链接。
+> ln 命令用来为文件创建`链接`。默认是硬链接。
 
 - -s 创建软连接。
 
@@ -144,7 +144,7 @@ tree -I 'node_modules|icon|font' -L 2
 
 ### 2.2.3 rename
 
->rename 命令用字符串替换的方式批量重命名。
+> rename 命令用字符串替换的方式批量重命名。
 
 ```shell
 # 将 main1.c 重命名为 main.c
@@ -158,11 +158,11 @@ rename "s//.txt//" *            # 把所有以 .txt 结尾的文件名的.txt �
 
 ### 2.2.4 stat 
 
->stat 命令用于显示文件的状态信息。stat 命令的输出信息比 ls 命令的输出信息要更详细。
+> stat 命令用于显示文件的状态信息。stat 命令的输出信息比 ls 命令的输出信息要更详细。
 
 ### 2.2.5 file 
 
->file 命令用来探测给定文件的类型。file 命令对文件的检查分为文件系统、魔法幻数检查和语言检查 3 个过程。
+> file 命令用来探测给定文件的类型。file 命令对文件的检查分为文件系统、魔法幻数检查和语言检查 3 个过程。
 
 示例：
 
@@ -175,7 +175,7 @@ file -L /var/spool/mail   # 显示符号链接的文件类型
 
 ### 2.2.6 chmod
 
-> chmod 命令用来变更文件或目录的权限。
+>  chmod 命令用来变更文件或目录的权限。
 
 - -R : 对目前目录下的所有文件与子目录进行相同的权限变更(即以递归的方式逐个变更)
   ![在这里插入图片描述](https://img-blog.csdnimg.cn/734e486b5b1b4786930d865dd2f67dba.png)
@@ -217,7 +217,7 @@ chmod 777 a.txt
 
 ### 2.2.7 chown
 
-> chown 命令改变某个文件或目录的所有者和所属的组，该命令可以向某个用户授权，使该用户变成指定文件的所有者或者改变文件所属的组。
+>  chown 命令改变某个文件或目录的所有者和所属的组，该命令可以向某个用户授权，使该用户变成指定文件的所有者或者改变文件所属的组。
 - 只有文件拥有者和超级用户才可以便用该命令。
   示例：
 
@@ -228,9 +228,9 @@ chown -R liu /usr/meng
 
 ### 2.2.8 locate 和 updatedb 
 
->locate 命令和 slocate 命令都用来查找文件或目录。
+> locate 命令和 slocate 命令都用来查找文件或目录。
 
->locate 命令其实是 find -name 的另一种写法，但是要比后者快得多，原因在于它不搜索具体目录，而是`搜索一个数据库/var/lib/locatedb`，这个数据库中含有本地所有文件信息。Linux 系统自动创建这个数据库，并且`每天自动更新一次`，所以`使用 locate 命令查不到最新变动过的文件`。为了避免这种情况，可以在使用 locate 之前，先使用 `updatedb 命令，手动更新数据库`。
+> locate 命令其实是 find -name 的另一种写法，但是要比后者快得多，原因在于它不搜索具体目录，而是`搜索一个数据库/var/lib/locatedb`，这个数据库中含有本地所有文件信息。Linux 系统自动创建这个数据库，并且`每天自动更新一次`，所以`使用 locate 命令查不到最新变动过的文件`。为了避免这种情况，可以在使用 locate 之前，先使用 `updatedb 命令，手动更新数据库`。
 
 示例：
 
@@ -239,7 +239,7 @@ locate pwd      # 查找和 pwd 相关的所有文件
 locate /etc/sh  # 搜索 etc 目录下所有以 sh 开头的文件
 ```
 
->updatedb 命令用来创建或更新 slocate/locate 命令所必需的数据库文件。
+> updatedb 命令用来创建或更新 slocate/locate 命令所必需的数据库文件。
 
 - updatedb 命令的执行过程较长，因为在执行时它会遍历整个系统的目录树，并将所有的文件信息写入 slocate/locate 数据库文件中。
 
@@ -247,7 +247,7 @@ locate /etc/sh  # 搜索 etc 目录下所有以 sh 开头的文件
 
 ### 2.2.9 find 
 
->find 命令用来在指定目录下查找文件。任何位于参数之前的字符串都将被视为欲查找的目录名。如果使用该命令时，不设置任何参数，则 find 命令将在当前目录下查找子目录与文件。并且将查找到的子目录和文件全部进行显示。
+> find 命令用来在指定目录下查找文件。任何位于参数之前的字符串都将被视为欲查找的目录名。如果使用该命令时，不设置任何参数，则 find 命令将在当前目录下查找子目录与文件。并且将查找到的子目录和文件全部进行显示。
 
 - -name name, -iname name : 文件名称符合 name 的文件。iname 会忽略大小写
 
@@ -282,35 +282,24 @@ find /home ! -name "*.txt"
 
 ### 2.2.10 which 
 
-
-
->which命令：查找命令的绝对路径。
-
+> which命令：查找命令的绝对路径。
 
 ### 2.2.11 whereis
 
-
-
->whereis命令： 查找命令的程序、源代码等相关文件
-
+> whereis命令： 查找命令的程序、源代码等相关文件
 - which + whereis 只能查找系统里面对应的环境变量$PATH设置的目录里查找符合条件的文件。
 
 小知识点：
-
 - **在/etc/profile，有时会看到`:$PATH` ，这个符号理解为将原来PATH下的内容，追加到后面。win7是用`;分号`进行分隔追加PATH路径，在这里道理一样的。**
 
 ## 2.3 文件和目录通用管理
 
 ### 2.3.1 cp  
 
-
-
->cp 命令用来将一个或多个源文件或者目录复制到指定的目的文件或目录。
-
+> cp 命令用来将一个或多个源文件或者目录复制到指定的目的文件或目录。
 - 默认情况下，cp 命令不能复制目录，如果要复制目录，则必须使用`-r`选项；
 
 示例：
-
 ```shell
 # 将文件 file 复制到目录 /usr/men/tmp 下，并改名为 file1
 cp file /usr/men/tmp/file1
@@ -325,15 +314,11 @@ cp -rf /usr/men/* /usr/zh
 cp -i /usr/men m*.c /usr/zh
 ```
 
-
 ### 2.3.2 mv
 
-
-
->mv 命令用来对文件或目录重新命名，或者将文件从一个目录移到另一个目录中。
+> mv 命令用来对文件或目录重新命名，或者将文件从一个目录移到另一个目录中。
 
 示例：
-
 ```shell
 mv file1.txt /home/office/                      # 移动单个文件
 mv file2.txt file3.txt file4.txt /home/office/  # 移动多个文件
@@ -354,14 +339,11 @@ mv -bv *.txt /home/office       # 复制时创建备份
 
 ### 2.3.3 rm
 
-
-
->rm 命令可以删除一个目录中的一个或多个文件或目录，也可以将某个目录及其下属的所有文件及其子目录均删除掉。对于链接文件，只是删除整个链接文件，而原有文件保持不变。
+> rm 命令可以删除一个目录中的一个或多个文件或目录，也可以将某个目录及其下属的所有文件及其子目录均删除掉。对于链接文件，只是删除整个链接文件，而原有文件保持不变。
 
 - -r 将目录及以下之档案亦逐一删除。 -r就有牵连目录以及目录以下的意思。
 
 示例：
-
 ```shell
 rm test.txt               # 删除文件
 rm -i test.txt test2.txt  # 交互式删除文件
@@ -373,50 +355,37 @@ rm -v testdir             # 显示当前删除操作的详情
 
 ### 2.3.4 scp
 
-
-
->scp 命令用于在 Linux 下进行远程拷贝文件的命令，和它类似的命令有 cp，不过 cp 只是在本机进行拷贝不能跨服务器，而且 scp 传输是加密的。可能会稍微影响一下速度。当你服务器硬盘变为只读 read only system 时，用 scp 可以帮你把文件移出来。另外，scp 还非常不占资源，不会提高多少系统负荷，在这一点上，rsync 就远远不及它了。虽然 rsync 比 scp 会快一点，但当小文件众多的情况下，rsync 会导致硬盘 I/O 非常高，而 scp 基本不影响系统正常使用。
+> scp 命令用于在 Linux 下进行远程拷贝文件的命令，和它类似的命令有 cp，不过 cp 只是在本机进行拷贝不能跨服务器，而且 scp 传输是加密的。可能会稍微影响一下速度。当你服务器硬盘变为只读 read only system 时，用 scp 可以帮你把文件移出来。另外，scp 还非常不占资源，不会提高多少系统负荷，在这一点上，rsync 就远远不及它了。虽然 rsync 比 scp 会快一点，但当小文件众多的情况下，rsync 会导致硬盘 I/O 非常高，而 scp 基本不影响系统正常使用。
 
 示例：
-
 ```shell
 # 拷贝文件到远程服务器的指定目录
-scp <file> <user>@<ip>:<url>
+scp <file>  <user> @<ip> :<url> 
 scp test.txt root@192.168.0.1:/opt
 
 # 拷贝目录到远程服务器的指定目录
-scp -r <folder> <user>@<ip>:<url>
+scp -r <folder>  <user> @<ip> :<url> 
 scp -r test root@192.168.0.1:/opt
 ```
 
-
-
 # 3. Linux 之 文件内容查看 和 编辑
 
-
-
->**关键词：`cat`, `head`, `tail`, `more`, `less`, `sed`, `vi`, `grep`。**
+> **关键词：`cat`, `head`, `tail`, `more`, `less`, `sed`, `vi`, `grep`。**
 
 ## 3.1 cat 
 
-
-
->cat 命令用于连接文件并打印到标准输出设备上。
+> cat 命令用于连接文件并打印到标准输出设备上。
 
 示例：
-
 ```shell
 cat m1              # 在屏幕上显示文件 ml 的内容
 cat m1 m2           # 同时显示文件 ml 和 m2 的内容
-cat m1 m2 > file    # 将文件 ml 和 m2 合并后放入文件 file 中
+cat m1 m2 >  file    # 将文件 ml 和 m2 合并后放入文件 file 中
 ```
 
 ## 3.2 head 
 
-
-
->head 命令用于显示文件的开头内容。
-
+> head 命令用于显示文件的开头内容。
 - 在默认情况下，head 命令显示文件的头部 10 行内容。
 - -n11参数：相当于查看头部的第11行。
 
@@ -425,46 +394,36 @@ head -n11 file01 # 查看file01文件开头的11行
 ```
 
 ## 3.3 tail
-
-
-
->tail 命令用于显示文件的尾部内容。
+> tail 命令用于显示文件的尾部内容。
 
 - 在默认情况下，tail 命令显示文件的尾部 10 行内容。
 - -n11命令：相当于查看尾部最后的11行。
 - tail -f 监视文件，一直监视者。
 
 示例：
-
 ```shell
 tail file           # 显示文件file的最后10行
 tail -n +20 file    # 显示文件file的内容，从第20行至文件末尾
 tail -c 10 file     # 显示文件file的最后10个字符
 ```
 
-
-
 **tail -f 监听的使用：**
 
 - 所以有时候，一般看tomcat日志，就用tail -f来监听tomcat日志啥的。
-- 注意:` tail -f 使用vim是不可以的！！！必须追加的内容才行`，像echo >> xxx来追加。
+- 注意:` tail -f 使用vim是不可以的！！！必须追加的内容才行`，像echo > >  xxx来追加。
 
 ```shell
-echo 123 >> aa 追加aa文件中。
-echo 123 > aa 覆盖aa文件中的内。
+echo 123 > >  aa 追加aa文件中。
+echo 123 >  aa 覆盖aa文件中的内。
 
 tail -f ./aaas # 一直监控aaas文件
 ```
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/f8ca6c576b604b11adf41254b1fd4a3d.png)
-
+![image](https://github.com/ITholmes/hello-world/assets/70437837/4b2185d1-fde7-4b2d-bb70-9ab0351c53c9)
 
 ## 3.4 more
 
-
-
->more 命令是一个基于 vi 编辑器文本过滤器，它以全屏幕的方式按页显示文本文件的内容，支持 vi 中的关键字定位操作。`more 名单中内置了若干快捷键，常用的有 H（获得帮助信息），Enter（向下翻滚一行），空格（向下滚动一屏），Q（退出命令）`。
-
+> more 命令是一个基于 vi 编辑器文本过滤器，它以全屏幕的方式按页显示文本文件的内容，支持 vi 中的关键字定位操作。`more 名单中内置了若干快捷键，常用的有 H（获得帮助信息），Enter（向下翻滚一行），空格（向下滚动一屏），Q（退出命令）`。
 - 按 Space 键：显示文本的下一屏内容。
 - 按 Enier 键：只显示文本的下一行内容。
 - 按斜线符|：接着输入一个模式，可以在文本中寻找下一个相匹配的模式。
@@ -473,7 +432,6 @@ tail -f ./aaas # 一直监控aaas文件
 - 按 Q 键：退出 rnore 命令。
 
 示例：
-
 ```shell
 # 显示文件 file 的内容，但在显示之前先清屏，并且在屏幕的最下方显示完核的百分比。
 more -dc file
@@ -484,19 +442,13 @@ more -c -10 file
 
 **注意：more命令只能向前浏览。**
 
-
-
 ## 3.5 less
 
-
-
->less 命令的作用与 more 十分相似，都可以用来浏览文字档案的内容，不同的是`less 命令允许用户向前或向后浏览文件`，而 more 命令只能向前浏览。用 less 命令显示文件时，用` PageUp 键向上翻页，用 PageDown 键向下翻页`。要退出 less 程序，应按 Q 键。
+> less 命令的作用与 more 十分相似，都可以用来浏览文字档案的内容，不同的是`less 命令允许用户向前或向后浏览文件`，而 more 命令只能向前浏览。用 less 命令显示文件时，用` PageUp 键向上翻页，用 PageDown 键向下翻页`。要退出 less 程序，应按 Q 键。
 
 ## 3.6 sed
 
-
-
->sed 是一种流编辑器，它是文本处理工具，能够完美的配合正则表达式使用，功能不同凡响。处理时，把当前处理的行存储在临时缓冲区中，称为“模式空间”（pattern space），接着用 sed 命令处理缓冲区中的内容，处理完成后，把缓冲区的内容送往屏幕。接着处理下一行，这样不断重复，直到文件末尾。文件内容并没有改变，除非你使用重定向存储输出。Sed 主要用来自动编辑一个或多个文件；简化对文件的反复操作；编写转换程序等。
+> sed 是一种流编辑器，它是文本处理工具，能够完美的配合正则表达式使用，功能不同凡响。处理时，把当前处理的行存储在临时缓冲区中，称为“模式空间”（pattern space），接着用 sed 命令处理缓冲区中的内容，处理完成后，把缓冲区的内容送往屏幕。接着处理下一行，这样不断重复，直到文件末尾。文件内容并没有改变，除非你使用重定向存储输出。Sed 主要用来自动编辑一个或多个文件；简化对文件的反复操作；编写转换程序等。
 
 ```shell
 # 替换文本中的字符串
@@ -530,16 +482,11 @@ sed '/^test/'d file
 
 ## 3.7 vi
 
-
-
->vi 命令是 UNIX 操作系统和类 UNIX 操作系统中最通用的全屏幕纯文本编辑器。Linux 中的 vi 编辑器叫 `vim，它是 vi 的增强版（vi Improved）`，与 vi 编辑器完全兼容，而且实现了很多增强功能。
-
+> vi 命令是 UNIX 操作系统和类 UNIX 操作系统中最通用的全屏幕纯文本编辑器。Linux 中的 vi 编辑器叫 `vim，它是 vi 的增强版（vi Improved）`，与 vi 编辑器完全兼容，而且实现了很多增强功能。
 
 ## 3.8 grep
 
-
-
->grep（global search regular expression(RE) and print out the line，全面搜索正则表达式并把行打印出来）是一种强大的文本搜索工具，它能使用正则表达式搜索文本，并把匹配的行打印出来。
+> grep（global search regular expression(RE) and print out the line，全面搜索正则表达式并把行打印出来）是一种强大的文本搜索工具，它能使用正则表达式搜索文本，并把匹配的行打印出来。
 
 示例：
 
@@ -563,26 +510,16 @@ $ grep "main()" . -r --exclude "README"
 $ grep "main()" . -r --exclude-from filelist
 ```
 
-
-
-
 # 4. Linux 文件压缩和解压
 
-
-
->**关键词：`tar`, `gzip`, `zip`, `unzip`。**
+> **关键词：`tar`, `gzip`, `zip`, `unzip`。**
 
 
 ## 4.1 tar
 
-
-
->tar 配合参数，实现打包，压缩，解压缩等等操作。
-
-
+> tar 配合参数，实现打包，压缩，解压缩等等操作。
 
 示例：
-
 **tar 打包：**
 
 ```shell
@@ -606,9 +543,7 @@ tar -zcvf a.tar.gz a.txt  # 打包后，以 gzip 压缩，后缀名最好是.tar
 tar -jcvf a.tar.bz2 a.txt # 打包后，以 bzip2 压缩
 ```
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/fd05954726dc46ee90dba2c06b4560b6.png)
-
-
+![image](https://github.com/ITholmes/hello-world/assets/70437837/94ac23ac-f008-4b60-b192-d9804797dfc2)
 
 **tar 解压缩：**
 
@@ -620,9 +555,7 @@ tar -zxvf log30.tar.gz log2013.log      # 只将 tar 内的部分文件解压出
 
 ## 4.2 gzip
 
-
-
->gzip 命令用来压缩文件。gzip 是个使用广泛的压缩程序，文件经它压缩过后，其名称后面会多出“.gz”扩展名。
+> gzip 命令用来压缩文件。gzip 是个使用广泛的压缩程序，文件经它压缩过后，其名称后面会多出“.gz”扩展名。
 
 gzip 是在 Linux 系统中经常使用的一个对文件进行压缩和解压缩的命令，既方便又好用。gzip 不仅可以用来压缩大的、较少使用的文件以节省磁盘空间，还可以和 tar 命令一起构成 Linux 操作系统中比较流行的压缩文件格式。据统计，gzip 命令对文本文件有 60%～ 70%的压缩率。减少文件大小有两个明显的好处，一是可以减少存储空间，二是通过网络传输文件时，可以减少传输的时间。
 
@@ -639,9 +572,7 @@ gzip -dr test/      # 递归地解压目录
 
 ## 4.3 zip
 
-
-
->zip 命令用于压缩文件。zip 是个使用广泛的压缩程序，文件经它压缩后会另外产生具有“.zip”扩展名的压缩文件。
+> zip 命令用于压缩文件。zip 是个使用广泛的压缩程序，文件经它压缩后会另外产生具有“.zip”扩展名的压缩文件。
 
 示例：
 
@@ -650,15 +581,9 @@ gzip -dr test/      # 递归地解压目录
 zip -q -r html.zip /home/Blinux/html
 ```
 
-
-
-
-
 ## 4.4 unzip
 
-
-
->unzip 命令用于解压缩由 zip 命令压缩的“.zip”压缩包。
+> unzip 命令用于解压缩由 zip 命令压缩的“.zip”压缩包。
 
 示例：
 
@@ -669,26 +594,18 @@ unzip -o test.zip -d /tmp/  # 在指定目录下解压缩，如果有相同文�
 unzip -v test.zip           # 查看压缩文件目录，但不解压
 ```
 
-
 # 5. Linux 之 硬件管理
 
-
-
->**关键词：`df`, `du`, `top`, `free`, `iotop`。**
-
+> **关键词：`df`, `du`, `top`, `free`, `iotop`。**
 
 ## 5.1 df
 
-
-
->df 命令(disk)用于`显示磁盘分区上的可使用的磁盘空间`。默认显示单位为 KB。可以利用该命令来获取硬盘被占用了多少空间，目前还剩下多少空间等信息。
-
+> df 命令(disk)用于`显示磁盘分区上的可使用的磁盘空间`。默认显示单位为 KB。可以利用该命令来获取硬盘被占用了多少空间，目前还剩下多少空间等信息。
 
 df命令显示的名称对应：
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/5c739f5123854ebbba4e1bff12028d8f.png)
 
 示例：
-
 ```shell
 # 查看系统磁盘设备，默认是 KB 为单位
 [root@root ~] df
@@ -719,12 +636,9 @@ tmpfs                  1032204         0   1032204   0% /dev/shm
 none                         0         0         0   -  /proc/sys/fs/binfmt_misc
 ```
 
-
 ## 5.2 du 
 
-
-
->du 命令是`对文件和目录磁盘使用的空间的查看`。
+> du 命令是`对文件和目录磁盘使用的空间的查看`。
 
 示例：
 
@@ -774,9 +688,7 @@ root@localhost [test]# du
 
 ## 5.3 top
 
-
-
->top 命令，就可以`理解为linux系统的任务管理器`。实时动态地查看系统的整体运行情况，是一个综合了多方信息监测系统性能和运行信息的实用工具。
+> top 命令，就可以`理解为linux系统的任务管理器`。实时动态地查看系统的整体运行情况，是一个综合了多方信息监测系统性能和运行信息的实用工具。
 
 按进程的CPU使用率排序：
 
@@ -790,7 +702,7 @@ root@localhost [test]# du
 
 
 
->free 命令，`针对内存的`，可以显示当前系统未使用的和已使用的内存数目，还可以显示被内核使用的内存缓冲区。
+> free 命令，`针对内存的`，可以显示当前系统未使用的和已使用的内存数目，还可以显示被内核使用的内存缓冲区。
 
 示例：
 
@@ -811,8 +723,8 @@ Swap:         4094          0       4094
 
 
 
->iotop 命令是一个用来监视磁盘 I/O 使用状况的 top 类工具。
->![在这里插入图片描述](https://img-blog.csdnimg.cn/b7055371aac0427884503ca2d3d13701.png)
+> iotop 命令是一个用来监视磁盘 I/O 使用状况的 top 类工具。
+> ![在这里插入图片描述](https://img-blog.csdnimg.cn/b7055371aac0427884503ca2d3d13701.png)
 
 
 
@@ -820,13 +732,13 @@ Swap:         4094          0       4094
 
 
 
->**关键词：`curl`,`wget`, `telnet`, `ip`, `hostname`, `ifconfig`, `route`, `ssh`, `ssh-keygen`, `firewalld`, `iptables`, `host`, `nslookup`, `nc/netcat`, `ping`, `traceroute`, `netstat`。**
+> **关键词：`curl`,`wget`, `telnet`, `ip`, `hostname`, `ifconfig`, `route`, `ssh`, `ssh-keygen`, `firewalld`, `iptables`, `host`, `nslookup`, `nc/netcat`, `ping`, `traceroute`, `netstat`。**
 
 ## 6.1 curl、wget
 
 
 
->curl 命令是`一个利用 URL 规则在命令行下工作的文件传输工具`。它`支持文件的上传和下载`，所以是综合传输工具，但按传统，习惯称 curl 为下载工具。作为一款强力工具，curl 支持包括 HTTP、HTTPS、ftp 等众多协议，还支持 POST、cookies、认证、从指定偏移处下载部分文件、用户代理字符串、限速、文件大小、进度条等特征。做网页处理流程和数据检索自动化，curl 可以祝一臂之力。
+> curl 命令是`一个利用 URL 规则在命令行下工作的文件传输工具`。它`支持文件的上传和下载`，所以是综合传输工具，但按传统，习惯称 curl 为下载工具。作为一款强力工具，curl 支持包括 HTTP、HTTPS、ftp 等众多协议，还支持 POST、cookies、认证、从指定偏移处下载部分文件、用户代理字符串、限速、文件大小、进度条等特征。做网页处理流程和数据检索自动化，curl 可以祝一臂之力。
 
 示例：
 
@@ -841,7 +753,7 @@ $ curl http://man.linuxde.net/test.iso -o filename.iso --progress
 
 
 
->wget 命令用来从指定的 URL 下载文件。
+> wget 命令用来从指定的 URL 下载文件。
 
 示例：
 
@@ -854,7 +766,7 @@ $ wget http://www.linuxde.net/testfile.zip
 
 
 
->telnet 命令一般用作测试远程端口连接，功能是用于远端登入。
+> telnet 命令一般用作测试远程端口连接，功能是用于远端登入。
 
 示例：
 
@@ -875,7 +787,7 @@ Login incorrect
 
 
 
->ip 命令用来查看或操纵 Linux 主机的路由、网络设备、策略路由和隧道，是 Linux 下较新的功能强大的网络配置工具。
+> ip 命令用来查看或操纵 Linux 主机的路由、网络设备、策略路由和隧道，是 Linux 下较新的功能强大的网络配置工具。
 
 示例：
 
@@ -906,19 +818,19 @@ $ ip route delete 192.168.1.0/24 dev eth0 # 删除路由
 
 
 
->hostname 命令`用于查看和设置系统的主机名称`。环境变量 HOSTNAME 也保存了当前的主机名。在使用 hostname 命令设置主机名后，系统并不会永久保存新的主机名，重新启动机器之后还是原来的主机名。如果需要永久修改主机名，需要同时修改 /etc/hosts 和 /etc/sysconfig/network 的相关内容。
+> hostname 命令`用于查看和设置系统的主机名称`。环境变量 HOSTNAME 也保存了当前的主机名。在使用 hostname 命令设置主机名后，系统并不会永久保存新的主机名，重新启动机器之后还是原来的主机名。如果需要永久修改主机名，需要同时修改 /etc/hosts 和 /etc/sysconfig/network 的相关内容。
 
 ## 6.6 ifconfig
 
 
 
->ifconfig 命令`被用于查看和配置 Linux 内核中网络接口的网络参数`。用 ifconfig 命令配置的网卡信息，在网卡重启后机器重启后，配置就不存在。要想将上述的配置信息永远的存的电脑里，那就要修改网卡的配置文件了。
+> ifconfig 命令`被用于查看和配置 Linux 内核中网络接口的网络参数`。用 ifconfig 命令配置的网卡信息，在网卡重启后机器重启后，配置就不存在。要想将上述的配置信息永远的存的电脑里，那就要修改网卡的配置文件了。
 
 ## 6.7 route
 
 
 
->route 命令用来`查看和设置 Linux 内核中的网络路由表`，route 命令设置的路由主要是静态路由。要实现两个不同的子网之间的通信，需要一台连接两个网络的路由器，或者同时位于两个网络的网关来实现。
+> route 命令用来`查看和设置 Linux 内核中的网络路由表`，route 命令设置的路由主要是静态路由。要实现两个不同的子网之间的通信，需要一台连接两个网络的路由器，或者同时位于两个网络的网关来实现。
 
 示例：
 
@@ -947,7 +859,7 @@ route del default gw 192.168.120.240                   # 删除默认网关
 
 
 
->ssh 命令是 `openssh 套件中的客户端连接工具`，可以给予 ssh 加密协议实现安全的`远程登录服务器`。
+> ssh 命令是 `openssh 套件中的客户端连接工具`，可以给予 ssh 加密协议实现安全的`远程登录服务器`。
 
 示例：
 
@@ -963,13 +875,13 @@ ssh -p 2211 root@140.206.185.170
 
 
 
->ssh-keygen 命令用于`为 ssh 生成、管理和转换认证密钥`，它支持 RSA 和 DSA 两种认证密钥。
+> ssh-keygen 命令用于`为 ssh 生成、管理和转换认证密钥`，它支持 RSA 和 DSA 两种认证密钥。
 
 ## 6.10 firewalld
 
 
 
->firewalld 命令是 Linux 上的`防火墙软件`。
+> firewalld 命令是 Linux 上的`防火墙软件`。
 
 ### 6.10.1 firewalld 的基本使用
 
@@ -985,7 +897,7 @@ ssh -p 2211 root@140.206.185.170
 
 
 
->systemctl 是服务管理工具中主要的工具，它融合之前 service 和 chkconfig 的功能于一体。
+> systemctl 是服务管理工具中主要的工具，它融合之前 service 和 chkconfig 的功能于一体。
 
 - 启动一个服务 - systemctl start firewalld.service
 - 关闭一个服务 - systemctl stop firewalld.service
@@ -1027,7 +939,7 @@ ssh -p 2211 root@140.206.185.170
 
 
 
->iptables 命令是` Linux 上常用的防火墙软件`，是 netfilter 项目的一部分。可以直接配置，也可以通过许多前端和图形界面配置。
+> iptables 命令是` Linux 上常用的防火墙软件`，是 netfilter 项目的一部分。可以直接配置，也可以通过许多前端和图形界面配置。
 
 
 示例：
@@ -1072,34 +984,34 @@ Chain OUTPUT (policy ACCEPT 3382K packets, 1819M bytes)
 
 
 
->host 命令是常用的`分析域名查询工具`，可以用来`测试域名系统工作是否正常`。
->![在这里插入图片描述](https://img-blog.csdnimg.cn/6c48fee6089a43889ffa8bb8457c489d.png)
+> host 命令是常用的`分析域名查询工具`，可以用来`测试域名系统工作是否正常`。
+> ![在这里插入图片描述](https://img-blog.csdnimg.cn/6c48fee6089a43889ffa8bb8457c489d.png)
 
 ## 6.13 nslookup
 
 
 
->nslookup 命令是常用域名查询工具，就是查 DNS 信息用的命令。
->![在这里插入图片描述](https://img-blog.csdnimg.cn/92272bbc794f490daca0be85bdff7881.png)
+> nslookup 命令是常用域名查询工具，就是查 DNS 信息用的命令。
+> ![在这里插入图片描述](https://img-blog.csdnimg.cn/92272bbc794f490daca0be85bdff7881.png)
 
 
 ## 6.14 nc/netcat
 
 
 
->nc 命令是 netcat 命令的简称，都是用来设置路由器。
+> nc 命令是 netcat 命令的简称，都是用来设置路由器。
 
 ## 6.15 ping
 
 
 
->ping 命令用来`测试主机之间网络的连通性`。
+> ping 命令用来`测试主机之间网络的连通性`。
 
 ## 6.16 traceroute（需要安装）
 
 
 
->traceroute 命令用于`追踪数据包在网络上的传输时的全部路径`，它默认发送的数据包大小是 40 字节。
+> traceroute 命令用于`追踪数据包在网络上的传输时的全部路径`，它默认发送的数据包大小是 40 字节。
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/f746eef19b0c4ecd90e4905e2cdb5946.png)
 
@@ -1109,7 +1021,7 @@ Chain OUTPUT (policy ACCEPT 3382K packets, 1819M bytes)
 
 
 
->netstat 命令用于`显示网络状态`，打印 Linux 中网络系统的状态信息，可让你得知整个 Linux 系统的网络情况。
+> netstat 命令用于`显示网络状态`，打印 Linux 中网络系统的状态信息，可让你得知整个 Linux 系统的网络情况。
 
 解释一下 - n 参数命令的效果：
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/17245a82af44422aa55ab823ff12bf86.png)
@@ -1140,14 +1052,14 @@ netstat -su   显示UDP端口的统计信息
 
 
 
->**关键词：`groupadd`, `groupdel`, `groupmod`, `useradd`, `userdel`, `usermod`, `passwd`, `su`, `sudo`。**
+> **关键词：`groupadd`, `groupdel`, `groupmod`, `useradd`, `userdel`, `usermod`, `passwd`, `su`, `sudo`。**
 
 
 ## 7.1 groupadd
 
 
 
->groupadd 命令用于`创建一个新的用户组`，新用户组的信息将被添加到系统文件中。
+> groupadd 命令用于`创建一个新的用户组`，新用户组的信息将被添加到系统文件中。
 
 - -g：指定新建工作组的 id。设置组ID，最好不要小于等于1000以下，因为1000内已经有很多系统自带的组。
 
@@ -1178,14 +1090,14 @@ itholmes:x:344:
 
 
 
->groupdel 命令用于`删除指定的用户组`，本命令要修改的系统文件包括 /ect/group 和 /ect/gshadow。若该群组中仍包括某些用户，则必须先删除这些用户后，方能删除群组。
+> groupdel 命令用于`删除指定的用户组`，本命令要修改的系统文件包括 /ect/group 和 /ect/gshadow。若该群组中仍包括某些用户，则必须先删除这些用户后，方能删除群组。
 
 
 ## 7.3 groupmod
 
 
 
->groupmod 命令`更改群组识别码(组ID)或名称(组名称)`。
+> groupmod 命令`更改群组识别码(组ID)或名称(组名称)`。
 
 示例：
 
@@ -1206,13 +1118,13 @@ itholmesNes:x:500:
 
 
 
->useradd 可用来`建立用户帐号`。帐号建好之后，再用 passwd 设定帐号的密码。`使用 useradd 指令所建立的帐号，实际上是保存在 /etc/passwd 文本文件中`。
+> useradd 可用来`建立用户帐号`。帐号建好之后，再用 passwd 设定帐号的密码。`使用 useradd 指令所建立的帐号，实际上是保存在 /etc/passwd 文本文件中`。
 
 - -r ：建立系统帐号。
-- -g<群组> 　指定用户所属的群组。
-- -G<群组> 　指定用户所属的附加群组。
-- -d<登入目录> 　指定用户登入时的起始目录。
-- -u\<uid> 　指定用户ID。
+- -g<群组>  　指定用户所属的群组。
+- -G<群组>  　指定用户所属的附加群组。
+- -d<登入目录>  　指定用户登入时的起始目录。
+- -u\<uid>  　指定用户ID。
 
 用户组：
 
@@ -1242,7 +1154,7 @@ $ useradd -d /opt/ -g itholmesGroup -r -u 544 itholmes
 
 
 
->userdel 命令`用于删除给定的用户，以及与用户相关的文件`。`若不加选项，则仅删除用户帐号，而不删除相关文件`。
+> userdel 命令`用于删除给定的用户，以及与用户相关的文件`。`若不加选项，则仅删除用户帐号，而不删除相关文件`。
 
 - -r 　删除用户登入目录以及目录中所有文件。
 
@@ -1250,12 +1162,12 @@ $ useradd -d /opt/ -g itholmesGroup -r -u 544 itholmes
 
 
 
->usermod 命令`用于修改用户的基本信息`。`usermod 命令不允许你改变正在线上的使用者帐号名称。当 usermod 命令用来改变 user id，必须确认这名 user 没在电脑上执行任何程序`。
+> usermod 命令`用于修改用户的基本信息`。`usermod 命令不允许你改变正在线上的使用者帐号名称。当 usermod 命令用来改变 user id，必须确认这名 user 没在电脑上执行任何程序`。
 
-- -u\<uid> 　修改用户ID。
-- -d登入目录> 　修改用户登入时的目录。
-- -g<群组> 　修改用户所属的群组。
-- -G<群组> 　修改用户所属的附加群组。
+- -u\<uid>  　修改用户ID。
+- -d登入目录>  　修改用户登入时的目录。
+- -g<群组>  　修改用户所属的群组。
+- -G<群组>  　修改用户所属的附加群组。
 - -L 　锁定用户密码，使密码无效。
 
 示例：
@@ -1273,7 +1185,7 @@ $ usermod -u 123 root
 
 
 
->passwd 命令`用于设置用户的认证信息，包括用户密码、密码过期时间`等。系统管理者则能用它管理系统用户的密码。`只有管理者可以指定用户名称，一般用户只能变更自己的密码`。
+> passwd 命令`用于设置用户的认证信息，包括用户密码、密码过期时间`等。系统管理者则能用它管理系统用户的密码。`只有管理者可以指定用户名称，一般用户只能变更自己的密码`。
 
 
 示例：
@@ -1299,7 +1211,7 @@ $ passwd -S itholmes
 
 
 
->su 命令用于切换当前用户身份到其他用户身份，变更时须输入所要变更的用户帐号与密码。
+> su 命令用于切换当前用户身份到其他用户身份，变更时须输入所要变更的用户帐号与密码。
 
 
 
@@ -1309,7 +1221,7 @@ $ passwd -S itholmes
 
 
 
->sudo 命令用来以其他身份来执行命令，预设的身份为 root（也就是默认是root）。在 /etc/sudoers 中设置了可执行 sudo 指令的用户。
+> sudo 命令用来以其他身份来执行命令，预设的身份为 root（也就是默认是root）。在 /etc/sudoers 中设置了可执行 sudo 指令的用户。
 
 示例：
 
@@ -1339,13 +1251,13 @@ $ sudo -L
 
 
 
->**关键词：`lsb_release`, `reboot`, `exit`, `shutdown`, `date`, `mount`, `umount`, `ps`, `kill`, `systemctl`, `service`, `crontab`。**
+> **关键词：`lsb_release`, `reboot`, `exit`, `shutdown`, `date`, `mount`, `umount`, `ps`, `kill`, `systemctl`, `service`, `crontab`。**
 
 ## 8.1 reboot
 
 
 
->reboot 命令用来`重新启动正在运行的 Linux 操作系统`。
+> reboot 命令用来`重新启动正在运行的 Linux 操作系统`。
 
 示例：
 
@@ -1359,7 +1271,7 @@ reboot -w     # 做个重开机的模拟（只有纪录并不会真的重开机�
 
 
 
-> exit命令用于`退出目前的shell(脚本)`。
+>  exit命令用于`退出目前的shell(脚本)`。
 
 - exit [状态值] 状态值0代表执行成功，其他值代表执行失败。
 
@@ -1373,7 +1285,7 @@ $ exit # 单独输入exit是退出终端的意思。
 
 
 
->shutdown 命令用来`系统关机命令`。shutdown 指令可以关闭所有程序，并依用户的需要，进行重新开机或关机的动作。
+> shutdown 命令用来`系统关机命令`。shutdown 指令可以关闭所有程序，并依用户的需要，进行重新开机或关机的动作。
 
 示例：
 
@@ -1390,7 +1302,7 @@ shutdown +5 "System will shutdown after 5 minutes"
 
 
 
->date 命令是`显示或设置系统时间与日期`。
+> date 命令是`显示或设置系统时间与日期`。
 
 示例：
 
@@ -1445,7 +1357,7 @@ date -s "20120523 01:01:01"    # 这样可以设置全部时间
 #!/bin/bash
 
 start=$(date +%s)
-nmap man.linuxde.net &> /dev/null
+nmap man.linuxde.net &>  /dev/null
 
 end=$(date +%s)
 difference=$(( end - start ))
@@ -1457,7 +1369,7 @@ echo $difference seconds.
 
 
 
->mount 命令用于挂载文件系统到指定的挂载点。
+> mount 命令用于挂载文件系统到指定的挂载点。
 
 - 挂载是将其他机器上的磁盘映射到本机器上来，使得在本机器上可以访问其他机器的文件；如在IP1服务器上可以访问IP2上的资源。
 - 软连接是一种快捷方式，这两个区分好！
@@ -1467,14 +1379,14 @@ echo $difference seconds.
 
 
 
->umount 命令用于`卸载已经挂载的文件系统`。利用设备名或挂载点都能 umount 文件系统，不过最好还是通过挂载点卸载，以免使用绑定挂载（一个设备，多个挂载点）时产生混乱。
+> umount 命令用于`卸载已经挂载的文件系统`。利用设备名或挂载点都能 umount 文件系统，不过最好还是通过挂载点卸载，以免使用绑定挂载（一个设备，多个挂载点）时产生混乱。
 
 
 ## 8.7 ps
 
 
 
-> ps 命令用于报告当前系统的进程状态。
+>  ps 命令用于报告当前系统的进程状态。
 
 示例：
 
@@ -1491,7 +1403,7 @@ ps aux | sort -nk 3
 
 
 
->kill 命令用来`删除执行中的程序或工作`。`预设的信息为 SIGTERM(15),可将指定程序终止`。若仍无法终止该程序，可使用` SIGKILL(9) 信息尝试强制删除程序`。
+> kill 命令用来`删除执行中的程序或工作`。`预设的信息为 SIGTERM(15),可将指定程序终止`。若仍无法终止该程序，可使用` SIGKILL(9) 信息尝试强制删除程序`。
 
 - kill -9 强制杀死， kill 是正常关闭。一般要用kill就行，因为有时就需要正常关闭才行，可以理解为先保存了再关闭！
 
@@ -1500,7 +1412,7 @@ ps aux | sort -nk 3
 
 
 
->service 命令是 Redhat Linux 兼容的发行版中用来`控制系统服务的实用工具`，它以启动、停止、重新启动和关闭系统服务，还可以显示所有系统服务的当前状态。
+> service 命令是 Redhat Linux 兼容的发行版中用来`控制系统服务的实用工具`，它以启动、停止、重新启动和关闭系统服务，还可以显示所有系统服务的当前状态。
 
 示例：
 
@@ -1523,7 +1435,7 @@ service network restart
 
 
 
->crontab 命令被用来提交和管理用户的需要`周期性执行的任务`。
+> crontab 命令被用来提交和管理用户的需要`周期性执行的任务`。
 
 详情见：[https://www.runoob.com/linux/linux-comm-crontab.html](https://www.runoob.com/linux/linux-comm-crontab.html)
 ![·](https://img-blog.csdnimg.cn/0b7860c30fcd4f86b4fed2301ac9b135.png)
@@ -1533,7 +1445,7 @@ service network restart
 
 
 
->systemctl 命令是`系统服务管理器指令`，它实际上将 service 和 chkconfig 这两个命令组合到一起。
+> systemctl 命令是`系统服务管理器指令`，它实际上将 service 和 chkconfig 这两个命令组合到一起。
 
 示例：
 
@@ -1570,13 +1482,13 @@ sudo systemctl disable firewalld.service
 
 
 
->**关键词：`rpm`, `yum`, `apt-get`。**
+> **关键词：`rpm`, `yum`, `apt-get`。**
 
 ## 9.1 rpm
 
 
 
->rpm 命令是` RPM 软件包的管理工具`。
+> rpm 命令是` RPM 软件包的管理工具`。
 
 1. 安装rpm包
 
@@ -1609,9 +1521,9 @@ $ make install
 
 - 使用`命令 rpm -e 包名`，包名可以包含版本号等信息，但是不可以有后缀.rpm
 
->有时会出现一些错误或者警告：
->... is needed by ...
->这说明这个软件被其他软件需要，不能随便卸载，可以`用 rpm -e --nodeps 强制卸载`。
+> 有时会出现一些错误或者警告：
+> ... is needed by ...
+> 这说明这个软件被其他软件需要，不能随便卸载，可以`用 rpm -e --nodeps 强制卸载`。
 
 4. 查看与 rpm 包相关的文件和其他信息。
 
@@ -1625,7 +1537,7 @@ rpm -qa # 列出所有安装过的包
 
 
 
->yum 命令 基于 RPM 包管理，能够从`指定的服务器自动下载 RPM 包并且安装`，可以自动处理依赖性关系，并且一次安装所有依赖的软件包，无须繁琐地一次次下载、安装。
+> yum 命令 基于 RPM 包管理，能够从`指定的服务器自动下载 RPM 包并且安装`，可以自动处理依赖性关系，并且一次安装所有依赖的软件包，无须繁琐地一次次下载、安装。
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/91ca9d13484b459898803a251eab6356.png)
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/d1dfb34fcc1c4fa68879404b0b869248.png)
@@ -1649,7 +1561,7 @@ yum makecache
 
 
 
- >apt-get 命令是 `Debian Linux 发行版中的 APT 软件包管理工具`。所有基于 Debian 的发行都使用这个包管理系统。deb 包可以把一个应用的文件包在一起，大体就如同 Windows 上的安装文件。
+ > apt-get 命令是 `Debian Linux 发行版中的 APT 软件包管理工具`。所有基于 Debian 的发行都使用这个包管理系统。deb 包可以把一个应用的文件包在一起，大体就如同 Windows 上的安装文件。
 
 示例：
 
