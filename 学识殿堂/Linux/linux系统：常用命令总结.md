@@ -700,8 +700,6 @@ root@localhost [test]# du
 
 ## 5.4 free 
 
-
-
 > free 命令，`针对内存的`，可以显示当前系统未使用的和已使用的内存数目，还可以显示被内核使用的内存缓冲区。
 
 示例：
@@ -721,22 +719,14 @@ Swap:         4094          0       4094
 
 ## 5.5 iotop (需要安装)
 
-
-
 > iotop 命令是一个用来监视磁盘 I/O 使用状况的 top 类工具。
 > ![在这里插入图片描述](https://img-blog.csdnimg.cn/b7055371aac0427884503ca2d3d13701.png)
 
-
-
 # 6. Linux 之 网络管理
-
-
 
 > **关键词：`curl`,`wget`, `telnet`, `ip`, `hostname`, `ifconfig`, `route`, `ssh`, `ssh-keygen`, `firewalld`, `iptables`, `host`, `nslookup`, `nc/netcat`, `ping`, `traceroute`, `netstat`。**
 
 ## 6.1 curl、wget
-
-
 
 > curl 命令是`一个利用 URL 规则在命令行下工作的文件传输工具`。它`支持文件的上传和下载`，所以是综合传输工具，但按传统，习惯称 curl 为下载工具。作为一款强力工具，curl 支持包括 HTTP、HTTPS、ftp 等众多协议，还支持 POST、cookies、认证、从指定偏移处下载部分文件、用户代理字符串、限速、文件大小、进度条等特征。做网页处理流程和数据检索自动化，curl 可以祝一臂之力。
 
@@ -751,8 +741,6 @@ $ curl http://man.linuxde.net/test.iso -o filename.iso --progress
 ########################################## 100.0%
 ```
 
-
-
 > wget 命令用来从指定的 URL 下载文件。
 
 示例：
@@ -763,8 +751,6 @@ $ wget http://www.linuxde.net/testfile.zip
 ```
 
 ## 6.2 telnet 
-
-
 
 > telnet 命令一般用作测试远程端口连接，功能是用于远端登入。
 
@@ -784,8 +770,6 @@ Login incorrect
 ```
 
 ## 6.4 ip
-
-
 
 > ip 命令用来查看或操纵 Linux 主机的路由、网络设备、策略路由和隧道，是 Linux 下较新的功能强大的网络配置工具。
 
@@ -813,22 +797,15 @@ $ ip route del default          # 删除默认路由
 $ ip route delete 192.168.1.0/24 dev eth0 # 删除路由
 ```
 
-
 ## 6.5 hostname
-
-
 
 > hostname 命令`用于查看和设置系统的主机名称`。环境变量 HOSTNAME 也保存了当前的主机名。在使用 hostname 命令设置主机名后，系统并不会永久保存新的主机名，重新启动机器之后还是原来的主机名。如果需要永久修改主机名，需要同时修改 /etc/hosts 和 /etc/sysconfig/network 的相关内容。
 
 ## 6.6 ifconfig
 
-
-
 > ifconfig 命令`被用于查看和配置 Linux 内核中网络接口的网络参数`。用 ifconfig 命令配置的网卡信息，在网卡重启后机器重启后，配置就不存在。要想将上述的配置信息永远的存的电脑里，那就要修改网卡的配置文件了。
 
 ## 6.7 route
-
-
 
 > route 命令用来`查看和设置 Linux 内核中的网络路由表`，route 命令设置的路由主要是静态路由。要实现两个不同的子网之间的通信，需要一台连接两个网络的路由器，或者同时位于两个网络的网关来实现。
 
@@ -853,11 +830,7 @@ route add default gw 192.168.120.240                   # 添加默认网关
 route del default gw 192.168.120.240                   # 删除默认网关
 ```
 
-
-
 ## 6.8 ssh
-
-
 
 > ssh 命令是 `openssh 套件中的客户端连接工具`，可以给予 ssh 加密协议实现安全的`远程登录服务器`。
 
@@ -870,22 +843,15 @@ ssh user1@172.24.210.101
 ssh -p 2211 root@140.206.185.170
 ```
 
-
 ## 6.9 ssh-keygen 
-
-
 
 > ssh-keygen 命令用于`为 ssh 生成、管理和转换认证密钥`，它支持 RSA 和 DSA 两种认证密钥。
 
 ## 6.10 firewalld
 
-
-
 > firewalld 命令是 Linux 上的`防火墙软件`。
 
 ### 6.10.1 firewalld 的基本使用
-
-
 
 1. 启动 - systemctl start firewalld
 2. 关闭 - systemctl stop firewalld
@@ -894,8 +860,6 @@ ssh -p 2211 root@140.206.185.170
 5. 开机启用 - systemctl enable firewalld
 
 ### 6.10.2 使用 systemctl 管理 firewalld 服务
-
-
 
 > systemctl 是服务管理工具中主要的工具，它融合之前 service 和 chkconfig 的功能于一体。
 
@@ -909,10 +873,7 @@ ssh -p 2211 root@140.206.185.170
 - 查看已启动的服务列表 - systemctl list-unit-files|grep enabled
 - 查看启动失败的服务列表 - systemctl --failed
 
-
 ### 6.10.3 配置 firewall-cmd（需要安装）
-
-
 
 1. 查看版本 - firewall-cmd --version
 2. 查看帮助 - firewall-cmd --help
@@ -927,17 +888,12 @@ ssh -p 2211 root@140.206.185.170
 
 ### 6.10.4 在防火墙中开放一个端口(常用)
 
-
-
 - 添加（--permanent 永久生效，没有此参数重启后失效） - firewall-cmd --zone=public --add-port=80/tcp --permanent
 - 重新载入 - firewall-cmd --reload
 - 查看 - firewall-cmd --zone= public --query-port=80/tcp
 - 删除 - firewall-cmd --zone= public --remove-port=80/tcp --permanent
 
-
 ## 6.11 iptables 
-
-
 
 > iptables 命令是` Linux 上常用的防火墙软件`，是 netfilter 项目的一部分。可以直接配置，也可以通过许多前端和图形界面配置。
 
@@ -982,50 +938,34 @@ Chain OUTPUT (policy ACCEPT 3382K packets, 1819M bytes)
 
 ## 6.12 host 
 
-
-
 > host 命令是常用的`分析域名查询工具`，可以用来`测试域名系统工作是否正常`。
 > ![在这里插入图片描述](https://img-blog.csdnimg.cn/6c48fee6089a43889ffa8bb8457c489d.png)
 
 ## 6.13 nslookup
 
-
-
 > nslookup 命令是常用域名查询工具，就是查 DNS 信息用的命令。
 > ![在这里插入图片描述](https://img-blog.csdnimg.cn/92272bbc794f490daca0be85bdff7881.png)
 
-
 ## 6.14 nc/netcat
-
-
 
 > nc 命令是 netcat 命令的简称，都是用来设置路由器。
 
 ## 6.15 ping
 
-
-
 > ping 命令用来`测试主机之间网络的连通性`。
 
 ## 6.16 traceroute（需要安装）
-
-
 
 > traceroute 命令用于`追踪数据包在网络上的传输时的全部路径`，它默认发送的数据包大小是 40 字节。
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/f746eef19b0c4ecd90e4905e2cdb5946.png)
 
-
-
 ## 6.17 netstat
-
-
 
 > netstat 命令用于`显示网络状态`，打印 Linux 中网络系统的状态信息，可让你得知整个 Linux 系统的网络情况。
 
 解释一下 - n 参数命令的效果：
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/17245a82af44422aa55ab823ff12bf86.png)
-
 
 示例：
 
@@ -1047,17 +987,12 @@ netstat -st   显示TCP端口的统计信息
 netstat -su   显示UDP端口的统计信息
 ```
 
-
 # 7. Linux 之 用户管理
-
-
 
 > **关键词：`groupadd`, `groupdel`, `groupmod`, `useradd`, `userdel`, `usermod`, `passwd`, `su`, `sudo`。**
 
 
 ## 7.1 groupadd
-
-
 
 > groupadd 命令用于`创建一个新的用户组`，新用户组的信息将被添加到系统文件中。
 
@@ -1085,17 +1020,11 @@ itholmes:x:344:
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/09af9fb2850d41ed8ea5b13bb75f4412.png)
 
-
 ## 7.2 groupdel 
-
-
 
 > groupdel 命令用于`删除指定的用户组`，本命令要修改的系统文件包括 /ect/group 和 /ect/gshadow。若该群组中仍包括某些用户，则必须先删除这些用户后，方能删除群组。
 
-
 ## 7.3 groupmod
-
-
 
 > groupmod 命令`更改群组识别码(组ID)或名称(组名称)`。
 
@@ -1113,10 +1042,7 @@ $ tail -1 /etc/group
 itholmesNes:x:500:
 ```
 
-
 ## 7.4 useradd
-
-
 
 > useradd 可用来`建立用户帐号`。帐号建好之后，再用 passwd 设定帐号的密码。`使用 useradd 指令所建立的帐号，实际上是保存在 /etc/passwd 文本文件中`。
 
@@ -1152,15 +1078,11 @@ $ useradd -d /opt/ -g itholmesGroup -r -u 544 itholmes
 
 ## 7.5 userdel
 
-
-
 > userdel 命令`用于删除给定的用户，以及与用户相关的文件`。`若不加选项，则仅删除用户帐号，而不删除相关文件`。
 
 - -r 　删除用户登入目录以及目录中所有文件。
 
 ## 7.6 usermod
-
-
 
 > usermod 命令`用于修改用户的基本信息`。`usermod 命令不允许你改变正在线上的使用者帐号名称。当 usermod 命令用来改变 user id，必须确认这名 user 没在电脑上执行任何程序`。
 
@@ -1179,14 +1101,9 @@ $ usermod -d /home/hnlinux root
 $ usermod -u 123 root
 ```
 
-
-
 ## 7.7 passwd
 
-
-
 > passwd 命令`用于设置用户的认证信息，包括用户密码、密码过期时间`等。系统管理者则能用它管理系统用户的密码。`只有管理者可以指定用户名称，一般用户只能变更自己的密码`。
-
 
 示例：
 
@@ -1206,20 +1123,13 @@ $ passwd -d itholmes
 $ passwd -S itholmes 
 ```
 
-
 ## 7.8 su
 
-
-
 > su 命令用于切换当前用户身份到其他用户身份，变更时须输入所要变更的用户帐号与密码。
-
-
 
 ## 7.9 sudo
 
 ### 7.9.1 sudo使用
-
-
 
 > sudo 命令用来以其他身份来执行命令，预设的身份为 root（也就是默认是root）。在 /etc/sudoers 中设置了可执行 sudo 指令的用户。
 
@@ -1246,16 +1156,11 @@ $ sudo -L
 
 与给普通用户授权 sudo 类似，区别仅在于第 2 步：mary ALL=(ALL) NOPASSWD: ALL。
 
-
 # 8. Linux 之 系统管理
-
-
 
 > **关键词：`lsb_release`, `reboot`, `exit`, `shutdown`, `date`, `mount`, `umount`, `ps`, `kill`, `systemctl`, `service`, `crontab`。**
 
 ## 8.1 reboot
-
-
 
 > reboot 命令用来`重新启动正在运行的 Linux 操作系统`。
 
@@ -1266,10 +1171,7 @@ reboot        # 重开机。
 reboot -w     # 做个重开机的模拟（只有纪录并不会真的重开机）。
 ```
 
-
 ## 8.2 exit
-
-
 
 >  exit命令用于`退出目前的shell(脚本)`。
 
@@ -1283,8 +1185,6 @@ $ exit # 单独输入exit是退出终端的意思。
 
 ## 8.3 shutdown
 
-
-
 > shutdown 命令用来`系统关机命令`。shutdown 指令可以关闭所有程序，并依用户的需要，进行重新开机或关机的动作。
 
 示例：
@@ -1297,10 +1197,7 @@ shutdown -h now
 shutdown +5 "System will shutdown after 5 minutes"
 ```
 
-
 ## 8.4 date
-
-
 
 > date 命令是`显示或设置系统时间与日期`。
 
@@ -1364,27 +1261,18 @@ difference=$(( end - start ))
 echo $difference seconds.
 ```
 
-
 ## 8.5 mount
-
-
 
 > mount 命令用于挂载文件系统到指定的挂载点。
 
 - 挂载是将其他机器上的磁盘映射到本机器上来，使得在本机器上可以访问其他机器的文件；如在IP1服务器上可以访问IP2上的资源。
 - 软连接是一种快捷方式，这两个区分好！
 
-
 ## 8.6 umount
-
-
 
 > umount 命令用于`卸载已经挂载的文件系统`。利用设备名或挂载点都能 umount 文件系统，不过最好还是通过挂载点卸载，以免使用绑定挂载（一个设备，多个挂载点）时产生混乱。
 
-
 ## 8.7 ps
-
-
 
 >  ps 命令用于报告当前系统的进程状态。
 
@@ -1398,19 +1286,13 @@ ps aux | sort -rnk 4
 ps aux | sort -nk 3
 ```
 
-
 ## 8.8 kill
-
-
 
 > kill 命令用来`删除执行中的程序或工作`。`预设的信息为 SIGTERM(15),可将指定程序终止`。若仍无法终止该程序，可使用` SIGKILL(9) 信息尝试强制删除程序`。
 
 - kill -9 强制杀死， kill 是正常关闭。一般要用kill就行，因为有时就需要正常关闭才行，可以理解为先保存了再关闭！
 
-
 ## 8.9 service
-
-
 
 > service 命令是 Redhat Linux 兼容的发行版中用来`控制系统服务的实用工具`，它以启动、停止、重新启动和关闭系统服务，还可以显示所有系统服务的当前状态。
 
@@ -1433,17 +1315,12 @@ service network restart
 
 ## 8.10 crontab
 
-
-
 > crontab 命令被用来提交和管理用户的需要`周期性执行的任务`。
 
 详情见：[https://www.runoob.com/linux/linux-comm-crontab.html](https://www.runoob.com/linux/linux-comm-crontab.html)
 ![·](https://img-blog.csdnimg.cn/0b7860c30fcd4f86b4fed2301ac9b135.png)
 
-
 ## 8.11 systemctl 
-
-
 
 > systemctl 命令是`系统服务管理器指令`，它实际上将 service 和 chkconfig 这两个命令组合到一起。
 
@@ -1477,16 +1354,11 @@ sudo systemctl stop firewalld.service
 sudo systemctl disable firewalld.service
 ```
 
-
 # 9. Linux 之 软件管理
-
-
 
 > **关键词：`rpm`, `yum`, `apt-get`。**
 
 ## 9.1 rpm
-
-
 
 > rpm 命令是` RPM 软件包的管理工具`。
 
@@ -1535,13 +1407,10 @@ rpm -qa # 列出所有安装过的包
 
 ## 9.2 yum
 
-
-
 > yum 命令 基于 RPM 包管理，能够从`指定的服务器自动下载 RPM 包并且安装`，可以自动处理依赖性关系，并且一次安装所有依赖的软件包，无须繁琐地一次次下载、安装。
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/91ca9d13484b459898803a251eab6356.png)
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/d1dfb34fcc1c4fa68879404b0b869248.png)
-
 
 
 替换yum源：
@@ -1556,10 +1425,7 @@ yum clean all
 yum makecache
 ```
 
-
 ## 9.3 apt-get 或 apt
-
-
 
  > apt-get 命令是 `Debian Linux 发行版中的 APT 软件包管理工具`。所有基于 Debian 的发行都使用这个包管理系统。deb 包可以把一个应用的文件包在一起，大体就如同 Windows 上的安装文件。
 
@@ -1590,4 +1456,3 @@ apt-get upgrade
 # 将系统升级到新版本
 apt-get dist-upgrade
 ```
-
