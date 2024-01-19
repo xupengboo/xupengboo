@@ -178,7 +178,9 @@ file -L /var/spool/mail   # 显示符号链接的文件类型
 >  chmod 命令用来变更文件或目录的权限。
 
 - -R : 对目前目录下的所有文件与子目录进行相同的权限变更(即以递归的方式逐个变更)
-  ![在这里插入图片描述](https://img-blog.csdnimg.cn/734e486b5b1b4786930d865dd2f67dba.png)
+
+![image](https://github.com/ITholmes/hello-world/assets/70437837/ae6368a9-3195-4619-9e1e-7276c0d0b54b)
+
 
 三种执行权限对应值：
 
@@ -526,7 +528,7 @@ $ grep "main()" . -r --exclude-from filelist
 tar -cvf a.tar a.txt #仅仅打包，不会压缩，后缀名名字最好是.tar，也为了方便解压。
 ```
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/cf1a6d43a772429c8f011a459ccd2763.png)
+![image](https://github.com/ITholmes/hello-world/assets/70437837/43d0ba8a-6c9c-412e-a118-c090f95e8d55)
 
 **tar 打包 + 压缩(gzip形式压缩)**
 
@@ -535,7 +537,7 @@ tar -cvf a.tar a.txt #仅仅打包，不会压缩，后缀名名字最好是.tar
 tar -zcvf a.tar.gz a.txt  # 打包后，以 gzip 压缩，后缀名最好是.tar.gz。
 ```
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/c50c4d637a3c47efab7b29215426f6c4.png)
+![image](https://github.com/ITholmes/hello-world/assets/70437837/c9168d23-280c-45e8-bf55-13169ce109f8)
 
 **tar 打包+压缩(bzip2形式压缩)**
 
@@ -543,7 +545,7 @@ tar -zcvf a.tar.gz a.txt  # 打包后，以 gzip 压缩，后缀名最好是.tar
 tar -jcvf a.tar.bz2 a.txt # 打包后，以 bzip2 压缩
 ```
 
-![image](https://github.com/ITholmes/hello-world/assets/70437837/94ac23ac-f008-4b60-b192-d9804797dfc2)
+![image](https://github.com/ITholmes/hello-world/assets/70437837/feadcf03-b4c7-49e0-87c7-2afda7831341)
 
 **tar 解压缩：**
 
@@ -603,7 +605,8 @@ unzip -v test.zip           # 查看压缩文件目录，但不解压
 > df 命令(disk)用于`显示磁盘分区上的可使用的磁盘空间`。默认显示单位为 KB。可以利用该命令来获取硬盘被占用了多少空间，目前还剩下多少空间等信息。
 
 df命令显示的名称对应：
-![在这里插入图片描述](https://img-blog.csdnimg.cn/5c739f5123854ebbba4e1bff12028d8f.png)
+
+![image](https://github.com/ITholmes/hello-world/assets/70437837/94cd0516-9336-47b0-88eb-559f062b333b)
 
 示例：
 ```shell
@@ -720,7 +723,8 @@ Swap:         4094          0       4094
 ## 5.5 iotop (需要安装)
 
 > iotop 命令是一个用来监视磁盘 I/O 使用状况的 top 类工具。
-> ![在这里插入图片描述](https://img-blog.csdnimg.cn/b7055371aac0427884503ca2d3d13701.png)
+
+![image](https://github.com/ITholmes/hello-world/assets/70437837/8161a4bc-b979-4d66-a16d-be2c972042f5)
 
 # 6. Linux 之 网络管理
 
@@ -939,12 +943,15 @@ Chain OUTPUT (policy ACCEPT 3382K packets, 1819M bytes)
 ## 6.12 host 
 
 > host 命令是常用的`分析域名查询工具`，可以用来`测试域名系统工作是否正常`。
-> ![在这里插入图片描述](https://img-blog.csdnimg.cn/6c48fee6089a43889ffa8bb8457c489d.png)
+
+![image](https://github.com/ITholmes/hello-world/assets/70437837/4cf48dbb-02ff-4c00-b30d-7010713aeccb)
 
 ## 6.13 nslookup
 
 > nslookup 命令是常用域名查询工具，就是查 DNS 信息用的命令。
-> ![在这里插入图片描述](https://img-blog.csdnimg.cn/92272bbc794f490daca0be85bdff7881.png)
+
+![image](https://github.com/ITholmes/hello-world/assets/70437837/1a63205e-7c80-4f41-86c8-9cdf62306ebd)
+
 
 ## 6.14 nc/netcat
 
@@ -958,14 +965,15 @@ Chain OUTPUT (policy ACCEPT 3382K packets, 1819M bytes)
 
 > traceroute 命令用于`追踪数据包在网络上的传输时的全部路径`，它默认发送的数据包大小是 40 字节。
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/f746eef19b0c4ecd90e4905e2cdb5946.png)
+![image](https://github.com/ITholmes/hello-world/assets/70437837/e8e4b0f2-8852-4896-a875-3cc64661dcc1)
 
 ## 6.17 netstat
 
 > netstat 命令用于`显示网络状态`，打印 Linux 中网络系统的状态信息，可让你得知整个 Linux 系统的网络情况。
 
 解释一下 - n 参数命令的效果：
-![在这里插入图片描述](https://img-blog.csdnimg.cn/17245a82af44422aa55ab823ff12bf86.png)
+
+![image](https://github.com/ITholmes/hello-world/assets/70437837/ac1b1dcc-b16e-4568-bcf2-17a66259a9a8)
 
 示例：
 
@@ -1018,7 +1026,7 @@ $ tail -1 /etc/group
 itholmes:x:344:
 ```
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/09af9fb2850d41ed8ea5b13bb75f4412.png)
+![image](https://github.com/ITholmes/hello-world/assets/70437837/f8e88a55-7e9a-4792-819a-4d4e72fc5b14)
 
 ## 7.2 groupdel 
 
@@ -1053,15 +1061,17 @@ itholmesNes:x:500:
 - -u\<uid>  　指定用户ID。
 
 用户组：
-
 - 没有指定组，默认就会根据账号名创建一个一样名字的组，该组的ID是已经上个组自增+1，在/etc/group能看到。
-  ![在这里插入图片描述](https://img-blog.csdnimg.cn/e38d210a53f04848a126bbf9dc85bd92.png)
+
+![image](https://github.com/ITholmes/hello-world/assets/70437837/6b5d14df-3fcf-41a9-bed5-2854c9b01c2e)
+
 
 用户目录：
 
 - 没有指定用户目录，默认就是在/home下面创建同名的目录。home是默认创建用户目录的地方。
 - 用户对自己的用户目录，有对应的权限，对其他目录，需要根据属主，属组，其他人等权限来判断。通过ll命令或者ls -l命令，来查看。
-  ![在这里插入图片描述](https://img-blog.csdnimg.cn/4f6e5c3104dd4b56b889552172bea41c.png)
+
+![image](https://github.com/ITholmes/hello-world/assets/70437837/6336f46d-0550-48db-93bb-239034ede4b5)
 
 示例：
 
@@ -1318,7 +1328,8 @@ service network restart
 > crontab 命令被用来提交和管理用户的需要`周期性执行的任务`。
 
 详情见：[https://www.runoob.com/linux/linux-comm-crontab.html](https://www.runoob.com/linux/linux-comm-crontab.html)
-![·](https://img-blog.csdnimg.cn/0b7860c30fcd4f86b4fed2301ac9b135.png)
+
+![image](https://github.com/ITholmes/hello-world/assets/70437837/dec1b9ff-d66b-4f89-846c-500948cb7e18)
 
 ## 8.11 systemctl 
 
@@ -1409,9 +1420,9 @@ rpm -qa # 列出所有安装过的包
 
 > yum 命令 基于 RPM 包管理，能够从`指定的服务器自动下载 RPM 包并且安装`，可以自动处理依赖性关系，并且一次安装所有依赖的软件包，无须繁琐地一次次下载、安装。
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/91ca9d13484b459898803a251eab6356.png)
-![在这里插入图片描述](https://img-blog.csdnimg.cn/d1dfb34fcc1c4fa68879404b0b869248.png)
+![image](https://github.com/ITholmes/hello-world/assets/70437837/a3306347-11ce-4640-b4b8-fed2f5c287f6)
 
+![image](https://github.com/ITholmes/hello-world/assets/70437837/a07297b4-e452-4d32-a939-9752b5bf3f6e)
 
 替换yum源：
 
