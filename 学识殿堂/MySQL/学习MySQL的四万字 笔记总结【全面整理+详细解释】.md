@@ -104,7 +104,7 @@ default-character-set=utf8
 	> 💡注意：MySQL8以上的版本，没有了 password 字段和 passwrod() 函数，所以不能使用上面的语句进行修改，而是使用alter语句进行修改：`alter user 'root'@'localhost' identified by 'newpassword'`;
 
 
-9. **<font color="red">输入 flush privileges; 刷新权限。</font>**
+9. **输入`flush privileges;`刷新权限**。
 10. **<font color="red">修改 my.ini 文件删除最后一句skip-grant-tables,可以使用#注释掉。</font>**
 11. **<font color="red">重启mysql即可正常使用，net stop mysql , net start mysql</font>**
 
