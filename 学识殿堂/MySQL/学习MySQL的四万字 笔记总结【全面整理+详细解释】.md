@@ -90,15 +90,18 @@ port=3306
 default-character-set=utf8
 ```
 
-4. **启动管理员模式下的CMD，并将路径切换至MySQL下的bin目录，然后输入mysqld -install（安装mysql，这一步就是将MySQL安装到服务中）**。
+4. **启动管理员模式下的CMD，并将路径切换至MySQL下的bin目录，然后输入`mysqld -install`（安装mysql，这一步就是将MySQL安装到服务中）**。
 >💡注意：如果，这里安装出现下面情况：
 >![在这里插入图片描述](https://img-blog.csdnimg.cn/a1f6ad3881c14e978cd64c3a98dbfb33.png)
 >说明已经安装了MySQL服务了，使用sc query mysql查看一下，也可以使用sc delete mysql删除一下服务就可以了。
 
-5. 再输入**`mysqld --initialize-insecure --user=mysql`** ，进行初始化数据库。初始化后，我们前面在my.ini设置的data就会出现在目录中，data中包括一些初始后的mysql数据库。
+5. **再输入`mysqld --initialize-insecure --user=mysql` ，进行初始化数据库**。初始化后，我们前面在my.ini设置的data就会出现在目录中，data中包括一些初始后的mysql数据库。
+
 6. **启动MySQL，`net start mysql`（启动mysql服务），然后用命令`mysql -u root -p`(注意-p后面不要加空格，因为p是代表密码，空格算是密码一部分) 进入mysql管理页面**。
+
 7. **进入mysql，第一件事情就是修改密码：`update mysql.user set authentication_string=password('123456') where user='root' and Host = 'localhost'`;**
-	**<font color="red">注意MySQL8以上的版本，没有了password字段和passwrod()函数，所以不能使用上面的语句进行修改，而是使用alter语句进行修改：alter user 'root'@'localhost' identified by 'newpassword';</font>**
+	
+	> 💡注意：MySQL8以上的版本，没有了 password 字段和 passwrod() 函数，所以不能使用上面的语句进行修改，而是使用alter语句进行修改：`alter user 'root'@'localhost' identified by 'newpassword'`;
 
 
 9. **<font color="red">输入 flush privileges; 刷新权限。</font>**
