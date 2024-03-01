@@ -105,8 +105,8 @@ default-character-set=utf8
 
 
 9. **输入`flush privileges;`刷新权限**。
-10. **<font color="red">修改 my.ini 文件删除最后一句skip-grant-tables,可以使用#注释掉。</font>**
-11. **<font color="red">重启mysql即可正常使用，net stop mysql , net start mysql</font>**
+10. **修改 my.ini 文件删除最后一句skip-grant-tables,可以使用#注释掉。**
+11. **重启mysql即可正常使用，net stop mysql , net start mysql**
 
 ## 1.6 SQLyog使用的 注意事项
 
