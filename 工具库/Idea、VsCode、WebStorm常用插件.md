@@ -26,6 +26,10 @@
 
 **Chinese (Simplified) Language Pack for Visual Studio Code**：中文语言包。（不推荐使用）
 
+**Git Graph**：方便管理Git分支相关。
+
+**GitLens**：方便查看某段代码是谁提交的。
+
 # 3. WebStorm 常用插件
 
 Vue.js：Vue项目开发必需的支持,如语法高亮、自动完成、Linting检查等。（这个肯定有）
