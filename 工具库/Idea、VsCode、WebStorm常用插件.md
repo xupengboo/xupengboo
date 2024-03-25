@@ -32,5 +32,13 @@
 
 # 3. WebStorm 常用插件
 
-Vue.js：Vue项目开发必需的支持,如语法高亮、自动完成、Linting检查等。（这个肯定有）
+**Vue.js**：Vue项目开发必需的支持,如语法高亮、自动完成、Linting检查等。（这个肯定有）
+
+**Key Promoter X**：弹出提示框，告知你用什么快捷键替代。
+
+**GitToolBox**：同上，也是Git必备。
+
+**Translation**：英文翻译，方便起名。点击不认识的单词，直接右键translation。
+
+> Tips：欢迎 评论区，推荐比较好用的工具插件。
 
