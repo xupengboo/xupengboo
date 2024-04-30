@@ -13,6 +13,7 @@ spring:
       discovery:
         locator:
           enabled: true
+# discovery.locator.enabled：这个配置项决定了是否启用基于服务发现的路由定位器。当设置为 true 时，Gateway 会自动为在服务发现中心注册的所有服务创建路由。这样，当一个新的服务实例注册到服务发现中心时，Gateway 会自动感知到，并为其创建相应的路由，无需手动配置
 ```
 
 该配置作用是：**用于启用服务发现定位器的**。
