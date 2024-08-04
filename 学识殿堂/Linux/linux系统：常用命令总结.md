@@ -1503,3 +1503,15 @@ chmod -R 755 /sypm/jenkins
 - **八进制模式**: 使用数字来设置权限，每个数字代表一组权限。例如：
   - **`755`**: 读、写、执行权限（7）给拥有者，读和执行权限（5）给组和其他人。
   - **`644`**: 读和写权限（6）给拥有者，读权限（4）给组和其他人。
+
+# 11. sed 命令
+`sed` 是一个强大的流编辑器，用于在**文本文件中执行基本的文本转换**。它以逐行处理的方式读取输入文件，并根据指定的命令对内容进行处理。
+```shell
+sed -e ' \
+s#{IMAGE_URL}#${env.HARBOR_HOST}/${env.HARBOR_LIB}/${APP_NAME}#g; \
+s#{IMAGE_TAG}#${TAG}#g; \
+' template.yaml > output.yaml
+```
+- `-e ' '`：表示多行命令。
+- `s#{IMAGE_URL}#${env.HARBOR_HOST}/${env.HARBOR_LIB}/${APP_NAME}#g;`：将 {IMAGE_URL} 替换为 ${env.HARBOR_HOST}/${env.HARBOR_LIB}/${APP_NAME}。
+- `>`：将输出重定向到 output.yaml。
