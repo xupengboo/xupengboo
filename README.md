@@ -2,8 +2,6 @@
 
 欢迎来到 **学识殿堂**，这是一个记录和分享学习过程、知识和经验的地方。在这里，我汇总了编程语言、技术问题解决方案和使用经验，旨在帮助自己和他人不断进步。
 
-![搬砖](https://github.com/user-attachments/assets/17b2f013-8fc1-45cf-9eea-ee205d43a8c8)
-
 <img src="https://github.com/user-attachments/assets/17b2f013-8fc1-45cf-9eea-ee205d43a8c8" alt="搬砖" width="530" height="530"/>
 
 ## 📚 学识殿堂
