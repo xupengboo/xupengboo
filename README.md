@@ -2,7 +2,7 @@
 
 欢迎来到 **学识殿堂**，这是一个记录和分享学习过程、知识和经验的地方。在这里，我汇总了编程语言、技术问题解决方案和使用经验，旨在帮助自己和他人不断进步。
 
-![Banner](https://your-banner-url.com)
+![搬砖](https://github.com/user-attachments/assets/17b2f013-8fc1-45cf-9eea-ee205d43a8c8)
 
 ## 📚 学识殿堂
 
@@ -34,7 +34,7 @@
 
 如果你有任何问题或建议，欢迎通过以下方式与我联系：
 
-- **Email**: [your-email@example.com](mailto:your-email@example.com)
+- **Email**: [itholmes@88.com](mailto:itholmes@88.com)
 - **GitHub Issues**: 在本项目的 [Issues](https://github.com/xupengboo/xupengboo/issues) 页面提出你的问题。
 
 ---
