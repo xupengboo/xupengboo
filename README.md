@@ -5,9 +5,9 @@
 ## 目录
 
 - [学识殿堂](#学识殿堂)
-  - [平台应用](#平台应用)
-  - [面试题](#面试题)
-  - [联系我](#联系我)
+- [平台应用](#平台应用)
+- [面试题](#面试题)
+- [联系我](#联系我)
 
 ## 学识殿堂
 
@@ -40,6 +40,6 @@
 如果你有任何问题或建议，欢迎通过以下方式与我联系：
 
 - **Email**: [itholmes@88.com]
-- **GitHub Issues**: 在本项目的 [Issues](https://github.com/你的用户名/xupengboo/issues) 页面提出你的问题。
+- **GitHub Issues**: 在本项目的 [Issues](https://github.com/xupengboo/xupengboo/issues) 页面提出你的问题。
 
 感谢你的访问，希望你在这里能找到有价值的信息！
