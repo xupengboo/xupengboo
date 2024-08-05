@@ -4,6 +4,8 @@
 
 ![搬砖](https://github.com/user-attachments/assets/17b2f013-8fc1-45cf-9eea-ee205d43a8c8)
 
+<img src="https://github.com/user-attachments/assets/17b2f013-8fc1-45cf-9eea-ee205d43a8c8" alt="搬砖" width="530" height="530"/>
+
 ## 📚 学识殿堂
 
 在这里，我记录了学习过程中获得的各种知识和经验，涵盖多个编程语言和技术领域。
