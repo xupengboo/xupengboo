@@ -165,6 +165,45 @@ docker version
 
 
 
+现在，国内docker网站是访问不通的，所以一开始就需要更换docker镜像仓库：（以阿里云的Docker仓库配置为例：）
+
+```shell
+# 1. 记得先备份
+sudo cp /etc/yum.repos.d/docker-ce.repo /etc/yum.repos.d/docker-ce.repo.bak
+# 2. 修改
+vi /etc/yum.repos.d/docker-ce.repo
+## 添加以下内容：
+[docker-ce]
+name=Docker CE Stable - $basearch
+baseurl=https://mirrors.aliyun.com/docker-ce/linux/centos/7/x86_64/stable
+enabled=1
+gpgcheck=1
+gpgkey=https://mirrors.aliyun.com/docker-ce/linux/centos/gpg
+
+[docker-ce-edge]
+name=Docker CE Edge - $basearch
+baseurl=https://mirrors.aliyun.com/docker-ce/linux/centos/7/x86_64/edge
+enabled=0
+gpgcheck=1
+gpgkey=https://mirrors.aliyun.com/docker-ce/linux/centos/gpg
+
+[docker-ce-test]
+name=Docker CE Test - $basearch
+baseurl=https://mirrors.aliyun.com/docker-ce/linux/centos/7/x86_64/test
+enabled=0
+gpgcheck=1
+gpgkey=https://mirrors.aliyun.com/docker-ce/linux/centos/gpg
+
+# 3. 重新安装
+sudo yum clean all
+sudo yum makecache
+sudo yum install docker-ce docker-ce-cli containerd.io
+systemctl start docker
+systemctl enable docker
+```
+
+
+
 
 ## 五、卸载 Docker
 
