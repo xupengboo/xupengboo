@@ -2,8 +2,11 @@
 
 Docker 是一个开源的容器引擎，它有助于更快地交付应用。Docker 可将应用程序和基础设施层隔离，并且能将基础设施当作程序一样进行管理。使用 Docker , 可更快地打包、测试以及部署应用程序，并可以缩短从编写到部署运行代码的周期。
 * Docker 的官方网址链接：[https://www.docker.com](https://www.docker.com/)
-
 * Docker 的 GitHub : http://github.com/docker/docker  
+
+
+
+> Tips：最近，镜像拉去经常超时，解决办法：https://blog.csdn.net/weixin_50160384/article/details/139861337
 
 
 
