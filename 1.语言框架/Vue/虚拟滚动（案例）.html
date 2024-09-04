@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Scrolling Example</title>
+    <style>
+        #container {
+            height: 300px;
+            overflow-y: auto;
+            position: relative;
+            border: 1px solid #ccc;
+        }
+        .item {
+            height: 50px;
+            box-sizing: border-box;
+            border-bottom: 1px solid #e0e0e0;
+            position: absolute;
+            width: 100%;
+            left: 0;
+            display: flex;
+            align-items: center;
+            padding-left: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="container"></div>
+
+<script>
+
+	// app.js
+
+// 总数据项数
+const totalItems = 10000;
+// 每个数据项的高度
+const itemHeight = 50;
+// 计算视口中最多可以显示多少个数据项
+const containerHeight = 300;
+const visibleItemCount = Math.ceil(containerHeight / itemHeight);
+
+// 获取容器元素
+const container = document.getElementById('container');
+
+// 创建一个空白的填充容器，用于撑开滚动条
+const spacer = document.createElement('div');
+spacer.style.height = `${totalItems * itemHeight}px`;
+container.appendChild(spacer);
+
+// 创建可见项的容器
+const visibleItemsContainer = document.createElement('div');
+container.appendChild(visibleItemsContainer);
+
+// 渲染可见项的函数
+function renderVisibleItems(scrollTop) {
+    const startIndex = Math.floor(scrollTop / itemHeight);
+    const endIndex = Math.min(startIndex + visibleItemCount, totalItems);
+
+    // 清空之前的可见项
+    visibleItemsContainer.innerHTML = '';
+
+    // 渲染当前视口中的数据项
+    for (let i = startIndex; i < endIndex; i++) {
+        const item = document.createElement('div');
+        item.className = 'item';
+        item.style.top = `${i * itemHeight}px`;
+        item.textContent = `Item ${i + 1}`;
+        visibleItemsContainer.appendChild(item);
+    }
+}
+
+// 初始化渲染
+renderVisibleItems(0);
+
+// 添加滚动事件监听
+container.addEventListener('scroll', () => {
+    const scrollTop = container.scrollTop;
+    renderVisibleItems(scrollTop);
+});
+
+	
+</script>
+</body>
+</html>
