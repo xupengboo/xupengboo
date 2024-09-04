@@ -12,3 +12,7 @@ VuePress是一个**基于Vue.js的静态网站生成器**，专注于文档网�
 怎么学习VuePress？
 - 看官方网站就行，写的很明白。
 - **官方地址：[VuePress](https://vuepress.vuejs.org/zh/)**
+
+> 推荐：使用 **VuePress Theme Hope** 构建项目，感觉比VuePress（1.x、2.x）更加灵活多样！
+
+VuePress Theme Hope： https://theme-hope.vuejs.press/zh/
