@@ -1515,3 +1515,13 @@ s#{IMAGE_TAG}#${TAG}#g; \
 - `-e ' '`：表示多行命令。
 - `s#{IMAGE_URL}#${env.HARBOR_HOST}/${env.HARBOR_LIB}/${APP_NAME}#g;`：将 {IMAGE_URL} 替换为 ${env.HARBOR_HOST}/${env.HARBOR_LIB}/${APP_NAME}。
 - `>`：将输出重定向到 output.yaml。
+
+# 12. set 命令
+
+**`set -eux` 是一个在 Unix/Linux shell 脚本中常用的命令，用于设置 shell 的执行选项**。这些选项可以帮助你在脚本中进行更严格的错误检查和调试。以下是每个选项的作用：
+
+- `-e`（或 `errexit`）：当命令失败时，立即退出脚本。即，如果脚本中的任何命令返回非零退出状态，脚本会立刻停止执行。这个选项可以帮助你在出现错误时快速发现问题并终止脚本执行。
+- `-u`（或 `nounset`）：当脚本中使用未定义的变量时，立即退出脚本。这可以防止因为使用了未初始化的变量而导致的错误，确保脚本中所有的变量都已正确定义。
+- `-x`（或 `xtrace`）：在执行每个命令之前，先将命令及其参数打印到标准错误输出。这有助于调试脚本，了解脚本的执行过程和每个命令的实际参数。
+
+![image-20240905172848693](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20240905172848693.png)
