@@ -59,6 +59,8 @@ docker run -p 3306:3306 --privileged=true --name mysql \
 # -v /mydata/mysql/data:/var/lib/mysql/：将配置文件夹挂载到主机
 # -e MYSQL_ROOT_PASSWORD=root：初始化 root 用户的密码
 ```
+
+mysql5的my.ini配置信息如下：
 ```shell
 # vi /mydata/mysql/conf/my.cnf
 [client]
@@ -71,6 +73,38 @@ collation-server=utf8_unicode_ci
 skip-character-set-client-handshake
 skip-name-resolve
 ```
+
+mysql8的my.ini配置信息如下：
+```shell
+# vi /mydata/mysql/conf/my.cnf
+[mysqld]
+#设置时区为东八区，此项设置后，在连接MySQL的时候可以不用每次都手动设置时区
+default-time-zone = '+8:00'
+# 设置3306端口
+port=3306
+# 设置mysql的安装目录，记得切换成自己的路径
+basedir=D:\mysql\mysql2\mysql-8.0.27-winx64
+# 设置mysql数据库的数据的存放目录
+datadir=D:\mysql\mysql2\mysql-8.0.27-winx64\data
+# 允许最大连接数
+max_connections=200
+# 允许连接失败的次数。这是为了防止有人从该主机试图攻击数据库系统
+max_connect_errors=10
+# 服务端使用的字符集默认为UTF8
+character-set-server=utf8
+# 创建新表时将使用的默认存储引擎
+default-storage-engine=INNODB
+# 默认使用“mysql_native_password”插件认证
+default_authentication_plugin=mysql_native_password
+[mysql]
+# 设置mysql客户端默认字符集
+default-character-set=utf8
+[client]
+# 设置mysql客户端连接服务端时默认使用的端口
+port=3306
+default-character-set=utf8
+```
+
 **docker5.7部署，无法进入MySQL服务内部问题：**
 **1、先进去容器中安装vim工具**
 ```powershell
