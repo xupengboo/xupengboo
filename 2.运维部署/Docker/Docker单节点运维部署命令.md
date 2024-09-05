@@ -106,6 +106,7 @@ default-character-set=utf8
 ```
 
 **docker5.7部署，无法进入MySQL服务内部问题：**
+
 **1、先进去容器中安装vim工具**
 ```powershell
 docker exec -it mysql bash
