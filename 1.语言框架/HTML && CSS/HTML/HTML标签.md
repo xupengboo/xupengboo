@@ -216,3 +216,137 @@
 </table>
 ```
 
+> **`tr`**：`tr` 是 table row 的缩写，表示表格的一行。
+>
+> **`td`**：`td` 是 table data 的缩写，表示表格的数据单元格。
+>
+> **`th`**：`th` 是 table header的缩写，表示表格的表头单元格。
+
+
+
+# 9. `<ul>` / `<ol>` 列表
+
+```html
+<!-- 无序列表：unordered list -->
+<ul>
+<li>Coffee</li>
+<li>Milk</li>
+</ul>
+
+<!-- 有序列表：ordered list -->
+<ol>
+<li>Coffee</li>
+<li>Milk</li>
+</ol>
+```
+
+
+
+# 10. `<div>` / `<span>` 区块
+
+`<div> ` 元素是块级元素，浏览器会在其前后显示折行，常见的用途是文档布局。
+
+`<span>` 元素是内联元素，没有特定的含义。
+
+一般配合 `css sytle` 配合使用。
+
+# 11. `<form>` 表单
+
+```html
+<form action="/" method="post">
+    <!-- 文本输入框 -->
+    <label for="name">用户名:</label>
+    <input type="text" id="name" name="name" required>
+
+    <br>
+
+    <!-- 密码输入框 -->
+    <label for="password">密码:</label>
+    <input type="password" id="password" name="password" required>
+
+    <br>
+
+    <!-- 单选按钮 -->
+    <label>性别:</label>
+    <input type="radio" id="male" name="gender" value="male" checked>
+    <label for="male">男</label>
+    <input type="radio" id="female" name="gender" value="female">
+    <label for="female">女</label>
+
+    <br>
+
+    <!-- 复选框 -->
+    <input type="checkbox" id="subscribe" name="subscribe" checked>
+    <label for="subscribe">订阅推送信息</label>
+
+    <br>
+
+    <!-- 下拉列表 -->
+    <label for="country">国家:</label>
+    <select id="country" name="country">
+        <option value="cn">CN</option>
+        <option value="usa">USA</option>
+        <option value="uk">UK</option>
+    </select>
+
+    <br>
+
+    <!-- 提交按钮 -->
+    <input type="submit" value="提交">
+</form>
+```
+
+
+
+# 12. `<iframe>` 内嵌框架
+
+```html
+<iframe src="demo_iframe.htm" width="200" height="200"></iframe>
+```
+
+
+
+# 13. `<script>` / `<noscript>` 脚本
+
+`<script>` 标签用于定义客户端脚本，比如 JavaScript。
+
+`<noscript>`  标签提供无法使用脚本时的替代内容，比方在浏览器禁用脚本时，或浏览器不支持客户端脚本时。
+
+```html
+<script>
+document.write("Hello World!")
+</script>
+<noscript>抱歉，你的浏览器不支持 JavaScript!</noscript>
+```
+
+
+
+# 14. 字符实体
+
+| 显示结果 | 描述        | 实体名称            | 实体编号  |
+| :------- | :---------- | :------------------ | :-------- |
+|          | 空格        | `&nbsp;`            | `&#160;`  |
+| <        | 小于号      | `&lt;`              | `&#60;`   |
+| >        | 大于号      | `&gt;`              | `&#62;`   |
+| &        | 和号        | `&amp;`             | `&#38;`   |
+| "        | 引号        | `&quot;`            | `&#34;`   |
+| '        | 撇号        | `&apos; (IE不支持)` | `&#39;`   |
+| ￠       | 分          | `&cent;`            | `&#162;`  |
+| £        | 镑          | `&pound;`           | `&#163;`  |
+| ¥        | 人民币/日元 | `&yen;`             | `&#165;`  |
+| €        | 欧元        | `&euro;`            | `&#8364;` |
+| §        | 小节        | `&sect;`            | `&#167;`  |
+| ©        | 版权        | `&copy`;            | `&#169;`  |
+| ®        | 注册商标    | `&reg;`             | `&#174;`  |
+| ™        | 商标        | `&trade;`           | `&#8482;` |
+| ×        | 乘号        | `&times;`           | `&#215;`  |
+| ÷        | 除号        | `&divide;`          | `&#247;`  |
+
+
+
+# HTML5 标签（重点！！！）
+
+> HTML5 现代浏览器完全支持。
+
+
+
