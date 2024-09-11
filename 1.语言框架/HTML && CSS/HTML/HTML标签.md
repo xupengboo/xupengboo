@@ -350,3 +350,492 @@ document.write("Hello World!")
 
 
 
+# 1. `<canvas>` 画布
+
+`<canvas>` 元素用于图形的绘制，通过脚本 (通常是JavaScript)来完成.
+
+`<canvas>` 标签只是图形容器，您**必须使用脚本来绘制图形**。
+
+`<canvas>` 基本使用：
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        #myCanvas {
+            border: 1px solid black; /* 给 canvas 添加边框，方便观察区域 */
+        }
+    </style>
+</head>
+<body>
+
+<h1>HTML5 Canvas 示例</h1>
+<canvas id="myCanvas" width="500" height="400">您的浏览器不支持 HTML5 canvas 元素。</canvas>
+
+<script>
+    // 获取 canvas 元素
+    const canvas = document.getElementById('myCanvas');
+    
+    // 获取 canvas 的 2D 上下文（context）
+    const ctx = canvas.getContext('2d');
+    
+    // 设置填充颜色为红色
+    ctx.fillStyle = '#FF0000';
+    // 绘制一个红色矩形，参数：x, y, width, height
+    ctx.fillRect(20, 20, 150, 100); 
+    // 详细解释：fillRect 用于绘制填充的矩形，第一个参数是 x 轴坐标，第二个是 y 轴坐标，接下来是宽度和高度
+    
+    // 设置描边颜色为蓝色
+    ctx.strokeStyle = '#0000FF';
+    // 绘制一个蓝色边框的矩形
+    ctx.strokeRect(200, 20, 150, 100);
+    // 详细解释：strokeRect 用于绘制空心矩形，类似于 fillRect，但只有边框
+    
+    // 绘制路径
+    ctx.beginPath(); // 开始新的路径
+    ctx.moveTo(100, 150); // 将画笔移动到指定位置
+    ctx.lineTo(200, 250); // 从当前位置画一条线到 (200, 250)
+    ctx.lineTo(50, 250);  // 从当前位置画一条线到 (50, 250)
+    ctx.closePath(); // 闭合路径（回到起点）
+    
+    // 填充路径
+    ctx.fillStyle = 'green'; // 设置填充颜色为绿色
+    ctx.fill(); // 填充形状
+    
+    // 绘制路径边框
+    ctx.strokeStyle = 'black'; // 设置描边颜色为黑色
+    ctx.stroke(); // 绘制路径边框
+    
+    // 绘制圆形
+    ctx.beginPath(); 
+    ctx.arc(350, 200, 50, 0, Math.PI * 2); // 参数：x, y, 半径, 起始角度, 结束角度（以弧度计算）
+    ctx.fillStyle = 'yellow'; // 设置填充颜色为黄色
+    ctx.fill(); // 填充圆形
+    ctx.stroke(); // 绘制圆形的边框
+    
+    // 绘制文本
+    ctx.font = '20px Arial'; // 设置字体
+    ctx.fillStyle = 'black'; // 设置文本颜色
+    ctx.fillText('Canvas 示例', 300, 350); // 在画布上绘制文本
+    // 详细解释：fillText 的第一个参数是文本内容，第二和第三个参数是文本的 x 和 y 坐标
+</script>
+
+</body>
+</html>
+```
+
+`<canvas>` **图像**：
+
+```js
+var c=document.getElementById("myCanvas");
+var ctx=c.getContext("2d");
+# 图像引入
+var img=document.getElementById("scream");
+ctx.drawImage(img,10,10);
+```
+
+
+
+# 2. `<svg>` 可缩放矢量图形
+
+与 `<canvas>` 区别：
+
+- SVG 是一种使用 XML 描述 2D 图形的语言，一般地图采用 `<svg>`  。
+
+- Canvas 通过 JavaScript 来绘制 2D 图形。
+
+案例：
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVG Example</title>
+</head>
+<body>
+
+    <h2>Simple SVG Example</h2>
+
+    <svg width="300" height="200" xmlns="http://www.w3.org/2000/svg">
+        <!-- 绘制一个圆 -->
+        <circle cx="100" cy="100" r="50" stroke="black" stroke-width="3" fill="red" />
+        
+        <!-- 绘制一个矩形 -->
+        <rect x="150" y="50" width="100" height="100" stroke="blue" stroke-width="3" fill="green" />
+
+        <!-- 添加文本 -->
+        <text x="50" y="180" font-family="Verdana" font-size="20" fill="black">This is SVG!</text>
+    </svg>
+
+</body>
+</html>
+```
+
+
+
+# 3. `<math>` MathML（数学标记语言）
+
+像数学上一些常用的标记性语言，就可以通过这个实现。
+
+```html
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="UTF-8">
+      <title>菜鸟教程(runoob.com)</title>
+   </head>
+        
+   <body>
+        
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+                
+         <mrow>
+            <msup><mi>a</mi><mn>2</mn></msup>
+            <mo>+</mo>
+                                
+            <msup><mi>b</mi><mn>2</mn></msup>
+            <mo>=</mo>
+                                
+            <msup><mi>c</mi><mn>2</mn></msup>
+         </mrow>
+                        
+      </math>
+                
+   </body>
+</html>
+```
+
+
+
+![image-20240911135042987](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20240911135042987.png)
+
+还可以通过引入第三方库实现上面效果。
+
+```html
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="UTF-8">
+      <title>菜鸟教程(runoob.com)</title>
+      <script type="text/javascript" src="https://static.jyshare.com/assets/js/mathml/mspace.js"></script>
+   </head>
+        
+   <body>
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+                
+         <mrow>
+            <mi>A</mi>
+            <mo>=</mo>
+                        
+            <mfenced open="[" close="]">
+                        
+               <mtable>
+                  <mtr>
+                     <mtd><mi>x</mi></mtd>
+                     <mtd><mi>y</mi></mtd>
+                  </mtr>
+                                        
+                  <mtr>
+                     <mtd><mi>z</mi></mtd>
+                     <mtd><mi>w</mi></mtd>
+                  </mtr>
+               </mtable>
+               
+            </mfenced>
+         </mrow>
+      </math>
+      
+   </body>
+</html>
+```
+
+![image-20240911135052002](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20240911135052002.png)
+
+
+
+# 4. 拖放
+
+
+
+
+
+# 5. `Geolocation` 地理定位
+
+```html
+<!DOCTYPE html>
+<html>
+<head> 
+<meta charset="utf-8"> 
+<title>菜鸟教程(runoob.com)</title> 
+</head>
+<body>
+<p id="demo">点击按钮获取您当前坐标（可能需要比较长的时间获取）：</p>
+<button onclick="getLocation()">点我</button>
+<script>
+var x=document.getElementById("demo");
+    
+function getLocation() {
+	if (navigator.geolocation)
+	{
+		navigator.geolocation.getCurrentPosition(showPosition,showError);
+	}
+	else
+	{
+		x.innerHTML="该浏览器不支持定位。";
+	}
+}
+    
+function showPosition(position) {
+	x.innerHTML="纬度: " + position.coords.latitude + 
+	"<br>经度: " + position.coords.longitude;	
+}
+    
+function showError(error) {
+	switch(error.code) {
+		case error.PERMISSION_DENIED:
+			x.innerHTML="用户拒绝对获取地理位置的请求。"
+			break;
+		case error.POSITION_UNAVAILABLE:
+			x.innerHTML="位置信息是不可用的。"
+			break;
+		case error.TIMEOUT:
+			x.innerHTML="请求用户地理位置超时。"
+			break;
+		case error.UNKNOWN_ERROR:
+			x.innerHTML="未知错误。"
+			break;
+	}
+}
+</script>
+</body>
+</html>
+```
+
+![image-20240911152316965](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20240911152316965.png)
+
+# 6. `<video> ` 视频
+
+`<video> `元素提供了 播放、暂停和音量控件来控制视频
+
+```html
+<!DOCTYPE html> 
+<html> 
+<head> 
+<meta charset="utf-8"> 
+<title>菜鸟教程(runoob.com)</title> 
+</head>
+<body> 
+
+<div style="text-align:center"> 
+  <button onclick="playPause()">播放/暂停</button> 
+  <button onclick="makeBig()">放大</button>
+  <button onclick="makeSmall()">缩小</button>
+  <button onclick="makeNormal()">普通</button>
+  <br> 
+  <video id="video1" width="420">
+    <source src="mov_bbb.mp4" type="video/mp4">
+    <source src="mov_bbb.ogg" type="video/ogg">
+    您的浏览器不支持 HTML5 video 标签。
+  </video>
+</div> 
+
+<script> 
+var myVideo=document.getElementById("video1"); 
+
+function playPause()
+{ 
+	if (myVideo.paused) 
+	  myVideo.play(); 
+	else 
+	  myVideo.pause(); 
+} 
+
+	function makeBig()
+{ 
+	myVideo.width=560; 
+} 
+
+	function makeSmall()
+{ 
+	myVideo.width=320; 
+} 
+
+	function makeNormal()
+{ 
+	myVideo.width=420; 
+} 
+</script> 
+
+</body> 
+</html>
+```
+
+![image-20240911152742855](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20240911152742855.png)
+
+# 7. `<audio>` 音频
+
+```html
+<!DOCTYPE html>
+<html>
+<head> 
+<meta charset="utf-8"> 
+<title>菜鸟教程(runoob.com)</title> 
+</head>
+<body>
+
+<audio controls>
+  <source src="horse.ogg" type="audio/ogg">
+  <source src="horse.mp3" type="audio/mpeg">
+您的浏览器不支持 audio 元素。
+</audio>
+
+</body>
+</html>
+```
+
+
+
+# 8. `<input>` 表单输入框
+
+多了许多不同类型，例如：color、date、email、datetime等等。
+
+类型详情【见】：https://www.runoob.com/html/html5-form-input-types.html
+
+
+
+# 9. `<datalist>` 、`<keygen>`、 `<output>`新表单元素
+
+`<datalist>` 元素规定输入域的选项列表，类似好多组件里面的Select。
+
+```html
+<input list="browsers">
+ 
+<datalist id="browsers">
+  <option value="Internet Explorer">
+  <option value="Firefox">
+  <option value="Chrome">
+  <option value="Opera">
+  <option value="Safari">
+</datalist>
+```
+
+![image-20240911165437824](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20240911165437824.png)
+
+
+
+`<keygen>` 加密相关，了解即可，快弃用了。
+
+
+
+`<output>` 主要用于显示计算或操作的结果。
+
+```html
+<form oninput="result.value = parseInt(a.value) + parseInt(b.value)">
+  <label for="a">First number:</label>
+  <input type="number" id="a" name="a">
+  
+  <label for="b">Second number:</label>
+  <input type="number" id="b" name="b">
+  
+  <output name="result" for="a b">0</output>
+</form>
+```
+
+![image-20240911170221464](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20240911170221464.png)
+
+
+
+# 10. `<form>` 表单 新属性
+
+**`autocomplete` 属性**：用于指定浏览器是否应该为表单或表单中的某个输入字段**提供自动填充功能**。
+
+```html
+<!--  autocomplete 属性为 "on"（开），但是 e-mail 自动为“off”（关） -->
+<form action="demo-form.php" autocomplete="on">
+    
+  First name:<input type="text" name="fname"><br>
+  Last name: <input type="text" name="lname"><br>
+    
+<!--  autocomplete 属性为 "on"（开），但是 e-mail 自动为“off”（关） -->
+  E-mail: <input type="email" name="email" autocomplete="off"><br>
+  <input type="submit">
+</form>
+```
+
+![image-20240911170633495](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20240911170633495.png)
+
+**`novalidate ` 属性**：设置浏览器不对表单进行验证。
+
+```html
+<form action="demo-form.php" novalidate>
+  E-mail: <input type="email" name="user_email">
+  <input type="submit">
+</form>
+```
+
+
+
+**`autofocus` 属性**：让 "First name" input 输入域 **在页面载入时自动聚焦**。
+
+```html
+<!DOCTYPE html>
+<html>
+<head> 
+<meta charset="utf-8"> 
+<title>菜鸟教程(runoob.com)</title> 
+</head>
+<body>
+
+<form action="demo-form.php">
+  First name: <input type="text" name="fname" autofocus><br>
+  Last name: <input type="text" name="lname"><br>
+  <input type="submit">
+</form>
+<p><strong>注意：</strong> Internet Explorer 9及更早 IE 版本不支持 input 标签的 autofocus 属性。</p>
+
+</body>
+</html>
+```
+
+
+
+# 11. `<input>` 输入域 新属性
+
+**`form` 属性**：位于form表单外的 input 字段引用了 HTML form (该 input 表单**仍然属于form表单的一部分**)
+
+```html
+<form action="demo-form.php" id="form1">
+  First name: <input type="text" name="fname"><br>
+  <input type="submit" value="提交">
+</form>
+ 
+<!-- 通过form属性： -->
+Last name: <input type="text" name="lname" form="form1">
+```
+
+**`list` 属性**：list 属性规定输入域的 datalist。datalist 是输入域的选项列表。
+
+```html
+<input list="browsers">
+<datalist id="browsers">
+    <option value="Internet Explorer">
+    <option value="Firefox">
+    <option value="Chrome">
+    <option value="Opera">
+    <option value="Safari">
+</datalist>
+```
+
+**height 和 width 属性、min 和 max 属性、multiple 属性、pattern 属性、placeholder 属性、required 属性、step 属性** 等等比较常用的。
+
+> [见]：https://www.runoob.com/html/html5-form-attributes.html
+
