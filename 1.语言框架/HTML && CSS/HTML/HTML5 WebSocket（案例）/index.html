@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSocket 聊天室</title>
+</head>
+<body>
+    <h1>WebSocket 聊天室</h1>
+    <div>
+        <input id="messageInput" type="text" placeholder="输入消息..." />
+        <button onclick="sendMessage()">发送</button>
+    </div>
+    <div>
+        <h2>聊天记录：</h2>
+        <pre id="chatLog"></pre>
+    </div>
+
+    <script>
+        // 连接到 WebSocket 服务器
+        const ws = new WebSocket('ws://localhost:8080/chat');
+
+        // 监听 WebSocket 打开事件
+        ws.onopen = function() {
+            console.log('WebSocket 连接已打开');
+        };
+
+        // 监听 WebSocket 消息事件
+        ws.onmessage = function(event) {
+            console.log('收到服务器消息:', event.data);
+            document.getElementById('chatLog').textContent += event.data + '\n';
+        };
+
+        // 发送消息到服务器
+        function sendMessage() {
+            const message = document.getElementById('messageInput').value;
+            ws.send(message);
+        }
+
+        // 监听 WebSocket 错误事件
+        ws.onerror = function(error) {
+            console.error('WebSocket 错误:', error);
+        };
+
+        // 监听 WebSocket 关闭事件
+        ws.onclose = function() {
+            console.log('WebSocket 连接已关闭');
+        };
+    </script>
+</body>
+</html>
