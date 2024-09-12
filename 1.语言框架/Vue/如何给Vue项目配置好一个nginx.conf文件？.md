@@ -2,7 +2,7 @@
 
 一般前端项目中，会有一个docker/nginx/nginx.conf文件，用于配置DockerFile配置等。
 
-![image](https://github.com/ITholmes/hello-world/assets/70437837/ffdc4da0-3ba9-4817-8560-541be2cad5fa)
+![image-20240912163324035](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20240912163324035.png)
 
 那么，如何给项目写好一个nginx.conf文件，以DockerFile为例：
 ```Dockerfile
@@ -34,7 +34,7 @@ CMD ["nginx", "-g", "daemon off;"]
 1. 首先，要有一个nginx.conf文件原型，根据自己配置的nginx版本去官方拉取、通过docker创建个容器copy一下也可以。
 - 第一种方式：直接修改nginx.conf文件，替换nginx.conf文件，上面采用的就是这种方式，无论什么配置直接都在nginx.conf文件操作即可。
 - 第二种方式：也可以通过`include /etc/nginx/conf.d/*.conf;`配置，单独配置。一般用来配置server等。
-![image](https://github.com/ITholmes/hello-world/assets/70437837/4aac2c7d-5db1-48b6-bc26-000658837b99)
+![image-20240912163304140](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20240912163304140.png)
 
 2. 确定需要的配置，需要几个进程、几个server、监听的端口是多少、location该怎么配置等。
 ```nginx.conf
