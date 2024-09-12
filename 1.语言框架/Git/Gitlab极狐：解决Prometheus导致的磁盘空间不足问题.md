@@ -5,11 +5,11 @@
 
 > 💡Tips：`/dev/vda1`目录是系统盘目录。
 
-![image (6)](https://github.com/ITholmes/hello-world/assets/70437837/7d226c3d-c86d-4536-bc6e-6b38e1a1843a)
+![image-20240912163903343](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20240912163903343.png)
 
 去云服务器上面看，短短半个月就占满了整个系统盘。。。
 
-![image (7)](https://github.com/ITholmes/hello-world/assets/70437837/112c4736-ce95-4b13-a172-297b7bba51d1)
+![image-20240912163923153](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20240912163923153.png)
 
 然后，看了看gitlab容器卷挂载目录data中，有一个prometheus目录居然占了29G，百度了一下，原来这个是用来监控的。。。所以，内容一直堆积堆积，导致磁盘满了。。。
 
@@ -18,14 +18,14 @@ GitLab中的Prometheus是一个用于监控和报警的开源系统，它能够�
 
 `/var/opt/gitlab/prometheus/data`是 [Prometheus](https://so.csdn.net/so/search?q=Prometheus&spm=1001.2101.3001.7020) 生成的监控数据文件，可参考文档 Monitoring GitLab with Prometheus。
 
-![image (8)](https://github.com/ITholmes/hello-world/assets/70437837/448d8f25-44bb-4945-b06b-380717503fb8)
+![image-20240912163940757](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20240912163940757.png)
 
 **解决办法：**
 
 1. **先备份一下**，云服务器购买个存储库，备份一下，临时的话可以用先`按需计费`省钱。
 2. 因为，我已经备份了，所以我就可以肆无忌惮的删一点。就把`gitlab/data/prometheus/data/wal`里面的一大文件删了一部分，保证gitlab的服务能启动起来。
 
-![image (9)](https://github.com/ITholmes/hello-world/assets/70437837/06cc99fa-a0d0-40fb-b779-f6fe69878e16)
+![image-20240912164007987](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20240912164007987.png)
 
 > 💡Tips：可能因为系统盘已经爆满，项目启动不起来，可以手动删除wal目录下面的一些大文件，先让磁盘有些空余，保险起见还是要提前备份一下。
 
@@ -33,7 +33,7 @@ GitLab中的Prometheus是一个用于监控和报警的开源系统，它能够�
 
 周期默认是15d是15天，意思是15天后重新记录。此处，我就改为了1d也就是1天。
 
-![image (10)](https://github.com/ITholmes/hello-world/assets/70437837/0ff6d88b-991c-4da3-a94d-ec773c4e34a4)
+![image-20240912164031924](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20240912164031924.png)
 
 也可以直接把prometheus禁用了。
 
@@ -44,9 +44,9 @@ prometheus['enable'] = false
 
 4. 再次，重启项目docker restart gitlab 就healthy启动了。
 
-![image (11)](https://github.com/ITholmes/hello-world/assets/70437837/2a7aacbb-c8b6-452a-9b8a-55f123e54e83)
+![image-20240912164050864](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20240912164050864.png)
 
 系统盘也释放了很多。
 
-![image (12)](https://github.com/ITholmes/hello-world/assets/70437837/cd45abe4-ebf1-4abb-96ae-f591cc1c1198)
+![image-20240912164109711](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20240912164109711.png)
 
