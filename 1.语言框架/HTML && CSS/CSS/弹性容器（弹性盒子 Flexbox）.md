@@ -50,8 +50,123 @@
 
 
 
-**换行设置**：`flex-wrap`，控制弹性项目是否换行及换行方向。
+**换行设置**：**`flex-wrap`**，控制弹性项目是否换行及换行方向。
 
 - **`nowrap`**：默认值，不换行。
 - **`wrap`**：允许换行，新的行放在旧行下方。
 - **`wrap-reverse`**：允许换行，新的行放在旧行上方。
+
+
+
+**控制多行的对齐：`align-content` 属性**，用于控制多行的对齐方式，如果只有一行则不会起作用。
+
+
+
+**排序设置：`order` 属性**，设置弹性子元素排列顺序，**用整数值来定义排列顺序，数值小的排在前面。可以为负值**。
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"> 
+<style> 
+.flex-container {
+    display: -webkit-flex;
+    display: flex;
+    width: 400px;
+    height: 250px;
+    background-color: lightgrey;
+}
+
+.flex-item {
+    background-color: cornflowerblue;
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+}
+
+.first {
+    -webkit-order: -1;
+    order: -1; /* 设置元素排序 */
+}
+</style>
+</head>
+<body>
+
+<div class="flex-container">
+  <div class="flex-item">flex item 1</div>
+  <div class="flex-item first">flex item 2</div>
+  <div class="flex-item">flex item 3</div>  
+</div>
+
+</body>
+</html>
+```
+
+
+
+**`align-self` 属性**，用于设置弹性元素自身在侧轴（纵轴）方向上的对齐方式。
+
+```css
+.flex-item {
+    background-color: cornflowerblue;
+    width: 60px;
+    min-height: 100px;
+    margin: 10px;
+}
+ 
+.item1 {
+    -webkit-align-self: flex-start;
+    align-self: flex-start;
+}
+.item2 {
+    -webkit-align-self: flex-end;
+    align-self: flex-end;
+}
+ 
+.item3 {
+    -webkit-align-self: center;
+    align-self: center;
+}
+ 
+.item4 {
+    -webkit-align-self: baseline;
+    align-self: baseline;
+}
+ 
+.item5 {
+    -webkit-align-self: stretch;
+    align-self: stretch;
+}
+```
+
+![image-20240920105455739](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20240920105455739.png)
+
+**`flex` 属性**：用于指定弹性子元素如何分配空间。
+
+```css
+.flex-item {
+    background-color: cornflowerblue;
+    margin: 10px;
+}
+ 
+.item1 {
+    -webkit-flex: 2;
+    flex: 2;
+}
+ 
+.item2 {
+    -webkit-flex: 1;
+    flex: 1;
+}
+ 
+.item3 {
+    -webkit-flex: 1;
+    flex: 1;
+}
+```
+
+![image-20240920105620797](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20240920105620797.png)
+
+
+
