@@ -1,0 +1,21 @@
+server:
+  port: 8888
+
+flowable:
+  idm:
+    app:
+      admin:
+        # 登录的用户名
+        user-id: admin
+        # 登录的密码
+        password: admin
+        # 用户的名字
+        first-name: xu
+        last-name: pengboo
+  jpa:
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: update
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+    open-in-view: true

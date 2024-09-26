@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             targetNamespace="http://www.flowable.org/processdef">
+
+    <!--
+        <process> 元素定义了一个流程，具有唯一的 id 和 name。
+        在这个例子中，id 为 simpleProcess，name 为 Simple Process。
+    -->
+    <process id="simpleProcess" name="Simple Process">
+
+        <!--
+            <startEvent> 表示流程的起始事件。
+            这是流程的开始点，当流程启动时首先会执行这个事件。
+            id 为 startEvent。
+        -->
+        <startEvent id="startEvent" />
+
+        <!--
+            <sequenceFlow> 表示流程中元素之间的连接关系。
+            第一个连接流 (flow1) 从 startEvent 流向 userTask，表示流程从开始事件流向用户任务。
+        -->
+        <sequenceFlow id="flow1" sourceRef="startEvent" targetRef="userTask" />
+
+        <!--
+            <userTask> 表示一个用户任务，通常需要人工干预完成。
+            当流程到达这个任务时，系统将等待某个用户来完成它。
+            id 为 userTask，name 为 User Task。
+        -->
+        <userTask id="userTask" name="User Task" />
+
+        <!--
+            第二个连接流 (flow2) 从 userTask 流向 endEvent，
+            表示用户完成任务后，流程将流向结束事件。
+        -->
+        <sequenceFlow id="flow2" sourceRef="userTask" targetRef="endEvent" />
+
+        <!--
+            <endEvent> 是流程的结束事件，表示流程的终止点。
+            完成所有任务后，流程将到达这个事件并结束。
+            id 为 endEvent。
+        -->
+        <endEvent id="endEvent" />
+
+    </process>
+</definitions>
