@@ -1,11 +1,11 @@
 package com.xupengboo.xupengbooflowablemodeler;
 
-import org.flowable.engine.ProcessEngine;
-import org.flowable.engine.ProcessEngineConfiguration;
-import org.flowable.engine.impl.cfg.StandaloneProcessEngineConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ * 访问：http://localhost:8888/ 就能看到业务流程模型了。
+ */
 @SpringBootApplication
 public class XupengbooFlowableModelerApplication {
 
