@@ -35,9 +35,7 @@ Web Service 的核心协议主要包括 **SOAP**、WSDL 和 UDDI：
 
 ### 5. SOAP Web Service 
 
-
-
 SoapUI工具：https://www.soapui.org/downloads/soapui/
 
-
+通过SoapUI，构建对应得WSDL文件请求，测试即可，测试成功整体过程迁移到代码上面，结果格式替换调试。
 
