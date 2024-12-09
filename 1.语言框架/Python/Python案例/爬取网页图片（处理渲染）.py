@@ -6,7 +6,7 @@ from requests import get
 from urllib.parse import urljoin, urlparse
 import base64
 
-url = "xxx.example.com"
+url = "example.com"
 
 # 清理文件命名的非法字符
 def clean_filename(filename): 
