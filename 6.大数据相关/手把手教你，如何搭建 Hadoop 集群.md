@@ -27,7 +27,7 @@ su - hadoop
 ```
 > 为什么要先创建好用户？
 >
-> - 如果一开始用 root 用户，后面在创建的话，之前已经配置好的内容，需要重新配置一边，因为不同用户不通环境。例如：`.bashrc` 文件、`ssh` 免密登录。
+> - 如果一开始用 root 用户，后面在创建的话，之前已经配置好的内容，需要重新配置一边，因为不同用户不同环境。例如：`.bashrc` 文件、`ssh` 免密登录。
 >
 > 也可以设置特定环境变量，临时使用 `root` 用户，但不推荐。
 
@@ -56,17 +56,19 @@ java -version
 
 为了让 Hadoop 节点之间可以通信，**主节点需要能够无密码登录到其他从节点**。
 
-在 主节点 vm-01 上执行以下命令：
+在 所有节点 上执行以下命令：
 ```shell
 # 生成密钥对， 不需要设置密码
 ssh-keygen -t rsa
 
 # 复制公钥到其他节点
 ssh-copy-id hadoop@localhost # 为了让 localhost 也支持免密登录，配置 localhost 免密登录
-ssh-copy-id root@192.168.10.69  # 复制到 vm-02
-ssh-copy-id root@192.168.10.70  # 复制到 vm-03
+ssh-copy-id hadoop@192.168.10.68  # 复制到 vm-01
+ssh-copy-id hadoop@192.168.10.69  # 复制到 vm-02
+ssh-copy-id hadoop@192.168.10.70  # 复制到 vm-03
 
 # 通过连接，检查是否能够免密操控：
+ssh root@192.168.10.68
 ssh root@192.168.10.69
 ssh root@192.168.10.70
 ```
@@ -141,7 +143,7 @@ vi $HADOOP_HOME/etc/hadoop/hdfs-site.xml
   <property>
     <name>dfs.namenode.http-address</name>
     <value>0.0.0.0:50070</value> <!-- 监听所有网络接口的 50070 端口，这样其他地址访问namenode UI也能访问通！ -->
-</property>
+  </property>
   <property>
     <name>dfs.namenode.name.dir</name>
     <value>file:///usr/local/hadoop/data/name</value> <!-- NameNode 数据存储目录 -->
@@ -205,20 +207,22 @@ hdfs namenode -format
 
 # 8. 启动 Hadoop 集群
 
-1. 启动 `HDFS` ，在主节点 `vm-01` 上运行：
+1. 启动 `HDFS` ，在 `所有节点` 上运行：
 
 ```shell
 # 进入hadoop安装目录的sbin目录下面：
 cd /usr/local/hadoop/sbin
+# 启动hdfs
 ./start-dfs.sh
 
 # 暂停使用：
-
+./stop-dfs.sh
 ```
 
-2. 启动 `YARN` ：在主节点 `vm-01` 上运行：
+2. 启动 `YARN` ：在 `所有节点` 上运行：
 
 ```shell
+# 启动yarn
 ./start-yarn.sh
 
 # 暂停使用
