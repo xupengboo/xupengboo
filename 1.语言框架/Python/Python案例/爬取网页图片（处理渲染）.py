@@ -6,11 +6,29 @@ from requests import get
 from urllib.parse import urljoin, urlparse
 import base64
 
-url = "example.com"
+url = "https://image.baidu.com/search/index?tn=baiduimage&ct=201326592&lm=-1&cl=2&ie=utf8&word=%E7%94%B5%E5%BD%B1%E5%90%8D%E5%8F%A5%20%E7%85%A7%E7%89%87&fr=ala&ala=1&alatpl=normal&pos=0&dyTabStr=MCwzLDEsMiwxMyw3LDYsNSwxMiw5"
 
 # 清理文件命名的非法字符
 def clean_filename(filename): 
-    return re.sub(r'[<>:"/\\|?*]', '', filename)
+    """
+    处理字符串中的特殊字符，将其替换为安全的字符。
+    :param input_string: 输入的字符串
+    :return: 处理后的字符串
+    """
+    # 定义特殊字符的替换规则，这里将常见的特殊字符替换为下划线
+    sanitized_string = filename
+
+    # 1. 替换空格
+    sanitized_string = sanitized_string.replace(" ", "_")
+    sanitized_string = sanitized_string.replace('.', '')
+
+    # 2. 替换所有非字母数字的字符为下划线（这可以根据实际需要修改）
+    sanitized_string = re.sub(r'[^a-zA-Z0-9_\-\.]', '_', sanitized_string)
+
+    # 3. 你也可以添加更多的替换规则，比如处理&符号、=号等
+    # sanitized_string = sanitized_string.replace("&", "_and_").replace("=", "_equals_")
+
+    return sanitized_string
 
 # 获取图片格式
 def get_image_extension(content_type):
@@ -53,7 +71,10 @@ def downloadImgUrl(img_url):
         content_type = img_response.headers.get('Content-Type', '')
         extension = get_image_extension(content_type)
         if not img_name.endswith(extension):
-            img_name = img_name + '.' + extension
+            if img_name.endswith("."):
+                img_name = img_name + extension
+            else:
+                img_name = img_name + '.' + extension
         # 保存图片
         with open(os.path.join("images", img_name), 'wb') as f:
             f.write(img_response.content)

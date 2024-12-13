@@ -31,6 +31,21 @@ su - hadoop
 >
 > 也可以设置特定环境变量，临时使用 `root` 用户，但不推荐。
 
+三台服务器都配置 阿里镜像源：
+
+```shell
+curl -o /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo
+# 或
+wget -O /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo
+# 这俩都行
+
+cat CentOS-Base.repo
+sudo yum clean all
+sudo yum makecache
+```
+
+
+
 
 # 1. 下载并安装JDK
 
@@ -164,10 +179,23 @@ vi $HADOOP_HOME/etc/hadoop/yarn-site.xml
 
 ```xml
 <configuration>
-  <property>
-    <name>yarn.resourcemanager.address</name>
-    <value>vm-01:8032</value> <!-- 主节点的 IP 地址 -->
-  </property>
+    <!-- YARN ResourceManager 地址 -->
+    <property>
+        <name>yarn.resourcemanager.address</name>
+        <value>vm-01:8032</value>
+    </property>
+
+    <!-- NodeManager 本地临时文件目录 -->
+    <property>
+        <name>yarn.nodemanager.local-dirs</name>
+        <value>/usr/local/hadoop/yarn/local</value>
+    </property>
+
+    <!-- NodeManager 本地日志文件目录 -->
+    <property>
+        <name>yarn.nodemanager.log-dirs</name>
+        <value>/usr/local/hadoop/yarn/log</value>
+    </property>
 </configuration>
 ```
 
