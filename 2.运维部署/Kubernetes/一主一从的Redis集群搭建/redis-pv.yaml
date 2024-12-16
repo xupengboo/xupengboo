@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: redis-data-pv
+  namespace: apttm
+spec:
+  accessModes:
+    - ReadWriteOnce
+  capacity:
+    storage: 1.5Gi
+  hostPath:  # 适用于本地测试环境，在生产环境中可能使用其他类型的存储（如 AWS EBS, GCE PD 等）
+    path: /opt/redis/data
+  storageClassName: redis-storage-class  # 确保与 PVC 中的 storageClassName 匹配
+  persistentVolumeReclaimPolicy: Retain

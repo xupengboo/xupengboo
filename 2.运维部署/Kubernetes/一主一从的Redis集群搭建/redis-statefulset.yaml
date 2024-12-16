@@ -1,0 +1,120 @@
+--- # 1. 自动创建使用这个，需要自己创建pv去匹配pvc。
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: redis
+  namespace: apttm
+spec:
+  serviceName: "redis"
+  replicas: 2  # 1主1从
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+        - name: redis
+          image: redis:7.0.2
+          ports:
+            - containerPort: 6379
+          volumeMounts:
+            - name: redis-data
+              mountPath: /data
+          env:
+            # 从 ConfigMap 注入主节点信息
+            - name: REDIS_MASTER_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: redis-config
+                  key: REDIS_MASTER_HOST
+            - name: REDIS_MASTER_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: redis-config
+                  key: REDIS_MASTER_PORT
+            - name: POD_INDEX
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+          command:
+            - /bin/sh
+            - -c
+            - |
+              # 根据 Pod 索引确定角色
+              if [ "$(hostname | grep -o '[^-]*$')" -eq "0" ]; then
+                echo "Starting Redis as Master"
+                redis-server --appendonly yes
+              else
+                echo "Starting Redis as Replica"
+                redis-server --appendonly yes --replicaof $REDIS_MASTER_HOST $REDIS_MASTER_PORT
+              fi
+  volumeClaimTemplates: # StatefulSet 使用 volumeClaimTemplates 来动态创建 PVC，之后自己去创建对应的PV去绑定。
+    - metadata:
+        name: redis-data
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 0.5Gi
+        storageClassName: redis-storage-class
+
+--- # 2. 指定创建使用这个， 采用这个。因已经创建好了pvc了，所以使用这个。。
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: redis
+  namespace: apttm
+spec:
+  serviceName: "redis"
+  replicas: 2  # 1主1从
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+        - name: redis
+          image: redis:7.0.2
+          ports:
+            - containerPort: 6379
+          volumeMounts:
+            - name: redis-data
+              mountPath: /data
+          env:
+            - name: REDIS_MASTER_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: redis-config
+                  key: REDIS_MASTER_HOST
+            - name: REDIS_MASTER_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: redis-config
+                  key: REDIS_MASTER_PORT
+            - name: POD_INDEX
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+          command:
+            - /bin/sh
+            - -c
+            - |
+              # 根据 Pod 索引确定角色
+              if [ "$(hostname | grep -o '[^-]*$')" -eq "0" ]; then
+                echo "Starting Redis as Master"
+                redis-server --appendonly yes
+              else
+                echo "Starting Redis as Replica"
+                redis-server --appendonly yes --replicaof $REDIS_MASTER_HOST $REDIS_MASTER_PORT
+              fi
+      volumes: # volumes 要遭 spec下面
+        - name: redis-data
+          persistentVolumeClaim:
+            claimName: redis-data-pvc  # 引用现有的 PVC
