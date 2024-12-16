@@ -66,3 +66,12 @@ redis-cli SET mykey myvalue
 redis-cli GET mykey
 ```
 
+
+
+# 5. 外部如何访问？
+
+**LoadBalancer**：最适合云环境，自动分配外部 IP。
+
+**NodePort**：适用于本地环境，暴露一个端口来进行外部访问。
+
+**Ingress**：可用于 HTTP/HTTPS 访问，但需要配置 TCP 服务和 Ingress Controller。
