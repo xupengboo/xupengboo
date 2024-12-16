@@ -1,3 +1,4 @@
+--- # 方便主从节点匹配
 apiVersion: v1
 kind: Service
 metadata:
@@ -11,3 +12,20 @@ spec:
     - name: redis
       port: 6379
       targetPort: 6379
+
+--- # 方便外部访问
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-external
+  namespace: apttm  # 使用您的实际命名空间
+spec:
+  type: NodePort  # 设置为 NodePort 类型
+  selector:
+    app: redis  # 确保标签与 StatefulSet 中的标签一致
+  ports:
+    - name: redis
+      port: 6379        # Redis 默认端口
+      targetPort: 6379   # Pod 中的 Redis 端口
+      nodePort: 30008    # 外部访问的端口
+
