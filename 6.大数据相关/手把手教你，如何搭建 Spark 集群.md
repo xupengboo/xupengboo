@@ -114,5 +114,5 @@ $SPARK_HOME/sbin/start-worker.sh spark://vm-01:7077
 spark-submit --master yarn --deploy-mode cluster /opt/Spark计算文本里面词汇个数.py
 ```
 
-> TODO：Python以及JAVA环境存在问题。
+> 注意：Python 需要 安装 `pyspark`： `pip install pyspark` 。 
 
