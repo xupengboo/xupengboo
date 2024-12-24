@@ -36,8 +36,6 @@ cp /opt/hadoop-3.2.4/share/hadoop/hdfs/hadoop-hdfs-3.2.4.jar /usr/local/flink/li
 cp /opt/hadoop-3.2.4/share/hadoop/client/hadoop-client-*.jar /usr/local/flink/lib/
 ```
 
-
-
 # 3. 配置 `Flink`
 
 在所有机器（`vm-01`、`vm-02`、`vm-03`）上，修改 `Flink` 配置文件。
@@ -48,6 +46,7 @@ cp /opt/hadoop-3.2.4/share/hadoop/client/hadoop-client-*.jar /usr/local/flink/li
 
      ```yaml
      jobmanager.rpc.address: vm-01  # JobManager IP 或主机名
+     jobmanager.rpc.port: 6123
      jobmanager.web.port: 8082  # JobManager Web UI 端口
      jobmanager.heap.size: 1024m  # 根据需要调整内存大小
      ```
@@ -61,6 +60,13 @@ cp /opt/hadoop-3.2.4/share/hadoop/client/hadoop-client-*.jar /usr/local/flink/li
      taskmanager.memory.process.size: 3g  # 设置 TaskManager 总内存
      taskmanager.memory.jvm-metaspace.size: 256m # JVM Metaspace
      ```
+
+   - `akka.rpc` 配置
+
+   ```yaml
+   akka.rpc.address: vm-01
+   akka.rpc.port: 6123
+   ```
 
    - 配置 `ZooKeeper` 高可用（可选）： 如果你想启用高可用性（HA），你需要配置 `Flink` 使用 `ZooKeeper` 作为协调器：
 
@@ -85,9 +91,9 @@ cp /opt/hadoop-3.2.4/share/hadoop/client/hadoop-client-*.jar /usr/local/flink/li
 ```bash
 cd /usr/local/flink/bin
 # 启动
-./jobmanager.sh start cluster
+./start-cluster.sh
 # 关闭
-./jobmanager.sh stop cluster
+./stop-cluster.sh
 ```
 
 在 `vm-02`、`vm-03` 上，启动 `TaskManager` ：
@@ -96,15 +102,15 @@ cd /usr/local/flink/bin
 ./taskmanager.sh start 设置 Flink 内存大小
 ```
 
+# 5. 查看集群状态
 
+访问，对应的 `vm-01:8082` （默认：8081，但端口冲突配置成了8082）
 
 ```bash
 # 通过 Flink 提供的 flink list 命令查看作业状态
 ./flink list
 # 列出集群中的 TaskManager 节点。
 flink list -y
-
-# TODO 当前job获取异常，待排查。
 ```
 
 
