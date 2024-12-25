@@ -1,10 +1,6 @@
 # Drios 概述
 
-
-
-
-
-
+>  关于部署，直接对接官方即可：https://doris.apache.org/zh-CN/docs/install/cluster-deployment/k8s-deploy/install-doris-operator 
 
 # Drios 实战
 
@@ -13,8 +9,6 @@
 同步的核心是：将 MySQL 中的变化（插入、更新、删除操作）实时或定期传输到 Drios 中。
 
 以下几种常见方案：
-
-
 
 ## **1. 基于 MySQL Binlog 的实时同步**
 
