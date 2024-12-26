@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite tests="1" failures="0" name="com.xupengboo.flink.AppTest" time="0.002" errors="0" skipped="0">
+  <properties>
+    <property name="idea.version" value="2024.1"/>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="java.vm.version" value="17.0.11+7-LTS-207"/>
+    <property name="sun.boot.library.path" value="D:\env\jdk\jdk17.0.11\bin"/>
+    <property name="maven.multiModuleProjectDirectory" value="D:\project\self\xupengboo\6.大数据相关\xupengboo-flink-demo"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="java.vendor.url" value="https://java.oracle.com/"/>
+    <property name="guice.disable.misplaced.annotation.check" value="true"/>
+    <property name="path.separator" value=";"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="user.script" value=""/>
+    <property name="user.country" value="CN"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="user.dir" value="D:\project\self\xupengboo\6.大数据相关\xupengboo-flink-demo"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="java.runtime.version" value="17.0.11+7-LTS-207"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.io.tmpdir" value="C:\Users\41712\AppData\Local\Temp\"/>
+    <property name="line.separator" value="
+"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="user.variant" value=""/>
+    <property name="os.name" value="Windows 11"/>
+    <property name="maven.ext.class.path" value="D:\tools\ideaIU\IntelliJ IDEA 2020.3.4\plugins\maven\lib\maven-event-listener.jar"/>
+    <property name="classworlds.conf" value="D:\env\maven\apache-maven-3.6.1\bin\m2.conf"/>
+    <property name="sun.jnu.encoding" value="GBK"/>
+    <property name="java.library.path" value="D:\env\jdk\jdk17.0.11\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files\Common Files\Oracle\Java\javapath;D:\tools\vmware\VMware Workstation\bin\;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;D:\env\Git\cmd;D:\env\nvm\nvm;D:\env\nvm\nodejs;D:\env\maven\apache-maven-3.6.1\bin;D:\tools\wxdevtools\微信web开发者工具\dll;D:\env\py\Python\Python312;D:\env\py\Python\Python312\Scripts;D:\tools\androidstudio\Sdk\platform-tools;D:\env\gradle\gradle\gradle-8.10\bin;D:\tools\androidstudio\Sdk\tools\bin;D:\env\gradle\gradle\gradle-8.10\bin;D:\tools\Tesseract-OCR;C:\Users\41712\AppData\Local\Programs\Python\Launcher\;C:\Users\41712\AppData\Local\Microsoft\WindowsApps;D:\tools\ideaIU\IntelliJ IDEA 2020.3.4\bin;D:\tools\vscode\Microsoft VS Code\bin;D:\env\nvm\nvm;D:\env\nvm\nodejs;D:\tools\webstorm\WebStorm 2020.3.3\bin;C:\Users\41712\AppData\Local\JetBrains\Toolbox\scripts;;D:\tools\fiddler\fiddler;."/>
+    <property name="jansi.passthrough" value="true"/>
+    <property name="maven.conf" value="D:\env\maven\apache-maven-3.6.1/conf"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="java.class.version" value="61.0"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="maven.repo.local" value="D:\env\maven\.m2\repository"/>
+    <property name="os.version" value="10.0"/>
+    <property name="user.home" value="C:\Users\41712"/>
+    <property name="user.timezone" value="Asia/Shanghai"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.specification.version" value="17"/>
+    <property name="user.name" value="41712"/>
+    <property name="java.class.path" value="D:\env\maven\apache-maven-3.6.1\boot\plexus-classworlds-2.6.0.jar"/>
+    <property name="java.vm.specification.version" value="17"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="sun.java.command" value="org.codehaus.classworlds.Launcher -Didea.version=2024.1 -s D:\env\maven\.m2\settings.xml -Dmaven.repo.local=D:\env\maven\.m2\repository package"/>
+    <property name="java.home" value="D:\env\jdk\jdk17.0.11"/>
+    <property name="user.language" value="zh"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="java.version" value="17.0.11"/>
+    <property name="native.encoding" value="GBK"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="maven.home" value="D:\env\maven\apache-maven-3.6.1"/>
+    <property name="file.separator" value="\"/>
+    <property name="java.version.date" value="2024-04-16"/>
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+  </properties>
+  <testcase classname="com.xupengboo.flink.AppTest" name="testApp" time="0.002"/>
+</testsuite>
