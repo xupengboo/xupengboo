@@ -115,3 +115,30 @@ SHOW PROCESSLIST;
 
 
 
+
+
+
+
+1. auth :admin is failed 问题：密码必须和数据库加密后的密码一致，才可以。
+2. example config is not found ：在 admin 页面上配置 instance 管理。
+
+相关操作最好都在 admin 页面上配置操作。
+
+
+
+```bash
+# 启动kafka自带的zk
+nohup bin/zookeeper-server-start.sh config/zookeeper.properties > zookeeper.log 2>&1 &
+
+# 启动kafka
+nohup bin/kafka-server-start.sh config/server.properties > kafka.log 2>&1 &
+
+# 创建topic
+bin/kafka-topics.sh --create --topic canal_data_topic --bootstrap-server center-server:9092 --partitions 3 --replication-factor 1
+
+# 查看topic有多少个
+bin/kafka-topics.sh --list --bootstrap-server localhost:9092
+```
+
+
+
