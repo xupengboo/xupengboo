@@ -206,4 +206,17 @@ canal.mq.partition=0
 
 见：[Github - xupengboo - Docker单节点运维部署命令.md](https://github.com/xupengboo/xupengboo/blob/master/2.%E8%BF%90%E7%BB%B4%E9%83%A8%E7%BD%B2/Docker/3.%20Docker%E5%8D%95%E8%8A%82%E7%82%B9%E8%BF%90%E7%BB%B4%E9%83%A8%E7%BD%B2%E5%91%BD%E4%BB%A4.md#kafka)
 
+```shell
+# 1. Download the latest Kafka release and extract it:
+tar -xzf kafka_2.13-3.9.0.tgz
+cd kafka_2.13-3.9.0
+
+# 2. Step 2: Start the Kafka environment
+KAFKA_CLUSTER_ID="$(bin/kafka-storage.sh random-uuid)"
+bin/kafka-storage.sh format --standalone -t $KAFKA_CLUSTER_ID -c config/kraft/reconfig-server.properties
+
+# 3. 启动命令
+bin/kafka-server-start.sh config/kraft/reconfig-server.properties
+```
+
 > 学习为主，推荐，官方部署 `kafka`：https://kafka.apache.org/quickstart

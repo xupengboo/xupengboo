@@ -65,7 +65,8 @@ MySQL 的 Binlog（Binary Log）记录了所有数据库的更改操作，可以
 
    - 使用 Drios 提供的批量写入工具。
    - 或通过 Spark、Flink 等工具定期同步。
-   - 
+   
+     
 
 ## **3. 双写策略**
 
@@ -78,7 +79,7 @@ MySQL 的 Binlog（Binary Log）记录了所有数据库的更改操作，可以
 2. 使用中间件：
    - 使用数据中间件（如 MQ）接收写入请求，再分别写入 MySQL 和 Drios。
 
-
+ 
 
 ## **4. 数据库触发器同步**
 
@@ -102,12 +103,16 @@ MySQL 的 Binlog（Binary Log）记录了所有数据库的更改操作，可以
 结合 Kafka、Flink 或 Spark Streaming，实现高性能的实时同步。
 
 1. **捕获 MySQL 数据**
+   
    - 使用 CDC 工具（如 Debezium）将 Binlog 发送到 Kafka。
 2. **流式处理**
    - 使用 Flink 或 Spark Streaming 从 Kafka 读取数据。
    - 将变更数据转换为 Drios 的写入格式。
 3. **写入 Drios**
+   
    - 使用 Drios 的写入接口或 SDK，将数据写入。
+   
+   
 
 ## 6. 总结
 
