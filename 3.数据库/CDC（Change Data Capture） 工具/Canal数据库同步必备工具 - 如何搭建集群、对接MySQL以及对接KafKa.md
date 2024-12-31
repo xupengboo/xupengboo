@@ -2,6 +2,8 @@
 
 > 功能：主要用于数据库同步。
 >
+> 流程：`MySQL binlog` ->  `Canal`  -> `Kafka Topics` 
+>
 > 推荐参考官方：
 >
 > - 本地 安装：https://github.com/alibaba/canal/wiki/QuickStart 【学习采用】
