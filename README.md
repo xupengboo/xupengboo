@@ -14,3 +14,12 @@ markdown-it 是一个非常流行的 Markdown 解析器，它将 Markdown 格式
 
 
 config.ts配置: [https://ecosystem.vuejs.press/zh/themes/default/config.html](https://ecosystem.vuejs.press/zh/themes/default/config.html)
+
+
+部署：
+
+```shell
+git pull origin main 
+docker build -t xupengboo:0.0.1 .
+docker run -d -p 80:80 xupengboo:0.0.1
+```

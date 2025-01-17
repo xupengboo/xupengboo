@@ -7,7 +7,7 @@ COPY . /home
 # 安装项目依赖
 RUN npm install --registry=https://registry.npmmirror.com
 # 执行 npm run build:prod 命令
-RUN npm run build:prod
+RUN npm run docs:build
 # 使用官方的 Nginx 镜像
 FROM nginx:latest
 # 将宿主机的 nginx.conf 文件复制到容器中的 /etc/nginx/ 目录
