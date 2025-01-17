@@ -2,15 +2,11 @@
 
 > Tips：记录docker的一些基本知识，忘记了回过头看看。
 
-
-
 # Docker常用命令
 这个经常用于想要容器里面的某个文件时，非常好用！
 ```shell
 docker cp <container_id>:/path/in/container /path/on/host
 ```
-
-
 
 # Docker重启策略
 

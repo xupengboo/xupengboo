@@ -11,3 +11,6 @@ Frontmatter：Frontmatter 必须在 Markdown 文件的顶部，并且被包裹�
 
 什么是 markdown-it ？
 markdown-it 是一个非常流行的 Markdown 解析器，它将 Markdown 格式的文本转换为 HTML（或其他格式）输出。它是一个基于 JavaScript 的库，常用于 Web 应用程序中处理和渲染 Markdown 内容。由于其高性能和可扩展性，markdown-it 广泛用于许多前端框架、博客引擎、以及其他需要处理 Markdown 的应用程序中。
+
+
+config.ts配置: [https://ecosystem.vuejs.press/zh/themes/default/config.html](https://ecosystem.vuejs.press/zh/themes/default/config.html)

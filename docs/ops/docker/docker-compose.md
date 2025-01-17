@@ -1,3 +1,9 @@
+---
+title: Docker Compose 安装
+description: 本文介绍了 Docker Compose 的安装方法。
+keywords: Docker Compose
+---
+
 ## 二进制安装
 ~~~shell
 //指定版本安装：
