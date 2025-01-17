@@ -17,7 +17,6 @@ config.ts配置: [https://ecosystem.vuejs.press/zh/themes/default/config.html](h
 
 
 部署：
-
 ```shell
 git pull origin main 
 docker build -t xupengboo:0.0.1 .
