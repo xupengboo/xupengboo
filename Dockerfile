@@ -3,7 +3,7 @@ FROM node:20.9.0 AS build
 # 指定工作目录
 WORKDIR /home
 # 将宿主机的所有文件，放到指定的WORKDIR工作目录里面来
-COPY nginx /home
+COPY . /home
 # 安装项目依赖
 RUN npm install --registry=https://registry.npmmirror.com
 # 执行 npm run build:prod 命令
