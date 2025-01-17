@@ -1,0 +1,18 @@
+{
+  "name": "xupengboo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
+  },
+  "author": "xupengboo",
+  "license": "ISC",
+  "devDependencies": {
+    "@vuepress/bundler-vite": "^2.0.0-rc.19",
+    "@vuepress/theme-default": "^2.0.0-rc.73",
+    "sass-embedded": "^1.83.4",
+    "vuepress": "^2.0.0-rc.19"
+  }
+}
