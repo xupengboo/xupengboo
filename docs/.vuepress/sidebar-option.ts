@@ -1,7 +1,37 @@
 const ops = '/ops'
+const code = '/code'
 
 export default {
     '/': [
+        {
+            text: '编程语言',
+            children: [
+                {
+                    text: "vite",
+                    prefix: `${code}/vite`,
+                    children: [
+                        {
+                            text: "import导入",
+                            link: "import.md"
+                        }
+                    ]
+                },
+                {
+                    text: "vue",
+                    prefix: `${code}/vue`,
+                    children: [
+                        {
+                            text: "avuejs",
+                            link: "Avuejs.md"
+                        },
+                        {
+                            text: "vue构建nginx",
+                            link: "vue-nginx.md"
+                        }
+                    ]
+                }
+            ]
+        },
         {
             text: '运维部署',
             children: [
@@ -11,7 +41,7 @@ export default {
                     children: [
                         {
                             text: 'docker 安装',
-                            link: 'docker-install.md',
+                            link: 'install.md',
                         },
                         {
                             text: 'docker-compose 使用',
@@ -37,8 +67,5 @@ export default {
                 }
             ],
         },
-        {
-            text: '前端开发',
-        }
     ],
 }

@@ -12,7 +12,6 @@ export default defineUserConfig({
     navbar,
     sidebar,
   }),
-
   lang: 'zh-cn',
   title: 'xupengboo',
   description: '这是我的第一个 VuePress 网站',

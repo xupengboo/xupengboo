@@ -1,4 +1,4 @@
-## 一、Docker 简介
+# 一、Docker 简介
 
 Docker 是一个开源的容器引擎，它有助于更快地交付应用。Docker 可将应用程序和基础设施层隔离，并且能将基础设施当作程序一样进行管理。使用 Docker , 可更快地打包、测试以及部署应用程序，并可以缩短从编写到部署运行代码的周期。
 * Docker 的官方网址链接：[https://www.docker.com](https://www.docker.com/)
@@ -11,7 +11,7 @@ Docker 是一个开源的容器引擎，它有助于更快地交付应用。Dock
 
 
 
-## 二、Docker 的架构
+# 二、Docker 的架构
 
 Docker 架构包含的主要组件：
 
@@ -43,7 +43,7 @@ Docker Registry 可分为公有 Docker Registry 和私有 Docker Registry 。最
 
 
 
-## 三、Docker准备
+# 三、Docker准备
 
 Docker 官方建议将 Docker 运行在 Linux 操作系统上。当然，Docker 也支持运行在其他平台，例如 Windows、MacOS 等。
 * 安装参考官方文档：[http://docs.docker.com/engine/installation/](http://docs.docker.com/engine/installation/)
@@ -114,7 +114,7 @@ $ sudo yum-config-manager --disable docker-ce-edge
 
 
 
-## **四、安装Docker**
+# **四、安装Docker**
 
 1、更新 Yum 包的索引
 
@@ -208,7 +208,7 @@ systemctl enable docker
 
 
 
-## 五、卸载 Docker
+# 五、卸载 Docker
 
 1、卸载 Docker 软件包
 
@@ -225,7 +225,7 @@ $ sudo rm -rf /var/lib/docker
 
 
 
-## 六、配置镜像加速器
+# 六、配置镜像加速器
 
 国内访问 Docker Hub 的速度很不稳定，有时甚至出现连接不上的情况。为 Docker 配置镜像加速器，从而解决这个问题。目前国内很多云服务商都提供了镜像加速的服务。常用的镜像加速器有：  
 阿里云加速器、DaoCloud加速器等。  
@@ -237,7 +237,7 @@ $ sudo rm -rf /var/lib/docker
 
 
 
-## 七、ipv4转向配置
+# 七、ipv4转向配置
 若启动docker的时候报错：`WARNING IPv4 forwarding is disabled. Networking will not work`  
 解决方案：
 
