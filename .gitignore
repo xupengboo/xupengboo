@@ -5,4 +5,4 @@ docs/.vuepress/.cache
 # VuePress 默认构建生成的静态文件目录
 docs/.vuepress/dist
 
-node_modules
+#node_modules
