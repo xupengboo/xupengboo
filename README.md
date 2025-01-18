@@ -21,6 +21,11 @@ config.ts配置: [https://ecosystem.vuejs.press/zh/themes/default/config.html](h
 docker build -t xupengboo:2.0.0 .
 docker rm -f xupengboo
 docker run -d -p 80:80 --name xupengboo xupengboo:2.0.0
+
+# 如果你确认这些镜像不再需要，可以使用以下命令来删除所有的悬挂镜像：
+docker image prune -f
+# 该命令会删除所有没有标签的镜像。如果你想要更细粒度的控制，也可以指定只删除悬挂镜像：
+docker image prune -a -f
 ```
 
 icon 获取：https://icon-sets.iconify.design/
