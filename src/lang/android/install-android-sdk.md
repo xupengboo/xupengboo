@@ -1,3 +1,8 @@
+---
+title: 安装 Android SDK
+icon: circle-info
+---
+
 # 安装 Android SDK
 
 > Android SDK安装流程。

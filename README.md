@@ -23,3 +23,5 @@ docker build -t xupengboo:2.0.0 .
 docker rm -f xupengboo
 docker run -d -p 80:80 --name xupengboo xupengboo:2.0.0
 ```
+
+icon 获取：https://icon-sets.iconify.design/

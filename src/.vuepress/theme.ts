@@ -7,8 +7,8 @@ export default hopeTheme({
   hostname: "https://vuepress-theme-hope-docs-demo.netlify.app",
 
   author: {
-    name: "Mr.Hope",
-    url: "https://mister-hope.com",
+    name: "Mr.xupengboo",
+    url: "https://www.xupengboo.com",
   },
 
   logo: "https://theme-hope-assets.vuejs.press/logo.svg",
