@@ -11,7 +11,11 @@ FROM node:20.9.0 AS build
 COPY --from=git /home /home
 # 安装项目依赖
 RUN npm cache clean --force
-RUN npm install --registry=https://registry.npmmirror.com
+# 删除 node_modules 和 package-lock.json（如果有冲突）
+RUN rm -rf node_modules
+RUN rm package-lock.json
+# 安装项目依赖
+RUN npm install --verbose --registry=https://registry.npmmirror.com
 # 执行 npm run build:prod 命令
 RUN npm run docs:build
 # 使用官方的 Nginx 镜像
