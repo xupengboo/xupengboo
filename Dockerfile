@@ -1,6 +1,5 @@
 # 使用 Git 镜像，添加 Git 工具
-FROM alpine:3.18 AS git
-RUN apk add --no-cache git
+FROM bitnami/git:2.40.0 AS git
 # 指定工作目录
 WORKDIR /home
 # 拉取 Git 仓库（如果需要的话，可以根据需要更改 git clone 的 URL）
