@@ -1,5 +1,3 @@
-# 使用 Node.js 镜像 , as build 别名构建阶段
-FROM node:20.9.0 AS build
 # 使用 Git 镜像，添加 Git 工具
 FROM alpine:3.18 AS git
 RUN apk add --no-cache git
@@ -7,6 +5,10 @@ RUN apk add --no-cache git
 WORKDIR /home
 # 拉取 Git 仓库（如果需要的话，可以根据需要更改 git clone 的 URL）
 RUN git clone https://github.com/xupengboo/xupengboo.git /home
+# 使用 Node.js 镜像 , as build 别名构建阶段
+FROM node:20.9.0 AS build
+# 复制git文件
+COPY --from=git /home /home
 # 安装项目依赖
 RUN npm install --registry=https://registry.npmmirror.com
 # 执行 npm run build:prod 命令
