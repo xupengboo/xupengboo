@@ -1,0 +1,59 @@
+<template><div><h1 id="vueuse-工具库" tabindex="-1"><a class="header-anchor" href="#vueuse-工具库"><span>VueUse 工具库</span></a></h1>
+<p>官方地址：https://vueuse.nodejs.cn/</p>
+<p>VueUse ：可以被看作是 Vue 生态系统中的一个 <strong>扩展工具库</strong>。</p>
+<p><code v-pre>useWindowSize</code> 使用场景，例如：</p>
+<ol>
+<li><strong>通过使用元素 <code v-pre>useWindowSize</code> 实现PC端与移动端自适应页面切换效果</strong>。</li>
+</ol>
+<div class="language-vue line-numbers-mode" data-highlighter="prismjs" data-ext="vue" data-title="vue"><pre v-pre><code><span class="line"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">setup</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>ts<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript"></span>
+<span class="line"><span class="token keyword">import</span> <span class="token punctuation">{</span>useWindowSize<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"@vueuse/core"</span><span class="token punctuation">;</span></span>
+<span class="line"><span class="token keyword">import</span> <span class="token punctuation">{</span>computed<span class="token punctuation">,</span> ref<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"vue"</span><span class="token punctuation">;</span></span>
+<span class="line"><span class="token keyword">import</span> Screen <span class="token keyword">from</span> <span class="token string">"@/pages/Screen.vue"</span><span class="token punctuation">;</span></span>
+<span class="line"><span class="token keyword">import</span> PhoneTheme <span class="token keyword">from</span> <span class="token string">"@/pages/PhoneTheme.vue"</span><span class="token punctuation">;</span></span>
+<span class="line"><span class="token keyword">import</span> <span class="token punctuation">{</span>useAuthService<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"@/service/AuthService"</span><span class="token punctuation">;</span></span>
+<span class="line"><span class="token keyword">import</span> dd <span class="token keyword">from</span> <span class="token string">"dingtalk-jsapi"</span><span class="token punctuation">;</span></span>
+<span class="line"></span>
+<span class="line"><span class="token comment">// 使用 useWindowSize() 传感器 来获取宽度，进而判断效果。</span></span>
+<span class="line"><span class="token keyword">const</span> <span class="token punctuation">{</span><span class="token literal-property property">width</span><span class="token operator">:</span> screenWidth<span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">useWindowSize</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line"></span>
+<span class="line"><span class="token keyword">const</span> authService <span class="token operator">=</span> <span class="token function">useAuthService</span><span class="token punctuation">(</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token keyword">const</span> authSuccess <span class="token operator">=</span> <span class="token function">ref</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line"><span class="token keyword">if</span> <span class="token punctuation">(</span>dd<span class="token punctuation">.</span>env<span class="token punctuation">.</span>platform <span class="token operator">!=</span> <span class="token string">"notInDingTalk"</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
+<span class="line">  authService<span class="token punctuation">.</span><span class="token function">loginByDingTalkCode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter">res</span> <span class="token operator">=></span> <span class="token punctuation">{</span></span>
+<span class="line">    authSuccess<span class="token punctuation">.</span>value <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span></span>
+<span class="line">    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"loginByDingTalkCode success"</span><span class="token punctuation">,</span> res<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line">  <span class="token punctuation">}</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span></span>
+<span class="line">  authSuccess<span class="token punctuation">.</span>value <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span></span>
+<span class="line"><span class="token punctuation">}</span></span>
+<span class="line"></span>
+<span class="line"><span class="token comment">// 通过判断宽度的size来，来显示不同页面。</span></span>
+<span class="line"><span class="token keyword">const</span> themeType <span class="token operator">=</span> <span class="token function">computed</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span></span>
+<span class="line">  <span class="token keyword">if</span> <span class="token punctuation">(</span>screenWidth<span class="token punctuation">.</span>value <span class="token operator">></span> <span class="token number">735</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
+<span class="line">    <span class="token keyword">return</span> <span class="token string">"pc"</span><span class="token punctuation">;</span></span>
+<span class="line">  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span></span>
+<span class="line">    <span class="token keyword">return</span> <span class="token string">"phone"</span><span class="token punctuation">;</span></span>
+<span class="line">  <span class="token punctuation">}</span></span>
+<span class="line"><span class="token punctuation">}</span><span class="token punctuation">)</span></span>
+<span class="line"></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span></span>
+<span class="line"></span>
+<span class="line"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span></span>
+<span class="line">  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span> <span class="token attr-name">v-if</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>authSuccess<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></span>
+<span class="line">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span> <span class="token attr-name">v-if</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>themeType === 'pc'<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></span>
+<span class="line">      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Screen</span><span class="token punctuation">/></span></span></span>
+<span class="line">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span></span>
+<span class="line">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span> <span class="token attr-name">v-else</span><span class="token punctuation">></span></span></span>
+<span class="line">      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>PhoneTheme</span><span class="token punctuation">/></span></span></span>
+<span class="line">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span></span>
+<span class="line">  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span></span>
+<span class="line"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span></span>
+<span class="line"></span>
+<span class="line"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">scoped</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>scss<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token style"><span class="token language-css"></span>
+<span class="line"></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span></span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><blockquote>
+<p>优点：能够动态监听页面的变化。</p>
+</blockquote>
+</div></template>
+
+

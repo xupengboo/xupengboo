@@ -1,18 +1,21 @@
 {
   "name": "xupengboo",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "xupengboo docs",
+  "version": "2.0.0",
+  "license": "MIT",
+  "type": "module",
   "scripts": {
-    "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs"
+    "docs:build": "vuepress-vite build src",
+    "docs:clean-dev": "vuepress-vite dev src --clean-cache",
+    "docs:dev": "vuepress-vite dev src",
+    "docs:update-package": "npx vp-update"
   },
-  "author": "xupengboo",
-  "license": "ISC",
   "devDependencies": {
-    "@vuepress/bundler-vite": "^2.0.0-rc.19",
-    "@vuepress/theme-default": "^2.0.0-rc.73",
-    "sass-embedded": "^1.83.4",
-    "vuepress": "^2.0.0-rc.19"
+    "@vuepress/bundler-vite": "2.0.0-rc.19",
+    "@vuepress/plugin-search": "^2.0.0-rc.71",
+    "sass-embedded": "^1.83.0",
+    "vue": "^3.5.13",
+    "vuepress": "2.0.0-rc.19",
+    "vuepress-theme-hope": "2.0.0-rc.70"
   }
 }
