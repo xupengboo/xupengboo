@@ -1,19 +1,9 @@
-# 使用 Git 镜像，添加 Git 工具
-FROM bitnami/git:2.40.0 AS git
-# 指定工作目录
-WORKDIR /home
-# 拉取 Git 仓库（如果需要的话，可以根据需要更改 git clone 的 URL）
-# RUN git clone https://github.com/xupengboo/xupengboo.git /home
-RUN git clone https://gitee.com/xupengboo/xupengboo.git /home
 # 使用 Node.js 镜像 , as build 别名构建阶段
 FROM node:20.9.0 AS build
-# 复制git文件
-COPY --from=git /home /home
-# 安装项目依赖
-RUN npm cache clean --force
-# 删除 node_modules 和 package-lock.json（如果有冲突）
-RUN rm -rf node_modules
-RUN rm package-lock.json
+# 指定工作目录
+WORKDIR /home
+# 复制宿主机文件到 home
+COPY . /home
 # 安装项目依赖
 RUN npm install --verbose --registry=https://registry.npmmirror.com
 # 执行 npm run build:prod 命令
