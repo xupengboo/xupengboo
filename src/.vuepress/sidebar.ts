@@ -3,29 +3,25 @@ import { sidebar } from "vuepress-theme-hope";
 export default sidebar({
   "/": [
     {
-      text: "运维部署",
-      icon: "book",
-      prefix: "ops/",
-      children: "structure",
-    },
-    {
-      text: "案例",
+      text: "案例介绍",
       icon: "laptop-code",
       prefix: "demo/",
       link: "demo/",
       children: "structure",
+      collapsible: true,
     },
     {
-      text: "文档",
+      text: "运维部署",
       icon: "book",
-      prefix: "guide/",
+      prefix: "ops/",
       children: "structure",
+      collapsible: true,
     },
-    {
-      text: "幻灯片",
-      icon: "person-chalkboard",
-      link: "https://ecosystem.vuejs.press/zh/plugins/markdown/revealjs/demo.html",
-    },
+    // {
+    //   text: "幻灯片",
+    //   icon: "person-chalkboard",
+    //   link: "https://ecosystem.vuejs.press/zh/plugins/markdown/revealjs/demo.html",
+    // },
   ],
 });
 
