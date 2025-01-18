@@ -1,6 +1,7 @@
 ---
 title: Rancher 功能
-icon: lightbulb
+icon: devicon-plain:rancher-wordmark
+index: false
 ---
 
 

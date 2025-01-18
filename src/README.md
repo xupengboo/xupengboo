@@ -1,13 +1,13 @@
 ---
 home: true
 icon: house
-title: 项目主页
+title: 主页
 heroImage: https://theme-hope-assets.vuejs.press/logo.svg
 bgImage: https://theme-hope-assets.vuejs.press/bg/6-light.svg
 bgImageDark: https://theme-hope-assets.vuejs.press/bg/6-dark.svg
 bgImageStyle:
   background-attachment: fixed
-heroText: xupengboo
+heroText: PengBoo
 tagline: 📚记录和分享学习过程、知识和经验的地方。在这里，我汇总了编程语言、技术问题解决方案和使用经验等等，旨在帮助自己和他人不断进步。
 actions:
   - text: 开始使用

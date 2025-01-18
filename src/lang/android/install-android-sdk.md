@@ -1,13 +1,8 @@
----
-title: 安装 Android SDK
-icon: circle-info
----
-
-# 安装 Android SDK
+# SDK 安装
 
 > Android SDK安装流程。
 
-# 1. **安装 Java Development Kit (JDK)**
+## 1. **安装 Java Development Kit (JDK)**
 
 Android SDK 需要 Java 环境。首先确保你已经安装了 JDK，并且配置好了 `JAVA_HOME` 环境变量。
 
@@ -24,9 +19,9 @@ java -version
 
 
 
-# 2. SDK的 三个工具集
+## 2. SDK的 三个工具集
 
-## 2.1 **Android SDK Tools（Command-line Tools） **命令行工具
+### 2.1 **Android SDK Tools**（Command-line Tools） 命令行工具
 
 - **作用**：Android SDK Tools 是 Android 开发的基础工具集，包含了一些基本的开发和管理工具，帮助开发者进行项目的构建、调试、以及设备管理等。
 - 主要功能：
@@ -36,7 +31,7 @@ java -version
 - **命令行版本**：可以通过终端（命令提示符）来使用这些工具，适合无需 GUI（如 Android Studio）时的开发操作。
 - **位置**：在 Android SDK 目录下的 `cmdline-tools/latest/bin` 目录中。
 
-## 2.2 **Build Tools**
+### 2.2 **Build Tools**
 
 - **作用**：**Build Tools 是专门为 Android 应用的构建和打包提供的工具集**。它包含了一些独立于 Android Studio 的构建工具，用于编译代码、生成 APK、以及进行应用签名。
 - 主要功能：
@@ -47,7 +42,7 @@ java -version
   - **`apksigner`**：为 APK 文件进行签名，以便可以在 Android 设备上安装。
 - **位置**：在 Android SDK 目录的 `build-tools/<version>` 中，多个版本可以共存。
 
-## 2.3 Platform Tools 
+### 2.3 Platform Tools 
 
 - **作用**：Platform Tools 是与 Android 平台相关的一组工具，主要用于设备管理、调试和系统层面的操作。
 - 主要工具：
@@ -56,7 +51,7 @@ java -version
   - **`systrace`**：分析 Android 系统性能的工具，用于追踪和记录系统中的各种性能指标。
 - **位置**：位于 Android SDK 目录下的 `platform-tools` 目录中。
 
-## 2.4 三个工作集 与 JDK版本的问题
+### 2.4 三个工作集 与 JDK版本的问题
 
 Android SDK Tools（command-line tools）：
 
@@ -73,9 +68,9 @@ Build Tools：
 
 
 
-# 3. **下载 Android Studio 或仅下载 SDK**
+## 3. **下载 Android Studio 或仅下载 SDK**
 
-## 3.1 通过 Android Studio 安装（推荐）
+### 3.1 通过 Android Studio 安装（推荐）
 
 Android Studio 是官方的 IDE，包含了 Android SDK、Android 模拟器以及其他开发工具。
 
@@ -91,7 +86,7 @@ Android Studio 是官方的 IDE，包含了 Android SDK、Android 模拟器以�
 
 
 
-## 3.2 仅下载 Android SDK（命令行工具）
+### 3.2 仅下载 Android SDK（命令行工具）
 
 如果你不需要完整的 Android Studio IDE，而只需要 Android SDK，可以下载命令行工具：
 
@@ -101,7 +96,7 @@ Android Studio 是官方的 IDE，包含了 Android SDK、Android 模拟器以�
 
 
 
-# 3. 环境变量配置
+## 3. 环境变量配置
 
 **Windows配置：**
 
@@ -123,7 +118,7 @@ Android Studio 是官方的 IDE，包含了 Android SDK、Android 模拟器以�
 
 
 
-# 4. **使用 SDK Manager 安装工具**
+## 4. **使用 SDK Manager 安装工具**
 
 如果你安装了 Android Studio 或下载了命令行工具，使用以下命令来管理 SDK 组件：
 
@@ -135,7 +130,7 @@ sdkmanager "build-tools;30.0.3" # 安装指定版本的构建工具
 
 
 
-# 5. **验证安装**
+## 5. **验证安装**
 
 你可以通过以下命令来检查 Android SDK 是否安装正确：
 
