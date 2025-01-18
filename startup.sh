@@ -3,6 +3,10 @@
 # 设置镜像名称
 IMAGE_NAME="xupengboo:2.0.0"
 CONTAINER_NAME="xupengboo"
+BRANCH="master"
+
+echo "Git pull ${BRANCH}."
+git pull origin ${BRANCH}
 
 # 步骤 1: 构建 Docker 镜像
 echo "Building Docker image ${IMAGE_NAME}..."
