@@ -10,6 +10,7 @@ FROM node:20.9.0 AS build
 # 复制git文件
 COPY --from=git /home /home
 # 安装项目依赖
+RUN npm cache clean --force
 RUN npm install --registry=https://registry.npmmirror.com
 # 执行 npm run build:prod 命令
 RUN npm run docs:build
