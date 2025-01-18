@@ -6,3 +6,4 @@ src/.vuepress/.cache
 src/.vuepress/dist
 node_modules
 .idea
+package-lock.json
