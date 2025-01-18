@@ -13,7 +13,7 @@ FROM nginx:latest
 # 将宿主机的 nginx.conf 文件复制到容器中的 /etc/nginx/ 目录
 COPY nginx.conf /etc/nginx/nginx.conf
 # 从第一build阶段获取dist下的文件移动到容器中的 /usr/share/nginx/html/ 目录
-COPY --from=build /home/docs/.vuepress/dist /usr/share/nginx/html/
+COPY --from=build /home/src/.vuepress/dist /usr/share/nginx/html/
 # 暴露 Nginx 监听的端口，一般为 80，但这里因为是https协议所以要暴露443端口！
 EXPOSE 80
 # 启动 Nginx 服务
