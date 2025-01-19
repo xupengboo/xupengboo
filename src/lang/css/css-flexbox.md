@@ -1,4 +1,6 @@
-# 弹性容器（弹性盒子 Flexbox）：flex
+# 弹性盒子
+
+## 弹性盒子
 
 **弹性容器**：使用 `display: flex;` 或 `display: inline-flex;` 定义。
 
@@ -6,13 +8,10 @@
 - `display: inline-flex;` 使元素成为内联弹性容器。
 
 
-
 **轴方向**：
 
 - **主轴（Main Axis）**：定义内容的主要排列方向，从 `main start` 到 `main end`。
 - **交叉轴（Cross Axis）**：与主轴垂直的方向，从 `cross start` 到 `cross end`。
-
-
 
 **轴的方向设置**：
 
@@ -28,8 +27,6 @@
 
 ![image-20240830150627853](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20240830150627853.png)
 
-
-
 **主轴上的排列方式**：**`justify-content`**，控制弹性项目在主轴上的排列方式。
 
 - **`center`**：项目居中对齐。
@@ -37,8 +34,6 @@
 - **`space-between`**：项目两端对齐，项目之间的间隔相等。
 - **`flex-start`**：项目从主轴的起点开始对齐。
 - **`flex-end`**：项目从主轴的终点开始对齐。
-
-
 
 **交叉轴上的排列方式**：**`align-items`**，控制弹性项目在交叉轴上的排列方式。
 
@@ -48,19 +43,13 @@
 - **`baseline`**：项目基于第一行文字的基线对齐。
 - **`stretch`**：默认值，项目在交叉轴上拉伸以填满容器。
 
-
-
 **换行设置**：**`flex-wrap`**，控制弹性项目是否换行及换行方向。
 
 - **`nowrap`**：默认值，不换行。
 - **`wrap`**：允许换行，新的行放在旧行下方。
 - **`wrap-reverse`**：允许换行，新的行放在旧行上方。
 
-
-
 **控制多行的对齐：`align-content` 属性**，用于控制多行的对齐方式，如果只有一行则不会起作用。
-
-
 
 **排序设置：`order` 属性**，设置弹性子元素排列顺序，**用整数值来定义排列顺序，数值小的排在前面。可以为负值**。
 
@@ -167,6 +156,107 @@
 ```
 
 ![image-20240920105620797](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20240920105620797.png)
+
+## 案例
+
+`flex` 容器：
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flexbox Layout Example</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="flex-container">
+        <div class="flex-item item1">Item 1</div>
+        <div class="flex-item item2">Item 2</div>
+        <div class="flex-item item3">Item 3</div>
+    </div>
+	<style>
+
+		/* 设置 flex 容器 */
+		.flex-container {
+			display: flex;
+			justify-content: space-between; /* 主轴上元素均匀分布，左右留有间距 */
+			align-items: center; /* 在交叉轴上居中对齐 */
+			height: 100vh; /* 设置容器高度为视口高度 */
+			padding: 20px;
+			background-color: #f4f4f4;
+		}
+
+		/* 设置 flex 项目 */
+		.flex-item {
+			background-color: #8ca0ff;
+			padding: 20px;
+			color: white;
+			font-size: 1.5rem;
+			text-align: center;
+			flex: 1; /* 使每个项目均等占用空间 */
+			margin: 0 10px; /* 每个项目之间有一定的间距 */
+		}
+
+		/* 为不同项目设置不同的背景色 */
+		.item1 {
+			background-color: #ff8c8c;
+		}
+
+		.item2 {
+			background-color: #8cff8c;
+		}
+
+		.item3 {
+			background-color: #ffc48c;
+		}
+
+	</style>
+</body>
+</html>
+```
+
+`grid` 网格：
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Grid 示例</title>
+    <link rel="stylesheet" href="styles.css">
+	<style>
+		.grid-container {
+			display: grid;
+			grid-template-columns: repeat(3, 1fr); /* 定义3列，等宽 */
+			grid-gap: 10px; /* 定义网格项之间的间隙 */
+			padding: 10px;
+		}
+
+		.grid-item {
+			background-color: #4CAF50;
+			color: white;
+			border-radius: 5px;
+			padding: 20px;
+			text-align: center;
+			font-size: 30px;
+		}
+	</style>
+</head>
+<body>
+    <div class="grid-container">
+        <div class="grid-item">1</div>
+        <div class="grid-item">2</div>
+        <div class="grid-item">3</div>
+        <div class="grid-item">4</div>
+        <div class="grid-item">5</div>
+        <div class="grid-item">6</div>
+    </div>
+</body>
+</html>
+```
 
 
 
