@@ -1,10 +1,14 @@
-# Docker基础知识
+---
+title: Docker 基础知识
+order: 2
+---
+
+## Docker基础知识
 
 > Tips：记录docker的一些基本知识，忘记了回过头看看。
 
 
-
-# Docker常用命令
+## Docker常用命令
 这个经常用于想要容器里面的某个文件时，非常好用！
 ```shell
 docker cp <container_id>:/path/in/container /path/on/host
@@ -12,7 +16,7 @@ docker cp <container_id>:/path/in/container /path/on/host
 
 
 
-# Docker重启策略
+## Docker重启策略
 
 当你启动一个容器时，可以通过 `--restart` 选项来设置重启策略。以下是几个常见的重启策略：
 

@@ -1,4 +1,8 @@
-# 如何写一个Dockerfile文件？
+---
+title: Dockerfile
+order: 4
+---
+## 如何写一个Dockerfile文件？
 
 现在的项目肯定都离不开docker，只要是流水线部署就会涉及Dockerfile文件，那么如何写一个正确的编写一个Dockerfile文件呢？
 

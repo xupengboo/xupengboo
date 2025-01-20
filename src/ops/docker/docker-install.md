@@ -1,15 +1,13 @@
+---
+title: Docker 安装
+order: 1
+---
+
 ## 一、Docker 简介
 
 Docker 是一个开源的容器引擎，它有助于更快地交付应用。Docker 可将应用程序和基础设施层隔离，并且能将基础设施当作程序一样进行管理。使用 Docker , 可更快地打包、测试以及部署应用程序，并可以缩短从编写到部署运行代码的周期。
 * Docker 的官方网址链接：[https://www.docker.com](https://www.docker.com/)
-* Docker 的 GitHub : http://github.com/docker/docker  
-
-
-
-> Tips：最近，镜像拉去经常超时，解决办法：https://blog.csdn.net/weixin_50160384/article/details/139861337
-
-
-
+* Docker 的 GitHub : http://github.com/docker/docker
 
 ## 二、Docker 的架构
 
@@ -40,9 +38,6 @@ Docker Registry 是一个集中存储与分发镜像的服务。构建完 Docker
 Docker Registry 可分为公有 Docker Registry 和私有 Docker Registry 。最常用的 Docker Registry 莫过于官方的 Docker Hub， 这也是默认的 Docker Registry 。Docker Hub 上存放着大量优秀的镜像，可使用 Docker 命令下载并使用。
 
 
-
-
-
 ## 三、Docker准备
 
 Docker 官方建议将 Docker 运行在 Linux 操作系统上。当然，Docker 也支持运行在其他平台，例如 Windows、MacOS 等。
@@ -53,7 +48,10 @@ Docker 官方建议将 Docker 运行在 Linux 操作系统上。当然，Docker 
 * Docker 运行在 CentOS 7.X 之上 （不支持内核在 3.8 以下的老版本）
 
 ### 通过以下命令查看您的 CentOS 内核
+```bash
 `uname -r`
+```
+
 需要保证Docker安装在 64 位平台
 
 ### 移除非官方软件包
@@ -207,7 +205,6 @@ systemctl enable docker
 
 
 
-
 ## 五、卸载 Docker
 
 1、卸载 Docker 软件包
@@ -232,8 +229,6 @@ $ sudo rm -rf /var/lib/docker
 以阿里云加速器为例：  
 1、注册阿里云账号，即可在阿里云控制台（[https://cr.console.aliyun.com/cn-zhangjiakou/instances/mirrors](https://cr.console.aliyun.com/cn-zhangjiakou/instances/mirrors)）  
 2、按照提示说明，即可配置镜像加速器。
-
-
 
 
 

@@ -1,9 +1,14 @@
-# mvn、jdk安装
+---
+title: Docker 单机部署
+order: 3
+---
+
+## mvn、jdk安装
 [CentOS7安装Maven_centos7安装maven-CSDN博客](https://blog.csdn.net/qq_38738510/article/details/105567513)
 
 [CentOS7安装jdk8教程_centos7安装jdk8-CSDN博客](https://blog.csdn.net/codedz/article/details/124044974)
 
-# 部署自定义网络
+## 部署自定义网络
 ```powershell
 # 1. 创建自定义网络。
 docker network create itholmes_network
@@ -13,7 +18,7 @@ docker network disconnect itholmes_network mysql
 # 3. 重启
 docker restart container_name
 ```
-# Dockerfile 写法
+## Dockerfile 写法
 ```dockerfile
 # 基础镜像
 FROM  openjdk:8-jre
@@ -31,12 +36,12 @@ COPY ./jar/ruoyi-auth.jar /home/ruoyi/ruoyi-auth.jar
 # 启动认证服务
 ENTRYPOINT ["java","-jar","ruoyi-auth.jar"]
 ```
-# docker Swarm 跨宿主机通讯
+## docker Swarm 跨宿主机通讯
 [跨宿主机- 如何实现 Docker 容器的通讯？（Docker-Swarm）_docker swarm 访问宿主机 add-host-CSDN博客](https://blog.csdn.net/adparking/article/details/119140418)
 > 💡Tips：work节点一开始不会刷新出来在manager节点创建的network，之后某个容器服务声明以后才能构建。
 
-# docker中间服务器 搭建
-## MySQL
+## docker中间服务器 搭建
+### MySQL
 ```powershell
 # Mysql 8版本：
 docker run -d -p 3306:3306 --privileged=true \
@@ -154,7 +159,7 @@ mysql> exit
 **docker部署mysql5.7异常：**
 [docker部署mysql5.7后登录时出现Access denied for user ‘root‘@‘localhost‘ (using password: YES)的解决方法-CSDN博客](https://blog.csdn.net/weixin_48226988/article/details/112681407)
 
-## Redis
+### Redis
 ```powershell
 # Redis 容器卷配置
 docker run -p 6379:6379 --name redis -v /itholmes/redis/data:/data \
@@ -172,7 +177,7 @@ docker run -d \
 -v /opt/redis/conf/redis.conf:/etc/redis/redis.conf \
 redis redis-server /etc/redis/redis.conf
 ```
-## ES
+### ES
 ```powershell
 # 安装es docker
 docker pull elasticsearch:7.4.2
@@ -221,7 +226,7 @@ docker run --name kibana \
 # 同样通过logs命令，排除安装失败问题
 docker logs kibana
 ```
-## Nginx
+### Nginx
 ```powershell
 # 1. 先下载一个nginx，方便获取/etc/nginx目录下的配置文件。
 docker run -p 80:80 --name nginx -d nginx:1.10
@@ -246,7 +251,7 @@ cd es
 # 在es目录下面，创建一个fenci.txt文件：可以输入一些测试词语、张三等等。
 vi fenci.txt
 ```
-## RabbitMQ
+### RabbitMQ
 ```powershell
 # 1. 启动 rabbitmq:management 容器
 docker run -d --name rabbitmq -p 5671:5671 -p 5672:5672 \
@@ -254,7 +259,7 @@ docker run -d --name rabbitmq -p 5671:5671 -p 5672:5672 \
 # 2. 自动重启
 docker update rabbitmq --restart=always
 ```
-## Nacos
+### Nacos
 ```powershell
 # 1. 创建配置目录
 mkdir -p /itholmes/nacos/logs/                      #新建logs目录
@@ -287,7 +292,7 @@ nacos/nacos-server:v2.0.4
 虽然能启动起来，但是启动的无法进行登录操作，应该不是我想要的nacos系统，可能版本不对。
 
 ```
-## Tomcat
+### Tomcat
 ```powershell
 # tomcat安装
 docker run -id --name=c_tomcat \
@@ -298,7 +303,7 @@ tomcat
 # -p 8080:8080：将容器的8080端口映射到主机的8080端口
 # -v $PWD:/usr/local/tomcat/webapps：将主机中当前目录挂载到容器的webapps
 ```
-## Jenkins
+### Jenkins
 ```powershell
 docker run -u root --name jenkins \ 
 	--memory 512m --memory-swap=512m \ 
@@ -308,7 +313,7 @@ docker run -u root --name jenkins \
   -v $JENKINS_HOME/docker.sock:/var/run/docker.sock \
   jenkinsci/blueocean
 ```
-## Gitlab
+### Gitlab
 ```powershell
 export GITLAB_HOME=/itholmes/gitlab
 
@@ -325,7 +330,7 @@ sudo docker run --detach \
   --shm-size 256m \
   registry.gitlab.cn/omnibus/gitlab-jh:latest
 ```
-## Rancher
+### Rancher
 ```powershell
 sudo docker run -d --privileged \
 	--restart=unless-stopped \ 
@@ -335,7 +340,7 @@ sudo docker run -d --privileged \
   rancher/rancher:v2.5.12
 ```
 
-## kafka
+### kafka
 
 ```bash
 docker pull bitnami/kafka:3.0
@@ -361,7 +366,7 @@ docker run -d \
 # 也可以采用官方的：https://kafka.apache.org/quickstart  ， kraft模式（kafka自带的。）
 ```
 
-## Kafdrop
+### Kafdrop
 
 ```bash
  # kafdrop kafka可视化工具
@@ -389,7 +394,7 @@ docker run -d \
 
 > 注意：由于docker启动后本地是无法解析自定义域名的，所以要换成IP 或者 修改容器内部的域名映射。
 
-## zookeeper
+### zookeeper
 
 ```bash
 docker run -d \

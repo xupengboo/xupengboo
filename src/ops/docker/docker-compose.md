@@ -1,6 +1,6 @@
 ---
-title: docker-compose
-icon: circle-info
+title: Docker Compose 安装
+order: 5
 ---
 
 ## 二进制安装

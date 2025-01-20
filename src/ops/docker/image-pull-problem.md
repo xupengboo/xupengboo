@@ -1,6 +1,11 @@
-# 解决国内镜像无法访问的问题
+---
+title: 镜像仓库地址
+order: 6
+---
 
-推荐一个网站记录所有可以用的 Docker 镜像源：
+# 镜像仓库地址
+
+相关 Docker 镜像源：
 
 - https://www.coderjia.cn/archives/dba3f94c-a021-468a-8ac6-e840f85867ea
 
@@ -31,7 +36,3 @@ vi /etc/docker/daemon.json
 ```shell
 systemctl restart docker
 ```
-
-
-
-目前，唯一个有效的能够拉去镜像的配置。
