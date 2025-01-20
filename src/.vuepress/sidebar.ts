@@ -28,6 +28,20 @@ export default sidebar({
       children: "structure",
       collapsible: true,
     },
+    {
+      text: "数据库",
+      icon: "mdi:database-outline",
+      prefix: "db/",
+      children: "structure",
+      collapsible: true,
+    },
+    {
+      text: "平台应用",
+      icon: "ep:platform",
+      prefix: "platform/",
+      children: "structure",
+      collapsible: true,
+    },
     // {
     //   text: "案例介绍",
     //   icon: "laptop-code",

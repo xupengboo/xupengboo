@@ -1,8 +1,15 @@
-# Drios 概述
+---
+title: Drios MPP数据库
+order: 1
+---
+
+
+
+## Drios 概述
 
 >  关于部署，直接对接官方即可：https://doris.apache.org/zh-CN/docs/install/cluster-deployment/k8s-deploy/install-doris-operator 
 
-# Drios 实战
+## Drios 实战
 
 如何将 MySQL 数据库表格以及数据，如何同步到 Drios 上呢？
 
@@ -10,7 +17,7 @@
 
 以下几种常见方案：
 
-## **1. 基于 MySQL Binlog 的实时同步**
+### **1. 基于 MySQL Binlog 的实时同步**
 
 MySQL 的 Binlog（Binary Log）记录了所有数据库的更改操作，可以用来捕获数据变更并将其同步到 Drios。
 
@@ -46,7 +53,7 @@ MySQL 的 Binlog（Binary Log）记录了所有数据库的更改操作，可以
 
 
 
-## **2. 使用 ETL 工具进行定期同步**
+### **2. 使用 ETL 工具进行定期同步**
 
 如果不需要实时性，可以通过定期的 ETL（Extract, Transform, Load）流程，将 MySQL 数据导出并加载到 Drios。
 
@@ -68,7 +75,7 @@ MySQL 的 Binlog（Binary Log）记录了所有数据库的更改操作，可以
    
      
 
-## **3. 双写策略**
+### **3. 双写策略**
 
 在业务代码中，同时写入 MySQL 和 Drios。这种方法适合新增和修改操作不频繁的场景，但可能增加代码复杂性。
 
@@ -81,7 +88,7 @@ MySQL 的 Binlog（Binary Log）记录了所有数据库的更改操作，可以
 
  
 
-## **4. 数据库触发器同步**
+### **4. 数据库触发器同步**
 
 利用 MySQL 的触发器功能，在表发生数据变化时，将变更记录到中间表或队列中，再同步到 Drios。
 
@@ -98,7 +105,7 @@ MySQL 的 Binlog（Binary Log）记录了所有数据库的更改操作，可以
 
 
 
-## **5. 基于流式数据管道的实时同步**
+### **5. 基于流式数据管道的实时同步**
 
 结合 Kafka、Flink 或 Spark Streaming，实现高性能的实时同步。
 
@@ -114,7 +121,7 @@ MySQL 的 Binlog（Binary Log）记录了所有数据库的更改操作，可以
    
    
 
-## 6. 总结
+### 6. 总结
 
 **实时同步**：推荐使用 MySQL Binlog + CDC 工具（如 Debezium、Maxwell）。
 

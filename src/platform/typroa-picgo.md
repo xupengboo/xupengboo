@@ -1,4 +1,5 @@
 # Typora：PicGo设置GitHub图床
+
 ## 1. GitHub配置（专用于图床）
 
 - 登录GitHub首页，先准备一个GitHub项目（权限最好是：public，不然其他人访问不到），专用于图床 。

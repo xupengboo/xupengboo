@@ -1,6 +1,6 @@
 ---
 title: vue
-icon: logos:vue
+icon: flowbite:vue-solid
 index: false
 ---
 

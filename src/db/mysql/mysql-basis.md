@@ -1,3 +1,9 @@
+---
+title: MySQL 基础
+order: 1
+---
+
+
 # 1. ﻿初识MySQL
 
 > 程序员岗位必备技能：MySQL

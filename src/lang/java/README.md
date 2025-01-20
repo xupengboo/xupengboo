@@ -1,6 +1,6 @@
 ---
 title: java
-icon: devicon:java
+icon: ri:java-line
 index: false
 ---
  

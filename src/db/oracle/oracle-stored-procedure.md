@@ -1,3 +1,8 @@
+---
+title: Oracle 存储过程
+order: 2
+---
+
 ## Oracle 存储过程
 1. **`CREATEOR REPLACE PROCEDURE [procedure_name] IS ... `**主体格式：
 - **`IS`**：用于分隔存储过程的头部声明部分和主体逻辑部分的开始。  

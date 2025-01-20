@@ -1,4 +1,9 @@
-# Canal 基本使用
+---
+title: Canal 基本使用
+order: 1
+---
+
+## Canal数据库同步 - 如何搭建集群、对接MySQL以及KafKa 实践
 
 > 功能：主要用于数据库同步。
 >
@@ -11,7 +16,7 @@
 
 ![image-20241226101247282](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20241226101247282.png)
 
-# 1. 准备工作
+### 1. 准备工作
 
 1. 确保 MySQL 已启用 `Binlog` ：
 
@@ -48,7 +53,7 @@ GRANT SELECT, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'canal'@'%';
 FLUSH PRIVILEGES;
 ```
 
-# 2. 下载安装部署 Canal
+### 2. 下载安装部署 Canal
 
 ```bash
 # 下载 canal, 访问 release 页面 , 选择需要的包下载, 如以 1.1.7 版本为例
@@ -78,7 +83,7 @@ tar -zxvf canal.deployer-1.1.7.tar.gz -C /usr/local/canal
 >
 > - 需要管理和监控：增加 `canal.admin`。
 
-# 3. 安装 Canal Admin UI
+### 3. 安装 Canal Admin UI
 
 1. 解压 `canal admin` 
 
@@ -112,7 +117,7 @@ source conf/canal_manager.sql
 
 - 默认，管理员账号为：`admin` / `123456` 
 
-# 4. 配置 Canal Admin
+### 4. 配置 Canal Admin
 
 1. 新建集群。
 
@@ -143,7 +148,7 @@ kafka.bootstrap.servers = center-server:9092
 
 保存即可。
 
-# 5. 部署 Canal Deploy 服务
+### 5. 部署 Canal Deploy 服务
 
 1. 安装 Canal Deploy 服务
 
@@ -169,7 +174,7 @@ vim canal_local.properties
 
 ![image-20241230171441821](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20241230171441821.png)
 
-# 6. 配置 监控实例 (instance)
+### 6. 配置 监控实例 (instance)
 
 1. 新建 `instance` 实例。
 
@@ -202,7 +207,7 @@ canal.mq.partition=0
 #canal.mq.partitionHash=.*\\..*
 ```
 
-# 7. 搭建 `KafKa` 和 `Kafdrop`
+### 7. 搭建 `KafKa` 和 `Kafdrop`
 
 见：[Github - xupengboo - Docker单节点运维部署命令.md](https://github.com/xupengboo/xupengboo/blob/master/2.%E8%BF%90%E7%BB%B4%E9%83%A8%E7%BD%B2/Docker/3.%20Docker%E5%8D%95%E8%8A%82%E7%82%B9%E8%BF%90%E7%BB%B4%E9%83%A8%E7%BD%B2%E5%91%BD%E4%BB%A4.md#kafka)
 
@@ -220,3 +225,19 @@ bin/kafka-server-start.sh config/kraft/reconfig-server.properties
 ```
 
 > 学习为主，推荐，官方部署 `kafka`：https://kafka.apache.org/quickstart
+
+
+
+## Canal 全量同步 和 增量同步
+
+Canal 初次启动时会执行 **全量同步**，然后进入 **增量同步** 模式，实时同步数据变更。
+
+```properties
+# 指定同步模式为 auto，这样首次会进行全量同步，之后会切换为增量同步
+canal.instance.mode=auto
+# 启动时执行全量同步
+canal.instance.snapshooting=true
+# 配置内存缓存大小
+canal.instance.memory.buffer.size=1024
+```
+
