@@ -1,3 +1,12 @@
+# 虚拟滚动
+
+虚拟滚动（有时称为 虚拟列表、虚拟滚动条）是 JavaScript 中的一种技术，旨在**优化大数据量的列表渲染**，尤其是当有成千上万的数据项时，直接渲染整个列表会导致性能问题。虚拟列表通过只渲染用户视口中可见的那一部分列表项，从而减少 DOM 元素的数量和内存占用，提高渲染性能。
+
+**使用场景：只渲染可视区域内的内容来优化大数据量渲染性能的技术**。
+
+## JS 实现简单的虚拟滚动效果
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,9 +38,6 @@
 <div id="container"></div>
 
 <script>
-
-	// app.js
-
 // 总数据项数
 const totalItems = 10000;
 // 每个数据项的高度
@@ -78,8 +84,26 @@ container.addEventListener('scroll', () => {
     const scrollTop = container.scrollTop;
     renderVisibleItems(scrollTop);
 });
-
-	
 </script>
 </body>
 </html>
+```
+
+1. 根据高度等属性，计算出滚动条的滚动大小效果。
+
+![image-20240904140033136](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20240904140033136.png)
+
+2. 根据 **滚动监听和索引位置改变** ，来实现DOM元素切换。
+
+![image-20240904140326919](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20240904140326919.png)
+
+
+
+## VueUse 虚拟滚动条 工具
+
+VueUse 虚拟滚动条：[https://vueuse.nodejs.cn/core/useVirtualList/#usevirtuallist](https://vueuse.nodejs.cn/core/useVirtualList/#usevirtuallist)
+
+![image-20240904135408561](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20240904135408561.png)
+
+根据官方案例来就行，使用起来很简单。
+

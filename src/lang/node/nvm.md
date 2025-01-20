@@ -1,4 +1,6 @@
-# 1. nvm安装
+# nvm
+
+## 1. nvm安装
 
 官方地址：[https://github.com/nvm-sh/nvm/blob/master/README.md](https://github.com/nvm-sh/nvm/blob/master/README.md)
 
@@ -10,7 +12,7 @@
 
 在 cmd 命令框中，输入 `nvm version` 显示nvm版本信息表示安装成功。
 
-# 2. nvm配置
+## 2. nvm配置
 
 nvm安装目录下面有一个 `settings.txt` 文件，该文件是配置文件：
 
@@ -27,7 +29,7 @@ node_mirror: https://npm.taobao.org/mirrors/node/
 npm_mirror: https://npm.taobao.org/mirrors/npm/
 ```
 
-# 3. nvm命令
+## 3. nvm命令
 
 ```powershell
 # 1.显示已安装的Node.js版本列表。

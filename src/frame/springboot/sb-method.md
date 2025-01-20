@@ -1,4 +1,6 @@
-# HandlerMethodArgumentResolver 作用
+# Spring Boot 类作用
+
+## HandlerMethodArgumentResolver 作用
 
 在 Spring Boot 中，`HandlerMethodArgumentResolver` 是一个非常有用的接口，它允许你自定义解析器，以便在处理器方法（即控制器方法）中自动解析方法参数。通过实现这个接口，你可以定义如何从请求中提取数据并将其转换为控制器方法的参数。
 

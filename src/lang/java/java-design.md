@@ -1,4 +1,4 @@
-# DesignPatterns
+# Java 设计模式
 
 本项目通过构建一个个maven项目梳理案例，来针对性的展示学习每一种设计模式。
 
@@ -8,7 +8,7 @@
 mvn archetype:generate -DgroupId=com.xupengboo -DartifactId=xxx -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
 ```
 
-# 设计模式 介绍
+## 设计模式 介绍
 
 设计模式是一种在软件设计中经常使用的通用解决方案，它们帮助解决常见问题并促使代码更具可维护性和可扩展性。
 
@@ -18,16 +18,16 @@ mvn archetype:generate -DgroupId=com.xupengboo -DartifactId=xxx -DarchetypeArtif
 1. 单例模式（Singleton Pattern）
 2. 原型模式（Prototype Pattern）
 3. 工厂模式（Factory Pattern）
-   - 简单工厂模式（Simple Factory Pattern）
-   - 工厂方法模式（Factory Method Pattern）
-   - 抽象工厂模式（Abstract Factory Pattern）
+    - 简单工厂模式（Simple Factory Pattern）
+    - 工厂方法模式（Factory Method Pattern）
+    - 抽象工厂模式（Abstract Factory Pattern）
 4. 建造者模式（Builder Pattern）
 
 **结构型模式（Structural Patterns）**:
 
 1. 适配器模式（Adapter Pattern）
-   - 对象适配器模式（Object Adapter Pattern）
-   - 类适配器模式（Class Adapter Pattern）
+    - 对象适配器模式（Object Adapter Pattern）
+    - 类适配器模式（Class Adapter Pattern）
 2. 桥接模式（Bridge Pattern）
 3. 过滤器模式（Filter Pattern）
 4. 组合模式（Composite Pattern）
@@ -51,7 +51,7 @@ mvn archetype:generate -DgroupId=com.xupengboo -DartifactId=xxx -DarchetypeArtif
 
 
 
-# 1. 工厂模式
+## 1. 工厂模式
 
 官方定义：工厂模式（factory pattern）属于创建型模式，它在创建对象时提供了一种封装机制，将实际创建对象的代码与使用代码分离。
 
@@ -72,7 +72,7 @@ mvn archetype:generate -DgroupId=com.xupengboo -DartifactId=xxx -DarchetypeArtif
 | [工厂方法模式](https://github.com/xupengboo/DesignPatterns/tree/main/1.%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/src/main/java/com/xupengboo/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F) | 定义了一个用于创建对象的接口，但由子类决定要实例化的类是哪一个。工厂方法使得一个类的实例化延迟到其子类。 |
 | [抽象工厂模式](https://github.com/xupengboo/DesignPatterns/tree/main/1.%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/src/main/java/com/xupengboo/%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F) | 提供了一个 接口/抽象类 用于创建相关或依赖对象的家族，而不需要明确指定具体类。抽象工厂模式是工厂方法模式的推广，它引入了多个工厂接口，用于创建一系列相关或相互依赖的产品。 |
 
-# 2. 单例模式
+## 2. 单例模式
 
 官方定义：单例模式（singleton pattern）是一种创建型设计模式，它确保一个类只有一个实例，并提供了一个全局访问点来访问该实例。
 
@@ -97,7 +97,7 @@ mvn archetype:generate -DgroupId=com.xupengboo -DartifactId=xxx -DarchetypeArtif
 |  4   | [静态内部类](https://github.com/xupengboo/DesignPatterns/blob/main/2.%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/src/main/java/com/xupengboo/%E9%9D%99%E6%80%81%E5%86%85%E9%83%A8%E7%B1%BB/Singleton.java) | 利用静态类实现，性能强于3                                    |
 |  5   | [枚举方式](https://github.com/xupengboo/DesignPatterns/blob/main/2.%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/src/main/java/com/xupengboo/%E6%9E%9A%E4%B8%BE/Singleton.java) | 目前，最佳方式                                               |
 
-# 3. 建造者模式
+## 3. 建造者模式
 
 官方定义：建造者模式（builder pattern）使用多个简单的对象一步一步构建成一个复杂的对象。这种类型的设计模式属于创建型模式，它提供了一种创建对象的最佳方式。**建造者模式适用于构建具有复杂结构的对象，其构建过程较为稳定，但对象的表示需要灵活变化的情况。**
 
@@ -125,7 +125,7 @@ mvn archetype:generate -DgroupId=com.xupengboo -DartifactId=xxx -DarchetypeArtif
 
 > 🔍Tips：**建造者模式与工厂模式的区别是：建造者模式更加关注与零件装配的顺序。**
 
-# 4. 原型模式
+## 4. 原型模式
 
 官方定义：原型模式（prototype-pattern）是一种创建型设计模式，其主要目的是通过复制现有对象来创建新的对象，而不是通过实例化来创建。**原型模式适用于需要创建多个相似对象，但又不想通过耗费大量时间和资源的实例化过程来创建这些对象的情况。**
 
@@ -172,7 +172,7 @@ class MyClass {
 | [浅克隆（浅拷贝）](https://github.com/xupengboo/DesignPatterns/tree/main/4.%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/src/main/java/com/xupengboo/%E6%B5%85%E5%85%8B%E9%9A%86) | 实现Cloneable接口，重写Clone方法。                           |
 | [深克隆（深拷贝）](https://github.com/xupengboo/DesignPatterns/tree/main/4.%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/src/main/java/com/xupengboo/%E6%B7%B1%E5%85%8B%E9%9A%86) | 实现Serializable接口，将对象序列化为字节流，再进而将字节流反序列化为对象。 |
 
-# 5. 适配器模式
+## 5. 适配器模式
 
 官方定义：适配器模式（Adapter Pattern）是作为两个不兼容的接口之间的桥梁。这种类型的设计模式属于结构型模式，它结合了两个独立接口的功能。
 
@@ -195,7 +195,7 @@ class MyClass {
 
 > 🔍Tips：可以配合 [菜鸟教程 - 适配器模式](https://www.runoob.com/design-pattern/adapter-pattern.html) 来进行学习。
 
-# 6. 桥接模式
+## 6. 桥接模式
 
 官方定义：桥接模式（bridge-pattern）是一种结构型设计模式，它将抽象部分与实现部分分离，使它们可以独立变化而互不影响。桥接模式通过组合的方式，将抽象部分和实现部分分别设计，并通过一个桥接接口（Bridge）将它们连接起来。
 
@@ -216,7 +216,7 @@ class MyClass {
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | [桥接](https://github.com/xupengboo/design-patterns/tree/main/6.%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/src/main/java/com/xupengboo) | 将抽象部分与实现部分分离，使它们都可以独立的变化。举个例子：创建不同颜色的圆形，颜色就可以理解为抽象部分，圆形就是实现部分。 |
 
-# 7. 过滤器模式
+## 7. 过滤器模式
 
 官方定义：过滤器模式（filter-pattern）是一种结构型设计模式，它允许通过一系列条件来过滤集合中的元素，从而实现对集合的筛选和过滤。过滤器模式将过滤逻辑封装在一个独立的过滤器对象中，使得过滤条件可以独立变化，同时还能保持对集合的操作封装和简化。
 
@@ -234,7 +234,7 @@ class MyClass {
 | ------------------------------------------------------------ | ----------------------------------------------------- |
 | [过滤器](https://github.com/xupengboo/design-patterns/tree/main/7.%E8%BF%87%E6%BB%A4%E5%99%A8%E6%A8%A1%E5%BC%8F/src/main/java/com/xupengboo) | 实现对集合的筛选和过滤，以对 Person类 人员过滤 为例。 |
 
-# 8. 组合模式
+## 8. 组合模式
 
 官方定义：组合模式（composite-pattern），又叫部分整体模式，是用于把一组相似的对象当作一个单一的对象。组合模式依据树形结构来组合对象，用来表示部分以及整体层次。这种类型的设计模式属于结构型模式，它创建了对象组的树形结构。
 
@@ -251,7 +251,7 @@ class MyClass {
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | [组合模式](https://github.com/xupengboo/design-patterns/tree/main/8.%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F/src/main/java/com/xupengboo) | 以 文件系统 为例：叶子节点就是文件File，容器（复合节点）就是文件夹。 |
 
-# 9. 装饰器模式
+## 9. 装饰器模式
 
 官方定义：装饰器模式（decorator-pattern）是一种结构型设计模式，它允许在不改变原有对象结构的情况下，动态地给对象添加新的功能。装饰器模式通过将对象包装在一个装饰器对象中，然后在装饰器对象中添加新的行为，从而实现了对原有对象的功能扩展。
 
@@ -268,10 +268,10 @@ class MyClass {
 - 具体装饰器（Concrete Decorator）：实现了抽象装饰器的接口，负责向抽象组件添加新的功能。具体装饰器通常会在调用原始对象的方法之前或之后执行自己的操作。
 
   | 装饰器模式                                                   | 概述                                                         |
-  | ------------------------------------------------------------ | ------------------------------------------------------------ |
+    | ------------------------------------------------------------ | ------------------------------------------------------------ |
   | [装饰器模式](https://github.com/xupengboo/design-patterns/tree/main/9.%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F/src/main/java/com/xupengboo) | 针对某个对象进行功能扩展或者包装，以 给咖啡 加牛奶 加糖为例，同一杯咖啡添加牛奶与不添加牛奶价格可能不同，同理加糖也是。 |
 
-# 10. 外观模式
+## 10. 外观模式
 
 官方定义：外观模式（facade-pattern）是一种结构型设计模式，它提供了一个统一的接口，用来访问子系统中的一组接口。外观模式的目的是简化客户端与子系统之间的交互，通过封装子系统的复杂性，提供一个更简单的接口给客户端使用。
 
@@ -287,7 +287,7 @@ class MyClass {
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | [外观模式](https://github.com/xupengboo/design-patterns/tree/main/10.%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/src/main/java/com/xupengboo) | 以 计算机为例，外观上就是电脑，但里面的子系统有 CPU、Memory、HardDriver等，启动的时候先启动哪个再启动哪个，用户无需关心。缺点也很明显：**不符合开闭原则**！如果要改东西很麻烦。 |
 
-# 11. 享元模式
+## 11. 享元模式
 
 官方定义：享元模式（flyweight-pattern）是一种结构型设计模式，它通过共享对象来减少内存中对象的数量，从而提高系统的性能和效率。享元模式将对象分为两种：内部状态（Intrinsic State）和外部状态（Extrinsic State）。内部状态是对象的固有属性，可以共享；外部状态是对象的变化属性，不可以共享。
 
@@ -306,7 +306,7 @@ class MyClass {
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | [享元模式](https://github.com/xupengboo/design-patterns/tree/main/%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F/src/main/java/com/xupengboo) | 就是通过共享对象来减少内存中对象的数量，最常见的例如：数据库的连接池。 |
 
-# 12. 代理模式
+## 12. 代理模式
 
 官方定义：代理模式（Proxy Pattern）是一种结构型设计模式，它允许通过一个代理对象来控制对另一个对象的访问。代理模式通常用于在访问对象时添加一些额外的功能，例如权限控制、日志记录等。代理模式将客户端和目标对象解耦，使得客户端可以通过代理对象来访问目标对象。
 
@@ -322,7 +322,7 @@ class MyClass {
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | [代理模式](https://github.com/xupengboo/design-patterns/tree/main/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/src/main/java/com/xupengboo) | 一个代理对象来控制对另一个对象，再进而扩展一些额外功能。以网络访问为例子。 |
 
-# 13. 责任链模式
+## 13. 责任链模式
 
 官方定义：责任链模式（Chain of Responsibility Pattern）是一种行为型设计模式，它允许多个对象都有机会处理请求，从而避免了请求的发送者和接收者之间的耦合关系。责任链模式将请求的发送者和接收者解耦，避免请求发送者与接收者耦合在一起，让多个对象都有可能接收请求，将这些对象连接成一条链，并且沿着这条链传递请求，直到有对象处理它为止。
 
@@ -340,7 +340,7 @@ class MyClass {
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | [责任链模式](https://github.com/xupengboo/design-patterns/tree/main/%E8%B4%A3%E4%BB%BB%E9%93%BE%E6%A8%A1%E5%BC%8F/src/main/java/com/xupengboo) | 原理：内嵌next对象，如果一个对象不能处理该请求，那么它会把相同的请求传给下一个接收者。例如：请假审批 |
 
-# 14. 命令模式
+## 14. 命令模式
 
 官方定义：命令模式（Command Pattern）是一种行为型设计模式，它将请求封装成一个对象，从而使得请求的发送者和接收者解耦。命令模式允许请求的发送者和接收者之间没有直接的关联关系，而是通过一个命令对象来进行通信。
 
@@ -359,7 +359,7 @@ class MyClass {
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | [命令模式](https://github.com/xupengboo/design-patterns/tree/main/%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/src/main/java/com/xupengboo) | 将一个命令对象化，包含`execute` 方法，通过一个命令对象进行通信。例如：电视遥控器 |
 
-# 15. 解释器模式
+## 15. 解释器模式
 
 官方定义：解释器模式（Interpreter Pattern）提供了评估语言的语法或表达式的方式，它属于行为型模式。这种模式实现了一个表达式接口，该接口解释一个特定的上下文。**这种模式被用在 SQL 解析、符号处理引擎等**。
 
@@ -378,7 +378,7 @@ class MyClass {
 | ------------------------------------------------------------ | ------------------------------------------------ |
 | [解释器模式](https://github.com/xupengboo/design-patterns/tree/main/%E8%A7%A3%E9%87%8A%E5%99%A8%E6%A8%A1%E5%BC%8F/src/main/java/com/xupengboo) | 解释器解释语言中的句子，例如：编译器、四则运算。 |
 
-# 16. 迭代器模式
+## 16. 迭代器模式
 
 官方定义：迭代器模式（Iterator Pattern）是 Java 和 .Net 编程环境中非常常用的设计模式。这种模式用于顺序访问集合对象的元素，不需要知道集合对象的底层表示。
 
@@ -396,7 +396,7 @@ class MyClass {
 | ------------------------------------------------------------ | ---------------------------------------------- |
 | [迭代器模式](https://github.com/xupengboo/design-patterns/tree/main/%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F/src/main/java/com/xupengboo) | 用于顺序访问集合对象的元素，例如：Java的集合。 |
 
-# 17. 中介者模式
+## 17. 中介者模式
 
 官方定义：中介者模式（Mediator Pattern）是一种行为型设计模式，它用于减少对象之间的直接依赖关系，从而提高系统的灵活性和可维护性。**中介者模式通过引入一个中介者对象来协调对象之间的交互，从而使得对象之间不需要直接相互通信，而是通过中介者对象来进行通信**。
 
@@ -415,7 +415,7 @@ class MyClass {
 | ---------- | ---- |
 | [中介者模式](https://github.com/xupengboo/design-patterns/tree/main/%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F/src/main/java/com/xupengboo) | 通过引入一个中介者对象来协调对象之间的交互，例如：qq聊天室 |
 
-# 18. 备忘录模式
+## 18. 备忘录模式
 
 官方定义：备忘录模式（memento-pattern）是一种设计模式，主要用于在不破坏封装性的前提下，捕获一个对象的内部状态，并在该对象之外保存这个状态，以便以后需要时能将该对象恢复到原先保存的状态。**备忘录模式又叫快照模式**，属于行为型模式。
 
@@ -433,7 +433,7 @@ class MyClass {
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | [备忘录模式](https://github.com/xupengboo/design-patterns/tree/main/%E5%A4%87%E5%BF%98%E5%BD%95%E6%A8%A1%E5%BC%8F/src/main/java/com/xupengboo) | 保存一个对象的某个状态，以便在适当的时候恢复对象，例如：文本编辑 |
 
-# 19. 观察者模式
+## 19. 观察者模式
 
 官方定义：观察者模式（observer-pattern）是一种行为型设计模式，它定义了一种一对多的依赖关系，当一个对象的状态发生改变时，其所有依赖者都会收到通知并自动更新。
 
@@ -445,7 +445,7 @@ class MyClass {
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | [观察者模式](https://github.com/xupengboo/design-patterns/tree/main/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/src/main/java/com/xupengboo) | 当一个对象的状态发生改变时，其所有依赖者都会收到通知并自动更新。 |
 
-# 20. 状态模式
+## 20. 状态模式
 
 官方定义：状态模式（state-pattern）是一种行为型设计模式，类的行为是基于它的状态改变的。
 
@@ -457,7 +457,7 @@ class MyClass {
 | ------------------------------------------------------------ | ------------------------------ |
 | [状态模式](https://github.com/xupengboo/design-patterns/tree/main/%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F/src/main/java/com/xupengboo) | 类的行为是基于它的状态改变的。 |
 
-# 21. 策略模式
+## 21. 策略模式
 
 官方定义：策略模式（strategy-pattern）是一种行为型设计模式，它允许在运行时根据上下文情况选择算法的行为。在策略模式定义了一系列算法或策略，并将每个算法封装在独立的类中，使得它们可以互相替换。
 
@@ -475,7 +475,7 @@ class MyClass {
 | ------------ | -------------------------------------------------- |
 | [策略模式]() | 将每个算法封装在独立的类中，使得它们可以互相替换。 |
 
-# 22. 模板模式
+## 22. 模板模式
 
 官方定义：模板模式（template-pattern）是一种行为性设计模式。在模板模式中，一个抽象类公开定义了执行它的方法的方式/模板。它的子类可以按需要重写方法实现，但调用将以抽象类中定义的方式进行。
 
@@ -491,7 +491,7 @@ class MyClass {
 | ------------------------------------------------------------ | ---------------------------- |
 | [模板模式](https://github.com/xupengboo/design-patterns/tree/main/%E6%A8%A1%E6%9D%BF%E6%A8%A1%E5%BC%8F/src/main/java/com/xupengboo) | 定义一个操作中的算法的骨架。 |
 
-# 23. 访问者模式
+## 23. 访问者模式
 
 官方定义：访问者模式（visitor-pattern）是一种行为设计模式，它主要将数据结构中的元素操作分离出来并封装成独立的类，使得在不改变数据结构的前提下，可以添加作用于这些元素的新的操作。这种模式的核心思想是将数据结构与数据操作分离，从而使得操作集合可以相对自由地演化而不影响数据结构的稳定性。
 

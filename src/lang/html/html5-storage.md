@@ -3,8 +3,7 @@
 > 其实就是：localStorage、sessionStorage
 
 
-
-# 检查浏览器是否支持 localStorage || sessionStorage
+## 检查浏览器是否支持 localStorage || sessionStorage
 
 ```js
 if(typeof(Storage)!=="undefined")
@@ -18,7 +17,7 @@ if(typeof(Storage)!=="undefined")
 
 
 
-# localStorage & sessionStorage
+## localStorage & sessionStorage
 
 **sessionStorage**：用于临时保存同一窗口(或标签页)的数据，在关闭窗口或标签页之后将会删除这些数据。
 

@@ -2,7 +2,7 @@
 
 ![image-20240909092452259](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20240909092452259.png)
 
-# 1. `<!DOCTYPE>` 声明
+## 1. `<!DOCTYPE>` 声明
 
 `<!DOCTYPE>` 声明，作用是告诉浏览器使用哪种 HTML 规范来解析网页。不同版本，对应的声明方式不同。
 
@@ -21,7 +21,7 @@
 
 
 
-# 2. `meta` 元数据
+## 2. `meta` 元数据
 
 `<meta>` 标签在 HTML 中用于**提供有关网页的元数据**，通常不会直接显示在页面上，但可以影响网页的表现和搜索引擎优化（SEO）。
 
@@ -47,7 +47,7 @@
 
 
 
-# 3. `<h1> - <h6>` 标题
+## 3. `<h1> - <h6>` 标题
 
 ```html
 <!-- 声明标题 -->
@@ -58,14 +58,14 @@
 
 
 
-# 4. `<p>` 段落
+## 4. `<p>` 段落
 
 ```html
 <!-- 声明一个段落 -->
 <p>这是一个段落。</p>
 ```
 
- `<p>` 标签是有一些特殊之处的：
+`<p>` 标签是有一些特殊之处的：
 
 1. **不能嵌套其他 块级元素**：如果试图在 `<p>` 内插入块级元素，浏览器会自动结束当前的 `<p>` 标签并开始新的块级元素，可能导致布局错乱。
 
@@ -92,7 +92,7 @@
 
 
 
-# 5. `<a> ` 链接（也叫做 锚元素 ）
+## 5. `<a> ` 链接（也叫做 锚元素 ）
 
 ```HTML
 <a href="https://www.runoob.com">这是一个链接</a>
@@ -132,7 +132,7 @@
 -->
 ```
 
-2.  `target` 属性：常用 `_blank` 和 `_self` 
+2.  `target` 属性：常用 `_blank` 和 `_self`
 
 ```html
 <!-- _blank：在新标签/窗口中打开的链接，或指向下载文件的链接**，应说明在跟踪链接时将发生什么。 -->
@@ -158,7 +158,7 @@
 
 
 
-# 6. `<img>` 图像
+## 6. `<img>` 图像
 
 ```html
 <img src="pulpit.jpg" alt="Pulpit rock" width="304" height="228">
@@ -182,7 +182,7 @@
 
 
 
-# 7. HTML 文本格式化（字体显示）
+## 7. HTML 文本格式化（字体显示）
 
 见：https://www.runoob.com/html/html-formatting.html
 
@@ -190,7 +190,7 @@
 
 
 
-# 8.  `<table>` 表格
+## 8.  `<table>` 表格
 
 ```html
 <table>
@@ -224,7 +224,7 @@
 
 
 
-# 9. `<ul>` / `<ol>` 列表
+## 9. `<ul>` / `<ol>` 列表
 
 ```html
 <!-- 无序列表：unordered list -->
@@ -242,7 +242,7 @@
 
 
 
-# 10. `<div>` / `<span>` 区块
+## 10. `<div>` / `<span>` 区块
 
 `<div> ` 元素是块级元素，浏览器会在其前后显示折行，常见的用途是文档布局。
 
@@ -250,7 +250,7 @@
 
 一般配合 `css sytle` 配合使用。
 
-# 11. `<form>` 表单
+## 11. `<form>` 表单
 
 ```html
 <form action="/" method="post">
@@ -298,7 +298,7 @@
 
 
 
-# 12. `<iframe>` 内嵌框架
+## 12. `<iframe>` 内嵌框架
 
 ```html
 <iframe src="demo_iframe.htm" width="200" height="200"></iframe>
@@ -306,7 +306,7 @@
 
 
 
-# 13. `<script>` / `<noscript>` 脚本
+## 13. `<script>` / `<noscript>` 脚本
 
 `<script>` 标签用于定义客户端脚本，比如 JavaScript。
 
@@ -321,7 +321,7 @@ document.write("Hello World!")
 
 
 
-# 14. 字符实体
+## 14. 字符实体
 
 | 显示结果 | 描述        | 实体名称            | 实体编号  |
 | :------- | :---------- | :------------------ | :-------- |
@@ -344,13 +344,13 @@ document.write("Hello World!")
 
 
 
-# HTML5 标签（重点！！！）
+## HTML5 标签（重点！！！）
 
 > HTML5 现代浏览器完全支持。
 
 
 
-# 1. `<canvas>` 画布
+## 1. `<canvas>` 画布
 
 `<canvas>` 元素用于图形的绘制，通过脚本 (通常是JavaScript)来完成.
 
@@ -443,7 +443,7 @@ ctx.drawImage(img,10,10);
 
 
 
-# 2. `<svg>` 可缩放矢量图形
+## 2. `<svg>` 可缩放矢量图形
 
 与 `<canvas>` 区别：
 
@@ -482,7 +482,7 @@ ctx.drawImage(img,10,10);
 
 
 
-# 3. `<math>` MathML（数学标记语言）
+## 3. `<math>` MathML（数学标记语言）
 
 像数学上一些常用的标记性语言，就可以通过这个实现。
 
@@ -562,13 +562,13 @@ ctx.drawImage(img,10,10);
 
 
 
-# 4. 拖放
+## 4. 拖放
 
 
 
 
 
-# 5. `Geolocation` 地理定位
+## 5. `Geolocation` 地理定位
 
 ```html
 <!DOCTYPE html>
@@ -622,7 +622,7 @@ function showError(error) {
 
 ![image-20240911152316965](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20240911152316965.png)
 
-# 6. `<video> ` 视频
+## 6. `<video> ` 视频
 
 `<video> `元素提供了 播放、暂停和音量控件来控制视频
 
@@ -681,7 +681,7 @@ function playPause()
 
 ![image-20240911152742855](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20240911152742855.png)
 
-# 7. `<audio>` 音频
+## 7. `<audio>` 音频
 
 ```html
 <!DOCTYPE html>
@@ -704,7 +704,7 @@ function playPause()
 
 
 
-# 8. `<input>` 表单输入框
+## 8. `<input>` 表单输入框
 
 多了许多不同类型，例如：color、date、email、datetime等等。
 
@@ -712,7 +712,7 @@ function playPause()
 
 
 
-# 9. `<datalist>` 、`<keygen>`、 `<output>`新表单元素
+## 9. `<datalist>` 、`<keygen>`、 `<output>`新表单元素
 
 `<datalist>` 元素规定输入域的选项列表，类似好多组件里面的Select。
 
@@ -754,7 +754,7 @@ function playPause()
 
 
 
-# 10. `<form>` 表单 新属性
+## 10. `<form>` 表单 新属性
 
 **`autocomplete` 属性**：用于指定浏览器是否应该为表单或表单中的某个输入字段**提供自动填充功能**。
 
@@ -808,7 +808,7 @@ function playPause()
 
 
 
-# 11. `<input>` 输入域 新属性
+## 11. `<input>` 输入域 新属性
 
 **`form` 属性**：位于form表单外的 input 字段引用了 HTML form (该 input 表单**仍然属于form表单的一部分**)
 
@@ -841,7 +841,7 @@ Last name: <input type="text" name="lname" form="form1">
 
 
 
-# 12. 语义元素
+## 12. 语义元素
 
 `<section>` 标签定义文档中的节（section、区段）。比如章节、页眉、页脚或文档中的其他部分。
 
