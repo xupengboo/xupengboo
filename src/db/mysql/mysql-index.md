@@ -1,6 +1,6 @@
 ---
 title: MySQL 索引
-order: 3
+order: 2
 ---
 
 ## 什么是 B-tree 和 B+tree ？

@@ -26,7 +26,7 @@ order: 1
 - Mysql, Oracle, Sql Server, DB2, SQLite
 - 通过表和表之间，行和列之间的关系进行数据的存储。
 
-非关系型数据库(Not Only SQL , NoSQL)：{ key : value } 
+非关系型数据库(Not Only SQL , NoSQL)：`{ key : value }` 
 
 - Redis， MonDB
 - 非关系型数据库是以对象存储，通过对象自身的属性来决定。
