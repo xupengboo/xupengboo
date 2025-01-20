@@ -1,7 +1,8 @@
 ---
-title: Rancher
-icon: circle-info
+title: Rancher 安装与使用
+order: 2
 ---
+
 
 ## 1. 前提条件
 前提条件：

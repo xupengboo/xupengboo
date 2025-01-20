@@ -1,8 +1,14 @@
-# Kubernetes 的yaml配置文件
+---
+title: Kubernetes yaml配置
+order: 3
+---
+
+
+## Kubernetes 的yaml配置文件
 
 > Kubernetes 的 YAML 配置文件是定义和管理集群中的所有资源的关键工具。了解如何编写和使用这些配置文件对管理 Kubernetes 集群至关重要。
 
-# 1. 基础结构
+## 1. 基础结构
 
 Kubernetes YAML 配置文件通常由以下几个部分组成：
 
@@ -53,7 +59,7 @@ spec:
       targetPort: 80  # 目标端口（容器内部端口）
 ```
 
-# 2. kind 资源类型
+## 2. kind 资源类型
 
 | 资源类型                          | 用途（解释）                                                 |
 | --------------------------------- | ------------------------------------------------------------ |
@@ -81,7 +87,7 @@ spec:
 | Endpoint                          | **存储一组 IP 地址，供 Service 使用**。                      |
 | ReplicationController             | Kubernetes 中的一种**控制器**，用于**确保指定数量的 Pod 副本始终在运行**。 |
 
-# 3. metadata 元数据
+## 3. metadata 元数据
 
 通过案例分析 `metadata` ：
 
@@ -138,7 +144,7 @@ spec:
     - containerPort: 80
 ```
 
-# 4. spec 资源规范（specification）
+## 4. spec 资源规范（specification）
 
 `spec` 定义了资源的具体配置和行为。
 
@@ -390,15 +396,15 @@ spec:
     image: nginx:latest
 ```
 
-# 5. 具体介绍 kind类型 使用
+## 5. 具体介绍 kind类型 使用
 
-## 5.1 deployment 资源类型
+### 5.1 deployment 资源类型
 
 见 [spec 资源规范（specification）](#spec 资源规范（specification）)
 
-## 5.2 service 资源类型
+### 5.2 service 资源类型
 
-### 5.2.1 service 注意点
+#### 5.2.1 service 注意点
 
 **`Service`**：提供了一种稳定的访问方式来路由流量到一组 Pod。`Service` 定义了如何访问这些 Pod，并可以提供负载均衡功能。
 
@@ -442,11 +448,11 @@ curl http://my-service.default.svc.cluster.local
 
 ![image-20240813163904282](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20240813163904282.png)
 
-### 5.2.2 service 的类型
+#### 5.2.2 service 的类型
 
 > **Tips：所有类型的 Kubernetes Service（无论是 ClusterIP、NodePort、LoadBalancer 还是 Headless）都可以通过 `servicename.namespace.svc.cluster.local` 的形式进行内部 DNS 解析访问**。
 
-#### 5.2.2.1 ClusterIP
+##### 5.2.2.1 ClusterIP
 
 `ClusterIP Service` 这是**默认的 `Service` 类型，用于在集群内部提供服务**。
 
@@ -469,7 +475,7 @@ spec:
     targetPort: 8080  # Pod 上的端口
 ```
 
-#### 5.2.2.2 NodePort
+##### 5.2.2.2 NodePort
 
 `NodePort` 会在每个 Node 上打开一个指定的端口，**外部流量可以通过 `<NodeIP>:<NodePort>` 的形式访问服务**。
 
@@ -494,7 +500,7 @@ spec:
     nodePort: 30007  # 在每个 Node 上暴露的端口号（30000-32767 之间的一个固定端口）
 ```
 
-#### 5.2.2.3 LoadBalancer
+##### 5.2.2.3 LoadBalancer
 
 `LoadBalancer` 是 **Kubernetes 中一种用于将集群内部的服务暴露到外部网络的 Service 类型**。创建一个负载均衡器（例如 AWS ELB、GCP GLB），并**自动分配一个公网 IP 地址或 DNS 名称，从而使外部流量通过 该公网IP或DNS名称 能够直接访问集群内的服务。**
 
@@ -528,7 +534,7 @@ NAME                 TYPE           CLUSTER-IP     EXTERNAL-IP     PORT(S)      
 mysql-loadbalancer   LoadBalancer   10.0.171.239   34.123.45.67    3306:32295/TCP 5m
 ```
 
-#### 5.2.2.4 ExternalName
+##### 5.2.2.4 ExternalName
 
 `ExternalName` 不是实际的代理，它只是**将 DNS 查询重定向到外部域名**。这个 Service 不会创建 `ClusterIP`，也不会创建负载均衡器。
 
@@ -547,7 +553,7 @@ spec:
   externalName: example.com  # 将服务指向的外部域名
 ```
 
-#### 5.2.2.5 Headless
+##### 5.2.2.5 Headless
 
 `Headless` 用于有状态服务，或者当不需要负载均衡时。不分配 `ClusterIP`，客户端可以直接通过 DNS 解析到 Pod 的 IP 地址。
 
@@ -569,7 +575,7 @@ spec:
 
 
 
-### 5.2.3 service 和 endpoint 关联
+#### 5.2.3 service 和 endpoint 关联
 
 1. **Service Selector**：当你创建一个 `Service` 时，你通常会指定一个 `selector`，它用于匹配特定标签的 Pod。**Kubernetes 控制器会根据这个 `selector` 找到匹配的 Pod，并自动创建一个与 `Service` 同名的 `Endpoint` 对象。**这个 `Endpoint` 会包含所有匹配的 Pod 的 IP 和端口信息。
 
@@ -579,7 +585,7 @@ spec:
 
 
 
-## 5.3 configmap 资源类型
+### 5.3 configmap 资源类型
 
 configmap 就是定义添加一些配置内容：
 
@@ -638,7 +644,7 @@ spec:
               key: mykey
 ```
 
-## 5.4 endpoint 资源类型
+### 5.4 endpoint 资源类型
 
 `Endpoint` 是一种资源类型，用于将一个或多个 Pod 的 IP 地址和端口信息与一个 Service 资源关联起来。**Service 是通过 `Endpoint` 来找到实际的 Pod，并将流量路由到这些 Pod 上的**。
 
@@ -671,7 +677,7 @@ subsets:
 
 > Tips：一般实际项目中，不推荐修改endpoints的ip，但是也不代表不能这么干，例如：**我的 `nacos`服务 独立于k8s集群之外，我们配置了nacos的service之后，可以通过修改该service对应的endpoints的ip来指向到独立的nacos服务，同理其他独立的服务也可以这么整。**
 
-## 5.5 secrets 资源类型
+### 5.5 secrets 资源类型
 
 `Secrets` 在 Kubernetes 中主要用于存储和管理敏感数据。
 
@@ -817,7 +823,7 @@ data:
   ca.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk...  # base64 编码的 CA 证书
 ```
 
-## 5.6 serviceaccount 资源类型
+### 5.6 serviceaccount 资源类型
 
 `ServiceAccount` ：是 Kubernetes 中用于管理和控制 Pod **如何与 Kubernetes API 进行身份验证和授权的一种资源类型**。**每个 Pod 默认都会与一个 `ServiceAccount` 关联**，该账户的权限定义了 Pod 可以执行的操作。
 
@@ -836,7 +842,7 @@ automountServiceAccountToken: true  # 是否自动挂载此 ServiceAccount 的�
 
 > 主要要看 service-account 和 secret、镜像仓库怎么使用的。
 
-## 5.7 StatefulSet 、PersistentVolume（PV）、PersistentVolumeClaim (PVC)、StorageClass 资源类型
+### 5.7 StatefulSet 、PersistentVolume（PV）、PersistentVolumeClaim (PVC)、StorageClass 资源类型
 
 **`StatefulSet` ：是 Kubernetes 中的一种控制器资源类型，用于管理有状态的应用程序**。与 `Deployment` 不同，**`StatefulSet` 专为管理那些需要持久存储和稳定网络标识的应用而设计，如数据库、分布式系统等**。
 
@@ -974,7 +980,7 @@ spec:
 
 - **当 PVC 创建时，Kubernetes 会查找所有符合 PVC 请求的 PV。它会匹配 PVC 的 `storageClassName` 和 PV 的 `storageClassName`，以及其他要求（如容量、访问模式）。如果找到合适的 PV，Kubernetes 会将 PVC 绑定到该 PV，这样就可以配合StatefulSets了。**
 
-## 5.8 DaemonSet 资源类型
+### 5.8 DaemonSet 资源类型
 
 `DaemonSet` 是 Kubernetes 中的一种控制器，**用来确保在集群中的每个（或某些特定）节点上运行一个 Pod 副本**。
 
@@ -1035,7 +1041,7 @@ spec:
     effect: NoSchedule  # 影响是 Pod 仍然可以被调度到有这个污点的节点上
 ```
 
-## 5.9 Job 和 CronJob 资源类型
+### 5.9 Job 和 CronJob 资源类型
 
 `Job`：**用于管理一次性任务（即批处理任务），这些任务在完成时会自动终止**。
 
@@ -1109,9 +1115,9 @@ spec:
   failedJobsHistoryLimit: 1  # 保留的失败 Job 的历史记录数
 ```
 
-## 5.10 Ingress 资源 和 Ingress Controller 控制器
+### 5.10 Ingress 资源 和 Ingress Controller 控制器
 
-### 5.10.1 Ingress 资源
+#### 5.10.1 Ingress 资源
 
 `Ingress`： **用于配置外部访问集群内服务的路由，也可以用在k8s内部服务做路由转发。**
 
@@ -1169,7 +1175,7 @@ spec:
     # 存储 TLS 证书和私钥的秘密名称，用于加密 HTTPS 连接
 ```
 
-### 5.10.2 Ingress Controller 控制器
+#### 5.10.2 Ingress Controller 控制器
 
 `Ingress Controller（Ingress Controller 控制器）`：**负责处理和管理 Ingress 资源**。它主要作用是根据 Ingress 资源中定义的规则来配置负载均衡器、路由流量，并将外部请求转发到集群内部的服务。
 
@@ -1289,13 +1295,13 @@ data:
 
 
 
-### 5.10.3 Ingress 和 Ingress Controller 二者关系
+#### 5.10.3 Ingress 和 Ingress Controller 二者关系
 
 这里强调一下， **Ingress 是策略和规则的定义者（可以理解为 配置），而 Ingress Controller（Ingress Controller 控制器） 是将这些规则应用于实际流量的执行者（可以理解为 实际操作者）**。
 
 
 
-### 5.10.4 IngressClass 的使用
+#### 5.10.4 IngressClass 的使用
 
 **IngressClass**：可以使用 `IngressClass` 资源来指定不同的 Ingress Controller，从而支持多种 Ingress Controller 并灵活管理流量路由。
 
@@ -1367,7 +1373,7 @@ spec:
 
 
 
-## 5.11 serviceaccount 以及 Role、RoleBinding、ClusterRole、ClusterRoleBinding资源类型
+### 5.11 serviceaccount 以及 Role、RoleBinding、ClusterRole、ClusterRoleBinding资源类型
 
 `ServiceAccount` 是**为 Pod 分配的身份标识，用于管理 Pods 在集群中的权限**。
 
@@ -1483,7 +1489,7 @@ roleRef:
 
 
 
-## 5.12 HorizontalPodAutoscaler（HPA）资源类型
+### 5.12 HorizontalPodAutoscaler（HPA）资源类型
 
 **HorizontalPodAutoscaler (HPA)** 是 Kubernetes 中的一个资源类型，它用于自动调整应用程序的 Pod 副本数量，以应对负载变化。
 
@@ -1521,7 +1527,7 @@ spec:
 
 
 
-## 5.13 NetworkPolicy 资源类型
+### 5.13 NetworkPolicy 资源类型
 
 **NetworkPolicy** 是 Kubernetes 中的一种资源类型，**用于控制 Pod 之间或 Pod 与其他网络实体之间的网络流量**。
 
@@ -1575,7 +1581,7 @@ spec:
 
 
 
-## 5.14 ResourceQuota 资源类型
+### 5.14 ResourceQuota 资源类型
 
 `ResourceQuota` 是 Kubernetes 中的一种资源类型，**用于在命名空间级别限制和管理资源使用**。
 
@@ -1598,7 +1604,7 @@ spec:
     requests.storage: "20Gi"  # 此命名空间中所有 PVC 的存储请求总和最多为 20Gi
 ```
 
-## 5.15 PodDisruptionBudget (PDB) 资源类型
+### 5.15 PodDisruptionBudget (PDB) 资源类型
 
 `PodDisruptionBudget (PDB)` 是 Kubernetes 中的一种资源类型，用于控制 Pod 的中断，确保在进行计划中的维护或升级（如节点重启、滚动更新）时，集群中**始终有一定数量的 Pod 处于可用状态**。
 
@@ -1617,13 +1623,13 @@ spec:
       app: myapp  # 选择带有 app=myapp 标签的 Pod
 ```
 
-# 6. volumes 、volumeMounts 与 PV、PVC的区别
+## 6. volumes 、volumeMounts 与 PV、PVC的区别
 
 **相同点：这四个都涉及到存储**。
 
 **不同点，如下**：
 
-## 6.1 `volumes` 和 `volumeMounts`
+### 6.1 `volumes` 和 `volumeMounts`
 
 - **`volumes`**:
   - `volumes` 是 Pod 的一种存储资源定义，它可以是不同类型的存储（例如 `emptyDir`、`hostPath`、`configMap`、`secret` 等）。
@@ -1633,7 +1639,7 @@ spec:
   - **`volumeMounts` 是指将 `volumes` 中定义的存储挂载到容器的文件系统中的某个路径**。
   - 它定义了容器中如何访问 `volumes` 中的存储。例如，将一个 `volumes` 挂载到 `/var/logs` 路径，以便容器能够在该路径下读取或写入数据。
 
-## 6.2 `PersistentVolume (PV)` 和 `PersistentVolumeClaim (PVC)`
+### 6.2 `PersistentVolume (PV)` 和 `PersistentVolumeClaim (PVC)`
 
 - **`PersistentVolume (PV)`**:
 
@@ -1700,7 +1706,7 @@ spec:
 
 
 
-## 6.3 `volumes` 和 `volumeMounts` 与 `PVC/PV` 的关系和区别
+### 6.3 `volumes` 和 `volumeMounts` 与 `PVC/PV` 的关系和区别
 
 - **关系**: `PVC` 可以在 `volumes` 中作为一种存储类型来使用。也就是说，`volumes` 可以引用一个 `PVC`，以将持久存储挂载到 Pod 中。然后，通过 `volumeMounts` 将这个存储挂载到容器的特定路径。
 - **区别**:
@@ -1713,7 +1719,7 @@ spec:
 
 
 
-# 7. StatefulSet 
+## 7. StatefulSet 
 
 记录一个细节：StatefulSet 配合 PV 和 PVC 有两种方式：
 
