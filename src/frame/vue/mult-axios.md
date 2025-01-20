@@ -1,10 +1,8 @@
-# 同一个Vue项目使用多个axios实例
+# 一个Vue项目使用多个axios实例
 
 项目要做部分隔离，对接其他项目，可能会用到多个 `axios`，这样既不会影响原系统，还可以对接要对接的系统。
 
-
-
-1. 先将多个不同的 `axios`实例 创建出来： 
+1. 先将多个不同的 `axios`实例 创建出来：
 
 ![image-20241023162820821](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20241023162820821.png)
 

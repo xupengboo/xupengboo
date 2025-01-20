@@ -1,4 +1,4 @@
-# 如何给Vue项目配置好一个nginx.conf文件？
+# Vue项目的DockerFile和nginx.conf配置
 
 一般前端项目中，会有一个docker/nginx/nginx.conf文件，用于配置DockerFile配置等。
 
@@ -34,7 +34,7 @@ CMD ["nginx", "-g", "daemon off;"]
 1. 首先，要有一个nginx.conf文件原型，根据自己配置的nginx版本去官方拉取、通过docker创建个容器copy一下也可以。
 - 第一种方式：直接修改nginx.conf文件，替换nginx.conf文件，上面采用的就是这种方式，无论什么配置直接都在nginx.conf文件操作即可。
 - 第二种方式：也可以通过`include /etc/nginx/conf.d/*.conf;`配置，单独配置。一般用来配置server等。
-![image-20240912163304140](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20240912163304140.png)
+  ![image-20240912163304140](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20240912163304140.png)
 
 2. 确定需要的配置，需要几个进程、几个server、监听的端口是多少、location该怎么配置等。
 ```nginx.conf

@@ -4,8 +4,6 @@
 
 VueUse ：可以被看作是 Vue 生态系统中的一个 **扩展工具库**。
 
-
-
 `useWindowSize` 使用场景，例如：
 
 1. **通过使用元素 `useWindowSize` 实现PC端与移动端自适应页面切换效果**。
