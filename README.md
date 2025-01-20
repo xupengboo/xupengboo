@@ -1,34 +1,21 @@
 # xupengboo
+📚记录和分享学习过程、知识和经验的地方。在这里，我汇总了编程语言、技术问题解决方案和使用经验等等，旨在帮助自己和他人不断进步。
 
-可以通过 命令行接口 的 --config 选项来指定配置文件：
-```bash
-vuepress dev docs --config docs/.vuepress/config.ts
-vuepress dev docs --config docs/.vuepress/other-config.ts
-```
+- **编程语言**：包括但不限于 Python、Java、JavaScript 等。
+- **技术问题**：在开发中遇到的各种问题及其解决方案。
+- **经验分享**：关于项目开发、代码优化、性能调优的实践和心得。
+- **构思框架**：分享对技术框架和开发方法的构思与应用。
 
-Frontmatter：Frontmatter 必须在 Markdown 文件的顶部，并且被包裹在一对三短划线中间。
+<img src="https://github.com/user-attachments/assets/17b2f013-8fc1-45cf-9eea-ee205d43a8c8" alt="搬砖" width="450" height="450"/>
 
+🌟 如果你有任何问题或建议，欢迎通过以下方式与我联系：
 
-什么是 markdown-it ？
-markdown-it 是一个非常流行的 Markdown 解析器，它将 Markdown 格式的文本转换为 HTML（或其他格式）输出。它是一个基于 JavaScript 的库，常用于 Web 应用程序中处理和渲染 Markdown 内容。由于其高性能和可扩展性，markdown-it 广泛用于许多前端框架、博客引擎、以及其他需要处理 Markdown 的应用程序中。
+- **Email**: [itholmes@88.com](mailto:itholmes@88.com)
+- **GitHub Issues**: 在本项目的 [Issues](https://github.com/xupengboo/xupengboo/issues) 页面提出你的问题。
 
+---
 
-config.ts配置: [https://ecosystem.vuejs.press/zh/themes/default/config.html](https://ecosystem.vuejs.press/zh/themes/default/config.html)
+感谢你的访问，希望你能在这里找到有价值的信息并共同进步！
 
-
-部署：
-```shell
-docker build -t xupengboo:2.0.0 .
-docker rm -f xupengboo
-docker run -d -p 80:80 --name xupengboo xupengboo:2.0.0
-
-# 如果你确认这些镜像不再需要，可以使用以下命令来删除所有的悬挂镜像：
-docker image prune -f
-# 该命令会删除所有没有标签的镜像。如果你想要更细粒度的控制，也可以指定只删除悬挂镜像：
-docker image prune -a -f
-```
-
-icon 获取：https://icon-sets.iconify.design/
-
-
-评论系统：https://giscus.app/zh-CN
+[![GitHub followers](https://img.shields.io/github/followers/xupengboo?label=Follow&style=social)](https://github.com/xupengboo)
+[![GitHub stars](https://img.shields.io/github/stars/xupengboo/xupengboo?style=social)](https://github.com/xupengboo/xupengboo/stargazers)
