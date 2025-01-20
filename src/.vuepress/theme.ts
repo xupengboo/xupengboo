@@ -121,13 +121,13 @@ export default hopeTheme({
   plugins: {
     search: true,
 
-    // 注意: 仅用于测试! 你必须自行生成并在生产环境中使用自己的评论服务
+    // 注意: 评论服务使用：Giscus 详细见：https://giscus.app/zh-CN
     comment: {
       provider: "Giscus",
-      repo: "vuepress-theme-hope/giscus-discussions",
-      repoId: "R_kgDOG_Pt2A",
+      repo: "xupengboo/xupengboo",
+      repoId: "R_kgDOK9czmw",
       category: "Announcements",
-      categoryId: "DIC_kwDOG_Pt2M4COD69",
+      categoryId: "DIC_kwDOK9czm84CmLJy",
     },
 
     components: {
