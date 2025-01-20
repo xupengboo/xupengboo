@@ -5,30 +5,49 @@ export default navbar([
   // "/portfolio",
   {
     text: "开始使用",
+    icon: "book",
     link: "/start/"
   },
   {
-    text: "指南",
+    text: "测试案例",
     icon: "lightbulb",
-    prefix: "/guide/",
+    prefix: "/demo/",
     children: [
       {
-        text: "Bar",
+        text: "布局与功能禁用",
         icon: "lightbulb",
-        prefix: "bar/",
-        children: ["baz", { text: "...", icon: "ellipsis", link: "" }],
+        link: "disable.md",
       },
       {
-        text: "Foo",
+        text: "密码加密的文章",
         icon: "lightbulb",
-        prefix: "foo/",
-        children: ["ray", { text: "...", icon: "ellipsis", link: "" }],
+        link: "encrypt.md",
+      },
+      {
+        text: "布局指南",
+        icon: "lightbulb",
+        link: "layout.md",
+      },
+      {
+        text: "Markdown 展示",
+        icon: "lightbulb",
+        link: "markdown.md",
+      },
+      {
+        text: "页面配置",
+        icon: "lightbulb",
+        link: "page.md",
       },
     ],
   },
-  {
-    text: "V2 文档",
-    icon: "book",
-    link: "https://theme-hope.vuejs.press/zh/",
+   {
+    text: "开源地址",
+    icon: "mdi:github",
+    link: "https://github.com/xupengboo/xupengboo.git",
   },
+  // {
+  //   text: "V2 文档",
+  //   icon: "book",
+  //   link: "https://theme-hope.vuejs.press/zh/",
+  // },
 ]);
