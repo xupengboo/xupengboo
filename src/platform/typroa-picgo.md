@@ -1,3 +1,8 @@
+---
+title: GitHub 图床配置
+order: 1
+---
+
 # Typora：PicGo设置GitHub图床
 
 ## 1. GitHub配置（专用于图床）
