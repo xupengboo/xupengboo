@@ -1,5 +1,7 @@
+---
 title: MySQL 基础
 order: 1
+---
 
 
 # 1. ﻿初识MySQL
