@@ -1,5 +1,5 @@
 ---
 title: Oracle 数据库
-icon: mdi:docker
+icon: raphael:db
 index: false
 ---
