@@ -1,7 +1,5 @@
----
 title: MySQL 基础
 order: 1
----
 
 
 # 1. ﻿初识MySQL
@@ -10,14 +8,15 @@ order: 1
 
 数据库(DB,DataBase) 作用：存储数据，管理数据。
 
-**linux系统，安装mysql步骤**：[https://developer.aliyun.com/article/863603](https://developer.aliyun.com/article/863603)。
+linux系统，安装mysql步骤：[https://developer.aliyun.com/article/863603](https://developer.aliyun.com/article/863603)。
 
-**window系统，安装mysql步骤**：[1.5 MySQL(压缩包) 安装配置](#1.5 MySQL(压缩包) 安装配置)
+window系统，安装mysql步骤：[1.5 MySQL(压缩包) 安装配置](#1.5 MySQL(压缩包) 安装配置)
 
-**linux系统，开启远程访问**：
+linux系统，开启远程访问：
 
 - 安装完成mysql后，远程ssh访问，需要给对应用户修改配置如下：(设置为%，所有ip都可访问)
-  ![在这里插入图片描述](https://img-blog.csdnimg.cn/1c4850a744854ae7ad4b6cbf2a0652d3.png)
+
+![image-20250122134559003](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122134559003.png)
 
 
 ## 1.2 数据库分类
@@ -49,7 +48,7 @@ MySQL是最好的RDBMS（Relational Database Management System ,关系数据库�
 
 MySQL是开源的数据库软件。
 
-优点：**体积小，速度快，总体拥有成本低。**
+优点：体积小，速度快，总体拥有成本低。
 
 **MySQL通常即适用于中小型网站，也适用大型网站(MySQL之所以能做大型网站，是因为有个东西叫做集群)**。
 
@@ -99,7 +98,8 @@ default-character-set=utf8
 
 4. **启动管理员模式下的CMD，并将路径切换至MySQL下的bin目录，然后输入`mysqld -install`（安装mysql，这一步就是将MySQL安装到服务中）**。
 >💡注意：如果，这里安装出现下面情况：
->![在这里插入图片描述](https://img-blog.csdnimg.cn/a1f6ad3881c14e978cd64c3a98dbfb33.png)
+>
+>![image-20250122134624451](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122134624451.png)
 >说明已经安装了MySQL服务了，使用sc query mysql查看一下，也可以使用sc delete mysql删除一下服务就可以了。
 
 5. **再输入`mysqld --initialize-insecure --user=mysql` ，进行初始化数据库**。初始化后，我们前面在my.ini设置的data就会出现在目录中，data中包括一些初始后的mysql数据库。
@@ -119,35 +119,43 @@ default-character-set=utf8
 
 连接数据库：(这里我连接云端的，一般的都在本地就好)
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/fc5b1aa5dafd4483baa4b9e0b7b9b22d.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUX0hvbG1lcw,size_16,color_FFFFFF,t_70)
+![image-20250122134650547](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122134650547.png)
 
+创建数据库时：字符集和数据库排序选择方面（推荐）：
 
-创建数据库时：字符集和数据库排序选择方面（推荐）
-![在这里插入图片描述](https://img-blog.csdnimg.cn/5c260207ef204e3d819fcc0f64e066ce.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUX0hvbG1lcw,size_16,color_FFFFFF,t_70)
+![image-20250122134712567](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122134712567.png)
+
 我们 可以先查看一下数据库版本：
+
 ```sql
 select version()    //查看数据库版本
 ```
 
 每一个sqlyog的执行操作，本质就是对应了一个sql，可以在软件的历史记录中查看
-![在这里插入图片描述](https://img-blog.csdnimg.cn/a7d207aba20d492fbe5fa39c95e1bb14.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUX0hvbG1lcw,size_16,color_FFFFFF,t_70)
+
+![image-20250122134758423](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122134758423.png)
 
 创建表： school -》table(表) -》右键创建表
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/e66de615e43d47fcb95fb0c297633977.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUX0hvbG1lcw,size_16,color_FFFFFF,t_70)
+![image-20250122134830960](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122134830960.png)
+
 查看表格，添加数据：student -》 open table(打开表) 直接修改数据就好。
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/068b7114cbeb4c9891ef44432709ac7c.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUX0hvbG1lcw,size_16,color_FFFFFF,t_70)
-**这里还是要注意，这些sqlyog的操作，我们都可以在History(历史)中看到。**
+![image-20250122135054365](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122135054365.png)
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/144ce97b1fd94e118c3112b80856f05e.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUX0hvbG1lcw,size_16,color_FFFFFF,t_70)
+这里还是要注意，这些sqlyog的操作，我们都可以在History(历史)中看到。
+
+![image-20250122135240488](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122135240488.png)
 
 ## 1.7 连接数据库 和 一些基本命令
 **命令行连接：**
 
 1. `mysql -uroot -p  --连接数据库`。
+
 2. `update mysql.user set authentication_string=password('123456') where user='root' and Host = 'localhost'`;  该语法的解释如下图：
-   ![在这里插入图片描述](https://img-blog.csdnimg.cn/9378eb9b69984033ac0c7ef5d2963499.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUX0hvbG1lcw,size_16,color_FFFFFF,t_70)
+   
+   ![image-20250122135337387](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122135337387.png)
+   
 3. `flush privileges;` 刷新权限
 
 - 在Mysql中，所有的语句使用 ; 结尾！
@@ -164,7 +172,8 @@ exit; --退出连接。
 ```
 
 - 三种程序猿
-![在这里插入图片描述](https://img-blog.csdnimg.cn/8b1ca049b0664c7bab7380c1885c3fcc.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUX0hvbG1lcw,size_16,color_FFFFFF,t_70)
+
+  ![image-20250122135701216](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122135701216.png)
 
 # 2. 操作数据库
 
@@ -198,9 +207,9 @@ use `数据库名`; -- 切换数据库
 
  如果定义的表明或者字段名是一个特殊的字符，我们在使用时，可以使用 ``(tab键上面的那个符号)来修饰。如下：
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/838f10056aff4ebe993f4faa7e6e6e40.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUX0hvbG1lcw,size_16,color_FFFFFF,t_70)
+![image-20250122135724409](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122135724409.png)
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/d61375a255ef4891821327ea360ee4ef.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUX0hvbG1lcw,size_16,color_FFFFFF,t_70)
+![image-20250122135736959](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122135736959.png)
 
 4. 查看数据库
 
@@ -257,7 +266,7 @@ show databases; -- 查看所有数据库
 - 通常用来设计唯一的主键~index，必须是整数类型。
 - 可以自定义设置主键自增的起始值和步长。
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/5e2a4342b8b8496c9b844fae369677fe.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUX0hvbG1lcw,size_16,color_FFFFFF,t_70)
+![image-20250122135754831](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122135754831.png)
 
 
 **非空，NULL ，Not Null**：
@@ -270,7 +279,9 @@ show databases; -- 查看所有数据库
 - 意思就是如果不指定该列的值，则会有默认的值取代。
 
 另外几个字段：
-![在这里插入图片描述](https://img-blog.csdnimg.cn/8ac7f72a1d794832b518564843a0ce1d.png)
+
+![image-20250122135808029](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122135808029.png)
+
 ## 2.4 创建数据库表（命令行）
  创建语句格式要记住：
  ```sql
@@ -335,7 +346,9 @@ engine = MYISAM; -- 早些年使用的。
 
 **MySQL引擎在物理文件上的区别**：
 - InnoDB ，在数据库表中只有一个\*.frm文件。
-![在这里插入图片描述](https://img-blog.csdnimg.cn/57b99ebb00a542068abb0f51e6587496.png)
+
+  ![image-20250122135827785](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122135827785.png)
+
 - MYISAM 对应文件:
 
   - \*.frm -- 表结构的定义文件。
@@ -344,7 +357,7 @@ engine = MYISAM; -- 早些年使用的。
   
   - \*.MYI -- 索引文件(index)。
     
-    ![在这里插入图片描述](https://img-blog.csdnimg.cn/a58dde36dc3b4bb980679867c7f83390.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_Q1NETiBASVRfSG9sbWVz,size_23,color_FFFFFF,t_70,g_se,x_16)
+    ![image-20250122135853933](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122135853933.png)
 
 设置数据库表的字符集编码
 ```sql
@@ -384,8 +397,9 @@ ALTER TABLE `teacher1` CHANGE age age1 INT(11); -- 重命名方式
 ALTER TABLE teacher1 DROP age
 ```
 
-**下面是change和modify的区别**：
-![在这里插入图片描述](https://img-blog.csdnimg.cn/27ef5f6330dc470a84c51ce7f782ff46.png)
+下面是change和modify的区别：
+
+![image-20250122135915476](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122135915476.png)
 
 **删除表**：
 
@@ -433,7 +447,7 @@ CREATE TABLE IF NOT EXISTS `student` (
 
 > 💡注意：删除外键关系的表的时候，必须要先删除引用别人的表(从表)，再删除被引用的表。否则报错如下：
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/ff6be84e567948fa96ca27555c55fc28.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_Q1NETiBASVRfSG9sbWVz,size_14,color_FFFFFF,t_70,g_se,x_16)
+![image-20250122135929698](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122135929698.png)
 
 **方式二：创建表成功后，添加外键约束**
 
@@ -469,7 +483,7 @@ ALTER TABLE `student` ADD CONSTRAINT `FK_gradeid` FOREIGN KEY(`gradeid`) REFEREN
 
 > 💡注意：以上的操作都是物理外键，数据库级别的外键，我们不建议使用！因为，引用过多删除表的时候很难删除！因此，我们不建议使用(避免数据库过多造成的困扰，这里了解即可~) 。
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/db3d516f07544ea9b8a6edb60e5a5546.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_Q1NETiBASVRfSG9sbWVz,size_23,color_FFFFFF,t_70,g_se,x_16)
+![image-20250122135940527](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122135940527.png)
 
 ## 3.2 DML语言
 **数据库意义**：数据存储，数据管理。
@@ -490,13 +504,13 @@ ALTER TABLE `student` ADD CONSTRAINT `FK_gradeid` FOREIGN KEY(`gradeid`) REFEREN
 -- insert into `表明` ([字段名1，字段名2 ,...]) values ('值1','值2',...);
 INSERT INTO `grade` (`gradename`) VALUES('高三三班')
 ```
-![在这里插入图片描述](https://img-blog.csdnimg.cn/3c88c174a5b34012ade0ee28e337c089.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_Q1NETiBASVRfSG9sbWVz,size_21,color_FFFFFF,t_70,g_se,x_16)
+![image-20250122140048516](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122140048516.png)
 
 如果不写表的字段，它就会一一匹配。容易报错：does't match (不匹配)。
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/a45bfecc4e7a4ea8a6e8183b0bc217ec.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_Q1NETiBASVRfSG9sbWVz,size_29,color_FFFFFF,t_70,g_se,x_16)
+![image-20250122140058677](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122140058677.png)
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/e9ea2172547e4c47bc9e21f4a52774b9.png)
+![image-20250122140109557](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122140109557.png)
 
 
 ## 3.4 update 修改
@@ -511,7 +525,8 @@ UPDATE `student` SET `name`='匿名';
 UPDATE `student` SET `name`='张三',`email`='123456@qq.com' WHERE id >= 2; 
 ```
 where 运算符 ，常用的案例，如下表格：
-![在这里插入图片描述](https://img-blog.csdnimg.cn/8636f94dccd4469485cdef570a729263.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBASVRfSG9sbWVz,size_20,color_FFFFFF,t_70,g_se,x_16)
+
+![image-20250122140128661](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122140128661.png)
 
 > 💡注意：new_value，不一定是一个具体的值，也可以是个变量，函数调用等。如下： 
 
@@ -519,7 +534,7 @@ where 运算符 ，常用的案例，如下表格：
 -- CURRENT_TIME 获得当前时间
 UPDATE `student` SET `birthday`=CURRENT_TIME WHERE `name`='张三' AND `sex`='男'
 ```
-![在这里插入图片描述](https://img-blog.csdnimg.cn/58e71df4fa994941984b377e9148ef5b.png)
+![image-20250122140143764](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122140143764.png)
 
 
 ## 3.5 delete from 删除 ，truncate 清空
@@ -553,9 +568,9 @@ TRUNCATE `student`
 
 例如：`delete from 表名` 删除所有数据后，就不会对自动递增重新设置。
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/f823c05163864ea7988bb6a9913ed952.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBASVRfSG9sbWVz,size_20,color_FFFFFF,t_70,g_se,x_16)
+![image-20250122140206055](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122140206055.png)
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/d658b0ef25f24ed58ba49f6cc7549853.png)
+![image-20250122140215347](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122140215347.png)
 
 # 4. DQL查询数据
 ## 4.1 DQL(Data Query Language:数据查询语言)
@@ -578,7 +593,8 @@ SELECT `id`,`name` FROM student
 -- 别名：as ，可以字段起别名，也可以给表名起别名 
 SELECT `id` AS 学号,`name` AS 学生名字 FROM student AS 学生
 ```
-![在这里插入图片描述](https://img-blog.csdnimg.cn/3b8fe37f83f84c7a9fb82393d29a19c8.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBASVRfSG9sbWVz,size_19,color_FFFFFF,t_70,g_se,x_16)
+![image-20250122140231576](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122140231576.png)
+
 **concat(a,b) 函数**：
 
 ```sql
@@ -587,7 +603,8 @@ SELECT CONCAT('姓名:',`coll`) FROM test
 -- 函数执行后的结果也是可以其别名的
 SELECT CONCAT('姓名:',`coll`) AS 数字 FROM test 
 ```
-![在这里插入图片描述](https://img-blog.csdnimg.cn/b277462660d3422aa019ad8c2ded598b.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBASVRfSG9sbWVz,size_20,color_FFFFFF,t_70,g_se,x_16)
+![image-20250122140245369](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122140245369.png)
+
 **distinct 去重**：
 
 - 作用：去除select 查询出来的结果中重复的数据，重复的数据只有一条。
@@ -599,18 +616,21 @@ SELECT DISTINCT `coll` AS '数字' FROM test
 ```
 
 select语句还可以做加减法，查看版本，查看步长，如下：
-![在这里插入图片描述](https://img-blog.csdnimg.cn/ce6d2bde876f48c2aef4c45ee1216f5b.png)
+
+![image-20250122140259203](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122140259203.png)
 
 ## 4.3 where 条件
 where作用：检索数据中 符合条件 的值。
 
 逻辑运算符：
-![在这里插入图片描述](https://img-blog.csdnimg.cn/abb47dea9b8748ffbdbb42d9e252c743.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBASVRfSG9sbWVz,size_20,color_FFFFFF,t_70,g_se,x_16)
+
+![image-20250122140312387](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122140312387.png)
+
 模糊查询：
 
 - 比较运算符
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/2bce08fe55eb4f948ae0fef87f1575bc.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBASVRfSG9sbWVz,size_20,color_FFFFFF,t_70,g_se,x_16)
+![image-20250122140330345](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122140330345.png)
 - like ，% ，_ 这三个符号的使用：
 
 ```sql
@@ -645,7 +665,7 @@ SELECT * FROM `student` WHERE `pwd` IS NOT NULL
 ## 4.4 联表查询
 > 💡注意：模棱两可，如果进行联表查询，两个表的字段名相同，一定要指定是那个表的，不要产生模棱两可的情况。
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/dac2e248d5234578881d05891a60e903.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBASVRfSG9sbWVz,size_20,color_FFFFFF,t_70,g_se,x_16)
+![image-20250122140339691](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122140339691.png)
 
 ```sql
 -- inner join 
@@ -677,9 +697,7 @@ join on 连接查询 和 where 等值查询的区别。
 - where 就是等值查询。
 - 结果两者还是相同的。
 
-如果查询多个表中的join数据，要循环递进的查询，如下解释：
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/629f12fc34d14aee8e410c3a8a032fc0.png)
+如果查询多个表中的join数据，要循环递进的查询。
 
 自连接 ：
 
@@ -692,9 +710,9 @@ SELECT a.`categoryName` AS '父栏目',b.`categoryName` AS '子栏目'
 FROM `category` AS a,`category` AS b 
 WHERE a.`categoryid` = b.`pid`
 ```
-![在这里插入图片描述](https://img-blog.csdnimg.cn/a5e3cf55f56c4b69b94a758104756383.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBASVRfSG9sbWVz,size_19,color_FFFFFF,t_70,g_se,x_16)
+![image-20250122140411600](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122140411600.png)
 ## 4.5 分页(limit) 和 排序(order by)
-![在这里插入图片描述](https://img-blog.csdnimg.cn/f63c8f3bd2ff4420bd9efbc66a673b11.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBASVRfSG9sbWVz,size_20,color_FFFFFF,t_70,g_se,x_16)
+![image-20250122140423571](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122140423571.png)
 
 **排序**：`order by 要排序的字段 [asc/desc]` 。
 
@@ -707,13 +725,13 @@ ORDER BY `id` DESC -- 逆序显示
 
 **分页**：`limit 查询起始下标 ，pageSize`。
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/c3d900bfc6d44ce5aa3ce9cdb303ba35.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBASVRfSG9sbWVz,size_20,color_FFFFFF,t_70,g_se,x_16)
+![image-20250122140435821](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122140435821.png)
 
 ## 4.6 子查询 和 嵌套查询
 
 本质：在where语句中嵌套一个子查询语句。
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/e3c1a4269c94490a902e0541e54c8390.png)![在这里插入图片描述](https://img-blog.csdnimg.cn/23c044d5528743beb47f9d6b277f0813.png)
+![在这里插入图片描述](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122140446717.png)
 
 子查询和嵌套查询本质上就是由里到外的一个运行代码过程。
 
@@ -743,9 +761,9 @@ HAVING 数学总分 > 60
 ## 4.8 select 语法格式 总结
 总体上，select查询语法格式为：
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/4a641d61a1b94a87978f94502e1c4fdc.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBASVRfSG9sbWVz,size_20,color_FFFFFF,t_70,g_se,x_16)
+![image-20250122140503246](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122140503246.png)
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/705db2ea53ba49e487fc29b8319114e3.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBASVRfSG9sbWVz,size_17,color_FFFFFF,t_70,g_se,x_16)
+![image-20250122140511091](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122140511091.png)
 
 # 5. MySQL 函数
 函数这节最好依靠官方给的文档来操作。
@@ -804,7 +822,8 @@ SELECT SUBSTR('你好张三，欢迎来到北京','3','6') -- 注意不是3到6�
 -- reverse('str'): 反转字符串
 SELECT REVERSE('你好张三，欢迎来到北京')
 ```
-![在这里插入图片描述](https://img-blog.csdnimg.cn/22ce5e2eaaba44639a48efc65f2f406c.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBASVRfSG9sbWVz,size_20,color_FFFFFF,t_70,g_se,x_16)
+![image-20250122140522538](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122140522538.png)
+
 **时间和日期函数**：
 
 ```sql
@@ -868,7 +887,7 @@ SELECT COUNT(*) FROM `category`
 -- count(l): 将一个代码行看为 1来查询。也不会忽略null值
 SELECT COUNT(1) FROM `category`
 ```
-![在这里插入图片描述](https://img-blog.csdnimg.cn/ce594b4c2b3941a0bb33942ee50f2b72.png)
+![image-20250122140540392](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122140540392.png)
 
 **求和，平均分，最大值，最小值**：
 
@@ -922,7 +941,7 @@ SELECT * FROM testmd5 WHERE `name` = '老鬼' AND pwd=MD5('123456')
 ## 6.1 什么是事务？什么是ACID？
 将一组sql放在一个批次中去执行~，要么都执行成功，要么都执行失败。
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/af41fc4bb4c84e6aa6cc0d653e6701f4.png)
+![image-20250122140550855](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122140550855.png)
 
 **ACID原则特性**：原子性(Atomicity) ，一致性(Consistency) ， 隔离性(Isolation) ，持久性(Durability) (脏读，幻读...)
 
@@ -932,39 +951,41 @@ SELECT * FROM testmd5 WHERE `name` = '老鬼' AND pwd=MD5('123456')
 
 - 要么都成功，要么都失败。
 
-  ![在这里插入图片描述](https://img-blog.csdnimg.cn/8c14dffcad2e4535accc8d448f2bdb04.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBASVRfSG9sbWVz,size_20,color_FFFFFF,t_70,g_se,x_16)
+  ![image-20250122140601681](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122140601681.png)
 
 **一致性(Consistency)**：
 - 事务前后的数据完整性要保证一致。
-  ![在这里插入图片描述](https://img-blog.csdnimg.cn/ee3f72c3d775453da7452eca8f894223.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBASVRfSG9sbWVz,size_20,color_FFFFFF,t_70,g_se,x_16)
+
+  ![image-20250122140614056](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122140614056.png)
 
 
 
 **持久性(Durability)**：
 - 事务一旦提交则不可逆，被持久化到数据库中。事务如果已经提交，就不可逆了。
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/d9b3a65135ff47b890f962bc8391f487.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBASVRfSG9sbWVz,size_20,color_FFFFFF,t_70,g_se,x_16)
+![image-20250122140633669](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122140633669.png)
 
 **隔离性(Isolation)**：
 
 - 事务的隔离性是多个用户并发访问数据库时，数据库为每一个用户开启的事务，不能被其他事务的操作数据所干扰，事务之间要相互隔离。
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/cea8a5591049477390d46af21f8b570e.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBASVRfSG9sbWVz,size_20,color_FFFFFF,t_70,g_se,x_16)
+![image-20250122140644877](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122140644877.png)
 
 **隔离所导致的一些问题**：
 
 **脏读**：
 
 - 指一个事务读取了另外一个事务未提交的数据。
-  ![在这里插入图片描述](https://img-blog.csdnimg.cn/37902612f3684300b3431a0b57be3ed4.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBASVRfSG9sbWVz,size_20,color_FFFFFF,t_70,g_se,x_16)
+  
+  ![image-20250122140658594](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122140658594.png)
 
 **不可重复读**：
 - 在一个事务内读取表中的某一行数据，多次读取结果不同。（这个不一定是错误，只是某些场合不对）
-  ![在这里插入图片描述](https://img-blog.csdnimg.cn/4908e52598184a15b675685eb0cd70f6.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBASVRfSG9sbWVz,size_20,color_FFFFFF,t_70,g_se,x_16)
+  ![image-20250122140715875](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122140715875.png)
 
 **虚读(幻读)**：
 - 它是指在一个事务内读取到了别的事务插入的数据，导致前后读取数量总量不一致。
-  ![在这里插入图片描述](https://img-blog.csdnimg.cn/2a999534ed1240348d008a78b03ee1aa.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBASVRfSG9sbWVz,size_20,color_FFFFFF,t_70,g_se,x_16)
+  ![image-20250122140729015](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122140729015.png)
 
 ## 6.2 事务的 执行流程
 
@@ -1010,7 +1031,7 @@ ROLLBACK; -- 如果出错，就执行回滚。
 SET autocommit = 1; -- 恢复默认值
 ```
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/5309a76143aa4cc5918ae27a224a119b.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBASVRfSG9sbWVz,size_20,color_FFFFFF,t_70,g_se,x_16)
+![image-20250122140739943](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122140739943.png)
 
 **了解 保存点**：
 
@@ -1098,7 +1119,7 @@ CREATE TABLE `school`.`app_user1` (
 
 我们在想要定义创建数据的时间或更新数据时的修改时间，通常会这样定义：
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/50093140f488463caf62afda0b003b66.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBASVRfSG9sbWVz,size_20,color_FFFFFF,t_70,g_se,x_16)
+![image-20250122140752927](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122140752927.png)
 
 
 使用mysql函数插入10万条数据：
@@ -1138,13 +1159,13 @@ EXPLAIN SELECT * FROM app_user WHERE `name` = '用户9999' -- 这里加了索引
 ```
 **通过explain 来查看语句，可得知，不添加索引查询的rows值很高！添加索引后的值仅仅是1** 。
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/131066010e4545aca7fb3346d305475e.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBASVRfSG9sbWVz,size_20,color_FFFFFF,t_70,g_se,x_16)
+![image-20250122140804833](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122140804833.png)
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/cbda01ddedf947ddbaf1ca524afa276f.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBASVRfSG9sbWVz,size_20,color_FFFFFF,t_70,g_se,x_16)
+![image-20250122140817002](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122140817002.png)
 
 我们想要查看刚刚我们创建（`CREATE INDEX id_app_user_name ON app_user(name)`）的id_app_user_name，可以去indexs查看。
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/9c3b38c74e954462a82184d5a2507b1c.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBASVRfSG9sbWVz,size_20,color_FFFFFF,t_70,g_se,x_16)
+![image-20250122140830712](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122140830712.png)
 
 因此，索引在面对大量数据时，是非常重要的！！
 
@@ -1173,18 +1194,19 @@ EXPLAIN SELECT * FROM app_user WHERE `name` = '用户9999' -- 这里加了索引
 ## 8.1 用户管理
 **添加用户**：
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/5fdbeb4b0b9b4c278e141e9a93e9ed88.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBASVRfSG9sbWVz,size_20,color_FFFFFF,t_70,g_se,x_16)
+![image-20250122140847048](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122140847048.png)
 
 **添加权限**：
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/4412dfbce3614916b3866a1c97691426.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBASVRfSG9sbWVz,size_20,color_FFFFFF,t_70,g_se,x_16)
+![image-20250122140858014](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122140858014.png)
 
 **删除用户**：
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/43f964d9096a432082464d8fba20c4c8.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBASVRfSG9sbWVz,size_20,color_FFFFFF,t_70,g_se,x_16)
+![image-20250122140905927](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122140905927.png)
 
 **注意点**：
-![在这里插入图片描述](https://img-blog.csdnimg.cn/af5f1bb7dd6440bf929f9856de29111c.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBASVRfSG9sbWVz,size_20,color_FFFFFF,t_70,g_se,x_16)
+
+![image-20250122140915967](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122140915967.png)
 
 sql命令操作，添加用户和权限
 
@@ -1237,7 +1259,7 @@ DROP USER zhangsan
 ```
 **mysql.user表中Host为%的含义**
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/30bcd23576ad4241a6f899e394c2d5ec.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBASVRfSG9sbWVz,size_14,color_FFFFFF,t_70,g_se,x_16)
+![image-20250122140927128](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122140927128.png)
 
 Host列指定了允许用户登录所使用的IP，比如user=root Host=192.168.1.1。这里的意思就是说root用户只能通过192.168.1.1的客户端去访问。
 
@@ -1264,7 +1286,7 @@ Host列指定了允许用户登录所使用的IP，比如user=root Host=192.168.
 
 第二种方式备份：直接在对应的表或者库中，右键，选择备份或导出，如下：
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/86f39dd006e14ec39d6b4f206ba21874.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBASVRfSG9sbWVz,size_20,color_FFFFFF,t_70,g_se,x_16)
+![image-20250122140940501](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122140940501.png)
 
 **第三种方式备份**：`mysqldump 命令行`导出，最重要的！！！
 
@@ -1278,7 +1300,7 @@ mysqldump -hlocalhost -uroot -p123456 school student result  >D:/b.sql
 # mysqldump -h 主机 -u 用户名 -p 密码 数据库名 >物理磁盘位置/文件名 ,导出数据库
 mysqldump -hlocalhost -uroot -p123456 school >D:/c.sql
 ```
-![在这里插入图片描述](https://img-blog.csdnimg.cn/7555ac1f38c840b1916da75ff8bc794e.png)
+![image-20250122140951566](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122140951566.png)
 
 有导出，就有导入。
 
@@ -1291,7 +1313,7 @@ mysqldump -hlocalhost -uroot -p123456 school >D:/c.sql
 -- source 文件路径
 source d:/a.sql
 ```
-![在这里插入图片描述](https://img-blog.csdnimg.cn/51c4236a01374d9db57fac22daa0f74f.png)
+![image-20250122141000853](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122141000853.png)
 
 # 9. 规范数据库设计
 ## 9.1 为什么需要设计数据库？
@@ -1317,7 +1339,7 @@ source d:/a.sql
 
 **设计数据库大体上的一个样式：**
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/b64dcefc4368406ab1d7463028a8886d.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBASVRfSG9sbWVz,size_20,color_FFFFFF,t_70,g_se,x_16)
+![image-20250122141013756](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122141013756.png)
 
 对于mysql数据库，可以应用到 管理系统(crm)，论坛系统(bbs)，博客系统中。推荐两个前端页面框架： element ui , ant design(阿里) 。
 
@@ -1337,20 +1359,21 @@ source d:/a.sql
 
 - 第一范式 (1NF) ：保证每一列，不可再分，就是不可分割的原子数据项。（原子性）
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/00027a3596654c9ab153657fb27a279a.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBASVRfSG9sbWVz,size_20,color_FFFFFF,t_70,g_se,x_16)
+![image-20250122141028162](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122141028162.png)
 
 - 第二范式 (2NF) 前提：满足第一范式；每张表只描述一件事情。
 
-  ![在这里插入图片描述](https://img-blog.csdnimg.cn/b604a7531e7f4871b8cdee99a910b245.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBASVRfSG9sbWVz,size_20,color_FFFFFF,t_70,g_se,x_16)
+  ![image-20250122141036961](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122141036961.png)
 
 
 - 第三范式 (3NF) 前提：满足第一范式和第二范式 。第三范式需要确保数据表中的每一列数据都和主键直接相关，而不能间接相关。
 
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/2ff25c75679b413aabc8b68fa5deeb27.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBASVRfSG9sbWVz,size_20,color_FFFFFF,t_70,g_se,x_16)
+![image-20250122141047330](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122141047330.png)
 
 **没必要非得符合上面的要求，见下：**
-![在这里插入图片描述](https://img-blog.csdnimg.cn/8efc935e82d64c3bbe52c53b65b040de.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBASVRfSG9sbWVz,size_20,color_FFFFFF,t_70,g_se,x_16)
+
+![image-20250122141058993](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122141058993.png)
 
 
 至此，MySQL业务级别的内容结束。但是，想要操作好MySQL，必须还要学习如何用语言来操作，例如：JDBC。
@@ -1364,11 +1387,11 @@ source d:/a.sql
 
 - **因为mysql不能会使用full [outer] join这样的语句，因此可以使用union来解决这方法的问题。例如：最下面的两个full join语句，mysql不能使用，但是可以使用union与其他的语句内容拼接起来！**
 
-![img](https://img-blog.csdnimg.cn/img_convert/1fb9a08538c41a28d5a1d0891a17da6a.png)
+![image-20250122141109035](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122141109035.png)
 
 ---
 
-![请添加图片描述](https://img-blog.csdnimg.cn/19256a9be2cf45769bff78e797a5391d.png#pic_center)
+![image-20250122141117825](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122141117825.png)
 
 
 
