@@ -2,7 +2,7 @@ import { hopeTheme } from "vuepress-theme-hope";
 import navbar from "./navbar.js";
 import sidebar from "./sidebar.js";
 
-const password = process.env.JAVA_HOME || "123456";
+const password = process.env.ENCRYPT_PASSWORD || "123456";
 
 export default hopeTheme({
   hostname: "https://vuepress-theme-hope-docs-demo.netlify.app",
