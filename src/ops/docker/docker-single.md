@@ -288,9 +288,8 @@ docker run -d \
   --restart=always \
 nacos/nacos-server:v2.0.4
 
-# 推荐v2.0.4，新版本2.2之后可能需要鉴权  -e NACOS_AUTH_ENABLE=true  操作。
-虽然能启动起来，但是启动的无法进行登录操作，应该不是我想要的nacos系统，可能版本不对。
-
+# 推荐v2.0.4，新版本2.2之后，鉴权-e NACOS_AUTH_ENABLE=true  操作。
+# 鉴权 见：https://nacos.io/docs/latest/manual/admin/auth/?spm=5238cd80.c984973.0.0.6be14023EgtSpC
 ```
 ### Tomcat
 ```powershell
