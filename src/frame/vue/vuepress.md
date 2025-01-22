@@ -1,3 +1,8 @@
+---
+title: VuePress 框架
+order: 3
+---
+
 # VuePress 框架
 
 VuePress是一个**基于Vue.js的静态网站生成器**，专注于文档网站的构建。它由Vue.js的创始人尤雨溪（Evan You）开发，旨在提供一个简单、灵活且易于使用的工具，用于创建漂亮的文档网站。

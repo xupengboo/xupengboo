@@ -1,3 +1,8 @@
+---
+title: Vite 框架
+order: 1
+---
+
 # Vite 框架
 
 ## `import.meta.env.xxx` 作用

@@ -1,4 +1,9 @@
-# Vue项目的DockerFile和nginx.conf配置
+---
+title: Vue DockerFile和nginx.conf配置
+order: 5
+---
+
+# Vue DockerFile和nginx.conf配置
 
 一般前端项目中，会有一个docker/nginx/nginx.conf文件，用于配置DockerFile配置等。
 
