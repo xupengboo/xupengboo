@@ -8,9 +8,9 @@ MySQL索引是一种用于加快数据库查询速度的数据结构。B-tree（
 B+树（B+ tree）和B树（B-tree）是常用的数据结构，用于在数据库和文件系统中进行索引和存储数据。
 **B树和B+树都是平衡二叉树，它们都用于数据库索引。**
 
-![image (13)](https://github.com/ITholmes/hello-world/assets/70437837/08f71891-9c97-480e-8fec-42c3926f11c1)
+![image-20250122141253770](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122141253770.png)
 
-![image (14)](https://github.com/ITholmes/hello-world/assets/70437837/37198963-7a2b-46f6-81d9-cd6a092ae642)
+![image-20250122141306910](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122141306910.png)
 
 **需要补充的是，**`在数据库的聚集索引（Clustered Index）中，叶子节点直接包含卫星数据。在非聚集索引（NonClustered Index）中，叶子节点带有指向卫星数据的指针`**。**
 **总体而言，B+树比B树更适合用于数据库索引。**`MySQL的索引就是基于B+树的。`
@@ -54,7 +54,7 @@ MySQL的最左匹配原则是指在使用组合索引时，MySQL会优先使用�
 **聚簇索引是将数据存储与索引放到了一块，索引结构的叶子节点保存了行数据。这意味着聚簇索引的叶子节点就是数据节点，每个叶子节点包含了行的全部信息**。使用聚簇索引查询数据时，只需要查找索引就可以找到数据，因为数据和索引是在同一个物理结构中。
 **非聚簇索引则将数据与索引分开存储。索引结构的叶子节点指向了数据对应的位置。这意味着非聚簇索引的叶子节点不包含行的全部信息，而是包含了数据的位置信息**。使用非聚簇索引查询数据时，需要先查找索引找到数据的位置，然后再通过位置信息找到实际的数据。
 
-![image (15)](https://github.com/ITholmes/hello-world/assets/70437837/ceb0dae7-b0b3-47c8-8d9c-394c0d55bbd8)
+![image-20250122141316011](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122141316011.png)
 
 ## 创建一个存储三百万数据量的表格
 假设，有一个订单表格，2023.11.25 这一天有300w数据量存储到表格，内容可以如下：

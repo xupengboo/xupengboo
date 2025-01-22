@@ -5,8 +5,9 @@ order: 3
 
 ## MySQL MVVC多版本并发控制
 > 参考：
-> [MySQL MVVC多版本并发控制-CSDN博客](https://blog.csdn.net/weixin_45902285/article/details/126291623)
-> [深入理解MySQL的MVCC原理_mysql隐藏主键_胡玉洋　的博客-CSDN博客](https://blog.csdn.net/huyuyang6688/article/details/123028254)
+>
+> - [MySQL MVVC多版本并发控制-CSDN博客](https://blog.csdn.net/weixin_45902285/article/details/126291623)
+> - [深入理解MySQL的MVCC原理_mysql隐藏主键_ 胡玉洋　的博客-CSDN博客](https://blog.csdn.net/huyuyang6688/article/details/123028254)
 
 ## 项目中，MySQL如何处理这种有千万级别量的表格？
 
@@ -36,7 +37,7 @@ explain select xxx from table_name;
 
 针对explain语句，以下解释：
 
-![image (16)](https://github.com/ITholmes/hello-world/assets/70437837/2b00ca9b-edf8-4924-9334-53be0567ad0d)
+![image-20250122141358648](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250122141358648.png)
 
 | 字段名 | 描述 |
 | --- | --- |
@@ -297,5 +298,5 @@ PARTITION BY RANGE COLUMNS(a,d,c) (
 );
 ```
 ## 为什么 分库分表？分库分表的优缺点？
-[12张图把分库分表讲的明明白白！](https://mp.weixin.qq.com/s?__biz=MzU0OTE4MzYzMw==&mid=2247547792&idx=2&sn=91a10823ceab0cb9db26e22783343deb&chksm=fbb1b26eccc63b784879f90540c8ab1731e635b30e5f4fd41de67f87a4fe055473039206f09d&scene=27)
+参考：[12张图把分库分表讲的明明白白！](https://mp.weixin.qq.com/s?__biz=MzU0OTE4MzYzMw==&mid=2247547792&idx=2&sn=91a10823ceab0cb9db26e22783343deb&chksm=fbb1b26eccc63b784879f90540c8ab1731e635b30e5f4fd41de67f87a4fe055473039206f09d&scene=27)
 
