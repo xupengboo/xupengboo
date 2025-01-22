@@ -22,7 +22,7 @@ docker rm -f ${CONTAINER_NAME} || true  # 忽略没有找到容器的错误
 
 # 步骤 3: 运行新的容器
 echo "Running new container ${CONTAINER_NAME} from image ${IMAGE_NAME}..."
-docker run -d -p 80:80 --name -e ENCRYPT_PASSWORD="$PASSWORD" ${CONTAINER_NAME} ${IMAGE_NAME}
+docker run -d -p 80:80 --name ${CONTAINER_NAME} -e ENCRYPT_PASSWORD="$PASSWORD" ${IMAGE_NAME}
 
 # 步骤 4: 删除所有悬挂的镜像（没有标签的镜像）
 echo "Removing dangling images..."
