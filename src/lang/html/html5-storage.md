@@ -1,3 +1,8 @@
+---
+title: HTML 存储
+order: 3
+---
+
 # HTML 存储
 
 > 其实就是：localStorage、sessionStorage

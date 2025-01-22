@@ -1,3 +1,8 @@
+---
+title: HTML5 WebSocket 使用
+order: 6
+---
+
 # HTML5 WebSocket
 
 WebSocket 是 HTML5 开始提供的一种在单个 TCP 连接上进行**全双工通讯的协议**。
