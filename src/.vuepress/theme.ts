@@ -5,24 +5,19 @@ import sidebar from "./sidebar.js";
 
 export default hopeTheme({
   hostname: "https://vuepress-theme-hope-docs-demo.netlify.app",
-
   author: {
     name: "Mr.xupengboo",
     url: "https://www.xupengboo.com",
   },
-
   logo: "https://theme-hope-assets.vuejs.press/logo.svg",
-
   repo: "xupengboo/xupengboo",
-
+  docsBranch: "master",
   docsDir: "src",
 
   // 导航栏
   navbar,
-
   // 侧边栏
   sidebar,
-
   // 页脚
   footer: "默认页脚",
   displayFooter: true,
