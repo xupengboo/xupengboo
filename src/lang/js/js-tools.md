@@ -1,4 +1,9 @@
-# js 工具库
+---
+title: JS 工具库
+order: 2
+---
+
+# JS 工具库
 
 ## Thressjs 工具
 
