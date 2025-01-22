@@ -1,6 +1,6 @@
 ---
 title: Git 使用规范
-order: 2
+order: 1
 ---
 
 

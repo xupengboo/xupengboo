@@ -1,6 +1,6 @@
 ---
 title: Git 常用操作
-order: 3
+order: 2
 ---
 
 ## Git 撤回提交操作

@@ -1,6 +1,6 @@
 ---
 title: CAP 分布式定理
-order: 2
+order: 3
 ---
 
 # 分布式CAP定理，为什么不能同时满足三个特性？.md

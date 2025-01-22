@@ -1,6 +1,7 @@
 ---
-title: node
-icon: cib:js
+title: node 语法
+icon: la:node
 index: false
+order: 5
 ---
 
