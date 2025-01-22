@@ -1,4 +1,12 @@
-# 1. 常用网站
+---
+title: 其他资源
+order: 1
+icon: lock
+tag:
+  - 加密
+---
+
+## 1. 常用网站
 
 梯子猫：https://tizimao.com/
 
@@ -24,7 +32,7 @@ Java 糊涂工具包：https://hutool.cn/
 
 
 
-# 2. 常用接口（公网）
+## 2. 常用接口（公网）
 
 Github接口（查询用户接口）：https://api.github.com/search/users?q=xxx 
 

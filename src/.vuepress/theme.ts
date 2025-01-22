@@ -1,7 +1,8 @@
 import { hopeTheme } from "vuepress-theme-hope";
-
 import navbar from "./navbar.js";
 import sidebar from "./sidebar.js";
+
+const password = process.env.ENCRYPT_PASSWORD || "1234";
 
 export default hopeTheme({
   hostname: "https://vuepress-theme-hope-docs-demo.netlify.app",
@@ -28,6 +29,10 @@ export default hopeTheme({
       "/demo/encrypt.html": {
         hint: "Password: 1234",
         password: "1234",
+      },
+      "/other/public.html": {
+        hint: "请输入密码: ",
+        password: password,
       },
     },
   },
