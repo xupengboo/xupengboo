@@ -1,3 +1,8 @@
+---
+title: Nvm 使用
+order: 1
+---
+
 # nvm
 
 ## 1. nvm安装
