@@ -16,7 +16,7 @@ actions:
     type: primary
 
   - text: 文档
-    link: ./guide/
+    link: ./start/
 
 highlights:
   - header: 易于安装
