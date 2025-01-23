@@ -10,7 +10,7 @@
 
 🌟 如果你有任何问题或建议，欢迎通过以下方式与我联系：
 
-- **Email**: [itholmes@88.com](mailto:itholmes@88.com)
+- **Email**: [xupengboo@126.com](mailto:xupengboo@126.com)
 - **GitHub Issues**: 在本项目的 [Issues](https://github.com/xupengboo/xupengboo/issues) 页面提出你的问题。
 
 ---
