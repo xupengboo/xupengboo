@@ -1,1 +1,6 @@
 // place your custom styles here
+/* 调整搜索框宽度 */
+.search-box input {
+  width: 200px !important; /* 设置搜索框宽度，单位可以为 px、%、em 等 */
+  max-width: 100%;        /* 确保在窄屏设备上不超出容器 */
+}

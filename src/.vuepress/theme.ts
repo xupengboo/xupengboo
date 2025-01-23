@@ -119,7 +119,20 @@ export default hopeTheme({
 
   // 在这里配置主题提供的插件
   plugins: {
-    search: true,
+    search: {
+      locales: {
+        "/": {
+          placeholder: "搜索文档",
+        },
+      },
+      hotKeys: [
+        {
+          key: "s",
+          ctrl: true,
+          alt: true,
+        }
+      ]
+    },
 
     // 注意: 评论服务使用：Giscus 详细见：https://giscus.app/zh-CN
     comment: {
