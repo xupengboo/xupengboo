@@ -1,11 +1,11 @@
 ---
-title: 镜像仓库地址
+title: Docker 镜像仓库地址
 order: 6
 ---
 
-# 镜像仓库地址
+# Docker 镜像仓库地址
 
-相关 Docker 镜像源：
+更多 Docker 镜像源：
 
 - https://www.coderjia.cn/archives/dba3f94c-a021-468a-8ac6-e840f85867ea
 
@@ -20,11 +20,7 @@ vi /etc/docker/daemon.json
 ```json
 {
 	"registry-mirrors": [
-        "https://docker.m.daocloud.io", 
-        "https://noohub.ru", 
-        "https://huecker.io", 
-        "https://dockerhub.timeweb.cloud", 
-        "https://docker.rainbond.cc"
+        "https://docker-0.unsee.tech"
     ]
 }
 ```
