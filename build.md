@@ -1,5 +1,7 @@
 # xupengboo
 
+## install
+
 可以通过 命令行接口 的 --config 选项来指定配置文件：
 ```bash
 vuepress dev docs --config docs/.vuepress/config.ts
@@ -37,3 +39,17 @@ icon 获取：https://icon-sets.iconify.design/
 评论系统：https://giscus.app/zh-CN
 
 logo设计：https://ai.logo123.com/
+
+## build
+
+1. 笔者以 Markdown 形式写好文章，上传到Github提供的代码仓库。
+2. Travis-CI 提供持续集成，检测仓库发生变化，触发VuePress编译活动，生成静态页面和目录。
+- Travis-CI 通过项目配置一个 .travis.yml 文件，来指定编译环境、安装依赖、编译命令等。
+- 编译完成后，Travis-CI 将编译后的静态页面和目录推送到 GitHub Pages。
+3. 然后推送回 GitHub Pages
+- https://pages.github.com/
+- 可以修改为自己的域名地址。
+4. 再触发国内的 CDN 缓存刷新。
+- 考虑使用：阿里云、七牛云、腾讯云的CDN缓存加速。
+
+
