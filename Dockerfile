@@ -1,5 +1,5 @@
 # 使用 Node.js 镜像 , as build 别名构建阶段
-FROM node:20.9.0 AS build
+FROM node:22.13.1 AS build
 # 指定工作目录
 WORKDIR /home
 # 复制宿主机文件到 home
