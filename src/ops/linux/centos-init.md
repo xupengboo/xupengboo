@@ -1,6 +1,6 @@
 ---
 title: CentOS 环境安装
-order: 1
+order: 2
 ---
 
 ## CentOS 服务器 环境安装

@@ -1,6 +1,6 @@
 ---
-title: Linux 系统
-order: 3
+title: CentOS 设置静态IP地址
+order: 23
 ---
 
 
