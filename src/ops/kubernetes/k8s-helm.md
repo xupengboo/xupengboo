@@ -1,6 +1,6 @@
 ---
-title: Helm 介绍
-order: 4
+title: Kubernetes Helm 介绍
+order: 10
 ---
 
 ## Helm 介绍

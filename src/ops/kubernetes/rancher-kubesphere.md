@@ -1,6 +1,6 @@
 ---
 title: Rancher 和 KubeSphere 的区别
-order: 6
+order: 21
 ---
 
 Rancher 本身是一个**独立运行的服务，不依赖于现有的 Kubernetes 集群**。它不仅可以管理已有的 Kubernetes 集群，还可以通过内置功能直接创建 Kubernetes 集群，比如：

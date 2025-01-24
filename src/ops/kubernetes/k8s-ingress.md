@@ -1,6 +1,6 @@
 ---
-title: Ingress 使用
-order: 5
+title: Kubernetes Ingress 使用
+order: 11
 ---
 
 1. 创建 `ingress` ：

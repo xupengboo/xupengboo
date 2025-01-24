@@ -1,6 +1,6 @@
 ---
 title: Rancher 安装与使用
-order: 2
+order: 20
 ---
 
 
