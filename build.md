@@ -40,7 +40,7 @@ icon 获取：https://icon-sets.iconify.design/
 
 logo设计：https://ai.logo123.com/
 
-## build
+## build 【后续采用】
 
 1. 笔者以 Markdown 形式写好文章，上传到Github提供的代码仓库。
 2. Travis-CI 提供持续集成，检测仓库发生变化，触发VuePress编译活动，生成静态页面和目录。
