@@ -1,5 +1,5 @@
 ---
-title: HTML Web Workers 使用
+title: HTML5 WebWorkers 使用
 order: 7
 ---
 
