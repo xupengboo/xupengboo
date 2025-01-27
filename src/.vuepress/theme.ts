@@ -20,7 +20,7 @@ export default hopeTheme({
   // 侧边栏
   sidebar,
   // 页脚
-  footer: "默认页脚",
+  footer: '<a href="https://beian.miit.gov.cn/" target="_blank">鲁ICP备2025142295号-1</a> | 主题: <a href="https://theme-hope.vuejs.press/zh/" target="_blank">VuePress Theme Hope</a>',
   displayFooter: true,
 
   // 加密配置

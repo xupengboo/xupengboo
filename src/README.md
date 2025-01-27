@@ -316,7 +316,7 @@ highlights:
         link: https://theme-hope.vuejs.press/zh/guide/advanced/pwa.html
 
 copyright: false
-footer: 使用 <a href="https://theme-hope.vuejs.press/zh/" target="_blank">VuePress Theme Hope</a> 主题 | MIT 协议, 版权所有 © 2019-至今 Mr.Hope
+footer: '<a href="https://beian.miit.gov.cn/" target="_blank">鲁ICP备2025142295号-1</a> | 主题: <a href="https://theme-hope.vuejs.press/zh/" target="_blank">VuePress Theme Hope</a>'
 ---
 
 这是项目主页的案例。你可以在这里放置你的主体内容。
