@@ -2,15 +2,17 @@
 title: 操作系统
 ---
 
-## Window ISO 镜像下载
+## ISO 镜像下载
 
 MSDN：[msdn.itellyou.cn](https://msdn.itellyou.cn/)   or   [next.itellyou.cn](https://next.itellyou.cn/)
 
-微软官方：
+微软官方：https://www.microsoft.com/zh-cn/software-download
 
 > 参考：[推荐几个Windows iso镜像下载的网站](https://blog.csdn.net/B11050729/article/details/131893717)
+>
+> 推荐：[next.itellyou.cn](https://next.itellyou.cn/) 里面包含很多Windows以及linux新版本的系统。
 
-## U盘 分区
+## Ventoy 安装 启动U盘
 
 Ventoy 支持将U盘分成两个分区：一个用于存放ISO文件（启动分区），另一个用于普通数据存储。
 
@@ -35,3 +37,5 @@ Ventoy 支持将U盘分成两个分区：一个用于存放ISO文件（启动分
 
 - 简单易用，无需手动分区。
 - 支持多系统启动。
+
+> 见：[Ventoy教程：创建多系统启动U盘的详细指南](https://blog.csdn.net/weixin_45167912/article/details/144653202)
