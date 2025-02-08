@@ -3,6 +3,27 @@ title: Git 常用操作
 order: 2
 ---
 
+## Git 修改配置
+
+```shell
+# 查看配置
+git config --list
+# 设置用户名
+git config user.name "your name"
+git config --global user.name "your name"
+# 设置邮箱
+git config user.email "your email"
+git config --global user.email "your email"
+```
+
+## Git 撤回提交操作
+
+```shell
+git reset --soft HEAD~1 # 撤销最近的提交，保留修改和暂存内容。
+git reset --mixed HEAD~1 # 撤销最近的提交，保留修改，但取消暂存。
+git reset --hard HEAD~1 # 撤销最近的提交，并丢弃所有修改（慎用）。
+```
+
 ## Git 代理配置
 代理配置如下：
 ```bash
@@ -20,16 +41,6 @@ git config https.proxy https://127.0.0.1:7890
 ```bash
 git config -l
 ```
-
-## Git 撤回提交操作
-
-```shell
-git reset --soft HEAD~1 # 撤销最近的提交，保留修改和暂存内容。
-git reset --mixed HEAD~1 # 撤销最近的提交，保留修改，但取消暂存。
-git reset --hard HEAD~1 # 撤销最近的提交，并丢弃所有修改（慎用）。
-```
-
-
 
 
 
