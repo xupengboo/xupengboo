@@ -70,7 +70,7 @@ mvn archetype:generate -DgroupId=com.xupengboo -DartifactId=xxx -DarchetypeArtif
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | [简单工厂模式](https://github.com/xupengboo/DesignPatterns/tree/main/1.%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/src/main/java/com/xupengboo/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F) | 非常简易的创建型设计模式，它并不属于23种经典设计模式中的一种。 |
 | [工厂方法模式](https://github.com/xupengboo/DesignPatterns/tree/main/1.%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/src/main/java/com/xupengboo/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F) | 定义了一个用于创建对象的接口，但由子类决定要实例化的类是哪一个。工厂方法使得一个类的实例化延迟到其子类。 |
-| [抽象工厂模式](https://github.com/xupengboo/DesignPatterns/tree/main/1.%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/src/main/java/com/xupengboo/%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F) | 提供了一个 接口/抽象类 用于创建相关或依赖对象的家族，而不需要明确指定具体类。抽象工厂模式是工厂方法模式的推广，它引入了多个工厂接口，用于创建一系列相关或相互依赖的产品。 |
+| [抽象工厂模式](https://github.com/xupengboo/DesignPatterns/tree/main/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/src/main/java/com/xupengboo/%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F) | 提供了一个 接口/抽象类 用于创建相关或依赖对象的家族，而不需要明确指定具体类。抽象工厂模式是工厂方法模式的推广，它引入了多个工厂接口，用于创建一系列相关或相互依赖的产品。 |
 
 ## 2. 单例模式
 
@@ -91,7 +91,7 @@ mvn archetype:generate -DgroupId=com.xupengboo -DartifactId=xxx -DarchetypeArtif
 
 | 序号 | 单例模式                                                     | 概述                                                         |
 | :--: | ------------------------------------------------------------ | ------------------------------------------------------------ |
-|  1   | [懒汉式](https://github.com/xupengboo/DesignPatterns/tree/main/2.%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/src/main/java/com/xupengboo/%E6%87%92%E6%B1%89%E5%BC%8F) | [线程安全，效率低](https://github.com/xupengboo/DesignPatterns/blob/main/2.%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/src/main/java/com/xupengboo/%E6%87%92%E6%B1%89%E5%BC%8F/%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8/Singleton.java) 、 [线程不安全](https://github.com/xupengboo/DesignPatterns/blob/main/2.%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/src/main/java/com/xupengboo/%E6%87%92%E6%B1%89%E5%BC%8F/%E7%BA%BF%E7%A8%8B%E4%B8%8D%E5%AE%89%E5%85%A8/Singleton.java) |
+|  1   | [懒汉式](https://github.com/xupengboo/DesignPatterns/tree/main/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/src/main/java/com/xupengboo/%E6%87%92%E6%B1%89%E5%BC%8F) | [线程安全，效率低](https://github.com/xupengboo/DesignPatterns/blob/main/2.%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/src/main/java/com/xupengboo/%E6%87%92%E6%B1%89%E5%BC%8F/%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8/Singleton.java) 、 [线程不安全](https://github.com/xupengboo/DesignPatterns/blob/main/2.%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/src/main/java/com/xupengboo/%E6%87%92%E6%B1%89%E5%BC%8F/%E7%BA%BF%E7%A8%8B%E4%B8%8D%E5%AE%89%E5%85%A8/Singleton.java) |
 |  2   | [饿汉式](https://github.com/xupengboo/DesignPatterns/blob/main/2.%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/src/main/java/com/xupengboo/%E9%A5%BF%E6%B1%89%E5%BC%8F/Singleton.java) | 天然线程安全，但不符合懒加载                                 |
 |  3   | [双检锁/双重校验锁](https://github.com/xupengboo/DesignPatterns/blob/main/2.%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/src/main/java/com/xupengboo/%E5%8F%8C%E6%A3%80%E9%94%81/Singleton.java) | 线程安全、符合懒加载、效率高，性能强于1，2                   |
 |  4   | [静态内部类](https://github.com/xupengboo/DesignPatterns/blob/main/2.%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/src/main/java/com/xupengboo/%E9%9D%99%E6%80%81%E5%86%85%E9%83%A8%E7%B1%BB/Singleton.java) | 利用静态类实现，性能强于3                                    |
@@ -117,11 +117,11 @@ mvn archetype:generate -DgroupId=com.xupengboo -DartifactId=xxx -DarchetypeArtif
 
 - 指导者（Director）： 负责调用具体建造者来构建产品对象，通常包含构建的具体步骤。
 
-| 建造者模式                                                   | 概述                                                         |
-| :----------------------------------------------------------- | :----------------------------------------------------------- |
-| [标准建造者模式](https://github.com/xupengboo/DesignPatterns/tree/main/3.%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F/src/main/java/com/xupengboo/%E6%A0%87%E5%87%86%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F) | 将一个复杂对象（产品）的构建过程与其表示分离，使得同样的构建过程可以创建不同的表示 |
-| [可配置的建造者模式](https://github.com/xupengboo/DesignPatterns/tree/main/3.%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F/src/main/java/com/xupengboo/%E5%8F%AF%E9%85%8D%E7%BD%AE%E7%9A%84%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F) | 允许客户端在构建产品时进行更灵活的配置，通过提供一系列的配置方法来实现。 |
-| [链式调用的建造者模式](https://github.com/xupengboo/DesignPatterns/tree/main/3.%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F/src/main/java/com/xupengboo/%E9%93%BE%E5%BC%8F%E8%B0%83%E7%94%A8%E7%9A%84%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F) | 通过 `return this` 实现的链式调用效果。                      |
+| 建造者模式                                                                                                                                                                                                                                    | 概述                                                         |
+|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| :----------------------------------------------------------- |
+| [标准建造者模式](https://github.com/xupengboo/DesignPatterns/tree/main/%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F/src/main/java/com/xupengboo/%E6%A0%87%E5%87%86%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F)                               | 将一个复杂对象（产品）的构建过程与其表示分离，使得同样的构建过程可以创建不同的表示 |
+| [可配置的建造者模式](https://github.com/xupengboo/DesignPatterns/tree/main/%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F/src/main/java/com/xupengboo/%E5%8F%AF%E9%85%8D%E7%BD%AE%E7%9A%84%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F)           | 允许客户端在构建产品时进行更灵活的配置，通过提供一系列的配置方法来实现。 |
+| [链式调用的建造者模式](https://github.com/xupengboo/DesignPatterns/tree/main/%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F/src/main/java/com/xupengboo/%E9%93%BE%E5%BC%8F%E8%B0%83%E7%94%A8%E7%9A%84%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F) | 通过 `return this` 实现的链式调用效果。                      |
 
 > 🔍Tips：**建造者模式与工厂模式的区别是：建造者模式更加关注与零件装配的顺序。**
 
@@ -169,8 +169,8 @@ class MyClass {
 
 | 原型模式                                                     | 概述                                                         |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| [浅克隆（浅拷贝）](https://github.com/xupengboo/DesignPatterns/tree/main/4.%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/src/main/java/com/xupengboo/%E6%B5%85%E5%85%8B%E9%9A%86) | 实现Cloneable接口，重写Clone方法。                           |
-| [深克隆（深拷贝）](https://github.com/xupengboo/DesignPatterns/tree/main/4.%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/src/main/java/com/xupengboo/%E6%B7%B1%E5%85%8B%E9%9A%86) | 实现Serializable接口，将对象序列化为字节流，再进而将字节流反序列化为对象。 |
+| [浅克隆（浅拷贝）](https://github.com/xupengboo/DesignPatterns/tree/main/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/src/main/java/com/xupengboo/%E6%B5%85%E5%85%8B%E9%9A%86) | 实现Cloneable接口，重写Clone方法。                           |
+| [深克隆（深拷贝）](https://github.com/xupengboo/DesignPatterns/tree/main/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/src/main/java/com/xupengboo/%E6%B7%B1%E5%85%8B%E9%9A%86) | 实现Serializable接口，将对象序列化为字节流，再进而将字节流反序列化为对象。 |
 
 ## 5. 适配器模式
 
@@ -188,8 +188,8 @@ class MyClass {
 
 | 适配器模式                                                   | 概述                                                         |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| [类适配器模式](https://github.com/xupengboo/design-patterns/tree/main/5.%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/src/main/java/com/xupengboo/%E7%B1%BB%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F) | 通过继承被适配者类来实现适配器。适配器类既继承了目标接口，又持有了被适配者类的实例。 |
-| [对象适配器模式](https://github.com/xupengboo/design-patterns/tree/main/5.%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/src/main/java/com/xupengboo/%E5%AF%B9%E8%B1%A1%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F) | 通过组合被适配者类的实例来实现适配器。适配器类持有被适配者类的实例，并实现了目标接口。 |
+| [类适配器模式](https://github.com/xupengboo/design-patterns/tree/main/%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/src/main/java/com/xupengboo/%E7%B1%BB%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F) | 通过继承被适配者类来实现适配器。适配器类既继承了目标接口，又持有了被适配者类的实例。 |
+| [对象适配器模式](https://github.com/xupengboo/design-patterns/tree/main/%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/src/main/java/com/xupengboo/%E5%AF%B9%E8%B1%A1%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F) | 通过组合被适配者类的实例来实现适配器。适配器类持有被适配者类的实例，并实现了目标接口。 |
 
 **适配器缺点**：过多地使用适配器，会让系统非常零乱，不易整体进行把握。比如，明明看到调用的是 A 接口，其实内部被适配成了 B 接口的实现。
 
@@ -214,7 +214,7 @@ class MyClass {
 
 | 桥接模式                                                     | 概述                                                         |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| [桥接](https://github.com/xupengboo/design-patterns/tree/main/6.%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/src/main/java/com/xupengboo) | 将抽象部分与实现部分分离，使它们都可以独立的变化。举个例子：创建不同颜色的圆形，颜色就可以理解为抽象部分，圆形就是实现部分。 |
+| [桥接](https://github.com/xupengboo/design-patterns/tree/main/%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/src/main/java/com/xupengboo) | 将抽象部分与实现部分分离，使它们都可以独立的变化。举个例子：创建不同颜色的圆形，颜色就可以理解为抽象部分，圆形就是实现部分。 |
 
 ## 7. 过滤器模式
 
@@ -232,7 +232,7 @@ class MyClass {
 
 | 过滤器模式                                                   | 概述                                                  |
 | ------------------------------------------------------------ | ----------------------------------------------------- |
-| [过滤器](https://github.com/xupengboo/design-patterns/tree/main/7.%E8%BF%87%E6%BB%A4%E5%99%A8%E6%A8%A1%E5%BC%8F/src/main/java/com/xupengboo) | 实现对集合的筛选和过滤，以对 Person类 人员过滤 为例。 |
+| [过滤器](https://github.com/xupengboo/design-patterns/tree/main/%E8%BF%87%E6%BB%A4%E5%99%A8%E6%A8%A1%E5%BC%8F/src/main/java/com/xupengboo) | 实现对集合的筛选和过滤，以对 Person类 人员过滤 为例。 |
 
 ## 8. 组合模式
 
@@ -249,7 +249,7 @@ class MyClass {
 
 | 组合模式                                                     | 概述                                                         |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| [组合模式](https://github.com/xupengboo/design-patterns/tree/main/8.%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F/src/main/java/com/xupengboo) | 以 文件系统 为例：叶子节点就是文件File，容器（复合节点）就是文件夹。 |
+| [组合模式](https://github.com/xupengboo/design-patterns/tree/main/%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F/src/main/java/com/xupengboo) | 以 文件系统 为例：叶子节点就是文件File，容器（复合节点）就是文件夹。 |
 
 ## 9. 装饰器模式
 
@@ -269,7 +269,7 @@ class MyClass {
 
   | 装饰器模式                                                   | 概述                                                         |
     | ------------------------------------------------------------ | ------------------------------------------------------------ |
-  | [装饰器模式](https://github.com/xupengboo/design-patterns/tree/main/9.%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F/src/main/java/com/xupengboo) | 针对某个对象进行功能扩展或者包装，以 给咖啡 加牛奶 加糖为例，同一杯咖啡添加牛奶与不添加牛奶价格可能不同，同理加糖也是。 |
+  | [装饰器模式](https://github.com/xupengboo/design-patterns/tree/main/%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F/src/main/java/com/xupengboo) | 针对某个对象进行功能扩展或者包装，以 给咖啡 加牛奶 加糖为例，同一杯咖啡添加牛奶与不添加牛奶价格可能不同，同理加糖也是。 |
 
 ## 10. 外观模式
 
@@ -285,7 +285,7 @@ class MyClass {
 
 | 外观模式                                                     | 概述                                                         |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| [外观模式](https://github.com/xupengboo/design-patterns/tree/main/10.%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/src/main/java/com/xupengboo) | 以 计算机为例，外观上就是电脑，但里面的子系统有 CPU、Memory、HardDriver等，启动的时候先启动哪个再启动哪个，用户无需关心。缺点也很明显：**不符合开闭原则**！如果要改东西很麻烦。 |
+| [外观模式](https://github.com/xupengboo/design-patterns/tree/main/%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/src/main/java/com/xupengboo) | 以 计算机为例，外观上就是电脑，但里面的子系统有 CPU、Memory、HardDriver等，启动的时候先启动哪个再启动哪个，用户无需关心。缺点也很明显：**不符合开闭原则**！如果要改东西很麻烦。 |
 
 ## 11. 享元模式
 
