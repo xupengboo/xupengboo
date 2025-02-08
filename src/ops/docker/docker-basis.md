@@ -4,10 +4,24 @@ order: 2
 ---
 
 ## Docker 常用命令
-这个经常用于想要容器里面的某个文件时，非常好用！
-```shell
+
+1. 复制：
+
+```bash
+# 复制容器中的文件，到宿主机中，这个经常用于想要容器里面的某个文件时，非常好用！
 docker cp <container_id>:/path/in/container /path/on/host
 ```
+
+2. 标签：
+
+```bash
+# 为已有的 Docker 镜像打上新的标签（Tag）。标签是镜像的一个标识，可以用来管理和区分不同版本的镜像。通过 docker tag，你可以为同一个镜像创建多个不同的标签或名字，从而让你更灵活地管理镜像。
+docker tag <source-image> <target-image>
+# 例如：
+docker tag node:14 node:latest
+```
+
+
 
 ## Docker 清理 overlay2 目录
 
