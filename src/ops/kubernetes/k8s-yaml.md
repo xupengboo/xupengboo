@@ -6,7 +6,9 @@ order: 13
 
 ## Kubernetes 的yaml配置文件
 
-> Kubernetes 的 YAML 配置文件是定义和管理集群中的所有资源的关键工具。了解如何编写和使用这些配置文件对管理 Kubernetes 集群至关重要。
+::: info
+Kubernetes 的 YAML 配置文件是定义和管理集群中的所有资源的关键工具。了解如何编写和使用这些配置文件对管理 Kubernetes 集群至关重要。
+:::
 
 ## 1. 基础结构
 

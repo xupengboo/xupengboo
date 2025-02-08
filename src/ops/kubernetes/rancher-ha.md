@@ -27,7 +27,9 @@ order: 33
 
 这种架构使得 Rancher 更加可靠，并可以利用 Kubernetes 本身的自动恢复机制来增强服务的稳定性。
 
-> 提示：这个前置 Kubernetes 集群 ，也被称为 `Bootstrap 集群` 。Rancher 的所有服务（如 API 服务、Web UI 等）将作为多个 Pod 部署在这个集群中。
+::: tip
+这个前置 Kubernetes 集群 ，也被称为 `Bootstrap 集群` 。Rancher 的所有服务（如 API 服务、Web UI 等）将作为多个 Pod 部署在这个集群中。
+:::
 
 Rancher 的 HA 模式需要一个 **外部数据库**（推荐 MySQL 或 PostgreSQL）来存储其配置信息和状态数据。
 
