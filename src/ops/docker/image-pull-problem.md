@@ -19,8 +19,10 @@ vi /etc/docker/daemon.json
 
 ```json
 {
-	"registry-mirrors": [
-        "https://docker-0.unsee.tech"
+    "registry-mirrors": [
+    	"https://docker-0.unsee.tech",
+        "https://docker-cf.registry.cyou",
+        "https://docker.1panel.live"
     ]
 }
 ```
