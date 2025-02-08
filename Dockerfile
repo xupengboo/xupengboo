@@ -9,7 +9,7 @@ RUN npm install --verbose --registry=https://registry.npmmirror.com
 # 执行 npm run build:prod 命令
 RUN npm run docs:build
 # 使用官方的 Nginx 镜像
-FROM nginx:1.10
+FROM nginx:latest
 # 将宿主机的 nginx.conf 文件复制到容器中的 /etc/nginx/ 目录
 COPY nginx.conf /etc/nginx/nginx.conf
 # 从第一build阶段获取dist下的文件移动到容器中的 /usr/share/nginx/html/ 目录

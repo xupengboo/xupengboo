@@ -3,20 +3,45 @@ title: Docker 基础知识
 order: 2
 ---
 
-## Docker基础知识
-
-> Tips：记录docker的一些基本知识，忘记了回过头看看。
-
-
-## Docker常用命令
+## Docker 常用命令
 这个经常用于想要容器里面的某个文件时，非常好用！
 ```shell
 docker cp <container_id>:/path/in/container /path/on/host
 ```
 
+## Docker 清理 overlay2 目录
 
+如果 `/var/lib/docker/overlay2` 占用了大量磁盘空间，可以考虑以下方法：
 
-## Docker重启策略
+- 一般 docker 相关资源规划不当，就会造成overlay2目录堆积拥堵。
+
+1. **清理不再使用的容器**：
+
+   ```bash
+   docker container prune
+   ```
+
+2. **删除未使用的镜像**：
+
+   ```bash
+   docker image prune
+   ```
+
+3. **删除所有未使用的资源**：
+
+   ```bash
+   docker system prune -a
+   ```
+
+4. **查看空间占用**： 使用 `du` 命令查看 `/var/lib/docker/overlay2` 的大小：
+
+   ```bash
+   sudo du -sh /var/lib/docker/overlay2
+   ```
+
+5. **手动删除未使用的容器和镜像**：如果某些容器或镜像已经不再需要，可以使用 `docker rm` 和 `docker rmi` 删除它们。
+
+## Docker 重启策略
 
 当你启动一个容器时，可以通过 `--restart` 选项来设置重启策略。以下是几个常见的重启策略：
 
@@ -28,5 +53,22 @@ docker cp <container_id>:/path/in/container /path/on/host
 ```shell
 # 例如：--restart always
 docker run --restart always -d my-container
+```
+
+## Docker 配置容器日志等
+
+配置 `/etc/docker/daemon.json` ：
+
+```json
+{
+   "log-driver": "json-file", 	 # 设置日志驱动为 json-file
+   "log-opts": {			    
+      "max-size": "10m",		# 限制单个日志文件的最大大小为 10MB
+      "max-file": "3"		    # 保留最多 3 个日志文件
+   },
+   "registry-mirrors": [
+        "https://docker-0.unsee.tech"
+   ]
+}
 ```
 
