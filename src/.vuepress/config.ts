@@ -7,7 +7,7 @@ export default defineUserConfig({
 
   lang: "zh-CN",
   title: "PengBoo",
-  description: "vuepress-theme-hope 的文档演示",
+  description: "xupengboo的个人博客，基于VuePress构建的静态网站，主要用于分享和记录你的学习笔记、技术心得或其他有价值的内容。",
 
   theme,
 
