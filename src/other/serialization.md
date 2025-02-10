@@ -1,6 +1,7 @@
 ---
 title: 序列化与反序列化
 order: 3
+icon: fluent:data-line-20-filled
 ---
 
 ## 什么是序列化与反序列化？

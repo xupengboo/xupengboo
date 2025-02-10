@@ -1,5 +1,7 @@
 ---
 title: 操作系统
+order: 2
+icon: ix:operating-system
 ---
 
 ## ISO 镜像下载
