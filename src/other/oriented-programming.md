@@ -1,6 +1,7 @@
 ---
 title: 四种编程思想
 order: 5
+icon: solar:programming-bold
 ---
 
 

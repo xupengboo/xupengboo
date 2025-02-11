@@ -1,6 +1,7 @@
 ---
-title: RESTFUL 设计风格
+title: RESTful 设计风格
 order: 4
+icon: carbon:api-1
 ---
 
 RESTful 是一种基于 **REST（Representational State Transfer，表述性状态转移）** 架构风格的设计规范，主要用于构建高效、可扩展的 Web 服务。它通过 **资源（Resource）** 和 **HTTP 协议** 的标准方法来实现客户端与服务端的交互。以下是 RESTful 设计的核心要点和实现原则：
