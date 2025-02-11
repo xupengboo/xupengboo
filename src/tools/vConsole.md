@@ -1,6 +1,7 @@
 ---
 title: vConsole 移动端调试
 order: 4
+icon: hugeicons:tools
 ---
 
 官方地址：https://gitee.com/Tencent/vConsole

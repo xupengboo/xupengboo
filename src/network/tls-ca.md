@@ -1,6 +1,7 @@
 ---
 title: TLS传输链路和CA证书
 order: 2
+icon: humbleicons:certificate
 ---
 
 TLS（Transport Layer Security，传输层安全协议）和CA（Certificate Authority，证书颁发机构）证书是互联网通信安全的核心技术，主要用于保障数据在网络传输过程中的**机密性**、**完整性**和**身份认证**。

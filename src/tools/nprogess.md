@@ -1,6 +1,7 @@
 ---
-title: NProgess 进度条
+title: NProgess 进度条工具
 order: 3
+icon: hugeicons:tools
 ---
 
 `NProgress` 是一个轻量级的进度条库，用于在页面加载过程中显示进度条，提升用户体验。它一般用于 AJAX 请求、路由切换、页面加载等需要显示加载状态的场景。

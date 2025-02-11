@@ -1,6 +1,7 @@
 ---
-title: Nginx 工具使用
+title: Nginx 代理工具
 order: 1
+icon: hugeicons:tools
 ---
 
 ## Nginx 使用场景
