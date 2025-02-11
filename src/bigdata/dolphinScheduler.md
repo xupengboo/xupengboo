@@ -1,6 +1,7 @@
 ---
 title: DolphinScheduler 工具
 order: 4
+icon: simple-icons:apachedolphinscheduler
 ---
 
 ## DolphinScheduler

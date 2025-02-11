@@ -1,6 +1,7 @@
 ---
 title: GitHub 图床配置
-order: 1
+order: 2
+icon: mdi:github
 ---
 
 # Typora：PicGo设置GitHub图床
