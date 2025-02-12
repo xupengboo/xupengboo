@@ -91,9 +91,7 @@ print(f'识别结果：{text}')
 
 ## BeautifulSoup HTML或XML文档中提取数据
 
-### 1. 案例
-
-BeautifulSoup 是一个用于从 HTML 或 XML 文档中提取数据的 Python 库。
+1. BeautifulSoup 是一个用于从 HTML 或 XML 文档中提取数据的 Python 库。
 
 ```python
 import requests
@@ -134,9 +132,7 @@ with open('articles.csv', mode='w', newline='', encoding='utf-8') as files:
 print("爬取完成")
 ```
 
-### 2. 爬取网页图片
-
-处理渲染：
+2. 爬取网页图片，处理渲染：
 
 ```python
 from playwright.sync_api import sync_playwright
