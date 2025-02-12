@@ -142,9 +142,18 @@ fruits.remove('banana')
 # 遍历列表
 for fruit in fruits:
     print(fruit)
+
+# pop：pop out 弹出
+arr = [1, 2, 3, 4]
+last_element = arr.pop()  # 移除并返回最后一个元素
+print(last_element)  # 输出 4
+print(arr)  # 输出 [1, 2, 3]
+arr.pop(0)     # 删除第一个元素 O(n)
 ```
 
 ### 2.2 元组 Tuple
+
+一般用来 **存储常量或配置数据（搭配解包）、函数返回值**：
 
 ```python
 # 创建一个元组
@@ -160,6 +169,91 @@ print(a,b,c,d,e)
 # 检查元素是否存在
 print(3 in numbers)
 ```
+
+以下是针对元组的特性以及使用场景：
+
+1. 不可变性
+
+- 特点：元组一旦创建，其内容不可修改（不可增删改元素）。
+
+- 作用：
+
+  - 保证数据的完整性和安全性，防止意外修改。
+  - **适合存储常量或配置数据**。
+
+- 示例：
+
+  ```python
+  config = ("localhost", 8080)
+  # config[0] = "127.0.0.1"  # 会报错，元组不可修改
+  ```
+
+2. 性能优势
+
+- 特点：**元组比列表更轻量，占用内存更少，访问速度更快**。
+
+- 作用：
+
+  - 适合存储大量不可变数据，提升程序性能。
+
+- 示例：
+
+  ```python
+  import sys
+  my_list = [1, 2, 3]
+  my_tuple = (1, 2, 3)
+  print(sys.getsizeof(my_list))  # 列表占用内存 88
+  print(sys.getsizeof(my_tuple)) # 元组占用内存 64
+  ```
+
+3. 作为字典的键
+
+- 特点：元组是不可变的，因此**可以作为字典的键，而列表则不行**。
+
+- 作用：
+
+  - 适合存储复合键（如坐标、日期等）。
+
+- 示例：
+
+  ```python
+  locations = {(1, 2): "New York", (3, 4): "London"}
+  print(locations[(1, 2)])  # 输出 "New York"
+  ```
+
+4. 函数返回值
+
+- 特点：元组可以打包多个值，**作为函数的返回值**。
+
+- 作用：
+
+  - 方便返回多个结果，无需创建新的数据结构。
+
+- 示例：
+
+  ```python
+  def get_user_info():
+      return "Alice", 25, "Developer"
+  
+  name, age, job = get_user_info()  # 解包元组
+  print(name, age, job)
+  ```
+
+5. 解包操作
+
+- 特点：**元组支持解包**，可以方便地将元素赋值给多个变量。
+
+- 作用：
+
+  - 简化代码，提高可读性。
+
+- 示例：
+
+  ```python
+  point = (3, 5)
+  x, y = point  # 解包
+  print(x, y)
+  ```
 
 ### 2.3 字典 Dictionary
 
@@ -186,9 +280,17 @@ for key, value in student.items():
 
 ### 2.4 集合 Set
 
+集合（Set）是一种 **无序且不重复** 的数据结构，常用于**去重、成员检测（快速判断元素是否存在）和数学集合运算**。以下是 Set 的特性：
+
+- **无序性**：集合中的元素没有固定顺序。
+- **唯一性**：集合中的元素不可重复。
+- **可变性**：集合可以动态增删元素（但元素本身必须是不可变的，如数字、字符串、元组）。
+- **高效性**：集合基于哈希表实现，查找、插入、删除操作的平均时间复杂度为 O(1)*O*(1)。
+
 ```python
 # 创建一个集合
 numbers = {1, 2, 3, 4, 5}
+empty_set = set()   # 创建空集合
 
 # 添加元素
 numbers.add(6)
@@ -200,10 +302,11 @@ print(numbers)
 
 # 集合运算
 set1 = {1, 2, 3}
-set2 = {3, 4, 5}
-print(set1.union(set2))  # 并集
-print(set1.intersection(set2))  # 交集
-print(set1.difference(set2))  # 差集    
+set2 = {3, 4, 5}   
+print(set1.union(set2)); print(set1 | set2);  # 并集
+print(set1.intersection(set2)); print(set1 & set2);  # 交集
+print(set1.difference(set2)); print(set1 - set2);  # 差集    
+print(set1 ^ set2); print(set1.symmetric_difference(set2)); # 对称差集
 
 # 集合遍历
 for num in numbers:
