@@ -71,6 +71,13 @@ export default sidebar({
       collapsible: true,
     },
     {
+      text: "算法与数据结构",
+      icon: "hugeicons:algorithm",
+      prefix: "algstr/",
+      children: "structure",
+      collapsible: true,
+    },
+    {
       text: "其他",
       icon: "fluent-mdl2:checked-out-by-other-12",
       prefix: "other/",
