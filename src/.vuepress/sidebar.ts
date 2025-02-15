@@ -73,7 +73,7 @@ export default sidebar({
     {
       text: "算法与数据结构",
       icon: "hugeicons:algorithm",
-      prefix: "algstr/",
+      prefix: "algorithm/",
       children: "structure",
       collapsible: true,
     },

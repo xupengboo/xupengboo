@@ -1,5 +1,5 @@
 ---
-title: 时间/空间复杂度
+title: 时间 / 空间 复杂度
 order: 3
 icon: gridicons:domains
 ---

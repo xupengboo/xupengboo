@@ -1,5 +1,5 @@
 ---
-title: 数据结构
+title: 数据结构 基础
 order: 2
 icon: carbon:data-structured
 ---

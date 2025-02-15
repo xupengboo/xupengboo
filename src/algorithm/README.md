@@ -1,5 +1,5 @@
 ---
-title: 算法学习路线
+title: 算法学习 路线
 order: 1
 icon: hugeicons:algorithm
 ---
