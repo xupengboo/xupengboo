@@ -1,7 +1,6 @@
 ---
-title: Elastic Stack（ELK、Beats）
-order: 8
-icon: hugeicons:tools
+title: Elastic Stack（ELK、Beats）组件
+order: 1
 ---
 
 ## 1. Elastic Stack 
