@@ -1,53 +1,9 @@
 ---
-title: Elastic Stack（ELK、Beats）
-order: 8
-icon: hugeicons:tools
+title: Logstash 管道
+order: 2
 ---
 
-## 1. Elastic Stack 
-
-**Elasticsearch**
-
-- **功能**：Elasticsearch 是一个分布式的全文搜索和分析引擎，广泛应用于**日志和数据分析**。它支持强大的搜索功能和实时数据分析，并能够处理大规模的结构化和非结构化数据。
-- **特点**：它基于 Apache Lucene 库，使用 RESTful API，能够快速检索、分析和可视化海量数据，支持分布式架构、横向扩展。
-- **应用场景**：日志索引和搜索、应用性能监控、网站搜索功能等。
-
-**Kibana**
-
-- **功能**：Kibana 是一个数据可视化工具，能够与 Elasticsearch 紧密集成，用来展示和分析存储在 Elasticsearch 中的数据。它提供了丰富的图表、仪表板、地图和可视化工具，帮助用户从数据中发现趋势和异常。
-- **特点**：具有图形化界面，易于操作。用户可以通过 Kibana 创建动态的仪表板，并与团队共享分析结果。
-- **应用场景**：日志分析、指标监控、业务数据展示等。
-
-**Logstash**
-
-- **功能**：Logstash 是一个数据收集和处理管道工具，可以从各种不同的数据源（日志文件、数据库、消息队列等）中获取数据，并对数据进行解析、过滤、转换、增强，最后将其发送到 Elasticsearch 或其他目标存储。
-- **特点**：提供了丰富的插件支持，可以对数据进行灵活的格式转换（如 JSON、CSV、XML 等）。它还支持处理数据流的增量更新。
-- **应用场景**：日志收集与过滤、数据格式转换、从不同来源聚合数据等。
-
-**Beats**
-
-- **功能**：Beats 是 Elastic Stack 中的轻量级数据收集器，专门用于在边缘设备或客户端收集数据，并将其发送到 Logstash 或 Elasticsearch。Beats 提供了多种不同的工具来收集特定类型的数据，如 Filebeat（收集日志文件）、Metricbeat（收集系统指标）、Packetbeat（收集网络流量数据）等。
-- **特点**：每种 Beats 工具都针对特定类型的数据进行优化，轻量且高效。
-- **应用场景**：实时日志收集、基础设施监控、网络流量分析等。
-
-![image-20250214151625227](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250214151625227.png)
-
-## 2. Elastic Cloud
-
-Elastic Cloud 是 Elastic 公司提供的云服务，用于部署和管理 Elastic Stack（包括 Elasticsearch、Kibana、Logstash 等工具）。它的主要作用包括：
-
-1. 简化部署：快速创建和管理 Elasticsearch 集群。
-2. 弹性扩展：根据需求动态调整资源。
-3. 高可用性：内置冗余和故障转移机制。
-4. 监控与管理：提供集中化的监控和管理工具。
-
-![image-20250214153355828](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250214153355828.png)
-
-
-
-## 3. Logstash
-
-### 3.1 Logstash 介绍
+## 1. Logstash 介绍
 
 Logstash 是 Elastic Stack 的中央数据流引擎，用于收集、丰富和统一所有数据，而不管格式或模式。
 
@@ -67,7 +23,7 @@ Logstash 是 开源的流式 ETL 引擎（Extract，Transform，Load  即 提取
 
 :::
 
-### 3.2  Logstash 三层构造
+## 2.  Logstash 三层构造
 
 **第一层 `Inputs` ：收集数据**
 
@@ -101,7 +57,7 @@ Logstash 是 开源的流式 ETL 引擎（Extract，Transform，Load  即 提取
 
 :::
 
-### 3.3 Pipeline Dynamics  动态管道
+## 3. Pipeline Dynamics  动态管道
 
 支持 带条件的多管道 ：
 
@@ -109,9 +65,9 @@ Logstash 是 开源的流式 ETL 引擎（Extract，Transform，Load  即 提取
 
 ![image-20250214161816463](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250214161816463.png)
 
-### 3.4 Logstash 原理
+## 4. Logstash 原理
 
-#### 3.4.1 基本配置和事件
+### 4.1 基本配置和事件
 
 一个最基本的配置：
 
@@ -145,7 +101,7 @@ output {
 }
 ```
 
-#### 3.4.2 Logstash 执行模型
+### 3.4.2 Logstash 执行模型
 
 **一个管道包含数据处理的一个逻辑流程**。大体逻辑如下：
 
@@ -170,7 +126,7 @@ output {
 
 ![image-20250214165136670](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250214165136670.png)
 
-### 3.5 Logstash 队列和交付保障
+## 5. Logstash 队列和交付保障
 
 Queue 两种队列：`In-Memory Queue` 和 `Persistent Queue`
 
@@ -192,7 +148,7 @@ Queue 两种队列：`In-Memory Queue` 和 `Persistent Queue`
 
 :::
 
-### 3.6  Logstash 死信队列
+## 6.  Logstash 死信队列
 
 死信队列（DLQ）：
 
@@ -203,9 +159,9 @@ Queue 两种队列：`In-Memory Queue` 和 `Persistent Queue`
 
 ![image-20250214170504100](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250214170504100.png)
 
-### 3.7 Logstash 使用
+## 7. Logstash 使用
 
-#### 3.7.1 简单测试
+### 7.1 简单测试
 
 下载 Logstash：[Download Logstash Free | Get Started Now | Elastic](https://www.elastic.co/cn/downloads/logstash)
 
@@ -216,7 +172,7 @@ bin/logstash -e 'input { stdin { } } output { stdout {} }'
 
 ![PixPin_2025-02-14_17-42-57](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/PixPin_2025-02-14_17-42-57.gif)
 
-#### 3.7.2 官方 DEMO日志
+### 7.2 官方 DEMO日志
 
 官方有提供一些 DEMO 日志：https://github.com/elastic/examples ， 可以直接使用。
 
@@ -224,7 +180,7 @@ bin/logstash -e 'input { stdin { } } output { stdout {} }'
 
 ![image-20250215141637406](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250215141637406.png)
 
-#### 3.7.3 官方配置文档
+### 7.3 官方配置文档
 
 1. 确定自己使用的 Logstash 版本，去找对应的文档：[Logstash Reference | Elastic](https://www.elastic.co/guide/en/logstash/index.html)
 
@@ -260,7 +216,7 @@ filter {
 
 :::
 
-#### 3.7.4 Logstash 配置案例
+### 7.4 Logstash 配置案例
 
 一个加载本地文件的 Logstash 配置：
 
@@ -341,15 +297,15 @@ input {
 }
 ```
 
-### 3.8 Logstash Modules 使用
+## 8. Logstash Modules 使用
 
 Logstash 中的 **modules** 是一组预配置的配置文件和管道，用于帮助用户更轻松地处理和解析特定类型的数据。
 
 只需要指定一些名称就能处理，简化配置，自动检测和解析。
 
-### 3.9 Logstash 常用的 Filter 解析器
+## 9. Logstash 常用的 Filter 解析器
 
-#### 3.9.1 Grok filter
+### 9.1 Grok filter
 
 用于从文本日志中提取结构化数据。它通过匹配文本中的模式（通常是正则表达式）来识别并提取信息，常用于处理来自不同来源的非结构化或半结构化日志数据。
 
@@ -375,7 +331,7 @@ filter {
 %{IPV4:client_ip} - - \[%{HTTPDATE:timestamp}\] "%{WORD:method} %{URIPATH:request} HTTP/%{NUMBER:http_version}" %{NUMBER:status_code} %{NUMBER:bytes}
 ```
 
-#### 3.9.2 Date Filter
+### 9.2 Date Filter
 
 解析日期字段，将其转换为标准的时间戳格式（Epoch 时间）。特别适用于从日志中提取的日期字段，确保日期字段的一致性。
 
@@ -387,7 +343,7 @@ filter {
 }
 ```
 
-#### 3.9.3 DissectFilter
+### 9.3 DissectFilter
 
 一个非常高效且快速的文本解析工具。它专门用于按固定模式拆解文本数据，通常用于处理结构化且模式简单的日志数据。
 
@@ -401,7 +357,7 @@ filter {
 }
 ```
 
-#### 3.9.4 KV Filter
+### 9.4 KV Filter
 
 用于解析键值对格式的数据（例如：`key1=value1 key2=value2`）。这对于解析如日志中的某些定制字段非常有用。
 
@@ -417,7 +373,7 @@ filter {
 
 如果 `message` 字段包含以空格分隔的键值对，`kv` 过滤器会将每对键值解析为独立的字段。
 
-#### 3.9.5 Mutate Filter
+### 9.5 Mutate Filter
 
 用于修改事件中的字段，包括重命名字段、删除字段、添加字段、转换字段类型等。
 
@@ -442,7 +398,7 @@ filter {
 
 这将重命名字段 `old_field` 为 `new_field`，将 `username` 和 `email` 字段转换为小写，并将 `age` 字段转换为整数类型。
 
-#### 3.9.6 其他 Filter
+### 9.6 其他 Filter
 
 1. Conditional Logic （条件逻辑）：条件逻辑允许根据事件中的某些字段或条件决定是否执行特定的过滤器或输出操作。
 
@@ -521,13 +477,13 @@ filter {
 
 7. JDBC Static Filter（JDBC 静态过滤器）：`jdbc_static` 过滤器与 `jdbc_streaming` 类似，不过它是静态查询，即查询一次然后缓存结果。适用于那些不需要频繁更新的查询，性能相对更好。
 
-###  3.10 Logstash 监控管理
+## 10. Logstash 监控管理
 
 默认 Logstash 是没有监控的，启用需要进行配置，启用 X-Pack 监控。
 
 同样 kibana 也可以监控 Logstash ，也是需要启动对 Logstash 的监控支持。
 
-### 3.11 Logstash 更新配置 步骤
+## 11. Logstash 更新配置 步骤
 
 在重新配置 Logstash 后，配置更改 **不会立刻生效**，除非你 **重启 Logstash**。
 
