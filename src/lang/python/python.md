@@ -3,8 +3,6 @@ title: Python 基础
 order: 1
 ---
 
-# Python 基础
-
 ## 1. Python 基础语法
 
 ### 1.1 保留字

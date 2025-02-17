@@ -3,7 +3,9 @@ title: Python 爬虫
 order: 3
 ---
 
-> 爬虫实战 项目地址：[xupengboo-crawler](https://github.com/xupengboo/xupengboo-crawler)
+::: info 爬虫实战
+项目地址：[xupengboo-crawler](https://github.com/xupengboo/xupengboo-crawler) 【暂未开始】
+:::
 
 ## 1. 为什么学习爬虫？
 

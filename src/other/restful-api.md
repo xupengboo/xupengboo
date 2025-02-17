@@ -1,5 +1,5 @@
 ---
-title: RESTful 设计风格
+title: RESTful-API 设计风格
 order: 4
 icon: carbon:api-1
 ---
@@ -30,6 +30,13 @@ RESTful 是一种基于 **REST（Representational State Transfer，表述性状�
      ```bash
      GET /users/123       # 获取用户123的信息
      DELETE /users/123    # 删除用户123
+     
+     # 格式：
+     GET /users			# 获取所有用户信息。
+     GET /users/{id}      # 获取特定用户的详细信息。
+     POST /users			# 创建一个新用户。
+     PUT /users/{id}		# 更新某个用户的信息。
+     DELETE /users/{id}	# 删除某个用户。
      ```
 
 3. **无状态（Stateless）**
