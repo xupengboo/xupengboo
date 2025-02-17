@@ -1,5 +1,5 @@
 ---
-title: vConsole 移动端调试
+title: vConsole 移动端调试工具
 order: 4
 icon: hugeicons:tools
 ---
@@ -11,8 +11,6 @@ icon: hugeicons:tools
 vConsole 是框架无关的，可以在 Vue、React 或其他任何框架中使用。
 
 现在 vConsole 是微信小程序的官方调试工具。
-
-
 
 例如：Vue 项目，在入口文件 `main.ts` 判断当前环境，是否启用vConsole工具：
 
