@@ -3,13 +3,13 @@ title: Drios MPP数据库
 order: 1
 ---
 
+## 一. Drios 概述
 
+::: info
+关于部署，直接对接官方即可：https://doris.apache.org/docs/gettingStarted/quick-start
+:::
 
-## Drios 概述
-
->  关于部署，直接对接官方即可：https://doris.apache.org/zh-CN/docs/install/cluster-deployment/k8s-deploy/install-doris-operator 
-
-## Drios 实战
+## 二. Drios 实战
 
 如何将 MySQL 数据库表格以及数据，如何同步到 Drios 上呢？
 
