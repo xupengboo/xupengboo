@@ -1,11 +1,27 @@
-# 索引生命周期管理
+---
+title: Kibana 可视化管理平台
+order: 3
+---
 
-例如：日志管理，会将日志存储到对应索引中，logstash一般会根据日期将日志推送过来。
+## 1. 索引模板
 
-这样我们可以声明索引生命周期策略，多久去定期删除对应的日志信息，也可以通过索引管理手动删除。
+索引模板，可以让一些其他组件，例如：Logstash ，根据这个匹配规则匹配对应模板，根据这个模板来创建索引。
 
-![image-20241018104433445](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20241018104433445.png)
+![image-20250217183913813](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250217183913813.png)
 
-还可以声明索引模式，并且设置默认值：
+## 2. 索引声明周期策略
 
-![image-20241018104403682](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20241018104403682.png)
+可以声明索引生命周期策略，去**定期管理日志**（一般进行删除），也可以通过索引管理手动删除。
+
+![image-20250217184145601](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250217184145601.png)
+
+
+## 3. 索引模式
+声明索引模式，并且设置默认值：
+
+![image-20250217183508888](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250217183508888.png)
+
+索引模式，配置后可以在`discover` 中继续宁查看。
+
+![image-20250217183707421](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250217183707421.png)
+
