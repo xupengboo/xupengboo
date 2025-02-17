@@ -527,3 +527,29 @@ filter {
 
 同样 kibana 也可以监控 Logstash ，也是需要启动对 Logstash 的监控支持。
 
+### 3.11 Logstash 更新配置 步骤
+
+在重新配置 Logstash 后，配置更改 **不会立刻生效**，除非你 **重启 Logstash**。
+
+1. 修改你的 `logstash.conf` 或其他相关的配置文件。
+2. **验证配置文件正确性**：
+
+```bash
+bin/logstash -t -f /opt/logstash/logstash-8.17.2/config/pipelines.yml
+# -t：这个选项告诉 Logstash 检查配置文件的语法是否正确
+# -f：这个选项用来指定配置文件的路径。
+
+# 没问题会打印：Configuration OK 标识
+```
+
+3. 重启 Logstash 服务。
+
+```bash
+# docker部署：
+sodu docker restart logstash
+# 本地部署：
+sudo systemctl restart logstash
+```
+
+4. 检查 Logstash 日志。
+
