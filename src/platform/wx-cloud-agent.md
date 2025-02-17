@@ -14,7 +14,7 @@ icon: material-symbols:cloud
 - 例如：Dockerfile文件中，指令：`COPY src /demo-server/src` 中的src目录，就是代码路径中的src目录。
 
 2. **编写Dockerfile文件**（根据Dockerfile，创建镜像，启动容器）
-- 例如：[如何写一个Dockerfile文件？](https://github.com/ITholmes/hello-world/blob/master/%E5%AD%A6%E8%AF%86%E6%AE%BF%E5%A0%82/Docker/Dockerfile%EF%BC%9A%E5%A6%82%E4%BD%95%E5%86%99%E4%B8%80%E4%B8%AADockerfile%E6%96%87%E4%BB%B6%EF%BC%9F.md)
+- 例如：[如何写一个Dockerfile文件？](https://github.com/xupengboo/xupengboo/blob/master/src/ops/docker/dockerfile.md)
 
 ```Dockerfile
 # 选择构建用基础镜像。如需更换，请到[dockerhub官方仓库](https://hub.docker.com/_/java?tab=tags)自行选择后替换。
@@ -50,7 +50,9 @@ CMD ["java","-jar","demo-server-1.0-SNAPSHOT.jar"]
 
 ![image](https://github.com/ITholmes/hello-world/assets/70437837/8197e88c-8872-45b5-a26a-68976aaf495d)
 
-> 🎈参考官方：https://github.com/WeixinCloud/wxcloudrun-springboot
+:::tip
+🎈参考官方：https://github.com/WeixinCloud/wxcloudrun-springboot
+:::
 
 ## 二、如何使用服务 基础信息-环境变量 ？
 
@@ -88,7 +90,7 @@ spring:
 
 **node 环境变量配置：**
 ```js
-# 暂未实践
+// 暂未实践
 const serverAddress = process.env.SERVER_ADDRESS;
 ```
 
@@ -153,5 +155,5 @@ location /prod-api/ {
 
 而不是直接代理到 "https://dlnmpwnf.holmes-center-server.hahsntqc.ie54110f.com" ，此处协议不是https，并且端口也不是443，应该是8080 。
 
-一般内网地址不会是https协议的，其次，端口与暴露的端口一致，并不是直接通过域名映射到指定的ip:端口的！[](url)
+一般内网地址不会是https协议的，其次，端口与暴露的端口一致，并不是直接通过域名映射到指定的ip:端口的！
 
