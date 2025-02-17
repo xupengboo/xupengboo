@@ -1,10 +1,8 @@
 ---
-title: 四种编程思想：过程、对象、服务与资源
-order: 5
+title: 四种面向编程思想
+order: 2
 icon: solar:programming-bold
 ---
-
-
 
 ### **1. 面向过程编程（Procedural Programming）**
 

@@ -1,6 +1,7 @@
-# Android SDK 安装
-
-> Android SDK安装流程。
+---
+title: Android SDK 安装
+icon: material-symbols:android
+---
 
 ## 1. **安装 Java Development Kit (JDK)**
 
