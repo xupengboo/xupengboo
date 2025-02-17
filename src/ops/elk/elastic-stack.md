@@ -1,5 +1,5 @@
 ---
-title: Elastic Stack（ELK、Beats）组件
+title: Elastic Stack 组件
 order: 1
 ---
 
