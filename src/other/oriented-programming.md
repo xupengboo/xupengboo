@@ -1,5 +1,5 @@
 ---
-title: 四种编程思想
+title: 四种编程思想：过程、对象、服务与资源
 order: 5
 icon: solar:programming-bold
 ---
