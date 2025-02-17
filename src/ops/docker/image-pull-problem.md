@@ -34,3 +34,14 @@ vi /etc/docker/daemon.json
 ```shell
 systemctl restart docker
 ```
+
+
+
+也可以官方，单独拉取镜像：
+
+- https://github.com/DaoCloud/public-image-mirror
+
+```bash
+docker pull m.daocloud.io/docker.io/library/node:14.15.0
+```
+
