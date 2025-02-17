@@ -1,6 +1,6 @@
 ---
 title: CentOS 设置静态IP地址
-order: 23
+order: 3
 ---
 
 
