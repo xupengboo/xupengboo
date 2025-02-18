@@ -12,9 +12,10 @@ MSDN：[msdn.itellyou.cn](https://msdn.itellyou.cn/)   or   [next.itellyou.cn](h
 
 阿里云 CentOS8：https://mirrors.aliyun.com/centos/8/BaseOS/x86_64/os/
 
-> 参考：[推荐几个Windows iso镜像下载的网站](https://blog.csdn.net/B11050729/article/details/131893717)
->
-> 推荐：[next.itellyou.cn](https://next.itellyou.cn/) 里面包含很多Windows以及linux新版本的系统。
+:::info
+参考：[推荐几个Windows iso镜像下载的网站](https://blog.csdn.net/B11050729/article/details/131893717)
+推荐：[next.itellyou.cn](https://next.itellyou.cn/) 里面包含很多Windows以及linux新版本的系统。
+:::
 
 ## Ventoy 安装 启动U盘
 
