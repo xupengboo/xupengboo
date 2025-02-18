@@ -1,6 +1,7 @@
 ---
-title: hadoop 使用
+title: Hadoop 集群使用
 order: 2
+icon: mdi:bash
 ---
 
 ## HDFS 常用指令

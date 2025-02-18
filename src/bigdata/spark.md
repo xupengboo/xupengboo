@@ -1,6 +1,7 @@
 ---
 title: Spark 相关操作
 order: 3
+icon: mdi:bash
 ---
 
 ## 一、配置 Python 环境

@@ -1,6 +1,7 @@
 ---
 title: Hadoop 集群搭建
-order: 8
+order: 2
+icon: ant-design:cluster-outlined
 ---
 
 ## 搭建Hadoop集群

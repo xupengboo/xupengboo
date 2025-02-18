@@ -1,6 +1,7 @@
 ---
 title: Hbase 集群搭建
-order: 9
+order: 5
+icon: ant-design:cluster-outlined
 ---
 
 ## HBase

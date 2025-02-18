@@ -1,6 +1,7 @@
 ---
 title: Flink 集群搭建
-order: 7
+order: 4
+icon: ant-design:cluster-outlined
 ---
 
 
