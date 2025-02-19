@@ -1,7 +1,5 @@
-﻿---
-title: Linux 命令
+﻿title: Linux 命令
 order: 1
----
 
 
 # 1. Linux 之 文件目录 工作机制
@@ -738,17 +736,116 @@ Swap:         4094          0       4094
 
 ## 6.1 curl、wget
 
-> curl 命令是`一个利用 URL 规则在命令行下工作的文件传输工具`。它`支持文件的上传和下载`，所以是综合传输工具，但按传统，习惯称 curl 为下载工具。作为一款强力工具，curl 支持包括 HTTP、HTTPS、ftp 等众多协议，还支持 POST、cookies、认证、从指定偏移处下载部分文件、用户代理字符串、限速、文件大小、进度条等特征。做网页处理流程和数据检索自动化，curl 可以祝一臂之力。
+`curl` 是一个命令行工具，用于通过 URL 与服务器进行交互。它支持多种协议（如 HTTP、HTTPS、FTP、SFTP、SMTP 等），主要用于发送请求、接收响应和与远程服务器交换数据。
 
-示例：
+用途：
+
+1. 发送 HTTP 请求，使用 `-X` 指定 HTTP 方法，适用于非默认的 HTTP 动作（如 DELETE、PUT）。
+
+```bash
+# GET 请求：请求某个 URL 的内容（默认就是 GET 请求）。
+curl https://jsonplaceholder.typicode.com/posts
+
+# POST 请求：向服务器提交数据（例如，提交表单数据或 JSON 数据）。
+curl -X POST -d "name=John&age=30" https://jsonplaceholder.typicode.com/users
+
+# 发送 JSON 数据的例子：
+curl -X POST -H "Content-Type: application/json" -d '{"name": "John", "age": 30}' https://jsonplaceholder.typicode.com/users
+
+# PUT 请求：用于更新资源。
+curl -X PUT -d '{"name": "John Updated", "age": 31}' https://jsonplaceholder.typicode.com/users/1
+
+# DELETE 请求：删除资源。
+curl -X DELETE https://jsonplaceholder.typicode.com/users/1
+```
+
+2. 上传文件
+
+```bash
+# 使用 -F 参数上传文件到服务器（例如，上传图片到某个 API）。
+curl -X POST -F "file=@/path/to/file.jpg" https://example.com/upload
+```
+
+3. 获取响应头信息
+
+```bash
+# 只获取响应头，而不获取内容，使用 -I（或 --head）参数。
+curl -I https://www.example.com
+
+# 显示详细的响应头信息（包括请求头、响应头等）。
+curl -v https://www.example.com
+```
+
+4. 指定请求头
+
+```bash
+# 设置自定义的 HTTP 请求头。例如，模拟浏览器请求：
+curl -H "User-Agent: Mozilla/5.0" https://www.example.com
+
+# 发送带有 Authorization 头部的请求（例如，Bearer Token 或基本认证）。
+curl -H "Authorization: Bearer <your_token>" https://api.example.com/data
+
+# 使用基本认证
+curl -u "username:password" https://api.example.com/protected
+```
+
+5. 身份认证
+
+```bash
+# 使用基本认证（-u）进行身份验证。
+curl -u "username:password" https://protected.example.com
+```
+
+6. 支持重定向，默认情况下，curl 不会自动跟随 HTTP 重定向
+
+```bash
+# 默认情况下，curl 不会自动跟随 HTTP 重定向。如果你想让它自动跟随，可以使用 -L 参数。
+curl -L https://example.com/redirect
+```
+
+7. 设置代理
+
+```bash
+# 使用 -x 或 --proxy 设置 HTTP 代理。
+curl -x http://proxy.example.com:8080 https://www.example.com
+```
+
+8. 下载文件
 
 ```shell
 # 下载文件
-$ curl http://man.linuxde.net/text.iso --silent
+curl http://man.linuxde.net/text.iso --silent
 
-# 下载文件，指定下载路径，并查看进度
-$ curl http://man.linuxde.net/test.iso -o filename.iso --progress
+# 使用 -o 将文件下载到本地，指定保存的文件名。
+curl http://man.linuxde.net/test.iso -o filename.iso --progress
 ########################################## 100.0%
+
+# 使用 -O 直接保存文件名为服务器上文件的名称。
+curl -O https://www.example.com/file.zip
+```
+
+9. `max-time` 设置超时
+
+```bash
+# 设置连接超时和响应超时，防止 curl 请求无响应时长时间等待。
+curl --max-time 10 https://www.example.com
+```
+
+10. 请求携带 Cookies
+
+```bash
+# 使用 -b 发送 Cookies，例如，模拟用户登录后请求某个页面。
+curl -b "name=value; sessionid=12345" https://www.example.com/dashboard
+
+# 保存响应中的 Cookies，使用 -c。
+curl -c cookies.txt https://www.example.com
+```
+
+11. 调试请求
+
+```bash
+# 使用 -v（verbose）调试请求和响应，查看详细的通信过程。
+curl -v https://www.example.com
 ```
 
 > wget 命令用来从指定的 URL 下载文件。
