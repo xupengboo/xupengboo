@@ -283,11 +283,66 @@ F(n) = F(n-1) + F(n-2) (n ≥ 2)
 
 :::
 
+```python
+def fibonacci_search(arr, target):
+    n = len(arr)
+    
+    # 生成斐波那契数列，找到 F(k) ≥ n
+    fib_m2 = 0  # F(k-2)
+    fib_m1 = 1  # F(k-1)
+    fib = fib_m1 + fib_m2  # F(k)
+    while fib < n:
+        fib_m2 = fib_m1
+        fib_m1 = fib
+        fib = fib_m1 + fib_m2
+    
+    low = 0
+    high = fib_m1 - 1  # 扩展后的数组长度为 F(k)
+    offset = -1
+    
+    # 扩展数组（填充尾部）
+    while len(arr) < fib:
+        arr.append(arr[-1])
+    
+    while fib > 1:
+        mid = min(low + fib_m2 -1, high)
+        
+        if target < arr[mid]:
+            # 向左半部分查找
+            high = mid - 1
+            fib = fib_m2
+            fib_m1 = fib_m1 - fib_m2
+            fib_m2 = fib - fib_m1
+        elif target > arr[mid]:
+            # 向右半部分查找
+            low = mid + 1
+            fib = fib_m1
+            fib_m1 = fib_m2
+            fib_m2 = fib - fib_m1
+        else:
+            # 找到目标，检查是否为填充值
+            return mid if mid < n else n-1
+    
+    # 检查最后一个元素
+    if fib_m1 and arr[low] == target:
+        return low
+    return -1
 
+arr = [1,2,3,4,5,6,7,8,9,11]
+print(fibonacci_search(arr, 9))        
+```
 
 ### 6. 树结构查找
 
+:::tip 什么是二叉树？
+
+二叉树（Binary Tree）是一种树形数据结构，它的特点是每个节点最多有两个子节点，通常被称为 **左子节点** 和 **右子节点**。
+
+:::
+
 #### 6.1 二叉搜索树（BST，Binary Search Tree）
+
+定义：二叉搜索树是一种有序的二叉树，其每个节点的左子树所有节点的值都小于该节点的值，右子树所有节点的值都大于该节点的值。
 
 核心思想：左子树节点 < 根节点 < 右子树节点
 
@@ -295,11 +350,73 @@ F(n) = F(n-1) + F(n-2) (n ≥ 2)
 
 优化：使用平衡树（如 AVL、红黑树）保持 O(log n) 时间复杂度。
 
-:::tip
+```python
+class TreeNode:
 
-红黑树是一种平衡的二叉查找树，每个节点除了存储键值外，还会存储一个颜色属性（红色或黑色），并满足一定的红黑树性质。红黑树的关键特点是：从任意节点到其叶子节点的所有路径上，必须包含相同数目的黑色节点。
+    def __init__(self, key):
+        self.key = key
+        self.left = None
+        self.right = None
+    
+class BST:
 
-:::
+    def __init__(self):
+        self.root = None
+    
+    def insert(self, val):
+        """插入节点"""
+        if not self.root:
+            self.root = TreeNode(val)
+        else:
+            self._insert_recursive(self.root, key)
+    
+    def _insert_recursive(self, node, key):
+        if key < node.key:
+            if node.left is None:
+                node.left = TreeNode(key)
+            else:
+                self._insert_recursive(node.left, key)
+        else:
+            if node.right is None:
+                node.right = TreeNode(key)
+            else:
+                self._insert_recursive(node.right, key)
+
+    def search(self, key):
+        """查找节点"""
+        return self._search_recursive(self.root, key)
+
+    def _search_recursive(self, node, key):
+        if node is None: 
+            return False
+        if key == node.key:
+            return True
+        elif key < node.key:
+            return self._search_recursive(node.left, key)
+        else:
+            return self._search_recursive(node.right, key)
+    
+    def inorder_traversal(self):
+        """中序遍历（返回有序序列）"""
+        result = []
+        self._inorder_recursive(self.root, result)
+        return result
+    
+    def _inorder_recursive(self, node, result):
+        if node:
+            self._inorder_recursive(node.left, result)
+            result.append(node.key)
+            self._inorder_recursive(node.right, result)
+
+# 测试
+bst = BST()
+keys = [5, 3, 7, 2, 4, 6, 8]
+for key in keys:
+    bst.insert(key)
+print("BST中序遍历:", bst.inorder_traversal())  # 输出: [2, 3, 4, 5, 6, 7, 8]
+print("查找 6:", bst.search(6))  # 输出: True
+print("查找 9:", bst.search(9))  # 输出: False
+```
 
 
 
@@ -309,5 +426,45 @@ F(n) = F(n-1) + F(n-2) (n ≥ 2)
 
 时间复杂度：O(log n)（层级少，适合大规模数据）。
 
-适用场景：数据库索引、文件系统。
+适用场景：
 
+- **B树适用**：MongoDB文档存储（需快速就地更新）
+- **B+树适用**：MySQL InnoDB索引（需高效范围扫描）
+
+:::tip 什么是多路平衡查找树？
+
+B 树和 B+ 树都是多路平衡查找树。
+
+**多路平衡查找树（Multi-way Balanced Search Tree）** 是一种树形数据结构，它扩展了二叉查找树的概念，使得每个节点可以有多个子节点，并且仍然保持平衡，以确保在查找、插入和删除操作时能够保持高效的时间复杂度。
+
+**阶数（m）** 指的是树中每个节点最多可以有多少个子节点。
+
+对于一个阶数为 **m** 的多路平衡查找树：
+
+- 每个节点最多可以有 **m 个子节点**。
+- 每个节点最多可以存储 **m - 1 个关键字**。
+
+假设我们有一个 **阶数为 4** 的树（即 m = 4）：
+
+- 每个节点最多可以有 **4 个子节点**。
+- 每个节点最多可以存储 **3 个关键字**。
+
+假设我们插入以下元素：`10, 20, 5, 15, 25, 30, 35`。
+
+在阶数为 4 的多路平衡查找树中，树可能会长成这样：
+
+```less
+            [10, 20, 30]
+           /    |    |    \
+       [5]   [15]  [25]  [35]
+```
+
+:::
+
+B 树与 B+ 树的区别：
+
+| **特征**         | **B树**                          | **B+树**                             |
+| ---------------- | -------------------------------- | ------------------------------------ |
+| **数据存储位置** | 所有节点均可存储数据             | 仅叶子节点存储完整数据               |
+| **键值冗余**     | 无冗余（键值唯一存在于一个节点） | 内部节点键值冗余（在叶子层重复出现） |
+| **叶子结构**     | 独立分散的叶子节点               | 叶子节点通过双向链表串联             |
