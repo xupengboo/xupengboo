@@ -468,3 +468,148 @@ B 树与 B+ 树的区别：
 | **数据存储位置** | 所有节点均可存储数据             | 仅叶子节点存储完整数据               |
 | **键值冗余**     | 无冗余（键值唯一存在于一个节点） | 内部节点键值冗余（在叶子层重复出现） |
 | **叶子结构**     | 独立分散的叶子节点               | 叶子节点通过双向链表串联             |
+
+
+
+### 7. 跳表查询（Skip List）
+
+核心思想：通过多层链表索引加速查找，类似二分查找的分层思想。
+
+时间复杂度：O(log n)。
+
+适用场景：实现简单，支持范围查询。替代平衡树（如 Redis 的有序集合）。
+
+```python
+import random
+
+class Node:
+    def __init__(self, value, level):
+        self.value = value  # 节点值
+        self.forward = [None] * (level + 1)  # 前进指针，长度为当前节点层数
+
+class SkipList:
+    def __init__(self, max_level=16):
+        self.max_level = max_level  # 跳表的最大层数
+        self.level = 0  # 当前跳表的层数
+        self.header = Node(None, self.max_level)  # 跳表的头节点
+        self.header.forward[0] = None  # 初始化底层链表为空
+
+    def random_level(self):
+        level = 0
+        while random.random() < 0.5 and level < self.max_level:
+            level += 1
+        return level
+
+    def insert(self, value):
+        update = [None] * (self.max_level + 1)  # 用于记录每一层的前驱节点
+        current = self.header
+
+        # 从跳表的最高层开始向下查找
+        for i in range(self.level, -1, -1):
+            while current.forward[i] and current.forward[i].value < value:
+                current = current.forward[i]
+            update[i] = current
+
+        # 跳表中是否已经存在该值
+        current = current.forward[0]
+        if current and current.value == value:
+            return  # 如果存在该值，则不插入
+
+        # 随机生成新节点的层数
+        new_level = self.random_level()
+
+        # 如果新节点的层数大于当前跳表的层数，则增加跳表的层数
+        if new_level > self.level:
+            for i in range(self.level + 1, new_level + 1):
+                update[i] = self.header
+            self.level = new_level
+
+        # 创建新节点
+        new_node = Node(value, new_level)
+
+        # 更新各层的前进指针
+        for i in range(new_level + 1):
+            new_node.forward[i] = update[i].forward[i]
+            update[i].forward[i] = new_node
+
+    def search(self, value):
+        current = self.header
+        for i in range(self.level, -1, -1):
+            while current.forward[i] and current.forward[i].value < value:
+                current = current.forward[i]
+        current = current.forward[0]
+        if current and current.value == value:
+            return current
+        return None
+
+    def delete(self, value):
+        update = [None] * (self.max_level + 1)
+        current = self.header
+
+        # 从跳表的最高层开始向下查找
+        for i in range(self.level, -1, -1):
+            while current.forward[i] and current.forward[i].value < value:
+                current = current.forward[i]
+            update[i] = current
+
+        current = current.forward[0]
+        if current and current.value == value:
+            # 删除节点
+            for i in range(self.level + 1):
+                if update[i].forward[i] != current:
+                    break
+                update[i].forward[i] = current.forward[i]
+            # 更新跳表的层数
+            while self.level > 0 and self.header.forward[self.level] is None:
+                self.level -= 1
+
+    def display(self):
+        for i in range(self.level, -1, -1):
+            current = self.header.forward[i]
+            print(f"Level {i}: ", end="")
+            while current:
+                print(current.value, end=" -> ")
+                current = current.forward[i]
+            print("None")
+
+# 使用示例
+skip_list = SkipList()
+
+# 插入数据
+skip_list.insert(3)
+skip_list.insert(6)
+skip_list.insert(7)
+skip_list.insert(9)
+skip_list.insert(12)
+
+# 查找数据
+result = skip_list.search(7)
+print("Found:", result.value if result else "Not found")
+
+# 删除数据
+skip_list.delete(6)
+
+# 显示跳表
+skip_list.display()
+```
+
+### 8. 广度优先搜索（BFS） 与 深度优先搜索（DFS）
+
+BFS（Breadth-First Search，广度优先搜索）是按照节点的“层次”逐层搜索，即先访问离起点最近的节点，再逐渐访问远离起点的节点。
+
+DFS（Depth-First Search，深度优先搜索）则是沿着一个路径尽可能深入，直到不能继续，再回溯到上一个节点，继续深入其他路径。
+
+
+
+
+
+### 9. 布隆过滤器（Bloom Filter）
+
+
+
+
+
+### 10. 三分搜索（Ternary Search）
+
+
+

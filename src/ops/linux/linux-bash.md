@@ -1,5 +1,7 @@
-﻿title: Linux 命令
+﻿---
+title: Linux 命令
 order: 1
+---
 
 
 # 1. Linux 之 文件目录 工作机制
