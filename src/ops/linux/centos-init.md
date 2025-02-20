@@ -27,10 +27,15 @@ cd /etc/yum.repos.d/
 mkdir repo_bak
 mv *.repo repo_bak/
 
-# 下载其他的仓库镜像源
-sudo curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo # 阿里
-sudo curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.163.com/.help/CentOS7-Base-163.repo # 网易
-sudo curl -o /etc/yum.repos.d/CentOS-Base.repo https://mirrors.tuna.tsinghua.edu.cn/help/centos7/ # 清华
+# 下载其他的仓库镜像源（注意：对应CentOS系统的版本号）
+# 阿里
+## 7版本：
+sudo curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo 
+## 8版本：
+sudo curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-8.repo
+# 网易
+## 7版本：
+sudo curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.163.com/.help/CentOS7-Base-163.repo 
 
 # 更新YUM源信息
 sudo yum update
