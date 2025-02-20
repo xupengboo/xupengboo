@@ -115,6 +115,10 @@ ping www.baidu.com
 - 例如：若子网为 `192.168.50.0/24`，网关一般为 `192.168.50.2`（可通过 VMware 虚拟网络编辑器验证）。
 - VMnet8 的 IP 地址（`192.168.50.1`）仅用于宿主机与虚拟机的通信，不承担网关功能。
 
+如果想要改变网关，可以去虚拟网络编译器配置：
+
+![image-20250221001434322](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250221001434322.png)
+
 :::
 
 网关以及IP配置都要基于 Vmnet8 实现，要注意网关的特殊性！
