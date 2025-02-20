@@ -21,6 +21,7 @@ CentOS官方镜像 下载地址：https://wiki.centos.org/Download.html
 
 1. 配置yum源
 
+CentOS 7：
 ```shell
 # 备份原来yum镜像源
 cd /etc/yum.repos.d/
@@ -28,13 +29,10 @@ mkdir repo_bak
 mv *.repo repo_bak/
 
 # 下载其他的仓库镜像源（注意：对应CentOS系统的版本号）
+# 注意是CentOS 7
 # 阿里
-## 7版本：
 sudo curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo 
-## 8版本：
-sudo curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-8.repo
 # 网易
-## 7版本：
 sudo curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.163.com/.help/CentOS7-Base-163.repo 
 
 # 更新YUM源信息
@@ -45,6 +43,19 @@ sudo yum repolist
 sudo yum clean all   
 # 生成新的缓存
 sudo yum makecache
+```
+
+CentOS 8（强制兼容 ）：
+```bash
+# 安装必要工具 
+sudo yum install -y yum-utils 
+ 
+# 添加 Docker 官方仓库（强制兼容 CentOS 8）
+sudo yum-config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo  
+sudo sed -i 's/\$releasever/8/g' /etc/yum.repos.d/docker-ce.repo  
+ 
+# 安装 Docker 
+sudo yum install docker-ce docker-ce-cli containerd.io  
 ```
 
 
