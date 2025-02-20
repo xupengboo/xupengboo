@@ -4,7 +4,7 @@ order: 1
 ---
 
 
-# 1. Linux 之 文件目录 工作机制
+## 1. Linux 之 文件目录 工作机制
 
 **Linux系统目录结构是树形结构，根目录是 `/`。**
 
@@ -44,13 +44,13 @@ dr-xr-xr-x   4 root root 4096 Apr 19  2012 boot
 
 bin 文件是一个目录文件，属主和属组都为 root，属主有可读、可写、可执行的权限；与属主同组的其他用户有可读和可执行的权限；其他用户也有可读和可执行的权限。
 
-# 2. Linux命令 之 文件目录管理
+## 2. Linux命令 之 文件目录管理
 
 >  **关键词：`cd`, `ls`, `pwd`, `mkdir`, `rmdir`, `tree`, `touch`, `ln`, `rename`, `stat`, `file`, `chmod`, `chown`, `locate`, `find`, `cp`, `scp`, `mv`, `rm`。**
 
-## 2.1 目录管理
+### 2.1 目录管理
 
-### 2.1.1 cd
+#### 2.1.1 cd
 
 >  cd 命令用来切换工作目录。
 
@@ -66,7 +66,7 @@ cd ../ 		# 切换到上级目录(与上一个一样)
 cd ../..    # 切换到上两级目录
 ```
 
-### 2.1.2 ls
+#### 2.1.2 ls
 
 > ls 命令用来显示目录信息。
 
@@ -80,11 +80,11 @@ ls -ltr   # 按修改时间列出文件和文件夹详细信息
 ls --color=auto     # 列出文件并标记颜色分类
 ```
 
-### 2.1.3 pwd
+#### 2.1.3 pwd
 
 > pwd 命令用来显示当前目录的绝对路径。
 
-### 2.1.4 mkdir
+#### 2.1.4 mkdir
 
 > mkdir 命令用来创建目录。
 
@@ -98,7 +98,7 @@ mkdir -p zp/test
 mkdir -p -m 750 zp/test
 ```
 
-### 2.1.5 rmdir
+#### 2.1.5 rmdir
 
 > rmdir 命令用来删除空目录。
 
@@ -107,7 +107,7 @@ mkdir -p -m 750 zp/test
 rmdir -p zp/test
 ```
 
-### 2.1.6 tree(需要安装)
+#### 2.1.6 tree(需要安装)
 
 > tree 命令以树状显示目录的内。
 
@@ -132,13 +132,13 @@ tree -L 2 >  /home/www/tree.txt  # 当前目录结果存到 tree.txt 文件中
 tree -I 'node_modules|icon|font' -L 2
 ```
 
-## 2.2 文件管理
+### 2.2 文件管理
 
-### 2.2.1 touch
+#### 2.2.1 touch
 
 >  touch命令有两个功能：一是用来创建空文件，二是用于把已存在文件的时间标签更新为系统当前的时间（默认方式），它们的数据将原封不动地保留下来。
 
-### 2.2.2 ln
+#### 2.2.2 ln
 
 > ln 命令用来为文件创建`链接`。默认是硬链接。
 
@@ -148,7 +148,7 @@ tree -I 'node_modules|icon|font' -L 2
 
 链接又可分为两种 : `硬链接(hard link)`与`软链接(symbolic link，又叫做 符号链接)`，硬链接的意思是一个档案可以有多个名称，而软链接的方式则是产生一个特殊的档案，该档案的内容是指向另一个档案的位置。硬链接是存在同一个文件系统中，而软链接却可以跨越不同的文件系统。
 
-### 2.2.3 rename
+#### 2.2.3 rename
 
 > rename 命令用字符串替换的方式批量重命名。
 
@@ -162,11 +162,11 @@ rename "s/$//.txt/" *           # 把所有的文件名都以 txt 结尾
 rename "s//.txt//" *            # 把所有以 .txt 结尾的文件名的.txt 删掉
 ```
 
-### 2.2.4 stat 
+#### 2.2.4 stat 
 
 > stat 命令用于显示文件的状态信息。stat 命令的输出信息比 ls 命令的输出信息要更详细。
 
-### 2.2.5 file 
+#### 2.2.5 file 
 
 > file 命令用来探测给定文件的类型。file 命令对文件的检查分为文件系统、魔法幻数检查和语言检查 3 个过程。
 
@@ -179,7 +179,7 @@ file -i install.log       # 显示 MIME 类型
 file -L /var/spool/mail   # 显示符号链接的文件类型
 ```
 
-### 2.2.6 chmod
+#### 2.2.6 chmod
 
 >  chmod 命令用来变更文件或目录的权限。
 
@@ -223,7 +223,7 @@ chmod 777 a.txt
 知识点：
 - 在所有命令中，大多数` -r 参数命令`就可以理解为递归，文件夹的递归，文件夹下的文件或者文件夹，这样好记，方便理解。
 
-### 2.2.7 chown
+#### 2.2.7 chown
 
 >  chown 命令改变某个文件或目录的所有者和所属的组，该命令可以向某个用户授权，使该用户变成指定文件的所有者或者改变文件所属的组。
 - 只有文件拥有者和超级用户才可以便用该命令。
@@ -234,7 +234,7 @@ chmod 777 a.txt
 chown -R liu /usr/meng
 ```
 
-### 2.2.8 locate 和 updatedb 
+#### 2.2.8 locate 和 updatedb 
 
 > locate 命令和 slocate 命令都用来查找文件或目录。
 
@@ -253,7 +253,7 @@ locate /etc/sh  # 搜索 etc 目录下所有以 sh 开头的文件
 
 如果locate命令，不起作用，那就是没有更新数据库的原因。就限制性updatedb命令，之后再查找就可。
 
-### 2.2.9 find 
+#### 2.2.9 find 
 
 > find 命令用来在指定目录下查找文件。任何位于参数之前的字符串都将被视为欲查找的目录名。如果使用该命令时，不设置任何参数，则 find 命令将在当前目录下查找子目录与文件。并且将查找到的子目录和文件全部进行显示。
 
@@ -288,11 +288,11 @@ find . -iregex ".*\(\.txt\|\.pdf\)$"
 find /home ! -name "*.txt"
 ```
 
-### 2.2.10 which 
+#### 2.2.10 which 
 
 > which命令：查找命令的绝对路径。
 
-### 2.2.11 whereis
+#### 2.2.11 whereis
 
 > whereis命令： 查找命令的程序、源代码等相关文件
 - which + whereis 只能查找系统里面对应的环境变量$PATH设置的目录里查找符合条件的文件。
@@ -300,9 +300,9 @@ find /home ! -name "*.txt"
 小知识点：
 - **在/etc/profile，有时会看到`:$PATH` ，这个符号理解为将原来PATH下的内容，追加到后面。win7是用`;分号`进行分隔追加PATH路径，在这里道理一样的。**
 
-## 2.3 文件和目录通用管理
+### 2.3 文件和目录通用管理
 
-### 2.3.1 cp  
+#### 2.3.1 cp  
 
 > cp 命令用来将一个或多个源文件或者目录复制到指定的目的文件或目录。
 - 默认情况下，cp 命令不能复制目录，如果要复制目录，则必须使用`-r`选项；
@@ -322,7 +322,7 @@ cp -rf /usr/men/* /usr/zh
 cp -i /usr/men m*.c /usr/zh
 ```
 
-### 2.3.2 mv
+#### 2.3.2 mv
 
 > mv 命令用来对文件或目录重新命名，或者将文件从一个目录移到另一个目录中。
 
@@ -345,7 +345,7 @@ mv -f *.txt /home/office        # 无条件覆盖已经存在的文件
 mv -bv *.txt /home/office       # 复制时创建备份
 ```
 
-### 2.3.3 rm
+#### 2.3.3 rm
 
 > rm 命令可以删除一个目录中的一个或多个文件或目录，也可以将某个目录及其下属的所有文件及其子目录均删除掉。对于链接文件，只是删除整个链接文件，而原有文件保持不变。
 
@@ -361,7 +361,7 @@ rm -rf testdir            # 强制删除目录下的所有文件和目录
 rm -v testdir             # 显示当前删除操作的详情
 ```
 
-### 2.3.4 scp
+#### 2.3.4 scp
 
 > scp 命令用于在 Linux 下进行远程拷贝文件的命令，和它类似的命令有 cp，不过 cp 只是在本机进行拷贝不能跨服务器，而且 scp 传输是加密的。可能会稍微影响一下速度。当你服务器硬盘变为只读 read only system 时，用 scp 可以帮你把文件移出来。另外，scp 还非常不占资源，不会提高多少系统负荷，在这一点上，rsync 就远远不及它了。虽然 rsync 比 scp 会快一点，但当小文件众多的情况下，rsync 会导致硬盘 I/O 非常高，而 scp 基本不影响系统正常使用。
 
@@ -376,11 +376,11 @@ scp -r <folder>  <user> @<ip> :<url>
 scp -r test root@192.168.0.1:/opt
 ```
 
-# 3. Linux 之 文件内容查看 和 编辑
+## 3. Linux 之 文件内容查看 和 编辑
 
 > **关键词：`cat`, `head`, `tail`, `more`, `less`, `sed`, `vi`, `grep`。**
 
-## 3.1 cat 
+### 3.1 cat 
 
 > cat 命令用于连接文件并打印到标准输出设备上。
 
@@ -391,7 +391,7 @@ cat m1 m2           # 同时显示文件 ml 和 m2 的内容
 cat m1 m2 >  file    # 将文件 ml 和 m2 合并后放入文件 file 中
 ```
 
-## 3.2 head 
+### 3.2 head 
 
 > head 命令用于显示文件的开头内容。
 - 在默认情况下，head 命令显示文件的头部 10 行内容。
@@ -401,7 +401,7 @@ cat m1 m2 >  file    # 将文件 ml 和 m2 合并后放入文件 file 中
 head -n11 file01 # 查看file01文件开头的11行
 ```
 
-## 3.3 tail
+### 3.3 tail
 > tail 命令用于显示文件的尾部内容。
 
 - 在默认情况下，tail 命令显示文件的尾部 10 行内容。
@@ -429,7 +429,7 @@ tail -f ./aaas # 一直监控aaas文件
 
 ![image](https://github.com/ITholmes/hello-world/assets/70437837/4b2185d1-fde7-4b2d-bb70-9ab0351c53c9)
 
-## 3.4 more
+### 3.4 more
 
 > more 命令是一个基于 vi 编辑器文本过滤器，它以全屏幕的方式按页显示文本文件的内容，支持 vi 中的关键字定位操作。`more 名单中内置了若干快捷键，常用的有 H（获得帮助信息），Enter（向下翻滚一行），空格（向下滚动一屏），Q（退出命令）`。
 - 按 Space 键：显示文本的下一屏内容。
@@ -450,11 +450,11 @@ more -c -10 file
 
 **注意：more命令只能向前浏览。**
 
-## 3.5 less
+### 3.5 less
 
 > less 命令的作用与 more 十分相似，都可以用来浏览文字档案的内容，不同的是`less 命令允许用户向前或向后浏览文件`，而 more 命令只能向前浏览。用 less 命令显示文件时，用` PageUp 键向上翻页，用 PageDown 键向下翻页`。要退出 less 程序，应按 Q 键。
 
-## 3.6 sed
+### 3.6 sed
 
 > sed 是一种流编辑器，它是文本处理工具，能够完美的配合正则表达式使用，功能不同凡响。处理时，把当前处理的行存储在临时缓冲区中，称为“模式空间”（pattern space），接着用 sed 命令处理缓冲区中的内容，处理完成后，把缓冲区的内容送往屏幕。接着处理下一行，这样不断重复，直到文件末尾。文件内容并没有改变，除非你使用重定向存储输出。Sed 主要用来自动编辑一个或多个文件；简化对文件的反复操作；编写转换程序等。
 
@@ -488,11 +488,11 @@ sed '/^test/'d file
 
 ```
 
-## 3.7 vi
+### 3.7 vi
 
 > vi 命令是 UNIX 操作系统和类 UNIX 操作系统中最通用的全屏幕纯文本编辑器。Linux 中的 vi 编辑器叫 `vim，它是 vi 的增强版（vi Improved）`，与 vi 编辑器完全兼容，而且实现了很多增强功能。
 
-## 3.8 grep
+### 3.8 grep
 
 > grep（global search regular expression(RE) and print out the line，全面搜索正则表达式并把行打印出来）是一种强大的文本搜索工具，它能使用正则表达式搜索文本，并把匹配的行打印出来。
 
@@ -518,12 +518,12 @@ $ grep "main()" . -r --exclude "README"
 $ grep "main()" . -r --exclude-from filelist
 ```
 
-# 4. Linux 文件压缩和解压
+## 4. Linux 文件压缩和解压
 
 > **关键词：`tar`, `gzip`, `zip`, `unzip`。**
 
 
-## 4.1 tar
+### 4.1 tar
 
 > tar 配合参数，实现打包，压缩，解压缩等等操作。
 
@@ -561,7 +561,7 @@ tar -zxvf log.tar.gz                    # 将 tar 包解压缩
 tar -zxvf log30.tar.gz log2013.log      # 只将 tar 内的部分文件解压出来
 ```
 
-## 4.2 gzip
+### 4.2 gzip
 
 > gzip 命令用来压缩文件。gzip 是个使用广泛的压缩程序，文件经它压缩过后，其名称后面会多出“.gz”扩展名。
 
@@ -578,7 +578,7 @@ gzip -rv test/      # 递归的压缩目录
 gzip -dr test/      # 递归地解压目录
 ```
 
-## 4.3 zip
+### 4.3 zip
 
 > zip 命令用于压缩文件。zip 是个使用广泛的压缩程序，文件经它压缩后会另外产生具有“.zip”扩展名的压缩文件。
 
@@ -589,7 +589,7 @@ gzip -dr test/      # 递归地解压目录
 zip -q -r html.zip /home/Blinux/html
 ```
 
-## 4.4 unzip
+### 4.4 unzip
 
 > unzip 命令用于解压缩由 zip 命令压缩的“.zip”压缩包。
 
@@ -602,11 +602,11 @@ unzip -o test.zip -d /tmp/  # 在指定目录下解压缩，如果有相同文�
 unzip -v test.zip           # 查看压缩文件目录，但不解压
 ```
 
-# 5. Linux 之 硬件管理
+## 5. Linux 之 硬件管理
 
 > **关键词：`df`, `du`, `top`, `free`, `iotop`。**
 
-## 5.1 df
+### 5.1 df
 
 > df 命令(disk)用于`显示磁盘分区上的可使用的磁盘空间`。默认显示单位为 KB。可以利用该命令来获取硬盘被占用了多少空间，目前还剩下多少空间等信息。
 
@@ -645,7 +645,7 @@ tmpfs                  1032204         0   1032204   0% /dev/shm
 none                         0         0         0   -  /proc/sys/fs/binfmt_misc
 ```
 
-## 5.2 du 
+### 5.2 du 
 
 > du 命令是`对文件和目录磁盘使用的空间的查看`。
 
@@ -695,7 +695,7 @@ root@localhost [test]# du
 32 scf
 ```
 
-## 5.3 top
+### 5.3 top
 
 > top 命令，就可以`理解为linux系统的任务管理器`。实时动态地查看系统的整体运行情况，是一个综合了多方信息监测系统性能和运行信息的实用工具。
 
@@ -707,7 +707,7 @@ root@localhost [test]# du
 
 - 运行top命令后，键入大写M。
 
-## 5.4 free 
+### 5.4 free 
 
 > free 命令，`针对内存的`，可以显示当前系统未使用的和已使用的内存数目，还可以显示被内核使用的内存缓冲区。
 
@@ -726,17 +726,17 @@ Mem:          2016       1973         42          0        163       1497
 Swap:         4094          0       4094
 ```
 
-## 5.5 iotop (需要安装)
+### 5.5 iotop (需要安装)
 
 > iotop 命令是一个用来监视磁盘 I/O 使用状况的 top 类工具。
 
 ![image](https://github.com/ITholmes/hello-world/assets/70437837/8161a4bc-b979-4d66-a16d-be2c972042f5)
 
-# 6. Linux 之 网络管理
+## 6. Linux 之 网络管理
 
 > **关键词：`curl`,`wget`, `telnet`, `ip`, `hostname`, `ifconfig`, `route`, `ssh`, `ssh-keygen`, `firewalld`, `iptables`, `host`, `nslookup`, `nc/netcat`, `ping`, `traceroute`, `netstat`。**
 
-## 6.1 curl、wget
+### 6.1 curl、wget
 
 `curl` 是一个命令行工具，用于通过 URL 与服务器进行交互。它支持多种协议（如 HTTP、HTTPS、FTP、SFTP、SMTP 等），主要用于发送请求、接收响应和与远程服务器交换数据。
 
@@ -859,7 +859,7 @@ curl -v https://www.example.com
 $ wget http://www.linuxde.net/testfile.zip
 ```
 
-## 6.2 telnet 
+### 6.2 telnet 
 
 > telnet 命令一般用作测试远程端口连接，功能是用于远端登入。
 
@@ -878,7 +878,7 @@ Password:
 Login incorrect
 ```
 
-## 6.4 ip
+### 6.4 ip
 
 > ip 命令用来查看或操纵 Linux 主机的路由、网络设备、策略路由和隧道，是 Linux 下较新的功能强大的网络配置工具。
 
@@ -906,15 +906,15 @@ $ ip route del default          # 删除默认路由
 $ ip route delete 192.168.1.0/24 dev eth0 # 删除路由
 ```
 
-## 6.5 hostname
+### 6.5 hostname
 
 > hostname 命令`用于查看和设置系统的主机名称`。环境变量 HOSTNAME 也保存了当前的主机名。在使用 hostname 命令设置主机名后，系统并不会永久保存新的主机名，重新启动机器之后还是原来的主机名。如果需要永久修改主机名，需要同时修改 /etc/hosts 和 /etc/sysconfig/network 的相关内容。
 
-## 6.6 ifconfig
+### 6.6 ifconfig
 
 > ifconfig 命令`被用于查看和配置 Linux 内核中网络接口的网络参数`。用 ifconfig 命令配置的网卡信息，在网卡重启后机器重启后，配置就不存在。要想将上述的配置信息永远的存的电脑里，那就要修改网卡的配置文件了。
 
-## 6.7 route
+### 6.7 route
 
 > route 命令用来`查看和设置 Linux 内核中的网络路由表`，route 命令设置的路由主要是静态路由。要实现两个不同的子网之间的通信，需要一台连接两个网络的路由器，或者同时位于两个网络的网关来实现。
 
@@ -939,7 +939,7 @@ route add default gw 192.168.120.240                   # 添加默认网关
 route del default gw 192.168.120.240                   # 删除默认网关
 ```
 
-## 6.8 ssh
+### 6.8 ssh
 
 > ssh 命令是 `openssh 套件中的客户端连接工具`，可以给予 ssh 加密协议实现安全的`远程登录服务器`。
 
@@ -952,15 +952,15 @@ ssh user1@172.24.210.101
 ssh -p 2211 root@140.206.185.170
 ```
 
-## 6.9 ssh-keygen 
+### 6.9 ssh-keygen 
 
 > ssh-keygen 命令用于`为 ssh 生成、管理和转换认证密钥`，它支持 RSA 和 DSA 两种认证密钥。
 
-## 6.10 firewalld
+### 6.10 firewalld
 
 > firewalld 命令是 Linux 上的`防火墙软件`。
 
-### 6.10.1 firewalld 的基本使用
+#### 6.10.1 firewalld 的基本使用
 
 1. 启动 - systemctl start firewalld
 2. 关闭 - systemctl stop firewalld
@@ -968,7 +968,7 @@ ssh -p 2211 root@140.206.185.170
 4. 开机禁用 - systemctl disable firewalld
 5. 开机启用 - systemctl enable firewalld
 
-### 6.10.2 使用 systemctl 管理 firewalld 服务
+#### 6.10.2 使用 systemctl 管理 firewalld 服务
 
 > systemctl 是服务管理工具中主要的工具，它融合之前 service 和 chkconfig 的功能于一体。
 
@@ -982,7 +982,7 @@ ssh -p 2211 root@140.206.185.170
 - 查看已启动的服务列表 - systemctl list-unit-files|grep enabled
 - 查看启动失败的服务列表 - systemctl --failed
 
-### 6.10.3 配置 firewall-cmd（需要安装）
+#### 6.10.3 配置 firewall-cmd（需要安装）
 
 1. 查看版本 - firewall-cmd --version
 2. 查看帮助 - firewall-cmd --help
@@ -995,14 +995,14 @@ ssh -p 2211 root@140.206.185.170
 9. 取消拒绝状态 - firewall-cmd --panic-off
 10. 查看是否拒绝 - firewall-cmd --query-panic
 
-### 6.10.4 在防火墙中开放一个端口(常用)
+#### 6.10.4 在防火墙中开放一个端口(常用)
 
 - 添加（--permanent 永久生效，没有此参数重启后失效） - firewall-cmd --zone=public --add-port=80/tcp --permanent
 - 重新载入 - firewall-cmd --reload
 - 查看 - firewall-cmd --zone= public --query-port=80/tcp
 - 删除 - firewall-cmd --zone= public --remove-port=80/tcp --permanent
 
-## 6.11 iptables 
+### 6.11 iptables 
 
 > iptables 命令是` Linux 上常用的防火墙软件`，是 netfilter 项目的一部分。可以直接配置，也可以通过许多前端和图形界面配置。
 
@@ -1045,34 +1045,34 @@ Chain OUTPUT (policy ACCEPT 3382K packets, 1819M bytes)
  5075  589K ACCEPT     all  --  *      lo      0.0.0.0/0            0.0.0.0/0
 ```
 
-## 6.12 host 
+### 6.12 host 
 
 > host 命令是常用的`分析域名查询工具`，可以用来`测试域名系统工作是否正常`。
 
 ![image](https://github.com/ITholmes/hello-world/assets/70437837/4cf48dbb-02ff-4c00-b30d-7010713aeccb)
 
-## 6.13 nslookup
+### 6.13 nslookup
 
 > nslookup 命令是常用域名查询工具，就是查 DNS 信息用的命令。
 
 ![image](https://github.com/ITholmes/hello-world/assets/70437837/1a63205e-7c80-4f41-86c8-9cdf62306ebd)
 
 
-## 6.14 nc/netcat
+### 6.14 nc/netcat
 
 > nc 命令是 netcat 命令的简称，都是用来设置路由器。
 
-## 6.15 ping
+### 6.15 ping
 
 > ping 命令用来`测试主机之间网络的连通性`。
 
-## 6.16 traceroute（需要安装）
+### 6.16 traceroute（需要安装）
 
 > traceroute 命令用于`追踪数据包在网络上的传输时的全部路径`，它默认发送的数据包大小是 40 字节。
 
 ![image](https://github.com/ITholmes/hello-world/assets/70437837/e8e4b0f2-8852-4896-a875-3cc64661dcc1)
 
-## 6.17 netstat
+### 6.17 netstat
 
 > netstat 命令用于`显示网络状态`，打印 Linux 中网络系统的状态信息，可让你得知整个 Linux 系统的网络情况。
 
@@ -1100,12 +1100,12 @@ netstat -st   显示TCP端口的统计信息
 netstat -su   显示UDP端口的统计信息
 ```
 
-# 7. Linux 之 用户管理
+## 7. Linux 之 用户管理
 
 > **关键词：`groupadd`, `groupdel`, `groupmod`, `useradd`, `userdel`, `usermod`, `passwd`, `su`, `sudo`。**
 
 
-## 7.1 groupadd
+### 7.1 groupadd
 
 > groupadd 命令用于`创建一个新的用户组`，新用户组的信息将被添加到系统文件中。
 
@@ -1133,11 +1133,11 @@ itholmes:x:344:
 
 ![image](https://github.com/ITholmes/hello-world/assets/70437837/f8e88a55-7e9a-4792-819a-4d4e72fc5b14)
 
-## 7.2 groupdel 
+### 7.2 groupdel 
 
 > groupdel 命令用于`删除指定的用户组`，本命令要修改的系统文件包括 /ect/group 和 /ect/gshadow。若该群组中仍包括某些用户，则必须先删除这些用户后，方能删除群组。
 
-## 7.3 groupmod
+### 7.3 groupmod
 
 > groupmod 命令`更改群组识别码(组ID)或名称(组名称)`。
 
@@ -1155,7 +1155,7 @@ $ tail -1 /etc/group
 itholmesNes:x:500:
 ```
 
-## 7.4 useradd
+### 7.4 useradd
 
 > useradd 可用来`建立用户帐号`。帐号建好之后，再用 passwd 设定帐号的密码。`使用 useradd 指令所建立的帐号，实际上是保存在 /etc/passwd 文本文件中`。
 
@@ -1191,13 +1191,13 @@ $ useradd -d /opt/ -g itholmesGroup -r -u 544 itholmes
 
 - 在使用su切换了用户，可以使用exit来退出当前用户。
 
-## 7.5 userdel
+### 7.5 userdel
 
 > userdel 命令`用于删除给定的用户，以及与用户相关的文件`。`若不加选项，则仅删除用户帐号，而不删除相关文件`。
 
 - -r 　删除用户登入目录以及目录中所有文件。
 
-## 7.6 usermod
+### 7.6 usermod
 
 > usermod 命令`用于修改用户的基本信息`。`usermod 命令不允许你改变正在线上的使用者帐号名称。当 usermod 命令用来改变 user id，必须确认这名 user 没在电脑上执行任何程序`。
 
@@ -1216,7 +1216,7 @@ $ usermod -d /home/hnlinux root
 $ usermod -u 123 root
 ```
 
-## 7.7 passwd
+### 7.7 passwd
 
 > passwd 命令`用于设置用户的认证信息，包括用户密码、密码过期时间`等。系统管理者则能用它管理系统用户的密码。`只有管理者可以指定用户名称，一般用户只能变更自己的密码`。
 
@@ -1238,13 +1238,13 @@ $ passwd -d itholmes
 $ passwd -S itholmes 
 ```
 
-## 7.8 su
+### 7.8 su
 
 > su 命令用于切换当前用户身份到其他用户身份，变更时须输入所要变更的用户帐号与密码。
 
-## 7.9 sudo
+### 7.9 sudo
 
-### 7.9.1 sudo使用
+#### 7.9.1 sudo使用
 
 > sudo 命令用来以其他身份来执行命令，预设的身份为 root（也就是默认是root）。在 /etc/sudoers 中设置了可执行 sudo 指令的用户。
 
@@ -1259,7 +1259,7 @@ $ sudo -l
 $ sudo -L
 ```
 
-### 7.9.2 给普通用户授权 sudo
+#### 7.9.2 给普通用户授权 sudo
 
 假设要给普通用户 itholmes 配置 sudo 权限：
 
@@ -1267,15 +1267,15 @@ $ sudo -L
 2. 在该文件中添加 itholmes  ALL=(ALL) ALL ，保存并退出，让 mary 具有 sudo 的所有权限。
 3. 再将 /etc/sudoers 的权限恢复到默认状态：chmod u-w /etc/sudoers。
 
-### 7.9.3 免密码授权 sudo
+#### 7.9.3 免密码授权 sudo
 
 与给普通用户授权 sudo 类似，区别仅在于第 2 步：mary ALL=(ALL) NOPASSWD: ALL。
 
-# 8. Linux 之 系统管理
+## 8. Linux 之 系统管理
 
 > **关键词：`lsb_release`, `reboot`, `exit`, `shutdown`, `date`, `mount`, `umount`, `ps`, `kill`, `systemctl`, `service`, `crontab`。**
 
-## 8.1 reboot
+### 8.1 reboot
 
 > reboot 命令用来`重新启动正在运行的 Linux 操作系统`。
 
@@ -1286,7 +1286,7 @@ reboot        # 重开机。
 reboot -w     # 做个重开机的模拟（只有纪录并不会真的重开机）。
 ```
 
-## 8.2 exit
+### 8.2 exit
 
 >  exit命令用于`退出目前的shell(脚本)`。
 
@@ -1298,7 +1298,7 @@ reboot -w     # 做个重开机的模拟（只有纪录并不会真的重开机�
 $ exit # 单独输入exit是退出终端的意思。
 ```
 
-## 8.3 shutdown
+### 8.3 shutdown
 
 > shutdown 命令用来`系统关机命令`。shutdown 指令可以关闭所有程序，并依用户的需要，进行重新开机或关机的动作。
 
@@ -1312,7 +1312,7 @@ shutdown -h now
 shutdown +5 "System will shutdown after 5 minutes"
 ```
 
-## 8.4 date
+### 8.4 date
 
 > date 命令是`显示或设置系统时间与日期`。
 
@@ -1376,18 +1376,18 @@ difference=$(( end - start ))
 echo $difference seconds.
 ```
 
-## 8.5 mount
+### 8.5 mount
 
 > mount 命令用于挂载文件系统到指定的挂载点。
 
 - 挂载是将其他机器上的磁盘映射到本机器上来，使得在本机器上可以访问其他机器的文件；如在IP1服务器上可以访问IP2上的资源。
 - 软连接是一种快捷方式，这两个区分好！
 
-## 8.6 umount
+### 8.6 umount
 
 > umount 命令用于`卸载已经挂载的文件系统`。利用设备名或挂载点都能 umount 文件系统，不过最好还是通过挂载点卸载，以免使用绑定挂载（一个设备，多个挂载点）时产生混乱。
 
-## 8.7 ps
+### 8.7 ps
 
 >  ps 命令用于报告当前系统的进程状态。
 
@@ -1401,13 +1401,13 @@ ps aux | sort -rnk 4
 ps aux | sort -nk 3
 ```
 
-## 8.8 kill
+### 8.8 kill
 
 > kill 命令用来`删除执行中的程序或工作`。`预设的信息为 SIGTERM(15),可将指定程序终止`。若仍无法终止该程序，可使用` SIGKILL(9) 信息尝试强制删除程序`。
 
 - kill -9 强制杀死， kill 是正常关闭。一般要用kill就行，因为有时就需要正常关闭才行，可以理解为先保存了再关闭！
 
-## 8.9 service
+### 8.9 service
 
 > service 命令是 Redhat Linux 兼容的发行版中用来`控制系统服务的实用工具`，它以启动、停止、重新启动和关闭系统服务，还可以显示所有系统服务的当前状态。
 
@@ -1428,7 +1428,7 @@ service network restart
 弹出界面 eth0：                                            [  确定  ]
 ```
 
-## 8.10 crontab
+### 8.10 crontab
 
 > crontab 命令被用来提交和管理用户的需要`周期性执行的任务`。
 
@@ -1436,7 +1436,7 @@ service network restart
 
 ![image](https://github.com/ITholmes/hello-world/assets/70437837/dec1b9ff-d66b-4f89-846c-500948cb7e18)
 
-## 8.11 systemctl 
+### 8.11 systemctl 
 
 > systemctl 命令是`系统服务管理器指令`，它实际上将 service 和 chkconfig 这两个命令组合到一起。
 
@@ -1470,11 +1470,11 @@ sudo systemctl stop firewalld.service
 sudo systemctl disable firewalld.service
 ```
 
-# 9. Linux 之 软件管理
+## 9. Linux 之 软件管理
 
 > **关键词：`rpm`, `yum`, `apt-get`。**
 
-## 9.1 rpm
+### 9.1 rpm
 
 > rpm 命令是` RPM 软件包的管理工具`。
 
@@ -1521,7 +1521,7 @@ $ make install
 rpm -qa # 列出所有安装过的包
 ```
 
-## 9.2 yum
+### 9.2 yum
 
 > yum 命令 基于 RPM 包管理，能够从`指定的服务器自动下载 RPM 包并且安装`，可以自动处理依赖性关系，并且一次安装所有依赖的软件包，无须繁琐地一次次下载、安装。
 
@@ -1541,7 +1541,7 @@ yum clean all
 yum makecache
 ```
 
-## 9.3 apt-get 或 apt
+### 9.3 apt-get 或 apt
 
  > apt-get 命令是 `Debian Linux 发行版中的 APT 软件包管理工具`。所有基于 Debian 的发行都使用这个包管理系统。deb 包可以把一个应用的文件包在一起，大体就如同 Windows 上的安装文件。
 
@@ -1573,7 +1573,7 @@ apt-get upgrade
 apt-get dist-upgrade
 ```
 
-# 10. chown和chmod
+## 10. chown和chmod
 
 **`chown`** (Change Owner)
 
@@ -1609,7 +1609,7 @@ chmod -R 755 /sypm/jenkins
   - **`755`**: 读、写、执行权限（7）给拥有者，读和执行权限（5）给组和其他人。
   - **`644`**: 读和写权限（6）给拥有者，读权限（4）给组和其他人。
 
-# 11. sed 命令
+## 11. sed 命令
 `sed` 是一个强大的流编辑器，用于在**文本文件中执行基本的文本转换**。它以逐行处理的方式读取输入文件，并根据指定的命令对内容进行处理。
 ```shell
 sed -e ' \
@@ -1621,7 +1621,7 @@ s#{IMAGE_TAG}#${TAG}#g; \
 - `s#{IMAGE_URL}#${env.HARBOR_HOST}/${env.HARBOR_LIB}/${APP_NAME}#g;`：将 {IMAGE_URL} 替换为 ${env.HARBOR_HOST}/${env.HARBOR_LIB}/${APP_NAME}。
 - `>`：将输出重定向到 output.yaml。
 
-# 12. set 命令
+## 12. set 命令
 
 **`set -eux` 是一个在 Unix/Linux shell 脚本中常用的命令，用于设置 shell 的执行选项**。这些选项可以帮助你在脚本中进行更严格的错误检查和调试。以下是每个选项的作用：
 
@@ -1646,3 +1646,10 @@ curl -L https://istio.io/downloadIstio | sh -
 - `curl -L https://istio.io/downloadIstio` 下载了 Istio 的安装脚本。
 
 - `| sh -` 将该脚本直接传递给 `sh` 来执行。
+
+## 14. export 命令
+
+```bash
+export PATH=$PWD/bin:$PATH
+```
+
