@@ -1630,3 +1630,19 @@ s#{IMAGE_TAG}#${TAG}#g; \
 - `-x`（或 `xtrace`）：在执行每个命令之前，先将命令及其参数打印到标准错误输出。这有助于调试脚本，了解脚本的执行过程和每个命令的实际参数。
 
 ![image-20240905172848693](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20240905172848693.png)
+
+
+
+## 13. sh 命令
+
+`sh` 是 Bourne shell 或默认的 shell，通常用于执行脚本文件。
+
+例如：
+
+```bash
+curl -L https://istio.io/downloadIstio | sh -
+```
+
+- `curl -L https://istio.io/downloadIstio` 下载了 Istio 的安装脚本。
+
+- `| sh -` 将该脚本直接传递给 `sh` 来执行。
