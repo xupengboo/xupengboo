@@ -6,9 +6,13 @@ order: 20
 
 ## 1. 前提条件
 前提条件：
-
 - 安装docker，要求版本各节点版本一致。
 - 网上还有额外的要求：关闭swap、禁用selinux等等。
+
+:::tip 版本兼容
+参考官方，[Rancher 支持矩阵](https://www.suse.com/suse-rancher/support-matrix/all-supported-versions/rancher-v2-5-14/)
+:::
+
 ## 2. 搭建 Rancher 服务
 直接通过docker命令实现即可，很方便。
 ```shell
