@@ -1653,3 +1653,36 @@ curl -L https://istio.io/downloadIstio | sh -
 export PATH=$PWD/bin:$PATH
 ```
 
+
+
+## 15. nano 命令
+
+`nano` 是一个简单易用的文本编辑器，通常用于在命令行界面中编辑文件。
+
+你可以使用 `nano` 命令来打开一个文件，比如：
+
+```bash
+nano filename.txt
+```
+
+这会打开 `filename.txt` 文件。如果文件不存在，它会创建一个新的文件。
+
+进入编辑模式后，你可以直接在文件中输入文本。
+
+保存文件：
+
+- 按 `Ctrl + O` 来保存文件。
+- `Enter` 确认文件名后保存。
+
+退出 nano：
+
+- 按 `Ctrl + X` 退出。
+- 如果文件有未保存的修改，nano 会提示你是否保存更改。
+
+常用快捷键：
+
+- `Ctrl + G`：显示帮助
+- `Ctrl + K`：剪切当前行
+- `Ctrl + U`：粘贴
+- `Ctrl + W`：查找
+- `Ctrl + C`：显示光标位置
