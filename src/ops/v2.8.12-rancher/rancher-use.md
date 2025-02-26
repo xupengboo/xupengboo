@@ -5,6 +5,8 @@ order: 1
 
 ## 1. 先决条件
 
+### 1.1 环境支持
+
 参考官方，[Rancher 支持矩阵](https://www.suse.com/suse-rancher/support-matrix/all-supported-versions/rancher-v2-8-12/) 。
 
 :::tip 为什么不适用CentOS系统？
@@ -13,9 +15,76 @@ CentOS 作为一款曾经广受欢迎的企业级 Linux 发行版，在开源社
 
 :::
 
-系统要求：
+| 环境要求 | 版本                                                         |
+| -------- | ------------------------------------------------------------ |
+| Ubuntu   | [Ubuntu 22.04.4 Live Server (amd64)【专为服务器使用】](https://next.itellyou.cn/Original/#cbp=Product?ID=deb4715d-5e52-ea11-bd34-b025aa28351d) 至少 2 台（Master、Slave） |
+| Rancher  | [v2.8.12](https://ranchermanager.docs.rancher.com/zh/v2.8/getting-started/overview) |
+|          |                                                              |
+|          |                                                              |
 
-| **Ubuntu** | [Ubuntu 22.04.4 Live Server (amd64)](https://next.itellyou.cn/Original/#cbp=Product?ID=deb4715d-5e52-ea11-bd34-b025aa28351d) 【Live Server 专为服务器使用】 |
-| ---------- | ------------------------------------------------------------ |
-|            |                                                              |
+## 1.2 环境准备
 
+1. 配置 `/etc/hostname` 和 `/etc/hosts`
+2. 配置 静态IP 
+
+```bash
+cd /etc/netplan/
+ls
+sudo nano 00-installer-config.yaml
+```
+
+```yaml
+network:
+  ethernets:
+    ens33:
+      dhcp4: false
+      addresses:
+        - 192.168.50.129/24  # 设置静态IP地址以及子网掩码(/24 对应 255.255.255.0)
+      gateway4: 192.168.50.2 # 设置默认网关
+      nameservers:
+        addresses:
+          - 8.8.8.8 		# 设置 DNS 服务器地址
+          - 8.8.4.4
+  version: 2
+```
+
+
+
+## 2.  通过 RKE2 部署高可用 Kubernetes 集群 
+
+:::important 什么是 RKE2？
+
+**RKE2**（Rancher Kubernetes Engine 2）是 Rancher 官方维护的 Kubernetes 发行版，专为生产环境设计。它融合了 Rancher 的轻量级 K3s 和传统 RKE 的优势，目标是提供 **安全、合规且易于维护** 的 Kubernetes 集群。
+
+:::
+
+1. **Control Plane 节点初始化**
+
+```bash
+# 下载 RKE2 安装脚本
+curl -sfL https://get.rke2.io | INSTALL_RKE2_CHANNEL="v1.27" sh -
+
+# 启动 RKE2 服务（默认启用 etcd 和 Control Plane）
+systemctl enable rke2-server.service
+systemctl start rke2-server.service
+
+# 获取 kubeconfig 文件
+mkdir -p ~/.kube
+cp /etc/rancher/rke2/rke2.yaml ~/.kube/config
+```
+
+2. **Worker 节点加入集群**：
+
+```bash
+# 在 Control Plane 节点获取 Token
+cat /var/lib/rancher/rke2/server/node-token
+
+# 在 Worker 节点执行加入命令
+curl -sfL https://get.rke2.io | INSTALL_RKE2_TYPE="agent" sh -
+systemctl enable rke2-agent.service
+rke2 agent --server https://<Control-Plane-IP>:9345 --token <TOKEN>
+```
+
+
+
+## 4. Helm 安装 Rancher
