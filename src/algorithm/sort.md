@@ -599,11 +599,85 @@ BFS（Breadth-First Search，广度优先搜索）是按照节点的“层次”
 
 DFS（Depth-First Search，深度优先搜索）则是沿着一个路径尽可能深入，直到不能继续，再回溯到上一个节点，继续深入其他路径。
 
+以 图 遍历为例：
 
+```
+A → B → C
+B → D → E
+C → F
+D → 
+E → 
+F → 
+```
 
+```python
+# bfs 广度优先搜索 - 基于队列实现
+from collections import deque
 
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': [],
+    'F': []
+}
+
+def bfs(graph, start):
+    visited = set()
+    queue = deque([start])
+    traversal_order = []
+    while queue:
+        node = queue.popleft()
+        if node not in visited:
+            visited.add(node)
+            traversal_order.append(node)
+            for neighbor in graph[node]:
+                if neighbor not in visited:
+                    queue.append(neighbor)
+        
+    return traversal_order
+
+print("BFS遍历结果：" , bfs(graph, 'A')) # BFS遍历结果： ['A', 'B', 'C', 'D', 'E', 'F']
+```
+
+```python
+# dfs 深度优先算法 - 基于递归实现
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': [],
+    'F': []
+}
+
+def dfs_recursive(graph, node, visted , traversal_order=[]):
+    if node not in visited:
+        visited.add(node)
+        traversal_order.append(node)
+        for neighbor in graph[node]:
+            dfs_recursive(graph, neighbor, visted, traversal_order)
+    return traversal_order
+
+visited = set()
+print("DFS遍历结果：" , dfs_recursive(graph, 'A', visited, [])) 
+```
+
+时间复杂度：两种算法的时间复杂度均为 **O(V + E)**（V为顶点数，E为边数）。
+
+应用场景：
+
+| **算法** | 典型应用场景                         |
+| :------- | :----------------------------------- |
+| BFS      | 最短路径（无权图）、社交网络好友推荐 |
+| DFS      | 拓扑排序、连通性检测、迷宫问题       |
 
 ### 9. 布隆过滤器（Bloom Filter）
+
+核心思想：高效判断一个元素**可能存在于集合中**或**一定不存在于集合中**（存在误判率，但不会漏判）。
+
+
 
 
 
