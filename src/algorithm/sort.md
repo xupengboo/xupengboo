@@ -677,13 +677,153 @@ print("DFS遍历结果：" , dfs_recursive(graph, 'A', visited, []))
 
 核心思想：高效判断一个元素**可能存在于集合中**或**一定不存在于集合中**（存在误判率，但不会漏判）。
 
+优点：**空间效率极高**（相比哈希表，内存占用更小），**误判率可控**（通过调整位数组大小和哈希函数数量平衡）。
 
+适用场景：
 
+- 缓存穿透防护（如 Redis 缓存未命中时过滤非法请求）。
+- 垃圾邮件过滤（快速判断邮件是否在黑名单）。
+- 大规模数据去重（如爬虫 URL 去重）。
 
+```python
+import math
+import mmh3  # MurmurHash库，用于生成哈希值（需安装：pip install mmh3）
+
+class BloomFilter:
+    def __init__(self, capacity, error_rate):
+        """
+        初始化布隆过滤器
+        :param capacity: 预期元素数量
+        :param error_rate: 可接受的误判率（0~1）
+        """
+        self.capacity = capacity
+        self.error_rate = error_rate
+        
+        # 计算位数组大小和哈希函数数量
+        self.size = self._calculate_size(capacity, error_rate)
+        self.hash_count = self._calculate_hash_count(self.size, capacity)
+        
+        self.bit_array = [0] * self.size  # 初始化位数组
+    
+    def _calculate_size(self, n, p):
+        """计算位数组大小公式：m = - (n * ln(p)) / (ln2)^2"""
+        m = - (n * math.log(p)) / (math.log(2) ** 2)
+        return int(math.ceil(m))
+    
+    def _calculate_hash_count(self, m, n):
+        """计算哈希函数数量公式：k = (m/n) * ln2"""
+        k = (m / n) * math.log(2)
+        return int(math.ceil(k))
+    
+    def _get_hash_indices(self, item):
+        """生成多个哈希索引（模拟多个哈希函数）"""
+        indices = []
+        for seed in range(self.hash_count):
+            # 使用MurmurHash生成不同的哈希值，取模后映射到位数组
+            hash_value = mmh3.hash(str(item), seed) % self.size
+            indices.append(abs(hash_value))  # 确保索引非负
+        return indices
+    
+    def add(self, item):
+        """添加元素到位数组"""
+        indices = self._get_hash_indices(item)
+        for index in indices:
+            self.bit_array[index] = 1
+    
+    def exists(self, item):
+        """检查元素是否存在（可能误判，但不会漏判）"""
+        indices = self._get_hash_indices(item)
+        return all(self.bit_array[index] == 1 for index in indices)
+
+# 示例测试
+if __name__ == "__main__":
+    # 初始化布隆过滤器：预期容量1000，误判率1%
+    bf = BloomFilter(capacity=1000, error_rate=0.01)
+    print(f"位数组大小: {bf.size}, 哈希函数数量: {bf.hash_count}")
+    
+    # 添加元素
+    items = ["apple", "banana", "cherry"]
+    for item in items:
+        bf.add(item)
+    
+    # 检查存在的元素
+    test_items = ["apple", "banana", "cherry", "mango"]
+    for item in test_items:
+        print(f"'{item}' 是否存在: {bf.exists(item)}")
+    
+    # 测试误判率
+    false_positives = 0
+    total_tests = 1000
+    for i in range(total_tests):
+        random_str = f"random_{i}"
+        if bf.exists(random_str):
+            false_positives += 1
+    print(f"误判率: {false_positives / total_tests * 100:.2f}%")
+```
 
 
 
 ### 10. 三分搜索（Ternary Search）
 
+核心思想：
 
+1. 将区间分为三等分，取两个中间点 `mid1` 和 `mid2`。
+
+2. 比较 `mid1` 和 `mid2` 处的值，缩小搜索范围。
+
+3. 重复直到找到极值。
+
+
+适用场景：在**单峰序列**（先递增后递减，或先递减后递增）中寻找极值。
+
+```python
+def ternary_search(arr):
+    """
+    在单峰数组中寻找最大值（假设数组严格先递增后递减）
+    :param arr: 单峰数组（例如 [1, 3, 5, 7, 9, 8, 6, 4, 2]）
+    :return: 最大值的索引
+    """
+    left = 0
+    right = len(arr) - 1
+    
+    while left <= right:
+        # 当区间足够小时，直接遍历找最大值
+        if right - left < 3:
+            max_val = arr[left]
+            max_idx = left
+            for i in range(left, right + 1):
+                if arr[i] > max_val:
+                    max_val = arr[i]
+                    max_idx = i
+            return max_idx
+        
+        # 将区间分为三等分
+        mid1 = left + (right - left) // 3
+        mid2 = right - (right - left) // 3
+        
+        # 比较中间点的值，缩小搜索范围
+        if arr[mid1] < arr[mid2]:
+            left = mid1  # 最大值在 mid1 右侧
+        else:
+            right = mid2  # 最大值在 mid2 左侧
+    
+    return -1  # 理论上不会执行到此处
+
+# 测试案例
+if __name__ == "__main__":
+    # 示例1：单峰数组（先递增后递减）
+    arr1 = [1, 3, 5, 7, 9, 8, 6, 4, 2]
+    peak_idx1 = ternary_search(arr1)
+    print(f"数组 {arr1} 的峰值索引: {peak_idx1}, 值: {arr1[peak_idx1]}")  # 输出索引4（值9）
+
+    # 示例2：单峰数组（峰值在右侧）
+    arr2 = [2, 4, 6, 8, 10, 15, 12, 11]
+    peak_idx2 = ternary_search(arr2)
+    print(f"数组 {arr2} 的峰值索引: {peak_idx2}, 值: {arr2[peak_idx2]}")  # 输出索引5（值15）
+
+    # 示例3：单峰数组（峰值在左侧）
+    arr3 = [20, 17, 15, 12, 10, 5, 3]
+    peak_idx3 = ternary_search(arr3)
+    print(f"数组 {arr3} 的峰值索引: {peak_idx3}, 值: {arr2[peak_idx3]}")  # 输出索引0（值20）
+```
 
