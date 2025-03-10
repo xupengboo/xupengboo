@@ -8,14 +8,15 @@ tag:
 
 ## 1. 常用网站
 
-| 名称             | 描述                   | 链接                                   |
-|------------------|------------------------|----------------------------------------|
-| 鱼皮部署网站     | 部署网站的几种方式     | [点击查看](https://www.bilibili.com/read/cv16179200) |
-| 王先生 GitHub文档 | Java 学习文档          | [点击查看](https://github.com/itwanger/toBeBetterJavaer) |
+| 名称             | 描述                         | 链接                                   |
+|------------------|----------------------------|----------------------------------------|
+| 鱼皮部署网站     | 部署网站的几种方式                  | [点击查看](https://www.bilibili.com/read/cv16179200) |
+| 王先生 GitHub文档 | Java 学习文档                  | [点击查看](https://github.com/itwanger/toBeBetterJavaer) |
 | `Ali Java8 SpringBoot` 构建 | 快速创建 `Java8 SpringBoot` 项目 | [点击查看](https://start.aliyun.com/) |
-| `Hutool` | Java 实用工具包        | [点击查看](https://hutool.cn/)         |
-| 凤凰架构         | 架构设计知识           | [点击查看](https://icyfenix.cn/)       |
-| 犬小哈           | 开发工具推荐           | [点击查看](https://www.quanxiaoha.com/dev-tools/) |
+| `Hutool` | Java 实用工具包                 | [点击查看](https://hutool.cn/)         |
+| 凤凰架构         | 架构设计知识                     | [点击查看](https://icyfenix.cn/)       |
+| 犬小哈           | 开发工具推荐                     | [点击查看](https://www.quanxiaoha.com/dev-tools/) |
+| compressor          | 压缩工具                       | [点击查看](https://compressor.io/) |
 
 
 ## 2. 常用接口（公网）
