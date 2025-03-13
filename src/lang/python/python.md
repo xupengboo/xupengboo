@@ -147,6 +147,18 @@ last_element = arr.pop()  # 移除并返回最后一个元素
 print(last_element)  # 输出 4
 print(arr)  # 输出 [1, 2, 3]
 arr.pop(0)     # 删除第一个元素 O(n)
+
+list1 = [1, 2, 3]
+list2 = [4, 5, 6]
+
+# extend方法：扩展列表
+# extend 和 append 区别：
+list1.append(list2)
+print(list1)  # 输出: [1, 2, 3, [4, 5, 6]]
+
+list1 = [1, 2, 3]
+list1.extend(list2)
+print(list1)  # 输出: [1, 2, 3, 4, 5, 6]
 ```
 
 ### 2.2 元组 Tuple
