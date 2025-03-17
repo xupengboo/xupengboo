@@ -96,3 +96,6 @@ kubectl get pods
 还是对应上面先安装 kubectl 那些操作，之后通过命令形式，去管理k8s或者rancher相关信息。
 
 
+:::important 解释一下 kubernetes 中的 pod 、container 与 docker 的区别！
+在 Kubernetes 中，一个 Pod 可以包含多个容器（container），这里的容器并不是嵌套的 Docker 容器，而是共享同一组资源的独立容器。这种设计的核心目的是为紧密协作的多个进程提供统一的环境，同时保持容器化的轻量和隔离性。
+:::
