@@ -48,17 +48,44 @@ network:
   version: 2
 ```
 
-## 2. 安装 Rancher
 
-1. 安装 Docker 
 
-```shell
-snap install docker
+## 2.  通过 RKE2 部署高可用 Kubernetes 集群 
+
+:::important 什么是 RKE2？
+
+**RKE2**（Rancher Kubernetes Engine 2）是 Rancher 官方维护的 Kubernetes 发行版，专为生产环境设计。它融合了 Rancher 的轻量级 K3s 和传统 RKE 的优势，目标是提供 **安全、合规且易于维护** 的 Kubernetes 集群。
+
+:::
+
+1. **Control Plane 节点初始化**
+
+```bash
+# 下载 RKE2 安装脚本
+curl -sfL https://get.rke2.io | INSTALL_RKE2_CHANNEL="v1.27" sh -
+
+# 启动 RKE2 服务（默认启用 etcd 和 Control Plane）
+systemctl enable rke2-server.service
+systemctl start rke2-server.service
+
+# 获取 kubeconfig 文件
+mkdir -p ~/.kube
+cp /etc/rancher/rke2/rke2.yaml ~/.kube/config
 ```
 
-2. 启动 Rancher
+2. **Worker 节点加入集群**：
 
-```shell
+```bash
+# 在 Control Plane 节点获取 Token
+cat /var/lib/rancher/rke2/server/node-token
 
+# 在 Worker 节点执行加入命令
+curl -sfL https://get.rke2.io | INSTALL_RKE2_TYPE="agent" sh -
+systemctl enable rke2-agent.service
+rke2 agent --server https://<Control-Plane-IP>:9345 --token <TOKEN>
 ```
+
+
+
+ Helm 安装 Rancher
 
