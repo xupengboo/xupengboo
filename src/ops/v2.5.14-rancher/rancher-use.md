@@ -98,4 +98,8 @@ kubectl get pods
 
 :::important 解释一下 kubernetes 中的 pod 、container 与 docker 的区别！
 在 Kubernetes 中，一个 Pod 可以包含多个容器（container），这里的容器并不是嵌套的 Docker 容器，而是共享同一组资源的独立容器。这种设计的核心目的是为紧密协作的多个进程提供统一的环境，同时保持容器化的轻量和隔离性。
+
+- Docker 单进程模型：通常推荐一个容器只运行一个主进程（如一个 Web 服务器），但 Kubernetes 通过 Pod 的容器组模式弥补了这一限制。
+- Pod 是无嵌套关系的，Pod 内的容器是平行关系，而非嵌套关系。每个容器都有自己的进程树和隔离环境。
+
 :::
