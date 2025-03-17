@@ -17,10 +17,6 @@ ls
 你可能会看到类似 `00-installer-config.yaml` 的文件，打开该文件进行编辑：
 
 ```bash
-bash
-
-
-复制编辑
 sudo nano 00-installer-config.yaml
 ```
 
