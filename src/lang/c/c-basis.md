@@ -938,6 +938,130 @@ int main ()
 
 ## 16. C 函数指针与回调函数
 
+1. 函数指针是指向函数的指针变量。函数指针可以像一般函数一样，用于调用函数、传递参数。
+
+```c
+#include <stdio.h>
+
+int max(int x, int y) {
+    return x > y ? x : y;
+}
+
+int main(void) {
+    /* p 是函数指针 */
+    int (* p)(int, int) = & max; // &可以省略
+    int a, b, c, d;
+    printf("请输入三个数字：");
+    scanf("%d,%d,%d", & a, & b,& c); // 用" , "隔离：1,2,3
+    // scanf("%d %d %d", & a, & b, & c);
+
+    /* 与直接调用函数等价， d = max(max(a, b), c) */
+    d = p(p(a, b), c);
+    printf("最大数字是：%d\n", d);
+    return 0;
+}
+```
+
+2. 回调函数是将一个函数作为参数传递给另一个函数，并在后者内部调用它。
+
+```c
+#include <stdio.h>
+
+void printNumber(int num){
+    printf("Number: %d/n", num);
+}
+
+void processNumber(int num , void (*callback)(int)) {
+    callback(num); // 调用回调函数
+}
+
+int main() {
+    processNumber(10, printNumber); // 将 printNumber 作为回调函数传递
+    return 0;
+}
+```
+
+## 17. C 字符串
+
+在 C 语言中，字符串实际上是使用空字符 **\0** 结尾的一维字符数组。因此，**\0** 是用于标记字符串的结束。
+
+![image-20250320174644268](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250320174644268.png)
+
+格式如下：
+
+```c
+char str[] = "Hello";
+char str[6] = {'H', 'e', 'l', 'l', 'o', '\0'};
+```
+
+C 中有大量操作字符串的函数：
+
+| 序号 | 函数 & 目的                                                  |
+| :--- | :----------------------------------------------------------- |
+| 1    | **strcpy(s1, s2);** 复制字符串 s2 到字符串 s1。              |
+| 2    | **strcat(s1, s2);** 连接字符串 s2 到字符串 s1 的末尾。       |
+| 3    | **strlen(s1);** 返回字符串 s1 的长度。                       |
+| 4    | **strcmp(s1, s2);** 如果 s1 和 s2 是相同的，则返回 0；如果 s1<s2 则返回小于 0；如果 s1>s2 则返回大于 0。 |
+| 5    | **strchr(s1, ch);** 返回一个指针，指向字符串 s1 中字符 ch 的第一次出现的位置。 |
+| 6    | **strstr(s1, s2);** 返回一个指针，指向字符串 s1 中字符串 s2 的第一次出现的位置。 |
+
+```c
+#include <stdio.h>
+#include <string.h>
+ 
+int main ()
+{
+   char str1[14] = "baidu";
+   char str2[14] = "google";
+   char str3[14];
+   int  len ;
+ 
+   /* 复制 str1 到 str3 */
+   strcpy(str3, str1);
+   printf("strcpy( str3, str1) :  %s\n", str3 );
+ 
+   /* 连接 str1 和 str2 */
+   strcat( str1, str2);
+   printf("strcat( str1, str2):   %s\n", str1 );
+ 
+   /* 连接后，str1 的总长度 */
+   len = strlen(str1);
+   printf("strlen(str1) :  %d\n", len );
+ 
+   return 0;
+}
+```
+
+## 18. C 结构体
+
+C 数组允许定义可存储相同类型数据项的变量，**结构**是 C 编程中另一种用户自定义的可用的数据类型，它允许您存储不同类型的数据项。
+
+```c
+struct Person {
+    char name[50];
+    int age;
+    float height;
+};
+```
+
+:::tip C 结构体与Java 类不同。
+
+C语言的结构体（Struct）：
+
+- 它只能包含**数据成员**（变量），不能包含**函数成员**（方法）。
+
+Java的类（Class）：
+
+- 类可以包含**数据成员**（字段）和**函数成员**（方法）。
+
+:::
+
+## 20. C 共用体
+
+
+
+
+
 
 
 
