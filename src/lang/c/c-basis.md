@@ -1058,9 +1058,328 @@ Java的类（Class）：
 
 ## 20. C 共用体
 
+C语言中的共用体（Union）是一种特殊的数据类型，允许在同一个内存区域存储不同的数据类型。
+
+```c
+#include <stdio.h>
+#include <string.h>
+ 
+union Data
+{
+   int i;
+   float f;
+   char  str[20];
+};
+ 
+int main( )
+{
+   union Data data;        
+ 
+   data.i = 10;
+   printf( "data.i : %d\n", data.i); // data.i : 10
+   
+   data.f = 220.5;
+   printf( "data.f : %f\n", data.f); // data.f : 220.500000
+   
+   strcpy( data.str, "C Programming");
+   printf( "data.str : %s\n", data.str); // data.str : C Programming
+ 
+   printf( "data.i : %d\n", data.i);  // data.i : 1917853763 在这里，所有的成员都能完好输出，因为同一时间只用到一个成员。
+
+   return 0;
+}
+```
+
+::: tip
+
+在 C 语言的共用体（Union）中，**同一时间只能有效使用一个成员**，这是由其底层内存共享机制决定的。具体原因和细节如下：
+
+- 共用体的所有成员共享同一块内存空间，它们的起始地址相同。**物理上，所有成员的数据存储在同一个位置**。
+
+- 写入任何一个成员的值，都会覆盖其他成员的内存内容（无论类型是否相同）。
+
+- **设计初衷：节省内存**
+
+:::
+
+## 21. C 位域
+
+**位域**（Bit Fields）是 C 语言中一种特殊的结构体成员，允许以 **位（bit）** 为单位指定成员占用的内存大小。通过位域，可以更精细地控制内存使用，适用于需要节省空间的场景（如嵌入式系统、网络协议等）。
+
+```c
+struct 结构体名 {
+    // 基本语法
+    type [成员名] : 位数;
+};
+```
+
+- **`type`**：成员的数据类型，通常为 `unsigned int` 或 `int`（其他类型如 `char` 取决于编译器支持）。
+- **`成员名`**：可省略（定义未命名的位域，用于占位）。
+- **`位数`**：指定该成员占用的位数（必须 ≤ 类型总位数）。
+
+场景案例：网络协议解析，解析IP数据包头部中的以下字段（假设前16位）：
+
+- 版本号（4位）
+- 头部长度（4位）
+- 服务类型（8位）
+
+```c
+struct IPHeader {
+    unsigned int version : 4;  // 版本号
+    unsigned int hlen    : 4;  // 头部长度
+    unsigned int tos     : 8;  // 服务类型
+    // 其他字段...
+};
+```
+
+例如：
+
+```c
+#include <stdio.h>
+
+// 定义LED状态位域（8位）
+struct LEDControl {
+    unsigned char power   : 1;  // 电源状态（0=关，1=开）
+    unsigned char mode    : 2;  // 模式（0=常亮，1=闪烁，2=呼吸）
+    unsigned char color   : 3;  // 颜色（0=红，1=绿，2=蓝，3=黄，4=紫）
+    unsigned char         : 2;  // 保留2位
+};
+
+int main() {
+    struct LEDControl led;
+    led.power = 1;   // 开启电源
+    led.mode  = 2;   // 呼吸模式
+    led.color = 4;   // 紫色
+
+    printf("LED状态：\n");
+    printf("电源：%s\n", led.power ? "开" : "关");
+    printf("模式：%d\n", led.mode);
+    printf("颜色：%d\n", led.color);
+    return 0;
+}
+```
 
 
 
+## 22. C 输入 & 输出
+
+### 22.1 标准输入输出（Standard I/O）
+
+以下是关于 **C 语言输入与输出** 的详细解释及实际案例：
+
+C 语言通过 **标准库函数** 处理输入输出，核心头文件为 `<stdio.h>`。程序默认打开三个标准流：
+
+- **`stdin`**：标准输入（键盘）。
+- **`stdout`**：标准输出（屏幕）。
+- **`stderr`**：标准错误输出（屏幕）。
+
+1. 基础输出函数
+
+`printf()`：格式化输出，将数据按指定格式输出到 `stdout`。
+
+```c
+int age = 25;
+float height = 1.75;
+printf("年龄: %d 岁，身高: %.2f 米\n", age, height);
+// 输出：年龄: 25 岁，身高: 1.75 米
+```
+
+`puts()`：输出字符串，输出字符串到 `stdout`，自动追加换行符。
+
+```c
+puts("Hello, World!"); // 输出后自动换行
+```
+
+2. 基础输入函数
+
+`scanf()`：格式化输入，从 `stdin` 读取数据并按格式解析。
+
+```c
+int num;
+char name[20];
+printf("输入数字和姓名：");
+scanf("%d %s", &num, name); // 注意变量地址符&
+printf("数字: %d, 姓名: %s\n", num, name);
+```
+
+`gets()` 和 `fgets()`：读取字符串。
+
+- **`gets()`**：从 `stdin` 读取字符串（不检查缓冲区溢出，已弃用）。
+- **`fgets()`**：更安全的替代，指定缓冲区大小。
+
+```c
+char str[50];
+fgets(str, sizeof(str), stdin); // 读取最多49字符（保留末尾'\0'）
+```
+
+### 22.2 文件输入输出（File I/O）
+
+1. **打开文件**：
+   - `fopen()`：打开文件。
+2. **读写文件**：
+   - `fprintf()` / `fscanf()`：格式化文件读写。
+   - `fread()` / `fwrite()`：二进制文件读写。
+3. **关闭文件**：`fclose()`\
+
+例如：
+
+```c
+#include <stdio.h>
+
+int main() {
+   // 写入文件
+   FILE *file = fopen("test.txt", "w");
+
+   if (file == NULL) {
+      perror("文件打开失败");
+      return 1;
+   }
+
+   fprintf(file, "Hello, File!!!\n");
+   fclose(file);
+
+   file = fopen("text.txt", "r");
+   char buffer[100];
+   fgets(buffer, sizeof(buffer), file);
+   printf("文件内容: %s", buffer);
+   fclose(file);
+   return 0;
+}
+```
+
+## 23. C 预处理器
+
+C 预处理器在编译代码之前执行，负责对源代码进行**文本替换和条件处理**，不直接参与编译，但会修改原始代码生成“预处理后的代码”。主要功能包括：
+
+- **宏定义（Macros）**：定义常量或函数式代码片段。
+- **文件包含（File Inclusion）**：插入头文件内容。
+- **条件编译（Conditional Compilation）**：根据条件决定是否编译某段代码。
+- **其他指令**：如错误提示、编译器指令等。
+
+1. 核心预处理器指令
+
+- `#define`：定义宏。
+
+```c
+// 常量定义：
+#define PI 3.14159
+#define MAX_SIZE 100
+// 函数宏：
+#define SQUARE(x) ((x) * (x))  // 正确：用括号确保优先级
+#define MAX(a, b) ((a) > (b) ? (a) : (b))
+```
+
+- `#include`：文件包含。例如：头文件
+
+```c
+#include <stdio.h>  // 标准库头文件（尖括号从系统路径查找）
+#include "myheader.h" // 用户头文件（引号从当前目录查找）
+```
+
+2. 条件编译指令
+
+- `#ifdef` / `#ifndef` / `#endif`：根据宏是否定义决定代码块是否编译。
+
+```c
+#define DEBUG_MODE  // 定义调试模式
+
+#ifdef DEBUG_MODE
+    printf("调试信息: x=%d\n", x); // 仅调试时编译
+#endif
+```
+
+- `#if` / `#elif` / `#else`：基于表达式条件编译。
+
+```c
+#define VERSION 2
+
+#if VERSION == 1
+    // 版本1代码
+#elif VERSION == 2
+    // 版本2代码
+#else
+    // 默认代码
+#endif
+```
+
+- 其他指令：
+
+```c
+// #undef：取消宏定义。后续代码中PI不再有效
+#undef PI  
+
+// #error：强制编译错误并显示消息。
+#if !defined(C_STANDARD)
+    #error "C_STANDARD未定义！"
+#endif
+
+// #pragma：向编译器传递特定指令（编译器相关）。非标准但广泛支持，防止头文件重复包含
+#pragma once 
+```
+
+3. 预处理器操作符
+
+- 字符串化操作符：`#`：将宏参数转换为字符串常量。
+
+```c
+#define STRINGIFY(x) #x
+printf("%s\n", STRINGIFY(Hello)); // 输出 "Hello"
+```
+
+- 连接操作符 `##`：拼接宏参数或标识符。
+
+```c
+#define CONCAT(a, b) a##b
+int num = CONCAT(12, 34); // 展开为 int num = 1234;
+```
+
+4. 预定义宏
+
+|   **宏**   |            **描述**            |
+| :--------: | :----------------------------: |
+| `__LINE__` |     当前行号（整数字面量）     |
+| `__FILE__` |   当前文件名（字符串字面量）   |
+| `__DATE__` | 编译日期（格式 "MMM DD YYYY"） |
+| `__TIME__` |  编译时间（格式 "HH:MM:SS"）   |
+| `__STDC__` | 是否遵循 ANSI C 标准（1为是）  |
+
+```c
+printf("文件: %s, 行号: %d\n", __FILE__, __LINE__);
+```
+
+C 预处理器核心用途：
+
+- 代码复用：通过头文件和宏减少重复代码。
+- 条件编译：灵活控制不同平台或版本的代码。
+- 常量管理：集中定义常量，便于维护。
+
+## 24. C 强制类型转换
+
+在 C 语言中，**强制类型转换**（Type Casting）允许程序员显式地将一种数据类型的值转换为另一种类型。
+
+```c
+int a = 10;
+float b = (float)a; // 将int转为float
+```
+
+**📋 常用 ASCII 码表速查**
+
+| **字符** | **十进制** | **十六进制** |  **解释**  |
+| :------: | :--------: | :----------: | :--------: |
+|   `A`    |     65     |     0x41     | 大写字母 A |
+|   `a`    |     97     |     0x61     | 小写字母 a |
+|   `0`    |     48     |     0x30     |   数字 0   |
+|   `\n`   |     10     |     0x0A     |   换行符   |
+|    ``    |     32     |     0x20     |    空格    |
+|   `!`    |     33     |     0x21     |   感叹号   |
+|   `@`    |     64     |     0x40     |   @符号    |
+
+- **字母**：大写从 **65** 开始，小写从 **97** 开始，大小写差32。
+- **数字**：字符 `0`=48，依次递增到 `9`=57。
+- **符号**：空格（32）、换行（10）、`@`（64）等需单独记忆。
+- **规律**：利用**差值法**快速计算（如大小写差32，数字差48）。
+
+## 25. 错误处理
 
 
 
