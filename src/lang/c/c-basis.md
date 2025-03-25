@@ -1379,7 +1379,274 @@ float b = (float)a; // 将int转为float
 - **符号**：空格（32）、换行（10）、`@`（64）等需单独记忆。
 - **规律**：利用**差值法**快速计算（如大小写差32，数字差48）。
 
-## 25. 错误处理
+## 25. C 错误处理
+
+在C语言中，错误处理是一个重要的编程实践，用于检测和处理程序运行时可能出现的错误。由于C语言本身没有内置的异常处理机制（如C++中的`try/catch`），因此错误处理通常通过返回值、全局变量、以及特定的错误处理函数来实现。
+
+C 语言提供了 **perror()** 和 **strerror()** 函数来显示与 **errno** 相关的文本消息。
+
+- `#include <errno.h>` 是 C 语言标准库中的一个头文件，用于**错误处理**。它定义了与系统或库函数调用中产生的错误相关的宏、变量和函数，帮助开发者检测和处理程序运行时的错误。
+
+例如：
+
+```c
+#include <stdio.h>
+#include <errno.h>
+#include <string.h>
+ 
+extern int errno ;
+ 
+int main ()
+{
+   FILE * pf;
+   int errnum;
+   pf = fopen ("unexist.txt", "rb");
+   if (pf == NULL)
+   {
+      errnum = errno;
+      fprintf(stderr, "错误号: %d\n", errno);
+      perror("通过 perror 输出错误");
+      fprintf(stderr, "打开文件错误: %s\n", strerror( errnum ));
+   }
+   else
+   {
+      fclose (pf);
+   }
+   return 0;
+}
+```
+
+## 26. C 递归
+
+C 语言支持递归，即一个函数可以调用其自身。但在使用递归时，程序员需要注意定义一个从函数退出的条件，否则会进入死循环。
+
+使用递归函数，生成一个斐波那契数列，如：
+
+```c
+#include <stdio.h>
+
+int fibonaci(int i) {
+   if (i == 0) {
+      return 0;
+   }
+   if (i == 1) {
+      return 1;
+   }
+   return fibonaci(i-1) + fibonaci(i-2);
+}
+
+int main () {
+   int i;
+   for(i = 0; i < 10; i++) {
+      printf("%d\t\n", fibonaci(i));
+   }
+   return i;
+}
+```
+
+## 27. C 可变参数
+
+在C语言中，**可变参数**（Variable Arguments）允许函数接受数量不确定的参数。这是通过标准库 `<stdarg.h>` 中的一组宏（`va_list`、`va_start`、`va_arg`、`va_end`）实现的。可变参数常用于需要灵活处理参数的函数，例如 `printf` 和 `scanf`。
+
+格式如下：
+
+1. 省略号之前的那个参数是 **int**，代表了要传递的可变参数的总数。
+2. 为了使用这个功能，您需要使用 **stdarg.h** 头文件，该文件提供了实现可变参数功能的函数和宏。
+
+```c
+int func(int, ... )  {
+   .
+   .
+   .
+}
+ 
+int main() {
+   func(2, 2, 3);
+   func(3, 2, 3, 4);
+}
+```
+
+例如：
+
+```c
+#include <stdio.h>
+#include <stdarg.h>
+
+// 计算可变参数的平均值（参数数量由第一个参数 `count` 指定）
+double average(int count, ...) {
+    va_list args;
+    va_start(args, count);  // 初始化 args，绑定到固定参数 count
+
+    double sum = 0;
+    for (int i = 0; i < count; i++) {
+        sum += va_arg(args, int);  // va_arg函数可以 逐个读取 int 类型参数 。
+    }
+
+    va_end(args);  // 清理资源
+    return sum / count;
+}
+
+int main() {
+    // 计算 3 个数的平均值：10, 20, 30
+    printf("Average: %.2f\n", average(2, 10, 20, 30));  // 输出：Average: 20.00
+    return 0;
+}
+```
+
+## 28. C 内存管理
+
+在C语言中，**内存管理**是程序设计的核心部分，直接关系到程序的性能和稳定性。C语言提供了对内存的底层控制，但同时也需要程序员手动管理内存的分配和释放。
+
+1. 栈（Stack）
+
+- **特点：**
+
+  - 由编译器自动分配和释放，存储局部变量、函数参数等。
+  - 内存大小固定（默认通常为几 MB），超出会导致栈溢出（Stack Overflow）。
+  - 生命周期与函数调用绑定，函数结束时自动释放。
+
+- **示例**：
+
+  ```c
+  void func() {
+      int a = 10;          // 栈上分配
+      char buffer[1024];    // 栈上数组（可能栈溢出风险）
+  }
+  ```
+
+2. 堆（Heap）
+
+- **特点**：
+
+  - 由开发者手动管理（通过 `malloc`、`calloc`、`realloc`、`free`）。
+  - 内存空间大（取决于系统可用内存），但需要显式释放，否则会导致内存泄漏。
+  - 生命周期由开发者控制，灵活但易出错。
+
+- **示例**：
+
+  ```c
+  int *create_array(int size) {
+      int *arr = (int*)malloc(size * sizeof(int)); // 堆上分配数组
+      if (arr == NULL) {
+          printf("内存分配失败！");
+          exit(1);
+      }
+      return arr; // 返回堆内存指针
+  }
+  
+  int main() {
+      int *data = create_array(100);
+      // 使用data...
+      free(data); // 必须手动释放
+      return 0;
+  }
+  ```
+
+| 序号 | 函数和描述                                                   |
+| :--- | :----------------------------------------------------------- |
+| 1    | **void \*calloc(int num, int size);** 在内存中动态地分配 num 个长度为 size 的连续空间，并将每一个字节都初始化为 0。所以它的结果是分配了 num*size 个字节长度的内存空间，并且每个字节的值都是 0。 |
+| 2    | **void free(void \*address);** 该函数释放 address 所指向的内存块,释放的是动态分配的内存空间。 |
+| 3    | **void \*malloc(int num);** 在堆区分配一块指定大小的内存空间，用来存放数据。这块内存空间在函数执行完成后不会被初始化，它们的值是未知的。 |
+| 4    | **void \*realloc(void \*address, int newsize);** 该函数重新分配内存，把内存扩展到 **newsize**。 |
+
+> 注意：void * 类型表示未确定类型的指针。C、C++ 规定 void * 类型可以通过类型转换强制转换为任何其它类型的指针。
+
+3. 静态存储区（Static/Global Area）
+
+- **特点**：
+
+  - 存储全局变量、`static` 修饰的静态变量。
+  - 内存生命周期持续到程序结束，默认初始化为零。
+
+- **示例**：
+
+  ```c
+  int global_var = 42;      // 全局变量（静态区）
+  
+  void func() {
+      static int count = 0; // 静态局部变量（只初始化一次）
+      count++;
+  }
+  ```
+
+4. 常量存储区（Constant Area）
+
+- **特点**：
+
+  - 存储字符串常量（如 `"Hello"`）和 `const` 修饰的常量。
+  - 内存只读，修改会导致未定义行为（如程序崩溃）。
+
+- **示例**：
+
+  ```c
+  const int MAX = 100;      // 常量（可能存储在只读区）
+  char *str = "Hello";      // 字符串常量（不可修改）
+  
+  // str[0] = 'h';          // 错误！尝试修改常量区数据
+  ```
+
+## 29. C 命令行参数
+
+执行程序时，可以从命令行传值给 C 程序。这些值被称为**命令行参数**，它们对程序很重要，特别是当您想从外部控制程序，而不是在代码内对这些值进行硬编码时，就显得尤为重要了。
+
+例如：
+
+```c
+#include <stdio.h>
+
+int main( int argc, char *argv[] )  
+{
+   if( argc == 2 )
+   {
+      printf("The argument supplied is %s\n", argv[1]);
+   }
+   else if( argc > 2 )
+   {
+      printf("Too many arguments supplied.\n");
+   }
+   else
+   {
+      printf("One argument expected.\n");
+   }
+}
+```
+
+```shell
+# 命令行参数通过 main 函数的参数传递给程序。
+$./a.out testing
+The argument supplied is testing
+```
+
+## 30. C 安全函数
+
+在C语言中，**安全函数**（Safe Functions）旨在替代传统的不安全函数，通过增加边界检查、错误处理等机制来避免常见的安全漏洞（如缓冲区溢出、内存泄漏、空指针解引用等）。
+
+1. 字符串操作函数：
+
+|      不安全函数      |          安全函数           |                          说明                          |
+| :------------------: | :-------------------------: | :----------------------------------------------------: |
+| `strcpy(dest, src)`  | `strncpy(dest, src, size)`  |     限制复制的最大字节数，但可能不自动添加终止符。     |
+| `strcat(dest, src)`  | `strncat(dest, src, size)`  | 限制追加的字节数，但需手动确保目标缓冲区剩余空间足够。 |
+| `sprintf(dest, ...)` | `snprintf(dest, size, ...)` |   限制格式化输出的最大字节数，自动截断并添加终止符。   |
+|     `gets(buf)`      |  `fgets(buf, size, stdin)`  |             限制输入长度，避免缓冲区溢出。             |
+
+2. 动态内存分配：
+
+- 使用 `calloc` 替代 `malloc` 以初始化内存为零。
+- 检查 `malloc`/`calloc` 返回值是否为 `NULL`。
+- 释放内存后立即将指针置为 `NULL`，避免悬空指针。
+
+3. 输入输出函数
+
+- `fgets` 替代 `gets`
+- `sscanf` 替代 `scanf`
+
+> 安全函数还有很多，后续补充。
+
+
+
+
+
 
 
 
