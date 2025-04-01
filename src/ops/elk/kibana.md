@@ -1,6 +1,6 @@
 ---
 title: Kibana 可视化管理平台
-order: 3
+order: 4
 ---
 
 ## 1. 索引模板
