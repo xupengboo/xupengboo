@@ -42,8 +42,142 @@ Elastic Cloud 是 Elastic 公司提供的云服务，用于部署和管理 Elast
 
 ![image-20250214153355828](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250214153355828.png)
 
-## 3. 单机部署
+## 3. ELK Docker单机部署
+
+1. 安装 Docker Compose 
+
+```shell
+# 指定版本安装
+curl -L https://github.com/docker/compose/releases/download/1.23.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+
+# 对二进制文件赋可执行权限
+sudo chmod +x /usr/local/bin/docker-compose
+```
+
+2. 编写 `docker-compose.yml` 文件：
+
+```yaml
+version: '3'
+services:
+  elasticsearch:
+    image: elasticsearch:7.4.2
+    container_name: elasticsearch
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      - discovery.type=single-node
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    volumes:
+      - /opt/elk/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - /opt/elk/elasticsearch/data:/usr/share/elasticsearch/data
+      - /opt/elk/elasticsearch/plugins:/usr/share/elasticsearch/plugins
+    networks:
+      - elk-network
+
+  logstash:
+    image: logstash:7.4.2
+    container_name: logstash
+    ports:
+      - "5044:5044"   # Filebeat 输入端口
+      - "5000:5000"   # TCP 输入端口（测试用）
+    volumes:
+      - /opt/elk/logstash/pipeline:/usr/share/logstash/pipeline
+      - /opt/elk/logstash/config:/usr/share/logstash/config
+      - /opt/elk/logstash/data:/usr/share/logstash/data
+      - /opt/elk/logstash/plugins:/usr/share/logstash/plugins
+    environment:
+      - LS_JAVA_OPTS=-Xms256m -Xmx256m
+    depends_on:
+      - elasticsearch
+    networks:
+      - elk-network
+
+  kibana:
+    image: kibana:7.4.2
+    container_name: kibana
+    ports:
+      - "5601:5601"
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    depends_on:
+      - elasticsearch
+    networks:
+      - elk-network
+
+networks:
+  elk-network:
+    driver: bridge
+```
+
+3. 创建相关目录：
+
+```shell
+# Elasticsearch 目录
+sudo mkdir -p /opt/elk/elasticsearch/{config,data,plugins}
+# Logstash 目录
+sudo mkdir -p /opt/elk/logstash/{pipeline,config,data,plugins}
+# Kibana 目录（如果后续需要挂载配置）
+sudo mkdir -p /opt/elk/kibana/config
+
+# 生成 elasticsearch.yml
+docker run --rm elasticsearch:7.4.2 cat /usr/share/elasticsearch/config/elasticsearch.yml > /opt/elk/elasticsearch/config/elasticsearch.yml
+# 将logstash相关配置文件获取出来
+docker run logstash:7.4.2
+docker ps # 7d0a511e1acd
+docker cp 7d0a511e1acd:/usr/share/logstash/config /opt/elk/logstash/config
+docker rm 7d0a511e1acd
 
 
+# 创建 logstash.conf ，并且配置如下：
+vi /opt/elk/logstash/pipeline/logstash.conf
+input {
+  tcp {
+    port => 5000
+    codec => json
+  }
+}
+
+output {
+  elasticsearch {
+    hosts => ["elasticsearch:9200"]
+    index => "logs-%{+YYYY.MM.dd}"
+  }
+  stdout {}
+}
 
 
+# 递归修改权限（解决容器启动时的权限错误）
+sudo chown -R 1000:1000 /opt/elk  # Elasticsearch/Logstash 默认用户 UID 1000
+sudo chmod -R 755 /opt/elk        # 确保可读可执行权限
+```
+
+4. 容器编排
+
+```shell
+# 启动所有容器
+docker-compose up -d
+# 查看运行状态
+docker-compose ps
+
+# 单独启动效果如下：
+docker-compose up -d elasticsearch
+docker-compose logs elasticsearch  # 查看是否启动成功
+```
+
+5. 测试验证：
+
+```shell
+# nc 是 netcat 的缩写，它是一个功能强大的网络工具，用于通过 TCP/UDP 协议 进行数据传输。
+echo '{"message": "Test log entry"}' | nc localhost 5000
+
+# 访问kibana，查看日志即可：
+```
+
+创建索引模式：
+
+![image-20250402141103416](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250402141103416.png)
+
+查看信息内容：
+
+![image-20250402141130222](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250402141130222.png)
