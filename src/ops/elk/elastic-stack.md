@@ -69,7 +69,7 @@ services:
       - "9300:9300"
     environment:
       - discovery.type=single-node
-      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+      - ES_JAVA_OPTS=-Xms512m -Xmx1g
     volumes:
       - /opt/elk/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
       - /opt/elk/elasticsearch/data:/usr/share/elasticsearch/data
@@ -89,7 +89,7 @@ services:
       - /opt/elk/logstash/data:/usr/share/logstash/data
       - /opt/elk/logstash/plugins:/usr/share/logstash/plugins
     environment:
-      - LS_JAVA_OPTS=-Xms256m -Xmx256m
+      - LS_JAVA_OPTS=-Xms256m -Xmx512m
     depends_on:
       - elasticsearch
     networks:
@@ -130,25 +130,56 @@ docker ps # 7d0a511e1acd
 docker cp 7d0a511e1acd:/usr/share/logstash/config /opt/elk/logstash/config
 docker rm 7d0a511e1acd
 
-
 # 创建 logstash.conf ，并且配置如下：
 vi /opt/elk/logstash/pipeline/logstash.conf
+```
+配置 `vi /opt/elk/logstash/pipeline/logstash.conf` 如下：
+```shell
 input {
+  # 来自 Filebeat 的输入（如 Nginx 日志）
+  beats {
+    port => 5044
+    tags => ["beats_input"]  # 添加来源标签
+  }
+
+  # 来自 TCP 的输入（如直接发送的日志）
   tcp {
     port => 5000
-    codec => json
+    codec => plain          # 按需调整编解码器（如 json_lines）
+    tags => ["tcp_input"]   # 添加来源标签
+  }
+}
+
+filter {
+  # 通用处理逻辑
+  mutate {
+    remove_field => ["@version", "input"]  # 清理冗余字段
+  }
+
+  # 可选：根据输入源添加元字段
+  if "beats_input" in [tags] {
+    mutate {
+      add_field => { "log_source" => "filebeat" }
+    }
+  }
+  if "tcp_input" in [tags] {
+    mutate {
+      add_field => { "log_source" => "tcp" }
+    }
   }
 }
 
 output {
   elasticsearch {
     hosts => ["elasticsearch:9200"]
-    index => "logs-%{+YYYY.MM.dd}"
+    index => "raw-logs-%{log_source}-%{+YYYY.MM.dd}"  # 按来源区分索引
   }
-  stdout {}
+  stdout {}  # 调试用，生产环境建议关闭
 }
+```
 
-
+最后，更改权限：
+``` shell
 # 递归修改权限（解决容器启动时的权限错误）
 sudo chown -R 1000:1000 /opt/elk  # Elasticsearch/Logstash 默认用户 UID 1000
 sudo chmod -R 755 /opt/elk        # 确保可读可执行权限
@@ -162,6 +193,12 @@ docker-compose up -d
 # 查看运行状态
 docker-compose ps
 
+# 停止并清理旧容器
+## -v：删除所有匿名卷（慎用，可能导致数据丢失）。
+## --rmi all：删除所有镜像（通常不需要）。
+# 示例（仅停止容器，保留所有卷和网络）
+docker-compose down
+
 # 单独启动效果如下：
 docker-compose up -d elasticsearch
 docker-compose logs elasticsearch  # 查看是否启动成功
@@ -173,13 +210,31 @@ docker-compose logs elasticsearch  # 查看是否启动成功
 # nc 是 netcat 的缩写，它是一个功能强大的网络工具，用于通过 TCP/UDP 协议 进行数据传输。
 echo '{"message": "Test log entry"}' | nc localhost 5000
 
-# 访问kibana，查看日志即可：
+# 访问kibana，查看日志即可
 ```
 
 6. 创建索引模式。
 
-![image-20250402141103416](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250402141103416.png)
+![image-20250402161904715](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250402161904715.png)
 
 7. 查看信息内容。
 
-![image-20250402141130222](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250402141130222.png)
+![image-20250402161851714](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250402161851714.png)
+
+
+## 4. 日志收集 - 典型流程
+
+1. 微服务典型流程：
+```text
+Spring Boot App + Logback → Kafka → Logstash → Elasticsearch → Kibana
+```
+
+通过 Spring Boot App + Logback 直接发送到 Kafka，然后 Logstash 从 Kafka 中消费数据，再将数据导入 Elasticsearch，最后通过 Kibana 进行数据可视化。
+
+2. web应用典型流程：
+```text
+Web 服务器（Nginx/Apache）+ Filebeat → (可选 Kafka) → Logstash → Elasticsearch → Kibana
+```
+
+通过 Nginx 收集日志文件，然后 filebeat 采集日志文件，然后 Logstash 导入 Elasticsearch，最后通过 Kibana 进行数据可视化。
+
