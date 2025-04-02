@@ -3,7 +3,6 @@ title: Kubernetes yaml配置
 order: 13
 ---
 
-
 ## Kubernetes 的yaml配置文件
 
 ::: info
