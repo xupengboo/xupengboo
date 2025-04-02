@@ -44,6 +44,8 @@ Elastic Cloud 是 Elastic 公司提供的云服务，用于部署和管理 Elast
 
 ## 3. ELK Docker单机部署
 
+搭建一套简单的 Elasticsearch、Logstash、Kibana 相关链接的系统。
+
 1. 安装 Docker Compose 
 
 ```shell
