@@ -176,10 +176,10 @@ echo '{"message": "Test log entry"}' | nc localhost 5000
 # 访问kibana，查看日志即可：
 ```
 
-创建索引模式：
+6. 创建索引模式。
 
 ![image-20250402141103416](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250402141103416.png)
 
-查看信息内容：
+7. 查看信息内容。
 
 ![image-20250402141130222](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250402141130222.png)
