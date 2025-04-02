@@ -3,7 +3,7 @@ title: Docker 镜像仓库地址
 order: 6
 ---
 
-# Docker 镜像仓库地址
+## 1. Docker 镜像仓库地址（三方网站维护）
 
 更多 Docker 镜像源：
 
@@ -35,8 +35,6 @@ vi /etc/docker/daemon.json
 systemctl restart docker
 ```
 
-
-
 也可以官方，单独拉取镜像：
 
 - https://github.com/DaoCloud/public-image-mirror
@@ -45,3 +43,6 @@ systemctl restart docker
 docker pull m.daocloud.io/docker.io/library/node:14.15.0
 ```
 
+## 2. xuanyuan 镜像库
+
+地址如下：https://docker.xuanyuan.me/

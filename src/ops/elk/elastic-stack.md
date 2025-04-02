@@ -42,5 +42,8 @@ Elastic Cloud 是 Elastic 公司提供的云服务，用于部署和管理 Elast
 
 ![image-20250214153355828](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250214153355828.png)
 
+## 3. 单机部署
+
+
 
 
