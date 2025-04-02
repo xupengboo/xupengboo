@@ -29,7 +29,7 @@ docker run -d \
   --shm-size 64m \
   rancher/rancher:v2.5.14
 ```
-## 3. 如何使用rancher搭建多个k8s集群？
+## 3. 如何使用 Rancher 搭建多个k8s集群？
 
 1. 英文不友好的同志，直接切换简体中文就行（喜欢强迫自己看英文的，推荐：先中文熟悉几遍，之后再切换回英文，不然容易自闭）。
 ![image](https://github.com/user-attachments/assets/fe75ab50-c8c1-4679-ae34-e32a164b4913)
