@@ -1,7 +1,7 @@
 ---
 title: 框架设计路线
 order: 1
-icon: bxs:data
+icon: icon-park-outline:data-all
 ---
 
 
