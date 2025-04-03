@@ -7,7 +7,7 @@ order: 2
 
 Filebeat 是 Elastic Stack 中的轻量级日志采集工具，用于收集、转发日志文件到 Logstash、Elasticsearch 等目的地。
 
-## 2. Filebeat 文件直接上传
+## 2. Filebeat 使用
 
 1. 下载 或者 启动 Filebeat
 - 官方地址：https://www.elastic.co/cn/downloads/beats/filebeat
@@ -50,8 +50,6 @@ sudo ./filebeat -e -c filebeat.yml
 ```shell
 echo "测试测试测试" >> test.log
 ```
-
-## 3. Filebeat Nginx日志上传
 
 
 
