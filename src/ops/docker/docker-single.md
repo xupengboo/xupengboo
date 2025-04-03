@@ -3,12 +3,7 @@ title: Docker 单机部署
 order: 3
 ---
 
-## mvn、jdk安装
-[CentOS7安装Maven_centos7安装maven-CSDN博客](https://blog.csdn.net/qq_38738510/article/details/105567513)
-
-[CentOS7安装jdk8教程_centos7安装jdk8-CSDN博客](https://blog.csdn.net/codedz/article/details/124044974)
-
-## 部署自定义网络
+## 1. Docker 自定义网络
 ```powershell
 # 1. 创建自定义网络。
 docker network create itholmes_network
@@ -18,7 +13,7 @@ docker network disconnect itholmes_network mysql
 # 3. 重启
 docker restart container_name
 ```
-## Dockerfile 写法
+## 2. Dockerfile 写法
 ```dockerfile
 # 基础镜像
 FROM  openjdk:8-jre
@@ -36,11 +31,12 @@ COPY ./jar/ruoyi-auth.jar /home/ruoyi/ruoyi-auth.jar
 # 启动认证服务
 ENTRYPOINT ["java","-jar","ruoyi-auth.jar"]
 ```
-## docker Swarm 跨宿主机通讯
+## 3. Docker Swarm 跨宿主机通讯（了解）
 [跨宿主机- 如何实现 Docker 容器的通讯？（Docker-Swarm）_docker swarm 访问宿主机 add-host-CSDN博客](https://blog.csdn.net/adparking/article/details/119140418)
+
 > 💡Tips：work节点一开始不会刷新出来在manager节点创建的network，之后某个容器服务声明以后才能构建。
 
-## docker中间服务器 搭建
+## 4. Docker 中间服务器 搭建
 ### MySQL
 ```powershell
 # Mysql 8版本：
@@ -410,4 +406,23 @@ docker run -d \
  zookeeper:3.8.0 \
  zkServer.sh start-foreground
 ```
+
+### PostgreSQL 
+
+```shell
+# 拉取官方镜像（推荐指定版本，如 postgres:16）
+docker pull postgres:latest
+
+# 启动容器（数据持久化 + 基础配置）
+docker run -d \
+ --name postgres \
+ -e POSTGRES_PASSWORD=0818 \
+ -e POSTGRES_USER=root \
+ -e POSTGRES_DB=postgres \
+ -v /opt/postgresql/data:/var/lib/postgresql/data \
+ -p 5432:5432 \
+ postgres:latest
+```
+
+
 
