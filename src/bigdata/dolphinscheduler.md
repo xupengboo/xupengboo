@@ -10,7 +10,9 @@ icon: simple-icons:apachedolphinscheduler
 
 Github 地址：https://github.com/apache/dolphinscheduler/tree/3.2.2-release
 
-## 2. Docker单节点启动（standalone-server）
+## 2. DolphinScheduler 部署
+
+### 2.1 Docker 单节点启动（standalone-server）
 
 适合学习使用，以 [3.2.2](https://github.com/apache/dolphinscheduler/tree/3.2.2-release) 版本为例，使用 PostgreSQL 作为外部存储：
 
@@ -69,7 +71,7 @@ docker run --name dolphinscheduler \
   -d apache/dolphinscheduler-standalone-server:3.2.2
 ```
 
-## 3. 二进制安装
+### 2.2 二进制安装
 
 见：[DolphinScheduler - 单机部署](https://dolphinscheduler.apache.org/zh-cn/docs/3.2.2/guide/installation/standalone)
 
@@ -169,3 +171,6 @@ DolphinScheduler 在执行任务时，会根据自己内部的任务配置和环
 因此，为了确保任务执行时拥有正确的环境，**你需要在 DolphinScheduler 的环境管理中配置好相应的变量，或者在任务的自定义配置中将这些变量明确写入任务脚本**。这样生成的脚本就会包含完整的命令路径和环境配置，从而保证 DataX 或其他任务能够正确运行。
 
 :::
+
+
+
