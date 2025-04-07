@@ -2,11 +2,18 @@
 title: DolphinScheduler 工具
 order: 10
 icon: simple-icons:apachedolphinscheduler
+tags:
+  - 大数据
+  - DolphinScheduler
+categories:
+  - 大数据
 ---
 
+:::info
 以官方为准：https://dolphinscheduler.apache.org/zh-cn/docs/3.2.2/guide/homepage
 
 Github 地址：https://github.com/apache/dolphinscheduler/tree/3.2.2-release
+:::
 
 ## 一. DolphinScheduler 部署
 

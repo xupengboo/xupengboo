@@ -4,14 +4,13 @@ order: 1
 icon: mdi:tools
 ---
 
-
-##  DataX 工具简介
-
+:::info
 DataX 开源项目地址：[https://github.com/alibaba/DataX](https://github.com/alibaba/DataX)
 
 DataX 概述：[https://github.com/alibaba/DataX/blob/master/introduction.md](https://github.com/alibaba/DataX/blob/master/introduction.md)
 
 DataX 安装：https://github.com/alibaba/DataX/tree/master?tab=readme-ov-file#quick-start
+:::
 
 ## 1. 环境安装
 
