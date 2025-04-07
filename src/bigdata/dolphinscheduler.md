@@ -4,13 +4,13 @@ order: 10
 icon: simple-icons:apachedolphinscheduler
 ---
 
-## 1. DolphinScheduler 
+## 一. DolphinScheduler 
 
 以官方为准：https://dolphinscheduler.apache.org/zh-cn/docs/3.2.2/guide/homepage
 
 Github 地址：https://github.com/apache/dolphinscheduler/tree/3.2.2-release
 
-## 2. DolphinScheduler 部署
+## 二. DolphinScheduler 部署
 
 ### 2.1 Docker 单节点启动（standalone-server）
 
@@ -106,7 +106,7 @@ bash ./bin/dolphinscheduler-daemon.sh status standalone-server
 ```
 
 
-## 3. 集成DataX
+## 三. 集成DataX
 
 1. 安装 DataX ， 见：[DataX 工具 - 上一篇章]
 2. 自己构建 Dockerfile 方式，集成 `python`、`java`、`mvn` 到 ds 镜像中：
