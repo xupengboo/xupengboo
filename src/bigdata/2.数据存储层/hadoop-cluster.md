@@ -202,6 +202,13 @@ vi $HADOOP_HOME/etc/hadoop/yarn-site.xml
         <name>yarn.nodemanager.log-dirs</name>
         <value>/usr/local/hadoop/yarn/log</value>
     </property>
+
+    <!-- 其作用是启用 NodeManager 的 mapreduce_shuffle 辅助服务。在 Hadoop 的 YARN 架构中，NodeManager 可以配置辅助服务（Auxiliary Services）来扩展其功能。 -->
+    <property>
+        <name>yarn.nodemanager.aux-services</name>
+        <value>mapreduce_shuffle</value>
+    </property>
+
 </configuration>
 ```
 
@@ -216,15 +223,33 @@ vi $HADOOP_HOME/etc/hadoop/mapred-site.xml
     <name>mapreduce.framework.name</name>
     <value>yarn</value> <!-- 使用 YARN 作为 MapReduce 框架 -->
   </property>
+    
+  <!-- 以下三个配置，用于确保 MapReduce 作业能够正确找到 Hadoop 的 MapReduce 组件 -->
+  <property>
+    <name>yarn.app.mapreduce.am.env</name>
+    <value>HADOOP_MAPRED_HOME=/usr/local/hadoop</value> <!-- 设置应用程序主控程序（ApplicationMaster）的环境变量。 -->
+  </property>
+    
+  <property>
+    <name>mapreduce.map.env</name>
+    <value>HADOOP_MAPRED_HOME=/usr/local/hadoop</value> <!-- 为 Map 任务设置环境变量。 -->
+  </property>
+    
+  <property>
+    <name>mapreduce.reduce.env</name>
+    <value>HADOOP_MAPRED_HOME=/usr/local/hadoop</value> <!-- 为 Reduce 任务设置环境变量。 -->
+  </property>
+    
 </configuration>
 ```
 
-> 拓展：在 Hadoop 1.x 中，MapReduce 承担了任务调度和资源管理的职责。
->
-> **在 Hadoop 2.x 中，这些职责被分离到 YARN 中**：
->
-> - **YARN 负责资源管理和任务调度**。
-> - **MapReduce 仅负责计算逻辑**。
+:::tip 拓展
+在 Hadoop 1.x 中，MapReduce 承担了任务调度和资源管理的职责。
+
+**在 Hadoop 2.x 中，这些职责被分离到 YARN 中**：
+- **YARN 负责资源管理和任务调度**。
+- **MapReduce 仅负责计算逻辑**。
+:::
 
 ## 7. 格式化HDFS
 
