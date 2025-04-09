@@ -3,7 +3,7 @@ title: Docker 基础知识
 order: 2
 ---
 
-## Docker 常用命令
+## 一、Docker 常用命令
 
 1. 复制：
 
@@ -21,9 +21,29 @@ docker tag <source-image> <target-image>
 docker tag node:14 node:latest
 ```
 
+3. 查看 Docker 占用空间情况，适合排查因 Docker 导致的磁盘占用问题。
+
+   ```bash
+   $ docker system df
+   TYPE            TOTAL     ACTIVE    SIZE      RECLAIMABLE
+   Images          3         1         1.328GB   1.312GB (98%)
+   Containers      1         0         1.093kB   1.093kB (100%)
+   Local Volumes   9         0         2.908GB   2.908GB (100%)
+   Build Cache     242       0         28.34GB   28.34GB
+   ```
+
+4. 清理 构建镜像时产生的缓存文件：（只清理构建缓存（更安全））
+
+```shell
+$ docker builder prune
+# docker builder prune 主要是用来清理 构建镜像时产生的缓存文件，并不会删除实际的镜像、容器或数据卷。
+```
+
+![image-20250409145804944](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250409145804944.png)
 
 
-## Docker 清理 overlay2 目录
+
+## 二、Docker 清理 overlay2 目录
 
 如果 `/var/lib/docker/overlay2` 占用了大量磁盘空间，可以考虑以下方法：
 
@@ -55,7 +75,7 @@ docker tag node:14 node:latest
 
 5. **手动删除未使用的容器和镜像**：如果某些容器或镜像已经不再需要，可以使用 `docker rm` 和 `docker rmi` 删除它们。
 
-## Docker 重启策略
+## 三、Docker 重启策略
 
 当你启动一个容器时，可以通过 `--restart` 选项来设置重启策略。以下是几个常见的重启策略：
 
@@ -69,7 +89,7 @@ docker tag node:14 node:latest
 docker run --restart always -d my-container
 ```
 
-## Docker 配置容器日志等
+## 四、Docker 配置容器日志等
 
 配置 `/etc/docker/daemon.json` ：
 
