@@ -1,6 +1,7 @@
 ---
 title: Vue 嵌入多个 axios
 order: 5
+icon: flowbite:vue-solid
 ---
 
 ## Vue 嵌入多个 axios

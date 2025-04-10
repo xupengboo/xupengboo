@@ -1,6 +1,7 @@
 ---
 title: Vite 框架
 order: 1
+icon: flowbite:vue-solid
 ---
 
 # Vite 框架

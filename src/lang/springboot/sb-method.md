@@ -1,4 +1,7 @@
-# Spring Boot 类作用
+---
+title: Spring Boot 类作用
+icon: bxl:spring-boot
+---
 
 ## HandlerMethodArgumentResolver 作用
 

@@ -1,6 +1,7 @@
 ---
 title: Python 工具
 order: 2
+icon: akar-icons:python-fill
 ---
 
 ## Pandas 数据清洗

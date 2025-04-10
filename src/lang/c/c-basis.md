@@ -1,6 +1,7 @@
 ---
 title: C 基础
 order: 1
+icon: arcticons:clanguage
 ---
 
 ## 1. 环境准备

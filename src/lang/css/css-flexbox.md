@@ -1,6 +1,7 @@
 ---
 title: CSS 弹性盒子
 order: 2
+icon: fa6-brands:css
 ---
 
 # 弹性盒子

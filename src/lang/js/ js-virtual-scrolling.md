@@ -1,6 +1,7 @@
 ---
 title: JS 虚拟滚动
 order: 3
+icon: cib:js
 ---
 
 # 虚拟滚动

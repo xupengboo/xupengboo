@@ -1,6 +1,7 @@
 ---
 title: CSS 基础
 order: 1
+icon: fa6-brands:css
 ---
 
 ## 1. CSS 简介

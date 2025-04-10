@@ -1,6 +1,7 @@
 ---
 title: Spring Cloud 认证架构
 order: 2
+icon: material-symbols:cloud
 ---
 
 ## 架构图
