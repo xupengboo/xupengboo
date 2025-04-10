@@ -1,7 +1,6 @@
 ---
 title: JS 工具库
 order: 2
-icon: cib:js
 ---
 
 # JS 工具库

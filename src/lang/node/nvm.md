@@ -1,7 +1,6 @@
 ---
-title: Nvm 工具使用
+title: Nvm 使用
 order: 1
-icon: la:node
 ---
 
 # nvm

@@ -1,7 +1,6 @@
 ---
 title: Vue Swiper 组件
 order: 8
-icon: flowbite:vue-solid
 ---
 
 ## Vue Swiper 组件

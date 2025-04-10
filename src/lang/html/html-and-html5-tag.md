@@ -1,7 +1,6 @@
 ---
 title: HTML 标签
 order: 2
-icon: akar-icons:html-fill
 ---
 
 # HTML 标签

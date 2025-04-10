@@ -1,7 +1,6 @@
 ---
 title: Gateway 网关
 order: 1
-icon: material-symbols:cloud
 ---
 
 # gateway 网关

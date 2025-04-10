@@ -1,7 +1,6 @@
 ---
 title: Git 常用操作
 order: 2
-icon: mdi:git
 ---
 
 ## Git 修改配置

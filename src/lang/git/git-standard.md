@@ -1,7 +1,6 @@
 ---
 title: Git 使用规范
 order: 1
-icon: mdi:git
 ---
 
 

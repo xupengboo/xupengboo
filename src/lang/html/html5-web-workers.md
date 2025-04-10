@@ -1,7 +1,6 @@
 ---
 title: HTML5 WebWorkers 使用
 order: 7
-icon: akar-icons:html-fill
 ---
 
 # Web Workers

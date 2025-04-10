@@ -1,7 +1,6 @@
 ---
 title: HTML5 服务器发送事件
 order: 7
-icon: akar-icons:html-fill
 ---
 
 # HTML5 服务器发送事件

@@ -1,7 +1,6 @@
 ---
 title: Gitlab Prometheus导致的磁盘空间不足问题
 order: 3
-icon: mdi:git
 ---
 
 

@@ -1,7 +1,6 @@
 ---
 title: VuePress 框架
 order: 3
-icon: flowbite:vue-solid
 ---
 
 # VuePress 框架

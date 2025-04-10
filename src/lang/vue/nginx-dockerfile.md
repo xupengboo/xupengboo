@@ -1,7 +1,6 @@
 ---
 title: Vue DockerFile和nginx.conf配置
 order: 5
-icon: flowbite:vue-solid
 ---
 
 # Vue DockerFile和nginx.conf配置

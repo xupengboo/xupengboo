@@ -1,7 +1,6 @@
 ---
 title: AVue 工具
 order: 2
-icon: flowbite:vue-solid
 ---
 
 ## AVue 工具

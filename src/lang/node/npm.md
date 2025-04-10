@@ -1,7 +1,6 @@
 ---
 title: Npm 包管理器
 order: 1
-icon: la:node
 ---
 
 ## npm (Node Package Manager)

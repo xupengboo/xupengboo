@@ -1,7 +1,6 @@
 ---
 title: Python 基础
 order: 1
-icon: akar-icons:python-fill
 ---
 
 ## 1. Python 基础语法

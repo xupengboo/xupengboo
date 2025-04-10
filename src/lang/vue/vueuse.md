@@ -1,7 +1,6 @@
 ---
 title: VueUse 工具库
 order: 4
-icon: flowbite:vue-solid
 ---
 
 # VueUse 工具库

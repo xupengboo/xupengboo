@@ -1,7 +1,6 @@
 ---
 title: HTML5 WebSocket 使用
 order: 6
-icon: akar-icons:html-fill
 ---
 
 # HTML5 WebSocket

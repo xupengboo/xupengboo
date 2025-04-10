@@ -1,7 +1,6 @@
 ---
 title: Python 爬虫
 order: 3
-icon: akar-icons:python-fill
 ---
 
 ::: info 爬虫实战

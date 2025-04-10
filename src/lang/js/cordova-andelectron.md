@@ -1,7 +1,6 @@
 ---
 title: JS 框架
 order: 1
-icon: cib:js
 ---
 
 # JS 框架

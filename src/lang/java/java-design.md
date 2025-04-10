@@ -1,9 +1,5 @@
----
-title: Java 设计模式
-icon: ri:java-line
----
+# Java 设计模式
 
-:::info
 本项目通过构建一个个maven项目梳理案例，来针对性的展示学习每一种设计模式。
 
 构建mvn项目命令，如下：
@@ -11,7 +7,6 @@ icon: ri:java-line
 ```powershell
 mvn archetype:generate -DgroupId=com.xupengboo -DartifactId=xxx -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
 ```
-:::
 
 ## 设计模式 介绍
 

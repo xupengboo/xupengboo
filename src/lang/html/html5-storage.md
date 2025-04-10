@@ -1,7 +1,6 @@
 ---
 title: HTML 存储
 order: 3
-icon: akar-icons:html-fill
 ---
 
 # HTML 存储

@@ -1,7 +1,6 @@
 ---
 title: HTML 简介
 order: 1
-icon: akar-icons:html-fill
 ---
 
 # HTML 简介
