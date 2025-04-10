@@ -1,13 +1,13 @@
 ---
 title: Sqoop 工具
 date: 2025-04-07 10:00:00
+icon: mdi:tools
 tags:
 - 大数据
 - Sqoop
 categories:
 - 大数据
-order: 2
-icon: mdi:tools
+order: 4
 ---
 
 :::info

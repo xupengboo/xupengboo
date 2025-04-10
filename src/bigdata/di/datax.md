@@ -1,7 +1,14 @@
 ---
 title: DataX 工具
-order: 1
 icon: mdi:tools
+order: 1
+date: 2025-04-07 10:00:00
+tags:
+  - 大数据
+  - Flume
+categories:
+  - 大数据
+
 ---
 
 :::info
