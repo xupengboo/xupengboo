@@ -1,7 +1,6 @@
 ---
-title: Istio
+title: Istio 框架
 order: 10
-icon: hugeicons:tools
 ---
 
 ## Istio 框架
