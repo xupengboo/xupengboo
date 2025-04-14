@@ -2,6 +2,12 @@
 title: Hadoop 集群搭建
 order: 2
 icon: ant-design:cluster-outlined
+date: 2025-04-14 10:00:00
+tags:
+  - 大数据
+  - Hadoop
+categories:
+  - 大数据
 ---
 
 ## 搭建Hadoop集群

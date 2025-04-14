@@ -1,7 +1,13 @@
 ---
 title: Hbase 集群搭建
-order: 5
+order: 4
 icon: ant-design:cluster-outlined
+date: 2025-04-14 10:00:00
+tags:
+  - 大数据
+  - Hbase
+categories:
+  - 大数据
 ---
 
 ## HBase

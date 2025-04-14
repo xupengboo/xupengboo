@@ -1,7 +1,13 @@
 ---
 title: Hadoop 集群使用
-order: 2
+order: 1
 icon: mdi:bash
+date: 2025-04-14 10:00:00
+tags:
+  - 大数据
+  - Hadoop
+categories:
+  - 大数据
 ---
 
 ## HDFS 常用指令
