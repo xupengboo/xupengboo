@@ -10,9 +10,11 @@ categories:
   - 大数据
 ---
 
-## 搭建Hadoop集群
+:::info
+Apache Hadoop 官方：[https://hadoop.apache.org/](https://hadoop.apache.org/)
 
-步骤：数据采集 → Hadoop HDFS 存储 → HBase 缓存 → 使用 Spark 和 Flink 进行数据处理和分析。
+搭建步骤：数据采集 → Hadoop HDFS 存储 → HBase 缓存 → 使用 Spark 和 Flink 进行数据处理和分析。
+:::
 
 ## 环境准备
 
@@ -55,9 +57,6 @@ cat CentOS-Base.repo
 sudo yum clean all
 sudo yum makecache
 ```
-
-
-
 
 ## 1. 下载并安装JDK
 

@@ -10,15 +10,17 @@ categories:
   - 大数据
 ---
 
-## HBase
+:::info
+Apache HBase 官方：[https://hbase.apache.org/](https://hbase.apache.org/)
 
 HBase 是基于 Hadoop 的分布式数据库，依赖于 Hadoop 的 HDFS 存储和 YARN 资源管理。
+:::
 
-## 前提
+## 环境准备
 
 搭建 HBase 前提条件：**Hadoop 集群已成功配置和启动。**
 
-## 1. 下载并安装 `HBase` 
+## 一、下载并安装 `HBase` 
 
 HBase 官方：[https://hbase.apache.org/](https://hbase.apache.org/)
 
@@ -38,9 +40,7 @@ bin：（binary）二进制：包含已经编译好的二进制文件和可执�
 
 ![image-20241211171812853](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20241211171812853.png)
 
-
-
-1. 下载  [hbase-2.6.1-hadoop3-bin.tar.gz](https://dlcdn.apache.org/hbase/2.6.1/hbase-2.6.1-hadoop3-bin.tar.gz) 压缩包
+下载  [hbase-2.6.1-hadoop3-bin.tar.gz](https://dlcdn.apache.org/hbase/2.6.1/hbase-2.6.1-hadoop3-bin.tar.gz) 压缩包
 
 ```shell
 # 解压压缩包
@@ -51,7 +51,7 @@ mv hbase-2.6.1-hadoop3 /usr/local/hbase
 
 
 
-## 2. 配置 HBase
+## 二、配置 HBase
 
 1. 配置 `hbase-env.sh` 
 
@@ -123,7 +123,7 @@ vi /usr/local/hbase/conf/hbase-site.xml
 
 3. 确保 使用的 `hdfs://vm-01:9000` 是你 Hadoop集群中 HDFS的 `core-site.xml` 和 `hdfs-site.xml` 配置。
 
-## 3.  配置 ZooKeeper （HBase 需要依赖 ZooKeeper）
+## 三、配置 ZooKeeper （HBase 需要依赖 ZooKeeper）
 
 ### 3.1 下载并安装 ZooKeeper 
 
@@ -224,7 +224,7 @@ create /test "HelloZooKeeper"
 get /test
 ```
 
-## 4. 启动 HBase 集群
+## 四、启动 HBase 集群
 
 1. 先在 主节点 `vm-01`  上 执行 `./start-hbase.sh`：
 
@@ -243,7 +243,7 @@ cd /usr/local/hbase/bin
 >
 > - `usr/local/zookeeper/bin/zkCli.sh` 执行 `ls /hbase` 查看。
 
-## 5. 检测 HBase 集群是否启动成功
+## 五、检测 HBase 集群是否启动成功
 
 1. 所有节点运行 `jps` 命令：
 
@@ -276,7 +276,7 @@ hbase:001:0> status
 Took 1.3920 seconds
 ```
 
-## 6. 访问 HBase Web UI
+## 六、访问 HBase Web UI
 
 HBase 提供了一个 Web UI，可以在浏览器中查看集群的状态。
 
@@ -285,7 +285,7 @@ HBase 提供了一个 Web UI，可以在浏览器中查看集群的状态。
 - HBase RegionServer Web UI：访问 `http://<regionserver-hostname>:16030`（例如 `http://vm-02:16030`）。
   - 你可以查看 RegionServer 的详细信息，例如 Region 分布、内存使用情况等。
 
-## 7. 向 HBase 中写入数据并读取
+## 七、向 HBase 中写入数据并读取
 
 ```shell
 # 进入 HBase Shell 
