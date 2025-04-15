@@ -4,10 +4,12 @@ order: 4
 icon: ant-design:cluster-outlined
 ---
 
+:::info
+Apache Flink 官方： [https://flink.apache.org/downloads/](https://flink.apache.org/downloads/)
+:::
 
-## `Flink` 集群搭建
 
-# 1. 准备工作
+## 一. 准备工作
 
 1. 确保所有节点安装了 `Java8` 或更高版本 。
 
@@ -23,7 +25,7 @@ java -version
 https://archive.apache.org/dist/flink/flink-1.14.6/
 ```
 
-## 2. 安装`Flink`
+## 二. 安装`Flink`
 
 1. 解压 `Flink` ：
 
@@ -43,7 +45,7 @@ cp /opt/hadoop-3.2.4/share/hadoop/hdfs/hadoop-hdfs-3.2.4.jar /usr/local/flink/li
 cp /opt/hadoop-3.2.4/share/hadoop/client/hadoop-client-*.jar /usr/local/flink/lib/
 ```
 
-## 3. 配置 `Flink`
+## 三. 配置 `Flink`
 
 在所有机器（`vm-01`、`vm-02`、`vm-03`）上，修改 `Flink` 配置文件。
 
@@ -91,7 +93,7 @@ cp /opt/hadoop-3.2.4/share/hadoop/client/hadoop-client-*.jar /usr/local/flink/li
 
    - 确保 `flink-conf.yaml` 文件在所有节点上配置一致，尤其是 `jobmanager.rpc.address` 和 `taskmanager.numberOfTaskSlots` 配置项。
 
-## 4. 启动 `Flink` 集群
+## 四. 启动 `Flink` 集群
 
 在 `vm-01` 上，启动 `JobManager` ：
 
@@ -109,7 +111,7 @@ cd /usr/local/flink/bin
 ./taskmanager.sh start 设置 Flink 内存大小
 ```
 
-## 5. 查看集群状态
+## 五. 查看集群状态
 
 访问，对应的 `vm-01:8082` （默认：8081，但端口冲突配置成了8082）
 

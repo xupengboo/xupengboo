@@ -4,6 +4,12 @@ order: 3
 icon: mdi:bash
 ---
 
+:::info
+
+Apache Spark 官方：[https://spark.apache.org/](https://spark.apache.org/)
+
+:::
+
 ## 一、配置 Python 环境
 
 配置 Python3 环境依赖：

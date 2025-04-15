@@ -4,10 +4,15 @@ order: 3
 icon: ant-design:cluster-outlined
 ---
 
+:::info
 
-## Spark 集群
+Apache Spark 官方：[https://spark.apache.org/](https://spark.apache.org/)
 
-## 1. 下载并安装  `Scala `
+官方下载 地址：[https://www.apache.org/dyn/closer.lua/spark/spark-3.5.3/spark-3.5.3-bin-hadoop3.tgz](https://www.apache.org/dyn/closer.lua/spark/spark-3.5.3/spark-3.5.3-bin-hadoop3.tgz)
+
+:::
+
+## 一. 下载并安装  `Scala `
 
 检查 Java ：
 
@@ -48,7 +53,7 @@ export SPARK_MASTER_HOST=vm-01  # 设置为主节点地址
 source ~/.bashrc
 ```
 
-## 2. 配置 Spark 与 Hadoop 集成
+## 二. 配置 Spark 与 Hadoop 集成
 
 1. 配置 `spark-env.sh`
 
@@ -98,7 +103,7 @@ cp $HADOOP_HOME/etc/hadoop/hdfs-site.xml $SPARK_HOME/conf/
 cp /usr/local/hbase/conf/hbase-site.xml $SPARK_HOME/conf/
 ```
 
-## 3. 启动Spark集群
+## 三. 启动Spark集群
 
 1. 在主节点 `vm-01` 上，运行以下命令启动 Spark Master：
 
@@ -115,7 +120,7 @@ $SPARK_HOME/sbin/start-worker.sh spark://vm-01:7077
 
 > 注意：如果 8080 占用，他会换成其他端口，可以去日志查看一下。
 
-## 4. 提交 Spark 作业
+## 四. 提交 Spark 作业
 
 ```bash
 spark-submit --master yarn --deploy-mode cluster /opt/Spark计算文本里面词汇个数.py

@@ -27,13 +27,20 @@ StarRocks 通常作为 **OLAP 核心引擎**（Online Analytical Processing，�
 
 :::
 
-## StarRocks 存算一体（简单部署）
+## StarRocks  存算分离（简单部署）
 
 运行以下命令启动 StarRocks 存算一体集群：
 
 ```shell
-docker run -p 9030:9030 -p 8030:8030 -p 8040:8040 -itd \
---name quickstart starrocks/allin1-ubuntu
+mkdir quickstart
+cd quickstart
+curl -O https://raw.githubusercontent.com/StarRocks/demo/master/documentation-samples/quickstart/docker-compose.yml
+
+# 启动StarRocks
+docker compose up -d
+
+# 检查环境状态
+docker compose ps
 ```
 
 详情见：[https://docs.starrocks.io/zh/docs/quick_start/shared-nothing/](https://docs.starrocks.io/zh/docs/quick_start/shared-nothing/)
