@@ -27,23 +27,54 @@ StarRocks 通常作为 **OLAP 核心引擎**（Online Analytical Processing，�
 
 :::
 
-## StarRocks  存算分离（简单部署）
+## 一、StarRocks  存算分离（官方傻瓜式部署）
 
-运行以下命令启动 StarRocks 存算一体集群：
+运行以下命令启动 StarRocks 存算分离：
 
 ```shell
 mkdir quickstart
 cd quickstart
+# 下载docker compose文件
 curl -O https://raw.githubusercontent.com/StarRocks/demo/master/documentation-samples/quickstart/docker-compose.yml
 
 # 启动StarRocks
 docker compose up -d
-
 # 检查环境状态
 docker compose ps
 ```
 
-详情见：[https://docs.starrocks.io/zh/docs/quick_start/shared-nothing/](https://docs.starrocks.io/zh/docs/quick_start/shared-nothing/)
+后续， 见 官方一步步来即可：[https://docs.starrocks.io/zh/docs/quick_start/shared-data/](https://docs.starrocks.io/zh/docs/quick_start/shared-data/)
+
+:::tip
+
+StarRocks 存算分离架构的核心是**将数据以存储卷（Storage Volume）的形式持久化到 MinIO 等对象存储系统上**，同时由**计算节点（CN）负责查询和缓存热数据**，实现存储与计算的解耦。
+
+所以，需要在 StarRocks 数据库中，配置 minio 相关的存储卷，以及相关的创建  MinIO 相关的 Access Key 和 Secret Key 。
+
+![image-20250416160846405](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250416160846405.png)
+
+:::
+
+
+
+
+## 二、StarRocks 使用
+
+:::tip
+StarRocks 可以直接使用 MySQL Client 连接，但是端口号是 9030 （ FE节点 ）需要注意！
+
+![image-20250416154813808](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250416154813808.png)
+
+:::
+
+整体效果和 MySQL 语法差不多，但是 StarRocks 核心是  **快速分析海量数据** 。
+
+|      核心能力      |          作用场景           |         与传统存储系统的差异         |
+| :----------------: | :-------------------------: | :----------------------------------: |
+|    **MPP 架构**    | 并行处理复杂查询，加速分析  | 传统存储系统（如 HDFS/S3）无计算能力 |
+| **向量化执行引擎** | 优化 CPU 利用率，提升吞吐量 |      存储系统仅提供数据读写接口      |
+|  **实时数据摄入**  |     支持 Kafka 流式导入     |      存储系统不具备实时处理能力      |
+| **高并发查询优化** |   支持数千 QPS 的并发查询   |    存储系统无法直接支持高并发分析    |
 
 
 
