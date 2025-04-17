@@ -55,5 +55,18 @@ Hive 的数据存储结构：
 
 
 
+## 三、数据加载到 Hive 表中
+
+1. 直接关联 HDFS 路径：若 HDFS 数据已存放到 Hive 表的存储路径（如 `/user/hive/warehouse/sales`），Hive 会自动读取数据，无需额外操作。
+
+2. 手动加载数据：使用 `LOAD DATA` 命令将 HDFS 文件加载到 Hive 表：
+
+```sql
+LOAD DATA INPATH '/user/hdfs/sales.csv' INTO TABLE sales;
+```
+
+- 此操作会将 HDFS 文件移动到 Hive 表的存储目录中（原始文件被删除）。
+- 若需保留原文件，使用 `EXTERNAL TABLE` 并直接关联路径。
+
 
 
