@@ -117,7 +117,7 @@ ping www.baidu.com
 
 如果想要改变网关，可以去虚拟网络编译器配置：
 
-![image-20250221001434322](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250221001434322.png)
+![image-20250418095215573](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250418095215573.png)
 
 :::
 
