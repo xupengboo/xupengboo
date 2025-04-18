@@ -376,6 +376,69 @@ scp -r <folder>  <user> @<ip> :<url>
 scp -r test root@192.168.0.1:/opt
 ```
 
+#### 2.3.4 rsync
+
+作用：高效同步文件（仅传输差异部分，支持断点续传）。
+
+```shell
+rsync -avz --delete /local/path user@host:/remote/path
+
+-a：归档模式（保留权限、时间戳等）。
+-v：显示详细过程。
+-z：压缩传输以节省带宽。
+--delete：删除目标端多余文件（保持严格一致）。
+```
+
+### 2.3.5 `xsync` 脚本的工作流程
+
+1. 编写 `xsync` 脚本
+
+```shell
+#!/bin/bash
+
+#1. 判断参数个数
+if [ $# -lt 1 ]
+then
+  echo Not Enough Arguement!
+  exit;
+fi
+
+#2. 遍历集群所有机器
+for host in hadoop102 hadoop103 hadoop104
+do
+  echo ====================  $host  ====================
+  #3. 遍历所有目录，挨个发送
+  for file in $@
+  do
+    #4 判断文件是否存在
+    if [ -e $file ]
+    then
+      #5. 获取父目录
+      pdir=$(cd -P $(dirname $file); pwd)
+      #6. 获取当前文件的名称
+      fname=$(basename $file)
+      ssh $host "mkdir -p $pdir"
+      rsync -av $pdir/$fname $host:$pdir
+    else
+      echo $file does not exists!
+    fi
+  done
+done
+```
+
+2. 授予权限
+
+```shell
+chmod 777 xsync
+```
+
+3. 测试将 `xsync` 脚本分发给其他linux系统上。
+
+```shell
+./xsync xsync
+```
+
+
 ## 3. Linux 之 文件内容查看 和 编辑
 
 > **关键词：`cat`, `head`, `tail`, `more`, `less`, `sed`, `vi`, `grep`。**
