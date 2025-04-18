@@ -110,3 +110,37 @@ systemctl set-default graphical.target
 reboot
 ```
 
+
+
+## 6. CentOS 环境变量配置说明
+
+Linux的环境变量可在多个文件中配置，如`/etc/profile` ，`/etc/profile.d/*.sh` ，`~/.bashrc` ，`~/.bash_profile` 等，下面说明上述几个文件之间的关系和区别。
+
+bash的运行模式可分为`login shell` 和`non-login shell` 。
+
+例如，我们通过终端，输入用户名、密码，登录系统之后，得到就是一个login shell。而当我们执行以下命令`ssh hadoop103 command` ，在 hadoop103 执行 command 的就是一个`non-login shell` 。
+
+![image-20250418134559613](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250418134559613.png)
+
+这两种`shell` 的主要区别在于，它们启动时会加载不同的配置文件，login shell启动时会加载`/etc/profile` ，`~/.bash_profile` ，`~/.bashrc` 。`non-login shell` 启动时会加载`~/.bashrc` 。
+
+而在加载`~/.bashrc`（实际是`~/.bashrc` 中加载的`/etc/bashrc` ）或`/etc/profile` 时，都会执行如下代码片段，
+
+```shell
+for i in /etc/profile.d/*.sh /etc/profile.d/sh.local ; do
+    if [ -r "$i" ]; then
+        if [ "${-#*i}" != "$-" ]; then 
+            . "$i"
+        else
+            . "$i" >/dev/null
+        fi
+    fi
+done
+```
+
+因此不管是`login shell` 还是`non-login shell` ，启动时都会加载`/etc/profile.d/*.sh` 中的环境变量。
+
+**所以，通过 `/etc/profile.d/\*.sh` 加载环境变量是推荐的做法**，尤其在多用户系统和需要统一管理全局配置的场景中。
+
+
+
