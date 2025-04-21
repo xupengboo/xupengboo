@@ -3,18 +3,24 @@ title: Canal 基本使用
 order: 1
 ---
 
-## Canal数据库同步 - 如何搭建集群、对接MySQL以及KafKa 实践
+:::important
 
-> 功能：主要用于数据库同步。
->
-> 流程：`MySQL binlog` ->  `Canal`  -> `Kafka Topics` 
->
-> 推荐参考官方：
->
-> - 本地 安装：https://github.com/alibaba/canal/wiki/QuickStart 【学习采用】
-> - 基于Docker 安装：https://github.com/alibaba/canal/wiki/Docker-QuickStart
+Canal 功能：CDC捕获工具，主要用于数据库同步。
+
+大体流程：`MySQL binlog` ->  `Canal`  -> `Kafka Topics`
+
+推荐参考官方：
+
+- 本地 安装：https://github.com/alibaba/canal/wiki/QuickStart 【学习采用】
+- 基于Docker 安装：https://github.com/alibaba/canal/wiki/Docker-QuickStart
 
 ![image-20241226101247282](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20241226101247282.png)
+
+:::
+
+
+
+## Canal数据库同步 - 如何搭建集群、对接MySQL以及KafKa 实践
 
 ### 1. 准备工作
 

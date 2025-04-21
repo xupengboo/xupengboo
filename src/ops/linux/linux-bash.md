@@ -1749,3 +1749,15 @@ nano filename.txt
 - `Ctrl + U`：粘贴
 - `Ctrl + W`：查找
 - `Ctrl + C`：显示光标位置
+
+## 16. jps （JVM自带）
+
+`jps`（Java Process Status）是 **JDK 自带的一个命令行工具**，用于 **列出当前系统中正在运行的 Java 进程**，并显示它们的 **进程 ID（PID）** 和 **主类名（或 JAR 文件名）**。
+
+```shell
+# 添加 -m 可以查看传递的参数
+jps -m
+60929 Kafka /opt/module/kafka/config/server.properties
+60019 QuorumPeerMain /opt/module/zookeeper/bin/../conf/zoo.cfg
+```
+
