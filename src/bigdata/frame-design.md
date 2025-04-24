@@ -4,6 +4,17 @@ order: 1
 icon: icon-park-outline:data-all
 ---
 
+:::info
+
+| **缩写** |          **全称**          |    **定位**    |              **数据特点**              |       **典型应用场景**       |       **依赖关系**        |
+| :------: | :------------------------: | :------------: | :------------------------------------: | :--------------------------: | :-----------------------: |
+| **ODS**  |   Operational Data Store   | 原始数据存储层 |    原始数据，与源系统一致，保留历史    | 数据备份、数据探查、ETL起点  |   直接抽取业务系统数据    |
+| **DWD**  |   Data Warehouse Detail    | 数据仓库明细层 | 清洗、标准化后的明细数据，保持业务过程 | 明细查询、事务分析、数据建模 | 依赖ODS层，输出到DWS/DIM  |
+| **DWS**  |   Data Warehouse Summary   | 数据仓库汇总层 |     按主题轻度汇总的宽表或聚合指标     |   报表分析、即席查询、OLAP   |   依赖DWD层，输出到ADS    |
+| **ADS**  |   Application Data Store   |   应用数据层   |     高度汇总，面向业务的指标或标签     |   推荐系统、风控、业务大屏   | 依赖DWS/DWD，直接服务应用 |
+| **DIW**  | Data Integration Warehouse |  数据集成仓库  |     整合多源数据，统一企业数据视图     |   跨部门分析、数据中台建设   |  可能包含ODS/DWD/DWS分层  |
+
+:::
 
 ## 1. 大体整体流程
 
@@ -47,8 +58,6 @@ icon: icon-park-outline:data-all
 ![image-20250113162441944](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250113162441944.png)
 
 
-
-## 3. 实时数仓 架构
 
 
 
