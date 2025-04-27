@@ -10,7 +10,7 @@ categories:
   - 大数据
 ---
 
-## 一、Hadoop 
+:::info
 
 **Hadoop** 是一个开源的 **分布式计算与存储框架**，设计用于在廉价硬件集群上处理海量数据（从 TB 到 PB 级）。其核心思想是通过 **横向扩展（Scale-out）** 而非纵向升级硬件来应对大数据挑战，提供高容错性、高吞吐量的数据处理能力。它是 **大数据生态的基石**。
 
@@ -21,9 +21,11 @@ categories:
 |   **MapReduce**   | 分布式计算模型，通过 `Map` 和 `Reduce` 阶段处理数据，适合批处理任务。 |
 | **Hadoop Common** | 基础工具库，为其他组件提供通用功能（如配置管理、文件系统抽象）。 |
 
+:::
 
-## 二、HDFS 常用指令
+## 一、HDFS 常用指令
 
+### 1. 常用命令
 ```shell
 hdfs dfs -ls / # 查看目录
 hdfs dfs -put input.txt /user/hadoop/input # 上传
@@ -34,7 +36,7 @@ hdfs dfs -rm /hdfs/path/to/file          # 删除文件
 hdfs dfs -rm -r /hdfs/path/to/directory # 递归删除目录
 ```
 
-## 三、查看 HDFS 文件
+### 2. 查看 HDFS 文件
 
 ```shell
 # zcat 用来解压 gzip 文件
