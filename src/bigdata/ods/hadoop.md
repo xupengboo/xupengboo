@@ -21,6 +21,30 @@ categories:
 |   **MapReduce**   | 分布式计算模型，通过 `Map` 和 `Reduce` 阶段处理数据，适合批处理任务。 |
 | **Hadoop Common** | 基础工具库，为其他组件提供通用功能（如配置管理、文件系统抽象）。 |
 
+
+
+`NameNode` Web UI：http://hadoop102:9870/  （端口 `9870` 是 Hadoop 3.x 以后的 `NameNode` 默认 Web UI 端口，Hadoop 2.x 用的是 `50070`。），主要功能：查看 HDFS 的健康状况，包括：
+
+- 文件系统概要（容量使用情况、文件块信息）
+- 活跃的 `DataNode` 列表和状态
+- HDFS 报错和警告信息
+- 块副本状态等
+
+ `MapReduce` `JobHistory` Server 的 Web UI：http://hadoop102:19888 （端口 `19888` 是 `JobHistory` Server 的默认访问端口。），主要功能：查看 **已经完成的 MapReduce 任务的历史记录**，包括：
+
+- 各个作业（job）的状态（成功、失败）
+
+- 作业的详细执行过程（map数、reduce数）
+
+- 每个 task 的耗时、日志、异常信息
+
+`ResourceManager` 的 Web UI（YARN 集群资源管理器，端口 `8088` 是 `ResourceManager` 的默认 Web 访问端口。）：http://hadoop103:8088 ，主要功能：查看当前集群上的 **应用程序（如 MapReduce、Spark 等）资源使用和调度情况**，包括：
+
+- 正在运行和已完成的应用列表
+- 各 `NodeManager` 节点的资源使用情况（CPU、内存）
+- 队列管理（Queue）、调度器状态
+- 整体集群资源总览
+
 :::
 
 ## 一、HDFS 常用指令
