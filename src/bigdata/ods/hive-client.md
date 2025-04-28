@@ -9,7 +9,7 @@ order: 5
 
 
 
-## 1. 安装 Hive
+## 一、安装 Hive
 
 ```shell
 # 1. 解压Hive压缩包
@@ -28,7 +28,7 @@ source /etc/profile.d/env.sh
 bin/schematool -dbType derby -initSchema
 ```
 
-## 2. derby 数据库的缺点
+## 二、Derby 数据库的缺点
 
 使用 derby 时，同一时间多个用户连接，会出现一下问题：
 
@@ -47,7 +47,7 @@ Caused by: ERROR XSDB6: Another instance of Derby may have already booted the da
 
 原因在于Hive默认使用的元数据库为 derby。**derby数据库的特点是同一时间只允许一个客户端访问。如果多个Hive客户端同时访问，就会报错。**所以，更多的 Hive 的元数据存储一般回换为 `MySQL` 或者`PostgreSQL` 。
 
-## 3. 切换 MySQL 源数据库
+## 三、切换 MySQL 源数据库
 
 1. 需要安装好对应的 MySQL 库：
 
@@ -151,6 +151,12 @@ mysql> show tables;
 （3）查看元数据库中存储的表中列相关信息：`select * from COLUMNS_V2;` 
 
 ![image-20250428182545749](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250428182545749.png)
+
+## 四、Hive 的连接方式
+
+1. 本地连接 `bin/hive` 启动。
+
+2. 
 
 
 
