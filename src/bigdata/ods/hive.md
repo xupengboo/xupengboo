@@ -1,5 +1,5 @@
 ---
-title: Hive 使用
+title: Hive 架构原理
 order: 3
 icon: ant-design:cluster-outlined
 date: 2025-04-14 10:00:00
