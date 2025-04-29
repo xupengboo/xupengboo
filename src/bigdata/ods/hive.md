@@ -1,5 +1,5 @@
 ---
-title: Hive(类 SQL 语法)
+title: Hive 使用
 order: 3
 icon: ant-design:cluster-outlined
 date: 2025-04-14 10:00:00

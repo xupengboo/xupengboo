@@ -1,6 +1,12 @@
 ﻿---
 title: Linux 命令
 order: 1
+date: 2025-04-14 10:00:00
+tags:
+  - 运维
+  - linux
+categories:
+  - 运维
 ---
 
 

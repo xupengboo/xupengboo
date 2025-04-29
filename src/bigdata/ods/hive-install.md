@@ -1,13 +1,14 @@
 ---
-title: Hive 搭建
-order: 5
+title: Hive 搭建指南
+order: 3
+icon: ant-design:cluster-outlined
+date: 2025-04-14 10:00:00
+tags:
+  - 大数据
+  - Hive
+categories:
+  - 大数据
 ---
-
-:::info
-
-:::
-
-
 
 ## 一、安装 Hive
 
@@ -336,7 +337,46 @@ cat .hivehistory
 
 ## 六、Hive 常见的属性配置
 
-### 1. 配置 log 存放日志位置
+:::info
+
+1. 配置文件方式：
+
+- 默认配置文件：`hive-default.xml`
+
+- 用户自定义配置文件：`hive-site.xml`
+
+> 注意：**用户自定义配置回覆盖默认配置**。另外，Hive 也会读入 Hadoop 的配置，因为 **Hive是作为Hadoop的客户端启动的**，Hive的配置会覆盖Hadoop的配置。
+
+2. 命令行参数方式：
+
+- 启动Hive时，可以在命令行添加`-hiveconf param=value`来设定参数。注意：仅对本次Hive启动有效。
+
+```shell
+bin/hive -hiveconf mapreduce.job.reduces=10;
+
+# 查看参数设置
+hive (default)> set mapreduce.job.reduces;
+```
+
+3. 参数声明方式：
+
+- 可以在HQL中使用`SET` 关键字设定参数，例如
+
+```shell
+hive(default)> set mapreduce.job.reduces;
+```
+
+:::
+
+
+
+### 1. 查看当前所有的配置信息
+
+```shell
+hive> set;
+```
+
+### 2. 配置 log 存放日志位置
 
 ```shell
 # 1. 修改`$HIVE_HOME/conf/hive-log4j2.properties.template` 文件名称为 `hive-log4j2.properties`
@@ -347,7 +387,7 @@ vim hive-log4j2.properties
 property.hive.log.dir=/opt/module/hive/logs
 ```
 
-### 2. Hive 客户端显示当前库和表头
+### 3. Hive 客户端显示当前库和表头
 
 在` vim hive-site.xml` 中加入如下两个配置：
 
