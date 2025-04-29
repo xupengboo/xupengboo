@@ -12,6 +12,8 @@ categories:
 
 :::info
 
+Apache Hive 查询语法：[https://cwiki.apache.org/confluence/display/Hive/LanguageManual+Select](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+Select)
+
 :::
 
 ## 一、Hive 数据类型

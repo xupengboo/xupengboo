@@ -1,6 +1,14 @@
 ---
 title: Canal 基本使用
 order: 1
+date: 2024-10-07 10:00:00
+icon: mdi:tools
+tags:
+- 大数据
+- Maxwell
+categories:
+- 大数据
+---
 ---
 
 :::important
