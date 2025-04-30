@@ -498,8 +498,299 @@ sort by deptno;
 | **输出结果** |        Reduce 内无序         |        Reduce 内有序         |       全局有序        |
 | **适用场景** |    数据分桶、聚合前预处理    |       分桶且需桶内有序       |   严格全局排序需求    |
 
-## 五、
+## 五、分区 和 分桶
 
+分区针对的是数据的存储路径，分桶针对的是数据文件。
+
+### 1. 分区（Partitioning）
+
+将表中的数据按 **某一列（或多个列）的值** 划分为不同的子目录（分区），每个子目录对应一个特定值。
+
+- **本质**：基于列值对数据进行 **物理划分**，目录结构为：`/表路径/分区列=值/数据文件`。
+- **常见分区列**：日期（`dt`）、地区（`region`）、类别（`category`）等低基数列（即重复值较多的列）。
+
+示例：
+
+按日期分区存储日志数据：
+
+```sql
+CREATE TABLE logs (
+    user_id STRING,
+    event STRING
+) PARTITIONED BY (dt STRING);  -- 分区列 `dt`（日期）
+```
+
+实际存储路径：
+
+```
+/user/hive/warehouse/logs/dt=2023-10-01/datafile1.orc
+/user/hive/warehouse/logs/dt=2023-10-02/datafile2.orc
+```
+
+优点：
+
+- **减少数据扫描量**：查询时通过分区过滤，直接跳过无关分区。
+- **优化数据管理**：可单独删除、加载或备份特定分区。
+
+```sql
+-- 删除整个分区
+ALTER TABLE logs DROP PARTITION (dt='2023-10-01');
+
+-- 删除部分数据
+INSERT OVERWRITE TABLE logs PARTITION (dt='2023-10-01')
+SELECT user_id, event 
+FROM logs 
+WHERE dt='2023-10-01' AND user_id != 'user1';  -- 过滤要保留的数据
+
+-- 更新覆盖数据
+INSERT OVERWRITE TABLE logs PARTITION (dt='2023-10-01')
+SELECT 
+    CASE WHEN user_id = 'user1' THEN 'user001' ELSE user_id END AS user_id, 
+    event
+FROM logs 
+WHERE dt='2023-10-01';
+
+-- 查看所有分区
+SHOW PARTITIONS logs;
+```
+
+
+
+### 2. 分桶（Bucketing）
+
+将表中的数据按 **某一列的哈希值** 划分为固定数量的桶（文件），每个桶对应一个文件。
+
+- **本质**：基于哈希值对数据进行 **均匀分布**，确保相同值的数据进入同一桶。
+- **常见分桶列**：高基数列（如 `user_id`、`order_id`），常用于 JOIN 或聚合操作。
+
+示例：
+
+按 `user_id` 分桶存储用户表：
+
+```sql
+CREATE TABLE users (
+    user_id STRING,
+    name STRING
+) CLUSTERED BY (user_id) INTO 4 BUCKETS;  -- 分桶列 `user_id`，分为 4 个桶
+```
+
+实际存储路径：
+
+```
+/user/hive/warehouse/users/000000_0  -- 桶1（哈希值为0）
+/user/hive/warehouse/users/000001_0  -- 桶2（哈希值为1）
+```
+
+优点：
+
+- **优化 JOIN 性能**：相同分桶列的两张表进行 JOIN 时，只需匹配对应桶的数据（类似 MapReduce 的 Map 端 JOIN）。
+
+- **数据均匀分布**：避免数据倾斜，提升并行计算效率。
+
+- **高效采样**：可通过 `TABLESAMPLE` 快速采样特定桶的数据。
+
+  ```sql
+  SELECT * FROM users TABLESAMPLE (BUCKET 1 OUT OF 4 ON user_id);
+  ```
+
+```sql
+-- 删除数据：分桶表不支持直接删除部分数据，需覆盖整个表或分桶。
+INSERT OVERWRITE TABLE users
+SELECT user_id, name 
+FROM users 
+WHERE user_id != 'user1';  -- 过滤要保留的数据
+
+
+-- 更新数据：同删除操作，需覆盖数据。
+INSERT OVERWRITE TABLE users
+SELECT 
+    CASE WHEN user_id = 'user1' THEN 'user001' ELSE user_id END AS user_id, 
+    name
+FROM users;
+```
+
+### 3. 先分区在分桶（实际场景）
+
+在实际场景中，通常 **先分区再分桶**，结合两者的优势：
+
+1. **分区过滤大范围数据**（如按日期）。
+2. **分桶优化细粒度操作**（如按用户 ID JOIN）。
+
+效果如下图：
+
+![image-20250430095024126](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250430095024126.png)
+
+### 4. 二级分区
+
+在分区表的基础上，按 **多个列** 的值进行层级划分。
+
+常见场景：
+
+- 时间维度细化（年 → 月 → 日）。
+- 地理维度细化（国家 → 省份 → 城市）。
+- 业务维度细化（类别 → 子类别）。
+
+示例：
+
+```sql
+-- 按年份（year）和月份（month）二级分区
+CREATE TABLE sales (
+    product_id STRING,
+    amount     DOUBLE
+) PARTITIONED BY (year STRING, month STRING)  -- 分区列顺序决定层级
+STORED AS ORC;
+```
+
+```bash
+# 得到的目录结构如下：
+/user/hive/warehouse/sales/
+├── year=2023/month=01/  # 2023年1月数据
+├── year=2023/month=02/  # 2023年2月数据
+└── year=2024/month=01/  # 2024年1月数据
+```
+
+### 5. 数据直接上传到分区目录上，如果让分区表与数据产生关联呢？
+
+1. 解决办法一：上传数据后，修复：
+
+```sql
+MSCK REPAIR TABLE logs_external;
+```
+
+2. 解决办法二：上传数据后，添加分区：
+
+```sql
+alter table logs_external add partition(day='201709', hour='14')
+```
+
+3. 创建文件夹后，load 数据到分区：
+
+```sql
+-- 创建目录
+dfs -mkdir -p /user/hive/warehouse/mydb.db/logs_external/day=20200401/hour=15;
+-- load 数据导入
+load data local inpath '/opt/module/hive/datas/dept_20200401.log' into table logs_external partition(day='20200401', hour='15') 
+```
+
+:::tip
+
+倘若，load 时，没有指定分区，他也会有一个默认的分区存储：
+
+![image-20250430153226906](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250430153226906.png)
+
+:::
+
+### 6. 动态分区
+
+**动态分区（Dynamic Partitioning）** 是 Hive 中一种自动化管理分区的机制，允许根据查询结果中的字段值自动创建分区，无需手动指定每个分区的值。它特别适用于 **分区列值不固定** 或 **分区数量较多** 的场景（如按日期、地区动态生成分区）。
+
+|         **场景**         |                 **优势**                 |
+| :----------------------: | :--------------------------------------: |
+|     **高频新增分区**     |       自动创建分区，无需手动维护。       |
+| **分区列值未知或变化多** |        根据数据特征自动生成分区。        |
+|     **减少人工操作**     | 避免为每个分区编写单独的 `INSERT` 语句。 |
+
+启动动态分区前，需要设置以下几个参数：
+
+|                   参数名                   |  默认值  |                             说明                             |
+| :----------------------------------------: | :------: | :----------------------------------------------------------: |
+|       `hive.exec.dynamic.partition`        | `false`  |            开启动态分区功能（必须设为 `true`）。             |
+|     `hive.exec.dynamic.partition.mode`     | `strict` | 动态分区模式： `strict`（严格模式，需至少一个静态分区） `nonstrict`（非严格模式，允许全动态分区）。 |
+|     `hive.exec.max.dynamic.partitions`     |  `1000`  |              单个查询允许创建的最大动态分区数。              |
+| `hive.exec.max.dynamic.partitions.pernode` |  `100`   |    单个计算节点（如 DataNode）允许创建的最大动态分区数。     |
+
+示例：
+
+```sql
+-- 按日期（dt）和国家（country）动态分区
+CREATE TABLE sales (
+    product_id STRING,
+    amount     DOUBLE
+) PARTITIONED BY (dt STRING, country STRING)
+STORED AS ORC;
+
+-- 从原始表导入数据（自动生成 dt 和 country 分区）
+INSERT OVERWRITE TABLE sales PARTITION (dt, country)
+SELECT 
+    product_id, 
+    amount, 
+    order_date AS dt,   -- 分区字段必须放在查询列最后
+    region      AS country
+FROM raw_orders;
+```
+
+> 官方要求，动态分区的列，放到最后，并且排序与前者排序相同！
+
+## 六、函数
+
+:::tip
+
+关于函数这块有几个概念性东西，如下：
+
+- UDF（User-Defined Function）：单行输入 → 单行输出，用于对单行数据进行简单转换或计算。（`trim()`、`substring()、date_format()` 等等 ）
+
+- UDAF（User-Defined Aggregation Function）：多行输入 → 单行输出，用于聚合计算（如 `sum()`、`avg()`）。
+
+- UDTF（User-Defined Table-Generating Function）：单行输入 → 多行/多列输出，用于数据展开或复杂解析。展开数组/Map 字段（如 `explode()` ）。
+
+:::
+
+
+
+### 1. 系统内置函数
+
+```sql
+-- 查看系统自带的函数
+show functions;
+
+-- 显示自带的函数的用法
+desc function upper;
+
+-- 详细显示自带的函数的用法
+desc function extended upper;
+```
+
+### 2. 常用的内置函数
+
+```sql
+-- 空字段赋值：nvl() 函数：
+select nvl(comm, -1) from emp;
+
+-- 条件判断函数：case when ... then ...  else ... end
+select case when 1=2 then 'tom' when 2=2 then 'mary' else 'tim' end from tabl eName; 
+
+-- if 条件判断：类似 Java 中的三元运算符
+select if(10 > 5,'正确','错误'); 
+
+-- 等等... 此处，不一一列举
+```
+
+### 3. `explore` 函数
+
+`explore` 函数：展开 数组 / Map 字段：
+
+```sql
+-- 创建含 Map 字段的表
+CREATE TABLE user_profiles (
+    user_id STRING,
+    profile MAP<STRING, STRING>  -- 如 {"gender":"male", "age":"25"}
+);
+
+-- 插入数据
+INSERT INTO user_profiles VALUES
+('user1', map('gender', 'male', 'age', '25')),
+('user2', map('gender', 'female', 'age', '30'));
+
+-- 展开 Map 为多行键值对
+SELECT 
+    user_id, 
+    key, 
+    value
+FROM user_profiles
+LATERAL VIEW explode(profile) tmp AS key, value;
+```
+
+### 4. 窗口函数
 
 
 
