@@ -28,8 +28,8 @@ kubectl --insecure-skip-tls-verify -n kube-system delete secrets k3s-serving
 kubectl --insecure-skip-tls-verify delete secret serving-cert -n cattle-system
 # 3. 删除动态证书文件，删除后，K3s 会重新生成新的证书并写入该文件。
 rm -f /var/lib/rancher/k3s/server/tls/dynamic-cert.json
-# 4. 触发证书更新，通过访问 Rancher API 接口 /v3，强制触发证书更新流程。
-curl --insecure -sfL https://192.168.243.121/v3
+# 4. 触发证书更新，通过访问 Rancher API 接口 /v3，强制触发证书更新流程。 
+curl --insecure -sfL https://<访问Rancher的路径地址(IP:端口号)>/v3
 exit
 
 # 5. 重启容器
