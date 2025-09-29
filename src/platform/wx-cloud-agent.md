@@ -6,6 +6,11 @@ icon: material-symbols:cloud
 
 :::tip
 微信云托管是一个 Serverless 服务，部署项目很简易，免去了很多运维上的事情。
+
+开发者文档：https://developers.weixin.qq.com/miniprogram/dev/wxcloudservice/wxcloudrun/src/basic/intro.html
+
+视频教程：https://developers.weixin.qq.com/community/business/course/00068c2c0106c0667f5b01d015b80d
+
 :::
 
 ## 一、微信云托管 github 流水线配置 和 端口号
