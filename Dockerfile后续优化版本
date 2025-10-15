@@ -1,0 +1,37 @@
+# 使用 Node.js 21.7.2 的官方基础镜像
+FROM node:22 AS builder
+
+# 创建并设置应用的工作目录
+WORKDIR /app
+
+# 复制 package.json 和 package-lock.json 文件
+COPY package*.json ./
+
+RUN npm config set registry https://registry.npmmirror.com
+
+# 安装项目依赖
+# 如果你使用 yarn，请将 npm install 替换为 yarn install
+RUN npm install
+
+# 复制项目文件到工作目录
+COPY . .
+
+# 构建 Nuxt 应用
+RUN npm run build:prod
+
+FROM node:22-alpine
+
+WORKDIR /app
+
+RUN npm config set registry https://registry.npmmirror.com
+RUN npm install pm2 -g
+
+COPY --from=builder /app/.output ./.output
+COPY --from=builder /app/package*.json ./
+COPY --from=builder /app/ecosystem.config.cjs ./
+
+# 暴露容器运行时的端口号
+EXPOSE 80
+
+# 当容器启动时运行 Nuxt 应用
+CMD ["npm", "run", "start"]
