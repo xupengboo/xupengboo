@@ -18,7 +18,7 @@ icon: material-symbols:cloud
 1. 首先，**这里的`主体(宿主机)`，指的就是你的代码本身**，可以理解为有一个服务器拉取了你的代码。
 - 例如：Dockerfile文件中，指令：`COPY src /demo-server/src` 中的src目录，就是代码路径中的src目录。
 
-2. **编写Dockerfile文件**（根据Dockerfile，创建镜像，启动容器）
+2. **编写 Dockerfile 文件**（根据 Dockerfile，创建镜像，启动容器）
 - 例如：[如何写一个Dockerfile文件？](https://github.com/xupengboo/xupengboo/blob/master/src/ops/docker/dockerfile.md)
 
 ```Dockerfile
@@ -74,6 +74,7 @@ docker run -e KEY1=value1 -e KEY2=value2 -e ANOTHER_KEY=another_value my_image
 **提醒一下，不同服务获取环境变量的语法不同**，例如：
 
 **SpringBoot 环境变量配置：**
+
 - SpringBoot 环境变量替换格式为：${xxx}
 
 ![image](https://github.com/ITholmes/hello-world/assets/70437837/ba4658b5-c763-4c45-ba72-5c02b26c4cf8)
