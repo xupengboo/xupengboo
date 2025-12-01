@@ -26,8 +26,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 # 单行注释
 
 '''
-多行注释
-'''
+多行注释 '''
 
 """
 多行注释
