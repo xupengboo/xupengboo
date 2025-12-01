@@ -286,6 +286,25 @@ print(student)
 # 遍历键值对
 for key, value in student.items(): 
     print(f"{key}: {value}")
+    
+# 判断 dict 某个属性是否存在
+## 方式一：
+my_dict = {"name": "Alice", "age": 25}
+if "name" in my_dict:
+    print("'name' 存在")
+if "gender" not in my_dict:
+    print("'gender' 不存在")
+## 方式二：适用于设置默认值
+my_dict = {"name": "Alice", "age": 25}
+if my_dict.get("gender") is None:
+    print("'gender' 不存在")
+if my_dict.get("gender", "default") == "default":
+    print("'gender' 不存在")
+
+## 方式三： 适用于校验key
+my_dict = {"name": "Alice", "age": 25}
+if "age" in my_dict.keys():
+    print("'age' 存在")
 ```
 
 ### 2.4 集合 Set
