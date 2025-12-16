@@ -347,6 +347,9 @@ for num in numbers:
 # 创建字符串
 message = "Hello, Python!"
 
+# 输出单词首字母大写
+print(message.title())
+
 # 字符串切片
 print(message[0:5])
 
