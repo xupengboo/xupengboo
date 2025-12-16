@@ -357,6 +357,10 @@ print(message[0:5])
 print(message.upper())
 print(message.lower())
 
+# “f字符串” 用法
+temp = '123123'
+print(f'{message} {temp}')
+
 # 分割和连接
 words = message.split(", ")
 print(words)
