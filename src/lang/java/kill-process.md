@@ -19,6 +19,6 @@ icon: iconoir:network
 
 > tasklist | findstr /i java
 taskkill /F /PID 75424
-成功: 已终止 PID 为 75424 的进程。
+成功: 已终止 PID 为 75424 的进程
 ```
 
