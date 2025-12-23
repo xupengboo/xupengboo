@@ -42,6 +42,22 @@ git config https.proxy https://127.0.0.1:7890
 git config -l
 ```
 
+清除全局代理配置（关键）：
+
+```bash
+# 查看全局代理配置
+git config --global --list | findstr proxy
+# 查看局部代理配置
+git config --list | findstr proxy
+
+# 清除全局 HTTP/HTTPS 代理
+git config --global --unset http.proxy
+git config --global --unset https.proxy
+# 清除局部 HTTP/HTTPS 代理
+git config --unset http.proxy
+git config --unset https.proxy
+```
+
 
 
 
