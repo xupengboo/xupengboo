@@ -66,3 +66,16 @@ icon: mdi:github
 
 在Typora偏好设置的那个界面，点击左下的【验证图片上传选项】，出现问题查看提示日志，解决即可。
 
+## 5. 还可以设置自定义域名
+
+**对于99%的国内用户，GitHub + jsDelivr 是最佳免费图床方案：**
+
+- ✅ 速度极快（国内有CDN节点）
+- ✅ 完全免费
+- ✅ 稳定可靠（企业级服务）
+- ✅ 搭配工具后体验流畅
+- ✅ 出现了问题，还能切换回 `GitHub`原生链接。
+
+格式：`https://cdn.jsdelivr.net/gh/yourname/my-images@main/img/路径` 
+
+![image-20260115230943020](https://cdn.jsdelivr.net/gh/xupengboo/xupengboo-picture@main/img/image-20260115230943020.png)
