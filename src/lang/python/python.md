@@ -347,12 +347,19 @@ for num in numbers:
 # 创建字符串
 message = "Hello, Python!"
 
+# 输出单词首字母大写（适合将姓名设置为合适格式）
+print(message.title())
+
 # 字符串切片
 print(message[0:5])
 
 # 转换大小写
 print(message.upper())
 print(message.lower())
+
+# “f字符串” 用法
+temp = '123123'
+print(f'{message} {temp}')
 
 # 分割和连接
 words = message.split(", ")
