@@ -1,8 +1,30 @@
-# VuePress 默认临时文件目录
-src/.vuepress/.temp
-# VuePress 默认缓存目录
-src/.vuepress/.cache
-# VuePress 默认构建生成的静态文件目录
-src/.vuepress/dist
-node_modules
-.idea
+# 依赖包
+node_modules/
+
+# VitePress 构建输出目录
+.vitepress/dist/
+
+# VitePress 运行时的缓存目录
+.vitepress/cache/
+
+# 环境变量文件（包含敏感信息时）
+.env
+.env.local
+.env.*.local
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# 日志文件
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# 编辑器配置（可选，如果你想保持个人习惯不污染仓库）
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
