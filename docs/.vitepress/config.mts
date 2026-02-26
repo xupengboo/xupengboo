@@ -3,7 +3,14 @@ import { defineConfig } from 'vitepress'
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: "XuPengBoo",
-  description: "个人知识库项目",
+  description: "XuPengBoo的个人技术知识库，记录开发成长、学习笔记、踩坑实践",
+  lang: 'zh-CN',
+  base: '/',
+  head: [
+    // 网站图标，替换为你自己的favicon（放在docs/public目录下）
+    ['link', { rel: 'icon', href: '/favicon.ico' }]
+  ],
+
 
   // 主题相关配置
   themeConfig: {
@@ -12,7 +19,8 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: '主页', link: '/' },
-      { text: 'Examples', link: '/markdown-examples' }
+      { text: '案例', link: '/markdown-examples' },
+      { text: '语言框架', link: '/lang/c/c-basis.md' },
     ],
 
     // 侧边栏配置
@@ -23,7 +31,14 @@ export default defineConfig({
           { text: 'Markdown Examples', link: '/markdown-examples' },
           { text: 'Runtime API Examples', link: '/api-examples' }
         ]
-      }
+      },
+      {
+        text: '语言框架',
+        items: [
+          { text: 'Markdown Examples', link: '/markdown-examples' },
+          { text: 'Runtime API Examples', link: '/api-examples' }
+        ]
+      },
     ],
 
     // 图标链接配置
