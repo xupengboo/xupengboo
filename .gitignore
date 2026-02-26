@@ -2,10 +2,10 @@
 node_modules/
 
 # VitePress 构建输出目录
-.vitepress/dist/
+docs/.vitepress/dist/
 
 # VitePress 运行时的缓存目录
-.vitepress/cache/
+docs/.vitepress/cache/
 
 # 环境变量文件（包含敏感信息时）
 .env
