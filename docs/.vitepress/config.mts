@@ -6,21 +6,23 @@ export default defineConfig({
   description: "XuPengBoo的个人技术知识库，记录开发成长、学习笔记、踩坑实践",
   lang: 'zh-CN',
   base: '/',
-  head: [
-    // 网站图标，替换为你自己的favicon（放在docs/public目录下）
-    ['link', { rel: 'icon', href: '/favicon.ico' }]
-  ],
-
+  // 设置favicon
+  head: [['link', { rel: 'icon', href: '/favicon.ico' }]],
 
   // 主题相关配置
   themeConfig: {
+    // TODO 左上角图标
+    logo: '/logo.png',
+    siteTitle: 'XuPengBoo',
 
     // 导航栏配置
     // https://vitepress.dev/reference/default-theme-config
     nav: [
-      { text: '主页', link: '/' },
-      { text: '案例', link: '/markdown-examples' },
-      { text: '语言框架', link: '/lang/c/c-basis.md' },
+      { text: '首页', link: '/' },
+      { text: '技术笔记', link: '/notes/' },
+      { text: '项目案例', link: '/projects/' },
+      { text: '工具合集', link: '/tools/' },
+      { text: '关于我', link: '/about/' },
     ],
 
     // 侧边栏配置
@@ -49,7 +51,13 @@ export default defineConfig({
     // 搜索插件配置
     search: {
       provider: 'local'
-    }
+    },
+
+    // 页脚
+    footer: {
+      message: '<a href="https://beian.miit.gov.cn/" target="_blank">鲁ICP备2025142295号-1</a>',
+      copyright: 'Copyright © 2024-present XuPengBoo'
+    },
 
   }
 })
