@@ -1,0 +1,60 @@
+/*!* 侧边栏整体字体大小调整（核心） *!*/
+/*!* 1. 侧边栏一级分类（如「开发总览」「编程语言」）- 调大到15px（默认14px） *!*/
+/*.VPSidebarItem.level-0 .item {*/
+/*    font-size: 15px !important; !* 核心：一级分类字体大小，可按需改16px/17px *!*/
+/*    font-weight: 500;*/
+/*    line-height: 1.6; !* 行高适配，避免文字重叠 *!*/
+/*    padding: 10px 12px !important; !* 上下内边距略调大，匹配大字体 *!*/
+/*}*/
+
+/*!* 2. 侧边栏二级子项（如「Python 全栈」「Java 开发」）- 调大到14px（默认13px） *!*/
+/*.VPSidebarItem.level-1 .item {*/
+/*    font-size: 14px !important; !* 二级子项字体大小 *!*/
+/*    font-weight: 400;*/
+/*    line-height: 1.5;*/
+/*    padding-left: 24px !important;*/
+/*    padding-top: 9px !important;*/
+/*    padding-bottom: 9px !important;*/
+/*}*/
+
+/*!* 3. 侧边栏三级子项（如「基础语法」「数据结构」）- 调大到13.5px（默认13px） *!*/
+/*.VPSidebarItem.level-2 .item {*/
+/*    font-size: 13.5px !important; !* 三级子项字体大小 *!*/
+/*    font-weight: 400;*/
+/*    line-height: 1.5;*/
+/*    padding-left: 36px !important;*/
+/*    padding-top: 8px !important;*/
+/*    padding-bottom: 8px !important;*/
+/*}*/
+
+/*!* 保持图标和文字对齐（调大字体后必加，避免错位） *!*/
+/*.VPSidebarItem .item .text {*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    gap: 6px; !* 图标和文字间距，适配大字体 *!*/
+/*}*/
+
+/*!* 移动端适配：小屏幕字体略调小，避免换行 *!*/
+/*@media (max-width: 768px) {*/
+/*    .VPSidebarItem.level-0 .item {*/
+/*        font-size: 14px !important;*/
+/*    }*/
+/*    .VPSidebarItem.level-1 .item {*/
+/*        font-size: 13px !important;*/
+/*    }*/
+/*    .VPSidebarItem.level-2 .item {*/
+/*        font-size: 12.5px !important;*/
+/*    }*/
+/*}*/
+
+/*!* 侧边栏宽度适配：字体大了，侧边栏宽度略调宽（可选） *!*/
+/*.VPSidebar {*/
+/*    width: 280px !important; !* 原260px，调宽20px适配大字体 *!*/
+/*    min-width: 280px !important;*/
+/*}*/
+/*@media (max-width: 768px) {*/
+/*    .VPSidebar {*/
+/*        width: 260px !important; !* 移动端恢复原宽度 *!*/
+/*        min-width: 260px !important;*/
+/*    }*/
+/*}*/
