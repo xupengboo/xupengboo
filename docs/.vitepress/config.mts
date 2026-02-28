@@ -42,6 +42,13 @@ export default defineConfig({
       // 当 URL 以 /dev/ 开头时，显示这个侧边栏
       '/dev/': [
         {
+          text: '🛠️ 开发工具箱', // 把 Git 放在这里，让它看起来很专业
+          collapsed: true,
+          items: [
+            { text: 'Git 核心实战', link: '/dev/tools/git' },
+          ]
+        },
+        {
           text: '☕ Java 生态',
           collapsed: true, // 默认展开
           items: [
@@ -61,7 +68,7 @@ export default defineConfig({
           items: [
             { text: 'nvm 使用', link: '/dev/front/nvm' },
           ]
-        }
+        },
       ],
 
       // 当 URL 以 /ops/ 开头时，显示运维侧边栏
