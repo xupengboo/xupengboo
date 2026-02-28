@@ -1,8 +1,10 @@
 import { defineConfig } from 'vitepress'
 
+let title = "XuPengBoo"
+
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "XuPengBoo",
+  title: title,
   description: "XuPengBoo的个人技术知识库，记录开发成长、学习笔记、踩坑实践",
   lang: 'zh-CN',
   base: '/',
@@ -11,127 +13,126 @@ export default defineConfig({
 
   // 主题相关配置
   themeConfig: {
-    // TODO 左上角图标
-    // logo: '/logo.png',
-    siteTitle: 'XuPengBoo',
+    // 主题名
+    siteTitle: title,
 
-    // 导航栏配置
-    // https://vitepress.dev/reference/default-theme-config
+    // ==========================================
+    // 1. 顶部导航栏 (Nav)
+    // ==========================================
     nav: [
       { text: '首页', link: '/' },
-      // 核心领域导航，和你的行业划分一一对应
-      { text: '软件开发', link: '/dev/' },
-      { text: '运维服务', link: '/ops/' },
-      { text: 'AI大模型', link: '/ai/' },
-      // 非核心内容收拢，不占用主导航空间
+      // 点击顶部导航，默认跳转到该分类的第一个文档或引导页
+      { text: '💻 软件开发', link: '/dev/intro', activeMatch: '/dev/' },
+      { text: '☁️ 运维与数据', link: '/ops/intro', activeMatch: '/ops/' },
+      { text: '🤖 AI大模型', link: '/ai/intro', activeMatch: '/ai/' },
       {
-        text: '更多',
+        text: '🎒 更多',
         items: [
-          // { text: '大数据', link: '/bigdata/' },
-          { text: '项目案例', link: '/projects/' },
-          { text: '工具合集', link: '/tools/' },
-          { text: '关于我', link: '/about/' },
+          { text: '算法心得', link: '/more/algo/' },
+          { text: '开发工具', link: '/more/tools/git' },
+          { text: '架构构思', link: '/more/arch/' }
         ]
       }
     ],
 
-    // 侧边栏
+    // ==========================================
+    // 2. 动态多侧边栏 (Sidebar) - 根据路由切换
+    // ==========================================
     sidebar: {
-      // 软件开发板块的侧边栏，匹配 /dev/ 路径
+      // 当 URL 以 /dev/ 开头时，显示这个侧边栏
       '/dev/': [
-        // 1. 开发总览：无子项，直接跳转
         {
-          text: '开发总览',
-          link: '/dev/', // 对应 dev/index.md
-        },
-        // 2. 编程语言：有子项，支持折叠展开
-        {
-          text: '💻 编程语言',
-          collapsed: false, // 核心高频内容，默认展开（false=展开，true=折叠）
-          activeMatch: '^/dev/language/', // 只要在该分类下，就保持高亮
-          // 子项：二级分类
+          text: '☕ Java 生态',
+          collapsed: true, // 默认展开
           items: [
-            {
-              text: 'Python 全栈',
-              collapsed: false, // 默认展开，匹配你当前核心内容
-              // 三级子项：具体文章
-              items: [
-                { text: 'Python 总览', link: '/dev/language/python/' },
-                { text: '基础语法', link: '/dev/language/python/base-syntax' },
-                { text: '数据结构', link: '/dev/language/python/data-structure' },
-                { text: '条件循环', link: '/dev/language/python/condition-loop' },
-                { text: '函数与lambda', link: '/dev/language/python/function-lambda' },
-                // 新增Python文章，直接在这里加就行
-              ]
-            },
-            {
-              text: 'Java 开发',
-              collapsed: true, // 内容少，默认折叠
-              items: [
-                { text: 'Java 基础', link: '/dev/language/java/base' },
-                // 其他Java文章
-              ]
-            },
-            {
-              text: '前端开发',
-              collapsed: true,
-              items: []
-            }
+            { text: 'Java 设计模式', link: '/dev/java/design' },
           ]
         },
-        // 3. 架构与设计
         {
-          text: '🏗️ 架构与设计',
-          collapsed: true, // 非高频，默认折叠
+          text: '🐍 Python 与 C',
+          collapsed: true,
           items: [
-            { text: '架构设计原则', link: '/dev/architecture/design-principle' },
-            { text: '设计模式', link: '/dev/architecture/design-pattern' },
+            { text: 'Python 基础', link: '/dev/python/basic' },
           ]
         },
-        // 4. 算法与数据结构
         {
-          text: '📊 算法与数据结构',
-          collapsed: true,
-          items: []
-        },
-        // 5. 数据库与中间件
-        {
-          text: '🗄️ 数据库与中间件',
-          collapsed: true,
-          items: []
-        },
-        // 6. 开发实战
-        {
-          text: '⚔️ 开发实战',
-          collapsed: true,
-          items: []
+          text: '🌐 前端开发',
+          collapsed: true, // 默认折叠
+          items: [
+            { text: 'nvm 使用', link: '/dev/front/nvm' },
+          ]
         }
       ],
 
-      // 其他板块（运维/大数据/AI）的侧边栏，同理配置
+      // 当 URL 以 /ops/ 开头时，显示运维侧边栏
+      '/ops/': [
+        {
+          text: '🐳 Docker 容器化',
+          collapsed: true, // 默认展开
+          items: [
+            { text: '简单部署', link: '/ops/docker/single' },
+          ]
+        },
+        {
+          text: '☸️ Kubernetes 集群',
+          collapsed: true, // 初始折叠，节省空间
+          items: [
+            { text: 'yaml配置', link: '/ops/k8s/yaml' },
+          ]
+        },
+        {
+          text: '🗄️ 数据库与中间件',
+          collapsed: true,
+          items: [
+            { text: 'MySQL 基础', link: '/ops/db/mysql-basis' },
+          ]
+        },
+        {
+          text: '🛠️ 服务器',
+          collapsed: true,
+          items: [
+              { text: 'Linux 常用命令', link: '/ops/server/linux-bash' },
+          ]
+        }
+      ],
+
+      // 当 URL 以 /ai/ 开头时，显示大模型侧边栏
+      '/ai/': [
+        {
+          text: '🤖 大模型基础',
+          collapsed: true,
+          items: [
+            { text: 'LLM 理论导论', link: '/ai/llm/intro' },
+            { text: 'Prompt 提示词工程', link: '/ai/llm/prompt' }
+          ]
+        },
+        {
+          text: '🛠️ AI 应用开发',
+          collapsed: true,
+          items: [
+            { text: 'LangChain 实战', link: '/ai/app/langchain' },
+            { text: '本地大模型部署', link: '/ai/app/deploy' }
+          ]
+        }
+      ],
+
+      // 更多分类侧边栏
+      // '/more/': [ ... ]
     },
 
-    // 配套开启面包屑，显示当前文章路径，和侧边栏联动
-    breadcrumbs: true,
-    // 右侧大纲，和侧边栏标题层级匹配
-    outline: [2, 3],
-    outlineTitle: '本页目录',
 
     // 图标链接配置
     socialLinks: [
       { icon: 'github', link: 'https://github.com/xupengboo/xupengboo' },
     ],
-
     // 搜索插件配置
     search: {
       provider: 'local'
     },
-
     // 页脚
     footer: {
       message: '<a href="https://beian.miit.gov.cn/" target="_blank">鲁ICP备2025142295号-1</a>',
       copyright: 'Copyright © 2024-present XuPengBoo'
     },
-
   }
 })
