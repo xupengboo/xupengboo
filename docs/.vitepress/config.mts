@@ -102,16 +102,14 @@ export default defineConfig({
           text: '🤖 大模型基础',
           collapsed: true,
           items: [
-            { text: 'LLM 理论导论', link: '/ai/llm/intro' },
-            { text: 'Prompt 提示词工程', link: '/ai/llm/prompt' }
+            { text: 'LLM 理论导论', link: '/ai/llm/llm' },
           ]
         },
         {
           text: '🛠️ AI 应用开发',
           collapsed: true,
           items: [
-            { text: 'LangChain 实战', link: '/ai/app/langchain' },
-            { text: '本地大模型部署', link: '/ai/app/deploy' }
+            { text: '本地大模型部署', link: '/ai/app/app' }
           ]
         }
       ],
