@@ -77,7 +77,8 @@ export default defineConfig({
           text: '🐳 Docker 容器化',
           collapsed: true, // 默认展开
           items: [
-            { text: '简单部署', link: '/ops/docker/single' },
+            { text: 'Docker 核心命令', link: '/ops/docker/核心命令' },
+            { text: 'Docker 单机部署', link: '/ops/docker/单机部署' },
           ]
         },
         {
