@@ -126,19 +126,26 @@ export default defineConfig({
       // '/more/': [ ... ]
     },
 
-
     // 图标链接配置
     socialLinks: [
       { icon: 'github', link: 'https://github.com/xupengboo/xupengboo' },
     ],
+
     // 搜索插件配置
     search: {
       provider: 'local'
     },
+
     // 页脚
     footer: {
       message: '<a href="https://beian.miit.gov.cn/" target="_blank">鲁ICP备2025142295号-1</a>',
       copyright: 'Copyright © 2024-present XuPengBoo'
     },
+  },
+  markdown: {
+    image: {
+      // 启用图片懒加载
+      lazyLoading: true
+    }
   }
 })
