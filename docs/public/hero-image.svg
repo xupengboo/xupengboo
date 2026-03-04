@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" fill="none">
+  <!-- 背景圆 -->
+  <circle cx="200" cy="200" r="180" fill="rgba(45,106,79,0.06)" stroke="rgba(45,106,79,0.15)" stroke-width="1"/>
+  <circle cx="200" cy="200" r="130" fill="rgba(45,106,79,0.06)" stroke="rgba(45,106,79,0.12)" stroke-width="1" stroke-dasharray="6 4"/>
+
+  <!-- 书本 -->
+  <rect x="120" y="140" width="160" height="120" rx="6" fill="rgba(45,106,79,0.12)" stroke="#2d6a4f" stroke-width="2"/>
+  <line x1="200" y1="140" x2="200" y2="260" stroke="#2d6a4f" stroke-width="2"/>
+  <!-- 书页线条 -->
+  <line x1="130" y1="165" x2="192" y2="165" stroke="#40916c" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="130" y1="180" x2="192" y2="180" stroke="#40916c" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="130" y1="195" x2="185" y2="195" stroke="#40916c" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="130" y1="210" x2="192" y2="210" stroke="#40916c" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="130" y1="225" x2="180" y2="225" stroke="#40916c" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- 右侧书页 -->
+  <line x1="208" y1="165" x2="270" y2="165" stroke="#52b788" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="208" y1="180" x2="265" y2="180" stroke="#52b788" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="208" y1="195" x2="270" y2="195" stroke="#52b788" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="208" y1="210" x2="260" y2="210" stroke="#52b788" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="208" y1="225" x2="268" y2="225" stroke="#52b788" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- 装饰点 -->
+  <circle cx="320" cy="120" r="5" fill="#52b788" opacity="0.6"/>
+  <circle cx="90" cy="160" r="4" fill="#2d6a4f" opacity="0.5"/>
+  <circle cx="330" cy="280" r="6" fill="#40916c" opacity="0.4"/>
+  <circle cx="75" cy="290" r="3" fill="#52b788" opacity="0.5"/>
+  <circle cx="200" cy="60" r="4" fill="#2d6a4f" opacity="0.4"/>
+
+  <!-- 代码符号 -->
+  <text x="95" y="115" font-family="monospace" font-size="16" fill="#2d6a4f" opacity="0.5">&lt;/&gt;</text>
+  <text x="290" y="320" font-family="monospace" font-size="14" fill="#40916c" opacity="0.5">{ }</text>
+</svg>

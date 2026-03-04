@@ -1,25 +1,40 @@
 ---
-# https://vitepress.dev/reference/default-theme-home-page
 layout: home
 
 hero:
-  name: "XuPengBoo"
-  text: "个人技术知识库"
-  tagline: 记录技术成长，沉淀学习笔记，分享全栈开发实践
+  name: "慧 · 技术笔记"
+  text: "写给未来的自己"
+  tagline: 全栈开发 · 运维实践 · AI 探索｜把每一个踩过的坑，变成下一个人的垫脚石
+  image:
+    src: /hero-image.svg
+    alt: Knowledge Garden
   actions:
     - theme: brand
-      text: 开始阅读
-      link: /notes/
+      text: 进入知识库 →
+      link: /dev/intro
     - theme: alt
-      text: 项目案例
-      link: /projects/
+      text: 关于我
+      link: /about
 
 features:
-  - title: 技术笔记
-    details: 前端、后端、数据库、运维等全栈技术学习笔记，踩坑记录与最佳实践
-  - title: 项目实战
-    details: 个人开源项目、商业项目复盘总结，技术选型与实现细节全拆解
-  - title: 效率工具
-    details: 开发工具、学习资源、常用代码片段合集，一站式提升开发效率
+  - icon:
+      src: /icons/dev.svg
+    title: 软件开发
+    details: Java 生态 · Python · 前端工程<br>从语言基础到设计模式，记录真实项目中踩坑与突破的全过程。
+    link: /dev/intro
+    linkText: 查看笔记
+  - icon:
+      src: /icons/ops.svg
+    title: 运维与数据
+    details: Docker · Kubernetes · MySQL<br>容器化部署、集群管理、数据库调优，每一条都是线上实战总结。
+    link: /ops/db/mysql-basis
+    linkText: 查看笔记
+  - icon:
+      src: /icons/ai.svg
+    title: AI 大模型
+    details: LLM 原理 · 本地部署 · Prompt 工程<br>从理论到落地，记录每一次与大模型「交手」的心得。
+    link: /ai/intro
+    linkText: 查看笔记
 ---
 
+<HomeStats />
