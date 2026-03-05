@@ -96,7 +96,7 @@ export default defineConfig({
           text: '🌐 前端开发',
           collapsed: false,
           items: [
-            { text: 'nvm 使用指南', link: '/dev/front/nvm' },
+            { text: 'Nvm 使用指南', link: '/dev/front/nvm' },
           ]
         },
       ],
@@ -116,7 +116,7 @@ export default defineConfig({
           text: '☸️ Kubernetes 集群',
           collapsed: true,
           items: [
-            { text: 'yaml 配置', link: '/ops/k8s/yaml' },
+            { text: 'Yaml 配置', link: '/ops/k8s/yaml' },
           ]
         },
         {

@@ -1,6 +1,6 @@
 ---
 title: Kubernetes yaml配置
-order: 13
+outline: deep
 ---
 
 ## Kubernetes 的yaml配置文件
