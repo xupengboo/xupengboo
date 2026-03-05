@@ -1,0 +1,56 @@
+/**
+ * navbar.css
+ * 顶部导航栏样式
+ */
+
+.VPNav {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--vp-c-divider) !important;
+}
+
+.VPNavBar {
+  background: transparent !important;
+}
+
+/* 站点标题 */
+.VPNavBarTitle .title {
+  font-family: 'Noto Serif SC', serif;
+  font-weight: 500;
+  font-size: 17px;
+  letter-spacing: 0.05em;
+  color: var(--vp-c-text-1);
+}
+
+/* 导航链接 */
+.VPNavBarMenu .VPNavBarMenuLink,
+.VPNavBarMenu .VPNavBarMenuGroup > .button {
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: var(--vp-c-text-2);
+  transition: color 0.2s ease;
+}
+
+.VPNavBarMenu .VPNavBarMenuLink:hover,
+.VPNavBarMenu .VPNavBarMenuGroup > .button:hover {
+  color: var(--vp-c-brand-1);
+}
+
+.VPNavBarMenu .VPNavBarMenuLink.active {
+  color: var(--vp-c-brand-1);
+  font-weight: 500;
+}
+
+/* 搜索框 */
+.VPNavBarSearch .DocSearch-Button {
+  border-radius: 20px;
+  background: var(--vp-c-bg-soft);
+  border: 1px solid var(--vp-c-border);
+  padding: 4px 12px;
+  transition: all 0.2s;
+}
+
+.VPNavBarSearch .DocSearch-Button:hover {
+  border-color: var(--vp-c-brand-1);
+}

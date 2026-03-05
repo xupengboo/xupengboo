@@ -1,0 +1,127 @@
+/**
+ * sidebar.css
+ * 左侧侧边栏样式
+ * ─────────────────────────────────────────────
+ * 包含：容器、一级分组、二级链接、激活状态、分割线、暗色模式
+ */
+
+/* 容器 */
+.VPSidebar {
+  background: var(--vp-c-bg) !important;
+  border-right: 1px solid var(--vp-c-divider) !important;
+}
+
+/* 一级分组整体间距收紧 */
+.VPSidebarItem.level-0 {
+  padding-bottom: 4px !important;
+}
+
+/* ── 一级分组标题（如「Docker 容器化」）── */
+.VPSidebarItem.level-0 > .item {
+  padding: 6px 12px 6px 16px !important;
+  border-radius: 7px;
+  margin: 2px 8px !important;
+  transition: background 0.15s;
+}
+
+.VPSidebarItem.level-0 > .item:hover {
+  background: var(--vp-c-bg-soft) !important;
+}
+
+.VPSidebarItem.level-0 > .item .text {
+  font-size: 13.5px !important;
+  font-weight: 600 !important;
+  color: var(--vp-c-text-1) !important;
+  letter-spacing: 0.01em;
+}
+
+/* 折叠箭头 */
+.VPSidebarItem .caret-icon {
+  width: 15px !important;
+  height: 15px !important;
+  color: var(--vp-c-text-3);
+  transition: transform 0.2s, color 0.15s;
+  flex-shrink: 0;
+}
+
+.VPSidebarItem.level-0 > .item:hover .caret-icon {
+  color: var(--vp-c-text-2);
+}
+
+/* ── 二级链接项（如「MySQL 基础」）── */
+.VPSidebarItem.level-1 > .item {
+  padding: 0 !important;
+  margin: 1px 8px !important;
+}
+
+.VPSidebarItem.level-1 > .item .link {
+  display: flex;
+  align-items: center;
+  padding: 7px 12px 7px 32px !important;
+  border-radius: 6px;
+  transition: background 0.15s, color 0.15s;
+  position: relative;
+}
+
+.VPSidebarItem.level-1 > .item .link:hover {
+  background: var(--vp-c-bg-soft) !important;
+}
+
+.VPSidebarItem.level-1 > .item .text {
+  font-size: 13.5px !important;
+  font-weight: 400 !important;
+  color: var(--vp-c-text-2) !important;
+  line-height: 1.5;
+  transition: color 0.15s;
+}
+
+.VPSidebarItem.level-1 > .item .link:hover .text {
+  color: var(--vp-c-text-1) !important;
+}
+
+/* ── 激活状态（当前页）── */
+.VPSidebarItem.level-1.is-active > .item .link {
+  background: var(--vp-c-brand-soft) !important;
+}
+
+/* 激活项左侧竖线 */
+.VPSidebarItem.level-1.is-active > .item .link::before {
+  content: '';
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 14px;
+  background: var(--vp-c-brand-1);
+  border-radius: 2px;
+}
+
+.VPSidebarItem.level-1.is-active > .item .text {
+  color: var(--vp-c-brand-1) !important;
+  font-weight: 500 !important;
+}
+
+.VPSidebarItem.level-1.is-active > .item .link:hover {
+  background: var(--vp-c-brand-soft) !important;
+}
+
+/* ── 分组之间的分隔线 ── */
+.VPSidebarItem.level-0 + .VPSidebarItem.level-0 {
+  margin-top: 4px !important;
+  padding-top: 4px !important;
+  border-top: 1px solid var(--vp-c-divider) !important;
+}
+
+/* ── 暗色模式 ── */
+.dark .VPSidebarItem.level-0 > .item:hover {
+  background: var(--vp-c-bg-mute) !important;
+}
+
+.dark .VPSidebarItem.level-1 > .item .link:hover {
+  background: var(--vp-c-bg-mute) !important;
+}
+
+.dark .VPSidebarItem.level-1.is-active > .item .link {
+  background: var(--vp-c-brand-soft) !important;
+}

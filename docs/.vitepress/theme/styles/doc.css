@@ -1,0 +1,256 @@
+/**
+ * doc.css
+ * 文章内容区样式
+ * ─────────────────────────────────────────────
+ * 包含：标题、正文、链接、代码、表格、引用、图片、提示框、
+ *       右侧目录、翻页按钮、页脚
+ */
+
+/* 内容最大宽度 */
+.VPDoc .content-container {
+  max-width: var(--vp-content-max-width) !important;
+}
+
+/* ── 标题 ── */
+.vp-doc h1 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  color: var(--vp-c-text-1);
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--vp-c-divider);
+}
+
+.vp-doc h2 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 1.4rem;
+  font-weight: 500;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  padding-top: 0;
+  border-top: none;
+  color: var(--vp-c-text-1);
+  position: relative;
+  padding-left: 14px;
+}
+
+/* h2 左侧竖线 */
+.vp-doc h2::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 1.1em;
+  background: var(--vp-c-brand-1);
+  border-radius: 2px;
+}
+
+.vp-doc h3 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-top: 2rem;
+  color: var(--vp-c-text-1);
+}
+
+/* ── 正文 ── */
+.vp-doc p {
+  margin: 1rem 0;
+  color: var(--vp-c-text-2);
+  line-height: 1.85;
+}
+
+.vp-doc a {
+  color: var(--vp-c-brand-1);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease;
+}
+
+.vp-doc a:hover {
+  border-bottom-color: var(--vp-c-brand-1);
+}
+
+/* ── 代码 ── */
+.vp-doc code {
+  font-family: var(--vp-font-family-mono);
+  font-size: 0.875em;
+  background: var(--vp-c-bg-soft);
+  border: 1px solid var(--vp-c-border);
+  border-radius: 4px;
+  padding: 0.15em 0.4em;
+  color: var(--vp-c-brand-1);
+}
+
+.vp-doc div[class*='language-'] {
+  border-radius: 8px;
+  border: 1px solid var(--vp-c-border);
+  margin: 1.5rem 0;
+  overflow: hidden;
+}
+
+.vp-doc div[class*='language-'] > button.copy {
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.vp-doc div[class*='language-']:hover > button.copy {
+  opacity: 1;
+}
+
+/* ── 引用块 ── */
+.vp-doc blockquote {
+  margin: 1.5rem 0;
+  padding: 0.75rem 1.25rem;
+  border-left: 3px solid var(--vp-c-brand-3);
+  background: var(--vp-c-bg-soft);
+  border-radius: 0 6px 6px 0;
+}
+
+.vp-doc blockquote p {
+  margin: 0;
+  color: var(--vp-c-text-2);
+  font-style: italic;
+}
+
+/* ── 列表 ── */
+.vp-doc ul,
+.vp-doc ol {
+  padding-left: 1.5rem;
+  color: var(--vp-c-text-2);
+}
+
+.vp-doc li {
+  margin: 0.4rem 0;
+  line-height: 1.75;
+}
+
+/* ── 表格 ── */
+.vp-doc table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1.5rem 0;
+  font-size: 0.9rem;
+}
+
+.vp-doc th {
+  background: var(--vp-c-bg-soft);
+  font-weight: 500;
+  color: var(--vp-c-text-1);
+  padding: 0.6rem 1rem;
+  border: 1px solid var(--vp-c-border);
+  text-align: left;
+}
+
+.vp-doc td {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--vp-c-border);
+  color: var(--vp-c-text-2);
+}
+
+.vp-doc tr:nth-child(even) td {
+  background: var(--vp-c-bg-soft);
+}
+
+/* ── 分割线 ── */
+.vp-doc hr {
+  border: none;
+  border-top: 1px solid var(--vp-c-divider);
+  margin: 2.5rem 0;
+}
+
+/* ── 图片 ── */
+.vp-doc img {
+  border-radius: 8px;
+  border: 1px solid var(--vp-c-border);
+  max-width: 100%;
+}
+
+/* ── 提示框 ── */
+.vp-doc .custom-block {
+  border-radius: 8px;
+  border: 1px solid var(--vp-c-border);
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+}
+
+.vp-doc .custom-block.tip {
+  background: rgba(45, 106, 79, 0.05);
+  border-color: rgba(45, 106, 79, 0.2);
+}
+
+.vp-doc .custom-block.warning {
+  background: rgba(234, 179, 8, 0.05);
+  border-color: rgba(234, 179, 8, 0.2);
+}
+
+.vp-doc .custom-block.danger {
+  background: rgba(239, 68, 68, 0.05);
+  border-color: rgba(239, 68, 68, 0.2);
+}
+
+.vp-doc .custom-block-title {
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+/* ── 右侧目录 ── */
+.VPDocAsideOutline .root {
+  padding: 0;
+}
+
+.VPDocOutlineItem a {
+  font-size: 13px;
+  color: var(--vp-c-text-3);
+  line-height: 1.6;
+  transition: color 0.2s;
+}
+
+.VPDocOutlineItem a:hover,
+.VPDocOutlineItem a.active {
+  color: var(--vp-c-brand-1);
+}
+
+/* ── 翻页按钮 ── */
+.VPDocFooter .pager-link {
+  border: 1px solid var(--vp-c-border);
+  border-radius: 8px;
+  padding: 12px 20px;
+  transition: all 0.2s ease;
+  background: var(--vp-c-bg);
+}
+
+.VPDocFooter .pager-link:hover {
+  border-color: var(--vp-c-brand-1);
+  background: var(--vp-c-brand-soft);
+}
+
+.VPDocFooter .pager-link .title {
+  font-size: 14px;
+  color: var(--vp-c-text-1);
+  font-weight: 500;
+}
+
+/* ── 页脚 ── */
+.VPFooter {
+  border-top: 1px solid var(--vp-c-divider) !important;
+  background: var(--vp-c-bg) !important;
+}
+
+.VPFooter .message,
+.VPFooter .copyright {
+  font-size: 13px;
+  color: var(--vp-c-text-3);
+}
+
+/* ── 响应式 ── */
+@media (max-width: 768px) {
+  .vp-doc h1 { font-size: 1.6rem; }
+  .vp-doc h2 { font-size: 1.2rem; }
+}

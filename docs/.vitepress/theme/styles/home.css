@@ -1,0 +1,242 @@
+/**
+ * home.css
+ * 首页专属样式：Hero 区域 + Features 卡片
+ */
+
+/* ══════════════════════════════════════════
+   Hero 区域
+   ══════════════════════════════════════════ */
+
+.VPHome {
+  padding-bottom: 0 !important;
+}
+
+.VPHero {
+  padding: 80px 48px 72px !important;
+}
+
+.VPHero .container {
+  align-items: center !important;
+}
+
+/* ── name：「许 · 慧」── */
+/* 作为署名，字号适中，宽字距，渐变墨绿 */
+.VPHero .name {
+  line-height: 1.2 !important;
+  margin-bottom: 10px !important;
+}
+
+.VPHero .name .clip {
+  font-family: 'Noto Serif SC', 'STSong', 'Songti SC', 'SimSun', serif !important;
+  font-size: 1.5rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.3em !important;
+  line-height: 1.2 !important;
+  background: linear-gradient(135deg, #1a3c2e 0%, #2d6a4f 50%, #52b788 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  opacity: 0.95;
+}
+
+/* name 和 text 之间的分隔装饰 */
+.VPHero .name::after {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 1.5px;
+  background: linear-gradient(90deg, var(--vp-c-brand-2), transparent);
+  border-radius: 1px;
+  margin-top: 16px;
+  opacity: 0.7;
+}
+
+/* ── text：「知行录」── */
+/* 作为主标题，大字号，衬线古典风 */
+.VPHero .text {
+  font-family: 'Noto Serif SC', 'STSong', 'Songti SC', serif !important;
+  font-size: 4.2rem !important;
+  font-weight: 600 !important;
+  color: var(--vp-c-text-1) !important;
+  line-height: 1.15 !important;
+  letter-spacing: 0.22em !important;
+  margin-top: 0 !important;
+  /* 轻微文字阴影增加质感 */
+  text-shadow: 0 1px 0 rgba(45, 106, 79, 0.08);
+}
+
+/* ── tagline ── */
+.VPHero .tagline {
+  font-size: 0.9rem !important;
+  color: var(--vp-c-text-3) !important;
+  line-height: 1.9 !important;
+  max-width: 100% !important;
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+  margin-top: 18px !important;
+}
+
+/* ── 按钮区 ── */
+.VPHero .actions {
+  margin-top: 40px !important;
+  gap: 12px !important;
+}
+
+.VPHero .VPButton.brand {
+  background: linear-gradient(135deg, #2d6a4f, #40916c) !important;
+  border: none !important;
+  padding: 11px 28px !important;
+  font-size: 14px !important;
+  border-radius: 8px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.06em !important;
+  box-shadow: 0 2px 14px rgba(45, 106, 79, 0.28) !important;
+  transition: transform 0.2s, box-shadow 0.2s !important;
+}
+
+.VPHero .VPButton.brand:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 22px rgba(45, 106, 79, 0.38) !important;
+}
+
+.VPHero .VPButton.alt {
+  border: 1px solid var(--vp-c-border) !important;
+  background: transparent !important;
+  color: var(--vp-c-text-2) !important;
+  padding: 11px 22px !important;
+  font-size: 14px !important;
+  border-radius: 8px !important;
+  letter-spacing: 0.04em !important;
+  transition: border-color 0.2s, color 0.2s, background 0.2s !important;
+}
+
+.VPHero .VPButton.alt:hover {
+  border-color: var(--vp-c-brand-1) !important;
+  color: var(--vp-c-brand-1) !important;
+  background: var(--vp-c-brand-soft) !important;
+}
+
+/* ── 右侧插图 ── */
+.VPHero .image-container {
+  opacity: 0.75;
+  transform: scale(0.72);
+  transform-origin: center center;
+}
+
+/* ══════════════════════════════════════════
+   Features 卡片
+   ══════════════════════════════════════════ */
+
+.VPFeatures {
+  padding: 0 48px 56px !important;
+}
+
+.VPFeatures .items {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 16px !important;
+}
+
+.VPFeatures .items .item {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.VPFeature {
+  border: 1px solid var(--vp-c-border) !important;
+  border-radius: 12px !important;
+  padding: 28px !important;
+  background: var(--vp-c-bg) !important;
+  transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.VPFeature::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--vp-c-brand-1), var(--vp-c-brand-3));
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.VPFeature:hover::before { opacity: 1; }
+
+.VPFeature:hover {
+  border-color: rgba(45, 106, 79, 0.25) !important;
+  box-shadow: 0 8px 28px rgba(45, 106, 79, 0.09) !important;
+  transform: translateY(-3px) !important;
+}
+
+.VPFeature .title {
+  font-family: 'Noto Serif SC', serif !important;
+  font-size: 1.05rem !important;
+  font-weight: 500 !important;
+  color: var(--vp-c-text-1) !important;
+  margin-bottom: 10px !important;
+}
+
+.VPFeature .details {
+  font-size: 13.5px !important;
+  line-height: 1.75 !important;
+  color: var(--vp-c-text-2) !important;
+}
+
+.VPFeature .link-text {
+  font-size: 13px !important;
+  color: var(--vp-c-brand-1) !important;
+  margin-top: 16px !important;
+  font-weight: 500 !important;
+}
+
+.VPFeature .icon img {
+  width: 44px !important;
+  height: 44px !important;
+}
+
+.dark .VPFeature {
+  background: var(--vp-c-bg-soft) !important;
+}
+
+/* ══════════════════════════════════════════
+   响应式
+   ══════════════════════════════════════════ */
+
+@media (max-width: 960px) {
+  .VPFeatures .items {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .VPHero {
+    padding: 60px 32px 52px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .VPHero .tagline {
+    white-space: normal !important;
+    font-size: 0.85rem !important;
+  }
+  .VPHero .name .clip {
+    font-size: 1.2rem !important;
+  }
+  .VPHero .text {
+    font-size: 3rem !important;
+    letter-spacing: 0.16em !important;
+  }
+  .VPHero {
+    padding: 44px 24px 44px !important;
+  }
+  .VPFeatures {
+    padding: 0 24px 40px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .VPFeatures .items {
+    grid-template-columns: 1fr !important;
+  }
+  .VPHero .text {
+    font-size: 2.5rem !important;
+  }
+}

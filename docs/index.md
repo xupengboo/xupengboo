@@ -2,9 +2,9 @@
 layout: home
 
 hero:
-  name: "慧 · 技术笔记"
-  text: "写给未来的自己"
-  tagline: 全栈开发 · 运维实践 · AI 探索｜把每一个踩过的坑，变成下一个人的垫脚石
+  name: "许 · 慧"
+  text: "知行录"
+  tagline: 全栈开发 · 运维实践 · AI 探索｜把踩过的每一个坑，变成下一个人的垫脚石
   image:
     src: /hero-image.svg
     alt: Knowledge Garden
