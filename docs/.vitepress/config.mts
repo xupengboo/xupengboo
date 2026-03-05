@@ -12,8 +12,8 @@ export default defineConfig({
   lang: 'zh-CN',
   base: '/',
 
-  // favicon（放置 /docs/public/favicon.ico 后取消注释）
-  // head: [['link', { rel: 'icon', href: '/favicon.ico' }]],
+  // favicon
+  head: [['link', { rel: 'icon', href: '/favicon.ico' }]],
 
   // 显示最后更新时间
   lastUpdated: true,
