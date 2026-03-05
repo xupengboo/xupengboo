@@ -232,8 +232,8 @@ function toggleBook(title) {
 /* ① 统计 */
 const stats = [
   {value: '10+', label: '篇技术笔记'},
-  {value: '3', label: '个知识领域'},
-  {value: '2025', label: '年开始记录'},
+  {value: '4', label: '个知识领域'},
+  {value: '2022', label: '年开始记录'},
   {value: '持续', label: '迭代更新中'},
 ]
 

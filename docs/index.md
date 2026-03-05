@@ -27,7 +27,7 @@ features:
       src: /icons/ops.svg
     title: 运维与数据
     details: Docker · Kubernetes · MySQL<br>容器化部署、集群管理、数据库调优，每一条都是线上实战总结。
-    link: /ops/db/mysql-basis
+    link: /ops/intro
     linkText: 查看笔记
   - icon:
       src: /icons/ai.svg
