@@ -135,7 +135,7 @@ export default defineConfig({
           text: '🛠️ 服务器',
           collapsed: true,
           items: [
-            // { text: 'Linux 常用命令', link: '/ops/server/linux-bash' },
+            { text: 'Linux 基础', link: '/ops/server/Linux 基础' },
           ]
         },
         {
