@@ -75,29 +75,31 @@ export default defineConfig({
           text: '🛠️ 开发工具箱',
           collapsed: false,
           items: [
-            { text: 'Git 核心实战', link: '/dev/tools/git' },
+            { text: 'Git 核心实战', link: '/dev/tools/Git 核心实战' },
           ]
         },
         {
           text: '☕ Java 生态',
           collapsed: false,
           items: [
-            { text: 'Java 设计模式', link: '/dev/java/design' },
-            { text: 'RestFul 风格', link: '/dev/java/restful' },
+            { text: 'Java 设计模式', link: '/dev/java/Java 设计模式' },
+            { text: 'RestFul 风格', link: '/dev/java/RestFul 风格' },
+            { text: '四种编程思想', link: '/dev/java/四种编程思想' },
+            { text: 'CAP 分布式定理', link: '/dev/java/CAP 分布式定理' },
           ]
         },
         {
           text: '🐍 Python',
           collapsed: false,
           items: [
-            { text: 'Python 基础', link: '/dev/python/basic' },
+            { text: 'Python 基础', link: '/dev/python/Python 基础' },
           ]
         },
         {
           text: '🌐 前端开发',
           collapsed: false,
           items: [
-            { text: 'Nvm 使用指南', link: '/dev/front/nvm' },
+            { text: 'Nvm 使用指南', link: '/dev/front/Nvm 使用指南' },
           ]
         },
       ],
