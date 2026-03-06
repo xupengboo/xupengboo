@@ -107,7 +107,7 @@ export default defineConfig({
           items: [
             { text: 'Nvm 使用指南', link: '/dev/front/Nvm 使用指南' },
             { text: 'Npm 包管理器', link: '/dev/front/Npm 包管理器' },
-            { text: 'Vue 生态工具速览', link: '/dev/front/Vue 生态工具速览' },
+            { text: 'Vue 生态工具', link: '/dev/front/Vue 生态工具' },
             { text: 'Node 实用工具', link: '/dev/front/Node 实用工具' },
           ]
         },
