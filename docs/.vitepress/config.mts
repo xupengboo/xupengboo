@@ -83,6 +83,7 @@ export default defineConfig({
           collapsed: false,
           items: [
             { text: 'Java 设计模式', link: '/dev/java/design' },
+            { text: 'RestFul 风格', link: '/dev/java/restful' },
           ]
         },
         {
