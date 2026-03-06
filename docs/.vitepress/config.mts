@@ -82,9 +82,9 @@ export default defineConfig({
           text: '🧱 架构基础',
           collapsed: false,
           items: [
-            { text: 'RestFul 风格', link: '/dev/java/RestFul 风格' },
-            { text: '四种编程思想', link: '/dev/java/四种编程思想' },
-            { text: 'CAP 分布式定理', link: '/dev/java/CAP 分布式定理' },
+            { text: 'RestFul 风格', link: '/dev/frame/RestFul 风格' },
+            { text: '四种编程思想', link: '/dev/frame/四种编程思想' },
+            { text: 'CAP 分布式定理', link: '/dev/frame/CAP 分布式定理' },
           ]
         },
         {
