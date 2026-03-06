@@ -106,6 +106,7 @@ export default defineConfig({
           collapsed: false,
           items: [
             { text: 'Nvm 使用指南', link: '/dev/front/Nvm 使用指南' },
+            { text: 'Vue 生态工具速览', link: '/dev/front/Vue 生态工具速览' },
           ]
         },
       ],
