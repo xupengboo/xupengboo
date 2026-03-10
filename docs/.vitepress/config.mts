@@ -89,6 +89,13 @@ export default defineConfig({
           ]
         },
         {
+          text: '📐 算法 & 数据结构',
+          collapsed: false,
+          items: [
+            { text: '时间 & 空间复杂度', link: '/dev/algorithm/时间 & 空间复杂度' },
+          ]
+        },
+        {
           text: '☕ Java 生态',
           collapsed: false,
           items: [
