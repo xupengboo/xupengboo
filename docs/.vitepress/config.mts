@@ -100,6 +100,7 @@ export default defineConfig({
           collapsed: false,
           items: [
             { text: 'Python 基础', link: '/dev/python/Python 基础' },
+            { text: 'Python 实用工具库', link: '/dev/python/Python 实用工具库' },
           ]
         },
         {
