@@ -92,6 +92,8 @@ export default defineConfig({
           text: '📐 算法 & 数据结构',
           collapsed: false,
           items: [
+            { text: '数据结构', link: '/dev/algorithm/数据结构' },
+            { text: '排序 & 搜索', link: '/dev/algorithm/排序 & 搜索' },
             { text: '时间 & 空间复杂度', link: '/dev/algorithm/时间 & 空间复杂度' },
           ]
         },
