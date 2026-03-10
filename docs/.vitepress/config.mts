@@ -111,6 +111,7 @@ export default defineConfig({
             { text: 'Vue 生态工具', link: '/dev/front/Vue 生态工具' },
             { text: 'Node 实用工具', link: '/dev/front/Node 实用工具' },
             { text: 'HTML5 全览', link: '/dev/front/HTML5 全览' },
+            { text: 'CSS 速查手册', link: '/dev/front/CSS 速查手册' },
           ]
         },
       ],
