@@ -93,6 +93,7 @@ export default defineConfig({
           collapsed: false,
           items: [
             { text: 'Java 设计模式', link: '/dev/java/Java 设计模式' },
+            { text: 'Flowable 工作流引擎', link: '/dev/java/Flowable 工作流引擎' },
           ]
         },
         {
