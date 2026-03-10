@@ -231,7 +231,7 @@ function toggleBook(title) {
 
 /* ① 统计 */
 const stats = [
-  {value: '10+', label: '篇技术笔记'},
+  {value: '38+', label: '篇技术笔记'},
   {value: '4', label: '个知识领域'},
   {value: '2022', label: '年开始记录'},
   {value: '持续', label: '迭代更新中'},
@@ -240,11 +240,11 @@ const stats = [
 /* ② 最近更新 */
 const recent = [
   {tag: 'AI', tagClass: 'tag-ai', title: '本地大模型部署实践', date: '2026-02-28', link: '/ai/app/app'},
-  {tag: 'Dev', tagClass: 'tag-dev', title: 'Java 设计模式精讲', date: '2026-02-10', link: '/dev/java/design'},
+  {tag: 'Dev', tagClass: 'tag-dev', title: 'CAP 分布式定理', date: '2026-02-10', link: '/dev/frame/CAP 分布式定理'},
   {tag: 'Ops', tagClass: 'tag-ops', title: 'MySQL 基础到实战', date: '2026-01-22', link: '/ops/db/mysql-basis'},
-  {tag: 'Dev', tagClass: 'tag-dev', title: 'Git 核心工作流', date: '2026-01-15', link: '/dev/tools/git'},
+  {tag: 'Dev', tagClass: 'tag-dev', title: 'Git 核心实战', date: '2026-01-15', link: '/dev/tools/Git 核心实战'},
   {tag: 'AI', tagClass: 'tag-ai', title: 'LLM 大模型理论导论', date: '2026-01-08', link: '/ai/llm/llm'},
-  {tag: 'Dev', tagClass: 'tag-dev', title: 'Python 基础语法精华', date: '2025-12-20', link: '/dev/python/basic'},
+  {tag: 'Dev', tagClass: 'tag-dev', title: 'Python 实用工具库', date: '2025-12-20', link: '/dev/python/Python 实用工具库'},
 ]
 
 /* ③ 技术栈 */
