@@ -122,7 +122,7 @@ export default defineConfig({
       '/ops/': [
         {
           text: '🐳 Docker 容器化',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: 'Docker 环境安装', link: '/ops/docker/环境安装' },
             { text: 'Docker 核心命令', link: '/ops/docker/核心命令' },
@@ -131,14 +131,14 @@ export default defineConfig({
         },
         {
           text: '☸️ Kubernetes 集群',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: 'Yaml 配置', link: '/ops/k8s/yaml' },
           ]
         },
         {
           text: '🛠️ 服务器',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: 'Linux 基础', link: '/ops/server/Linux 基础' },
           ]
