@@ -146,10 +146,11 @@ export default defineConfig({
           ]
         },
         {
-          text: '🛠️ 服务器',
+          text: '🛠️ 服务器 & 中间件',
           collapsed: false,
           items: [
             { text: 'Linux 基础', link: '/ops/server/Linux 基础' },
+            { text: 'Nginx 使用指南', link: '/ops/server/Nginx 使用指南' },
           ]
         },
         {
