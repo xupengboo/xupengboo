@@ -169,7 +169,7 @@ npm run docs:dev
 - 📌 代码块**必须注明语言**（`bash` `java` `yaml` `nginx` 等）
 - 🔒 密码 / Token 一律用 `your_password` 占位，**不提交真实凭证**
 - 🎨 只使用 VitePress 支持的容器类型：`tip` `warning` `danger` `info` `details`
-- 🖼️ 图片通过 **PicGo + Typora** 自动上传 GitHub 图床，使用外链引用
+- 🖼️ 图片通过 **PicGo + Typora** 配置上传到本项目中 `public/images` 下，也可以外链引用。
 
 ---
 
