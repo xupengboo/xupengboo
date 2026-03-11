@@ -74,7 +74,7 @@ dr-xr-xr-x  2 root root 4096 Dec 14 2012 bin
 
 以上示例：`bin` 是目录，属主和属组均为 `root`。属主有读/写/执行权限，属组和其他用户有读/执行权限。
 
-![20260306-linux-属主与属组.png](/images/20260306-linux-属主与属组.png)
+![属主与属组](/public/images/image-20250217188880001.png)
 
 ---
 

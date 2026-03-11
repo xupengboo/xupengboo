@@ -360,7 +360,7 @@ HTML5 之前，布局依赖无语义的 `<div id="nav">`、`<div class="header">
 </body>
 ```
 
-![20260310-HTML5-页面布局.png](/images/20260310-HTML5-页面布局.png)
+![页面布局](/public/images/image-20250217188880001.png)
 
 | 标签 | 用途 |
 |---|---|
@@ -744,7 +744,7 @@ WebSocket 是 HTML5 提供的**全双工通信协议**，在单个 TCP 连接上
 :::
 
 > **AJAX 轮询是"一问一答"的模式，反复建立/断开连接**。而 **WebSocket 则是先用 HTTP 发起握手**（`GET /ws`），**握手成功后协议升级**，之后用红色箭头表示的 WebSocket 协议**进行双向通信，连接持续不断开**。
-> ![20260310-HTML5-WebSocket.png](/public/images/20260310-HTML5-WebSocket.png)
+> ![Ajax轮询与WebSocket](/public/images/image-20250217188880002.png)
 
 
 **`index.html`（前端）：**
