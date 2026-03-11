@@ -173,7 +173,7 @@ export default defineConfig({
           text: '🗄️ 数据库',
           collapsed: false,
           items: [
-            { text: 'MySQL 基础', link: '/ops/db/mysql-basis' },
+            { text: 'MySQL 核心速查', link: '/ops/db/MySQL 核心速查' },
           ]
         }
       ],
