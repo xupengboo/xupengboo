@@ -76,6 +76,7 @@ export default defineConfig({
           collapsed: false,
           items: [
             { text: 'Git 核心实战', link: '/dev/tools/Git 核心实战' },
+            { text: 'GitHub 图床配置', link: '/dev/tools/GitHub 图床配置' },
           ]
         },
         {
