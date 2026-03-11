@@ -1,0 +1,226 @@
+---
+title: Rancher 安装与使用
+outline: deep
+---
+
+# Rancher 安装与使用
+
+> Rancher 是一个开源的 Kubernetes 多集群管理平台，提供可视化界面，大幅降低 K8s 的运维门槛。
+
+:::warning 版本说明
+本文以 **Rancher v2.5.14** 为例。该版本已于 2023 年 EOL，建议新项目使用 **v2.8+** 或 **v2.9+**，API 和界面略有差异，操作思路一致。
+
+版本兼容性参考：[Rancher 支持矩阵](https://www.suse.com/suse-rancher/support-matrix/all-supported-versions/)
+:::
+
+---
+
+## 一、前提条件
+
+| 要求 | 说明 |
+|---|---|
+| Docker | 所有节点版本必须一致 |
+| 关闭 swap | `sudo swapoff -a` 并注释 `/etc/fstab` 中的 swap 行 |
+| 禁用 SELinux | `sudo setenforce 0`，并修改 `/etc/selinux/config` 永久生效 |
+| 时间同步 | 各节点时间必须一致，否则证书验证会失败 |
+| 开放端口 | 443、80、6443、2379-2380、10250-10252 等 |
+
+---
+
+## 二、搭建 Rancher 服务
+
+单节点部署（适合测试/开发环境），一条命令即可：
+
+```bash
+docker run -d \
+  --name rancher \
+  --restart unless-stopped \
+  --privileged \
+  -v /opt/rancher/lib/kubelet:/var/lib/kubelet \
+  -v /opt/rancher/lib/rancher:/var/lib/rancher \
+  -v /opt/rancher/log:/var/log \
+  -v /opt/rancher/lib/cni:/var/lib/cni \
+  -p 1443:443 \
+  --security-opt label=disable \
+  --shm-size 1g \
+  rancher/rancher:v2.5.14
+```
+
+:::tip 参数说明
+- `--privileged`：Rancher 需要特权模式来管理 K8s 组件
+- `--shm-size 1g`：共享内存建议至少 1g，过小会导致 Rancher 运行异常
+- `-p 1443:443`：将容器 443 端口映射到宿主机 1443，避免与已有服务冲突
+- `-v` 挂载目录：持久化数据，容器重启后不丢失
+  :::
+
+启动后访问：`https://<宿主机IP>:1443`，首次登录会提示设置管理员密码。
+
+---
+
+## 三、搭建 K8s 集群
+
+### 切换中文界面
+
+右上角用户头像 → `Preferences` → `Language` → 选择简体中文。
+
+![切换中文](/public/images/image-20250217188880007.png)
+
+### 创建集群步骤
+
+1. 首页点击 `添加集群` → 集群类型选择 **自定义**（自己的服务器节点）
+2. 填写集群名称、K8s 版本等基础信息，点击下一步
+3. 根据节点角色（etcd / Control Plane / Worker）勾选对应选项，复制生成的命令
+4. 在对应节点上执行该命令，节点会自动注册到集群
+5. 等待集群初始化完成（通常需要 5~15 分钟）
+
+:::tip 初始化期间的报红提示
+集群创建过程中会有一些红色警告，这是正常现象，组件还在拉取和启动中，耐心等待会自动消除。真正需要关注的是节点长时间处于 `NotReady` 状态。
+:::
+
+---
+
+## 四、部署服务
+
+### 操作路径
+
+`集群` → `项目/命名空间` → 进入目标项目 → `部署服务`
+
+![进入项目](/public/images/image-20250217188880008.png)
+
+![部署服务入口](/public/images/image-20250217188880009.png)
+
+:::info Rancher「项目」是什么？
+**项目（Project）是 Rancher 独有的概念**，K8s 原生并没有这个层级。它是对多个命名空间（Namespace）的逻辑分组，方便按团队或业务进行权限管理，不影响 K8s 本身的运行。
+:::
+
+### 配置项说明
+
+部署服务的配置项和 Docker 参数基本一一对应：
+
+| Rancher 配置项 | 对应 Docker 参数 |
+|---|---|
+| 镜像 | `docker run <image>` |
+| 环境变量 | `-e KEY=VALUE` |
+| 端口映射 | `-p 宿主机端口:容器端口` |
+| 数据卷 | `-v 宿主机路径:容器路径` |
+| 缩放策略 | 副本数 / 自动扩缩容 |
+
+![服务配置](/public/images/image-20250217188880010.png)
+
+---
+
+## 五、配置 kubectl
+
+Rancher 控制台内置了 kubectl，但**在宿主机命令行直接执行 kubectl 需要额外配置**。
+
+### Step 1 — 安装 kubectl
+
+```bash
+# 查询当前集群使用的 kubectl 版本（在 Rancher 控制台终端执行）
+kubectl version
+
+# 在宿主机下载对应版本（将 v1.x.x 替换为实际版本号）
+curl -LO https://dl.k8s.io/release/v1.x.x/bin/linux/amd64/kubectl
+
+# 验证完整性
+curl -LO https://dl.k8s.io/release/v1.x.x/bin/linux/amd64/kubectl.sha256
+echo "$(cat kubectl.sha256) kubectl" | sha256sum --check
+# 输出 "kubectl: OK" 表示验证通过
+
+# 安装到系统路径
+sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+
+# 验证安装
+kubectl version --client
+```
+
+:::warning kubectl 版本必须与集群一致
+kubectl 客户端版本和 K8s 集群版本最多允许差一个小版本，版本差距过大会出现 API 不兼容问题。先在 Rancher 控制台执行 `kubectl version` 确认集群版本再下载。
+:::
+
+### Step 2 — 配置 kubeconfig
+
+`kubeconfig` 是 kubectl 访问集群的凭证文件，包含集群地址、用户证书等信息。
+
+在 Rancher 界面复制 kubeconfig 内容：
+
+![复制 kubeconfig](/public/images/image-20250217188880011.png)
+
+保存到本地：
+
+```bash
+mkdir -p ~/.kube
+vim ~/.kube/config
+# 将复制的内容粘贴保存
+```
+
+### Step 3 — 验证
+
+```bash
+# 查看集群节点
+kubectl get nodes
+
+# 查看所有命名空间的 Pod
+kubectl get pods -A
+```
+
+:::tip Rancher 内置向导
+Rancher 界面里有完整的 kubectl 配置引导（集群页面右上角 → `Kubeconfig 文件`），步骤和上面完全一致，也会自动提示 kubectl 版本。
+:::
+
+![Rancher kubectl 向导](/public/images/image-20250217188880012.png)
+
+---
+
+## 六、Rancher 宕机处理
+
+**Rancher 是管理面，不是数据面。** Rancher 服务宕机不会影响 K8s 集群本身的运行，已部署的服务照常运行，只是暂时无法通过 Rancher 界面管理。
+
+处理步骤：
+
+```bash
+# 1. 查看 Rancher 容器状态
+docker ps -a | grep rancher
+
+# 2. 查看日志排查原因
+docker logs rancher --tail 100
+
+# 3. 尝试重启
+docker restart rancher
+
+# 4. 如果容器异常，删除重建（数据已挂载到宿主机，不会丢失）
+docker rm rancher
+# 重新执行第二章的 docker run 命令
+```
+
+Rancher 宕机期间，通过已配置好的 kubectl 直接管理集群：
+
+```bash
+# 查看节点状态
+kubectl get nodes
+
+# 查看 Pod 状态
+kubectl get pods -A
+
+# 重启某个 Deployment
+kubectl rollout restart deployment/<name> -n <namespace>
+```
+
+---
+
+## 七、K8s 核心概念速查
+
+:::info Pod、Container 与 Docker 的关系
+
+| 概念 | 说明 |
+|---|---|
+| **Docker 容器** | 单进程模型，通常一个容器跑一个主进程 |
+| **Pod** | K8s 的最小调度单位，可包含一个或多个容器 |
+| **Pod 内多容器** | 容器之间是**平行关系**，共享网络（同一 IP）和存储卷，但进程互相隔离 |
+
+Pod 内多容器的典型模式：
+- **Sidecar**：主容器 + 辅助容器（如日志采集 agent、流量代理）
+- **Init Container**：主容器启动前先跑初始化容器（如数据库迁移、配置下发）
+
+简单记忆：**Pod 是一组共享网络的容器的集合**，不是嵌套关系。
+:::
