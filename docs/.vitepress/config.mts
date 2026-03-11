@@ -136,6 +136,7 @@ export default defineConfig({
             { text: 'Docker 环境安装', link: '/ops/docker/环境安装' },
             { text: 'Docker 核心命令', link: '/ops/docker/核心命令' },
             { text: 'Docker 单机部署', link: '/ops/docker/单机部署' },
+            { text: 'Dockerfile 构建', link: '/ops/docker/Dockerfile 构建' },
           ]
         },
         {
