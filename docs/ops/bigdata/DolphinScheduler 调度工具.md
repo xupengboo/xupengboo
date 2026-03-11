@@ -53,7 +53,7 @@ ALTER SYSTEM SET listen_addresses = '*';
 导入脚本时请使用 `ds_user` 账号执行，避免出现对象权限问题。
 :::
 
-![初始化SQL导入示意](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250403175146326.png)
+![初始化SQL导入示意](/public/images/image-20250403175146326.png)
 
 **Step 4 — 提取默认配置文件**
 
@@ -199,11 +199,11 @@ export JAVA_HOME=/opt/java/openjdk
 export PATH=$JAVA_HOME/bin:$PATH
 ```
 
-![环境管理配置](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250407151604853.png)
+![环境管理配置](/public/images/image-20250407151604853.png)
 
 创建完成后，在任务配置中关联该环境即可：
 
-![任务关联环境](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250407151720741.png)
+![任务关联环境](/public/images/image-20250407151720741.png)
 
 :::tip 为什么要在 DS 中单独配置环境变量？
 DolphinScheduler 执行任务时，会将任务配置和环境管理中的变量**写入生成的执行脚本**，而不会继承容器或宿主机的全局环境变量。
