@@ -152,6 +152,8 @@ export default defineConfig({
           items: [
             { text: 'Linux 基础', link: '/ops/server/Linux 基础' },
             { text: 'Nginx 使用指南', link: '/ops/server/Nginx 使用指南' },
+            { text: 'ELK Stack 概览与部署', link: '/ops/server/ELK Stack 概览与部署' },
+            { text: 'Logstash 数据管道', link: '/ops/server/Logstash 数据管道' },
           ]
         },
         {
