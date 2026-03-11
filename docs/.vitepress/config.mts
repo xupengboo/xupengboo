@@ -166,6 +166,7 @@ export default defineConfig({
             { text: 'Spark', link: '/ops/bigdata/spark' },
             { text: 'Flink', link: '/ops/bigdata/flink' },
             { text: 'StarRocks', link: '/ops/bigdata/starrocks' },
+            { text: 'DolphinScheduler 调度工具', link: '/ops/bigdata/DolphinScheduler 调度工具' },
           ]
         },
         {
