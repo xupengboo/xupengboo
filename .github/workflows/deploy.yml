@@ -27,3 +27,15 @@ jobs:
             docker build -t xupengboo:$VERSION .
             docker rm -f xupengboo
             docker run -d -p 80:80 --name xupengboo xupengboo:$VERSION
+
+  sync-gitee:
+    runs-on: ubuntu-latest
+    needs: deploy  # ← 关键：等 deploy job 成功后才执行
+
+    steps:
+      - name: Sync to Gitee
+        run: |
+          curl -X PUT \
+            "https://gitee.com/api/v5/repos/xupengboo/xupengboo/mirror" \
+            -H "Content-Type: application/json" \
+            -d '{"access_token": "${{ secrets.GITEE_TOKEN }}"}'
