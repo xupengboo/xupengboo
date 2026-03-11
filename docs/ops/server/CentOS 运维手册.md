@@ -5,15 +5,68 @@ outline: deep
 
 # CentOS 运维手册
 
-> 记录 CentOS 服务器从初始化到日常运维的常用操作，包括环境配置、网络设置、磁盘挂载等，避免每次重复查找。
+> 记录从 VMware 安装虚拟机到 CentOS 日常运维的完整操作流程，包括环境配置、网络设置、磁盘挂载等，避免每次重复查找。
 
 ---
 
-## 一、系统初始化
+## 一、VMware 虚拟机
 
 ### 下载安装
 
-- VMware Workstation Pro 安装：[参考教程](https://blog.csdn.net/Du_XiaoNan/article/details/136138427)（推荐 Pro 版，Player 版功能有限）
+- 官方下载页：https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion
+- 推荐安装 **Workstation Pro** 版本，Player 版功能受限（无快照、无克隆等）
+
+:::tip VMware 现已免费
+VMware Workstation Pro 自 2024 年起对个人用户**免费开放**，注册 Broadcom 账号后可直接下载，无需激活码。
+:::
+
+### VMnet1 vs VMnet8
+
+VMware 安装后会创建两块虚拟网卡，对应两种内置网络模式：
+
+| | VMnet1（仅主机模式） | VMnet8（NAT 模式） |
+|---|---|---|
+| 虚拟机 ↔ 宿主机 | ✅ 可通信 | ✅ 可通信 |
+| 虚拟机访问外网 | ❌ 不能 | ✅ 通过宿主机 NAT 转发 |
+| 外部设备访问虚拟机 | ❌ 不能 | ❌ 默认不能（需端口转发） |
+| 宿主机切换网络后影响虚拟机 | 有影响 | **无影响** |
+| 适用场景 | 纯内网隔离测试 | 日常开发，虚拟机需要上网 |
+
+:::info 为什么 NAT 模式切换网络不影响虚拟机？
+VMnet8 是一个独立的虚拟子网，与宿主机物理网络完全隔离。虚拟机只和 VMnet8 虚拟网卡通信，由 VMware 内置的 NAT 服务负责转发到外网。宿主机从 WiFi 切到以太网，虚拟机完全感知不到。
+:::
+
+:::warning 虚拟机 ping 不通宿主机 VMnet8 IP 是正常现象
+NAT 模式下，宿主机物理网卡**不直接响应**来自虚拟机的 ICMP（ping）请求，这是 VMware NAT 实现机制决定的，不是配置问题。
+:::
+
+### 快照与克隆
+
+**快照**：记录虚拟机某一时刻的完整状态，可随时回滚，是折腾系统前的必备操作。
+
+```
+VM 菜单 → 快照 → 拍摄快照   # 创建
+VM 菜单 → 快照 → 快照管理器  # 查看/回滚/删除
+```
+
+**克隆**：基于现有虚拟机创建副本，搭建集群时常用。
+
+```
+右键虚拟机 → 管理 → 克隆
+→ 选择"完整克隆"（独立副本，推荐）
+→ 或"链接克隆"（依赖源虚拟机，节省空间）
+```
+
+:::tip 搭建集群的正确姿势
+先配置好一台干净的基础虚拟机（装好工具、配好网络），**拍快照** → **克隆多份** → 分别修改 IP，比逐台安装效率高得多。
+:::
+
+---
+
+## 二、系统初始化
+
+### 下载安装
+
 - CentOS 官方镜像：https://wiki.centos.org/Download.html
 - 阿里云镜像（CentOS 7.9，国内速度快）：https://mirrors.aliyun.com/centos/7.9.2009/isos/x86_64/
 
@@ -106,7 +159,7 @@ reboot
 
 ---
 
-## 二、环境变量配置
+## 三、环境变量配置
 
 ### 配置文件说明
 
@@ -154,7 +207,7 @@ source /etc/profile.d/java.sh
 
 ---
 
-## 三、网络配置：设置静态 IP
+## 四、网络配置：设置静态 IP
 
 ### NAT 模式 vs 桥接模式
 
@@ -222,19 +275,19 @@ ping www.baidu.com
 
 NAT 模式基于 **VMnet8** 虚拟网卡配置，和桥接模式步骤相同，但网关有所不同：
 
-![VMnet8 配置](/public/images/image-20250221000813087.png)
+![VMnet8 配置](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250221000813087.png)
 
 :::tip NAT 模式网关特殊说明
 - VMnet8 的 IP（如 `192.168.50.1`）是宿主机地址，**不是网关**
 - NAT 模式的网关是 VMware 内置虚拟 NAT 设备，通常为子网的**第 2 个地址**（如 `192.168.50.2`）
 - 可在 VMware → 编辑 → 虚拟网络编辑器 中查看和修改子网配置
 
-![虚拟网络编辑器](/public/images/image-20250418095215573.png)
+![虚拟网络编辑器](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20250418095215573.png)
 :::
 
 ---
 
-## 四、磁盘挂载
+## 五、磁盘挂载
 
 ### 常用命令速查
 
