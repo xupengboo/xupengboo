@@ -60,7 +60,7 @@ export default defineConfig({
     nav: [
       { text: '首页', link: '/' },
       { text: '💻 软件开发', link: '/dev/intro', activeMatch: '/dev/' },
-      { text: '☁️ 运维与数据', link: '/ops/db/mysql-basis', activeMatch: '/ops/' },
+      { text: '☁️ 运维与数据', link: '/ops/intro', activeMatch: '/ops/' },
       { text: '🤖 AI大模型', link: '/ai/intro', activeMatch: '/ai/' },
       { text: '👤 关于我', link: '/about' },
     ],
@@ -154,12 +154,27 @@ export default defineConfig({
           ]
         },
         {
+          text: '📊 大数据',
+          collapsed: false,
+          items: [
+            // --- 大数据 ---
+            { text: '框架设计路线', link: '/ops/bigdata/框架设计路线' },
+            { text: '数据采集工具', link: '/ops/bigdata/数据采集工具' },
+            { text: 'Hadoop', link: '/ops/bigdata/hadoop' },
+            { text: 'Hive', link: '/ops/bigdata/hive' },
+            { text: 'HBase', link: '/ops/bigdata/hbase' },
+            { text: 'Spark', link: '/ops/bigdata/spark' },
+            { text: 'Flink', link: '/ops/bigdata/flink' },
+            { text: 'StarRocks', link: '/ops/bigdata/starrocks' },
+          ]
+        },
+        {
           text: '🗄️ 数据库',
           collapsed: false,
           items: [
             { text: 'MySQL 基础', link: '/ops/db/mysql-basis' },
           ]
-        },
+        }
       ],
 
       // AI 大模型侧边栏
