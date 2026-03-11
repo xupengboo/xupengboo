@@ -26,4 +26,5 @@ jobs:
 
             docker build -t xupengboo:$VERSION .
             docker rm -f xupengboo
+            docker images --quiet xupengboo:1.1.* | xargs docker rmi
             docker run -d -p 80:80 --name xupengboo xupengboo:$VERSION
