@@ -77,6 +77,7 @@ export default defineConfig({
           items: [
             { text: 'Git 核心实战', link: '/dev/tools/Git 核心实战' },
             { text: 'GitHub 图床配置', link: '/dev/tools/GitHub 图床配置' },
+            { text: '微信云托管', link: '/dev/tools/微信云托管' },
           ]
         },
         {
