@@ -23,8 +23,7 @@ jobs:
             git pull origin main
 
             VERSION=1.1.${{ github.run_number }}
-
-            docker build -t xupengboo:$VERSION .
             docker rm -f xupengboo
             docker images --quiet xupengboo:1.1.* | xargs docker rmi
+            docker build -t xupengboo:$VERSION .
             docker run -d -p 80:80 --name xupengboo xupengboo:$VERSION
