@@ -3,6 +3,7 @@ node_modules/
 
 # VitePress 构建输出目录
 docs/.vitepress/dist/
+docs/.vitepress/.temp/
 
 # VitePress 运行时的缓存目录
 docs/.vitepress/cache/
