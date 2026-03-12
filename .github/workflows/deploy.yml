@@ -26,4 +26,4 @@ jobs:
             docker rm -f xupengboo
             docker images --quiet xupengboo:1.1.* | xargs docker rmi
             docker build -t xupengboo:$VERSION .
-            docker run -d -p 80:80 --name xupengboo xupengboo:$VERSION
+            docker run -d -p 80:80 -p 443:443 -v /etc/letsencrypt/live/www.xupengboo.top:/etc/letsencrypt/live/www.xupengboo.top --restart=always --name xupengboo xupengboo:$VERSION
