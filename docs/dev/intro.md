@@ -14,7 +14,6 @@ title: 软件开发导航
 
 ## 精选笔记 ⭐️
 
-- [Java 设计模式](/dev/java/design)
-- [Python 基础](/dev/python/basic)
-- [nvm 使用指南](/dev/front/nvm)
-- [Git 核心实战](/dev/tools/git)
+- [Python 基础](/dev/python/Python基础)
+- [nvm 使用指南](/dev/front/Nvm使用指南)
+- [Git 核心实战](/dev/tools/Git核心实战)

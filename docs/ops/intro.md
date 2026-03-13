@@ -12,8 +12,8 @@ title: 运维与云原生基建
 * **🛠️ 自动化与监控**：记录了 Shell 脚本自动化运维、Prometheus 监控体系以及 CI/CD 流水线建设。
 
 ### 精选笔记 ⭐️
-* [Kubernetes 常用故障排查手册](/ops/k8s/troubleshooting)
-* [MySQL 千万级数据深分页优化实战](/ops/db/mysql-optimize)
-* [Docker 常用镜像一键部署脚本集锦](/ops/docker/scripts)
+* [大数据框架设计路线](/ops/bigdata/框架设计路线)
+* [Docker 常用镜像一键部署脚本集锦](/ops/docker/单机部署)
+* [Rancher 安装与使用（构建 kubernetes 集群）](/ops/k8s/Rancher安装与使用)
 
 > **💡 提示**：你可以通过左侧侧边栏快速跳转到具体的组件学习笔记。
