@@ -1,3 +1,5 @@
+declare global { interface Window { _hmt: any[] } }
+
 import DefaultTheme from 'vitepress/theme'
 import { useRouter } from 'vitepress'
 import { watch } from 'vue'
