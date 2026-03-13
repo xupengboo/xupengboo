@@ -13,7 +13,20 @@ export default defineConfig({
   base: '/',
 
   // favicon
-  head: [['link', { rel: 'icon', href: '/favicon.ico' }]],
+  head: [
+      ['link', { rel: 'icon', href: '/favicon.ico' }],
+      [
+        'script',
+        {},
+        `var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14eedf447d028821b02c396bac640923";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();`
+      ],
+  ],
 
   // 显示最后更新时间
   lastUpdated: true,
