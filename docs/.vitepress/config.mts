@@ -155,6 +155,7 @@ export default defineConfig({
           collapsed: false,
           items: [
             { text: 'Linux 基础', link: '/ops/server/Linux 基础' },
+            { text: 'HTTPS 证书申请', link: '/ops/server/HTTPS 证书申请' },
             { text: 'Nginx 使用指南', link: '/ops/server/Nginx 使用指南' },
             { text: 'CentOS 运维手册', link: '/ops/server/CentOS 运维手册' },
             { text: 'ELK Stack 概览与部署', link: '/ops/server/ELK Stack 概览与部署' },
