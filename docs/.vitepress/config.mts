@@ -139,7 +139,7 @@ export default defineConfig({
             { text: 'Docker 环境安装', link: '/ops/docker/环境安装' },
             { text: 'Docker 核心命令', link: '/ops/docker/核心命令' },
             { text: 'Docker 单机部署', link: '/ops/docker/单机部署' },
-            { text: 'Dockerfile 构建', link: '/ops/docker/Dockerfile 构建' },
+            { text: 'Dockerfile 构建', link: '/ops/docker/Dockerfile构建' },
           ]
         },
         {
@@ -154,12 +154,12 @@ export default defineConfig({
           text: '🛠️ 服务器 & 中间件',
           collapsed: false,
           items: [
-            { text: 'Linux 基础', link: '/ops/server/Linux 基础' },
-            { text: 'HTTPS 证书申请', link: '/ops/server/HTTPS 证书申请' },
-            { text: 'Nginx 使用指南', link: '/ops/server/Nginx 使用指南' },
-            { text: 'CentOS 运维手册', link: '/ops/server/CentOS 运维手册' },
-            { text: 'ELK Stack 概览与部署', link: '/ops/server/ELK Stack 概览与部署' },
-            { text: 'Logstash 数据管道', link: '/ops/server/Logstash 数据管道' },
+            { text: 'Linux 基础', link: '/ops/server/Linux基础' },
+            { text: 'HTTPS 证书申请', link: '/ops/server/HTTPS证书申请' },
+            { text: 'Nginx 使用指南', link: '/ops/server/Nginx使用指南' },
+            { text: 'CentOS 运维手册', link: '/ops/server/CentOS运维手册' },
+            { text: 'ELK Stack 概览与部署', link: '/ops/server/ELKStack概览与部署' },
+            { text: 'Logstash 数据管道', link: '/ops/server/Logstash数据管道' },
           ]
         },
         {
@@ -175,14 +175,14 @@ export default defineConfig({
             { text: 'Spark', link: '/ops/bigdata/spark' },
             { text: 'Flink', link: '/ops/bigdata/flink' },
             { text: 'StarRocks', link: '/ops/bigdata/starrocks' },
-            { text: 'DolphinScheduler 调度工具', link: '/ops/bigdata/DolphinScheduler 调度工具' },
+            { text: 'DolphinScheduler 调度工具', link: '/ops/bigdata/DolphinScheduler调度工具' },
           ]
         },
         {
           text: '🗄️ 数据库',
           collapsed: false,
           items: [
-            { text: 'MySQL 核心速查', link: '/ops/db/MySQL 核心速查' },
+            { text: 'MySQL 核心速查', link: '/ops/db/MySQL核心速查' },
           ]
         }
       ],
