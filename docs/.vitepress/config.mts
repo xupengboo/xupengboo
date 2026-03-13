@@ -194,7 +194,7 @@ export default defineConfig({
           text: '🤖 大模型基础',
           collapsed: false,
           items: [
-            { text: 'LLM 理论导论', link: '/ai/llm/llm' },
+            { text: 'LLM 理论导论', link: '/ai/llm/LLM理论导论' },
           ]
         },
         {
