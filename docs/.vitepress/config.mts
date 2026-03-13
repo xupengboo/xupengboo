@@ -75,8 +75,8 @@ export default defineConfig({
           text: '🛠️ 开发工具箱',
           collapsed: false,
           items: [
-            { text: 'Git 核心实战', link: '/dev/tools/Git 核心实战' },
-            { text: 'GitHub 图床配置', link: '/dev/tools/GitHub 图床配置' },
+            { text: 'Git 核心实战', link: '/dev/tools/Git核心实战' },
+            { text: 'GitHub 图床配置', link: '/dev/tools/GitHub图床配置' },
             { text: '微信云托管', link: '/dev/tools/微信云托管' },
             { text: '制作启动U盘', link: '/dev/tools/制作启动U盘' },
           ]
@@ -86,9 +86,9 @@ export default defineConfig({
           collapsed: false,
           items: [
             { text: '四种编程思想', link: '/dev/frame/四种编程思想' },
-            { text: 'CAP 分布式定理', link: '/dev/frame/CAP 分布式定理' },
-            { text: 'RestFul 风格', link: '/dev/frame/RestFul 风格' },
-            { text: 'Web Service', link: '/dev/frame/Web Service' },
+            { text: 'CAP 分布式定理', link: '/dev/frame/CAP分布式定理' },
+            { text: 'RestFul 风格', link: '/dev/frame/RestFul风格' },
+            { text: 'Web Service', link: '/dev/frame/WebService' },
           ]
         },
         {
@@ -96,36 +96,36 @@ export default defineConfig({
           collapsed: false,
           items: [
             { text: '数据结构', link: '/dev/algorithm/数据结构' },
-            { text: '排序 & 搜索', link: '/dev/algorithm/排序 & 搜索' },
-            { text: '时间 & 空间复杂度', link: '/dev/algorithm/时间 & 空间复杂度' },
+            { text: '排序 & 搜索', link: '/dev/algorithm/排序&搜索' },
+            { text: '时间 & 空间复杂度', link: '/dev/algorithm/时间&空间复杂度' },
           ]
         },
         {
           text: '☕ Java 生态',
           collapsed: false,
           items: [
-            { text: 'Java 设计模式', link: '/dev/java/Java 设计模式' },
-            { text: 'Flowable 工作流引擎', link: '/dev/java/Flowable 工作流引擎' },
+            { text: 'Java 设计模式', link: '/dev/java/Java设计模式' },
+            { text: 'Flowable 工作流引擎', link: '/dev/java/Flowable工作流引擎' },
           ]
         },
         {
           text: '🐍 Python',
           collapsed: false,
           items: [
-            { text: 'Python 基础', link: '/dev/python/Python 基础' },
-            { text: 'Python 实用工具库', link: '/dev/python/Python 实用工具库' },
+            { text: 'Python 基础', link: '/dev/python/Python基础' },
+            { text: 'Python 实用工具库', link: '/dev/python/Python实用工具库' },
           ]
         },
         {
           text: '🌐 前端开发',
           collapsed: false,
           items: [
-            { text: 'Nvm 使用指南', link: '/dev/front/Nvm 使用指南' },
-            { text: 'Npm 包管理器', link: '/dev/front/Npm 包管理器' },
-            { text: 'Vue 生态工具', link: '/dev/front/Vue 生态工具' },
-            { text: 'Node 实用工具', link: '/dev/front/Node 实用工具' },
-            { text: 'HTML5 全览', link: '/dev/front/HTML5 全览' },
-            { text: 'CSS 速查手册', link: '/dev/front/CSS 速查手册' },
+            { text: 'Nvm 使用指南', link: '/dev/front/Nvm使用指南' },
+            { text: 'Npm 包管理器', link: '/dev/front/Npm包管理器' },
+            { text: 'Vue 生态工具', link: '/dev/front/Vue生态工具' },
+            { text: 'Node 实用工具', link: '/dev/front/Node实用工具' },
+            { text: 'HTML5 全览', link: '/dev/front/HTML5全览' },
+            { text: 'CSS 速查手册', link: '/dev/front/CSS速查手册' },
           ]
         },
       ],
@@ -147,7 +147,7 @@ export default defineConfig({
           collapsed: false,
           items: [
             { text: 'Yaml 配置', link: '/ops/k8s/yaml' },
-            { text: 'Rancher 安装与使用', link: '/ops/k8s/Rancher 安装与使用' },
+            { text: 'Rancher 安装与使用', link: '/ops/k8s/Rancher安装与使用' },
           ]
         },
         {
