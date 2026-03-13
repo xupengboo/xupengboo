@@ -231,7 +231,7 @@ function toggleBook(title) {
 
 /* ① 统计 */
 const stats = [
-  {value: '38+', label: '篇技术笔记'},
+  {value: '52+', label: '篇技术笔记'},
   {value: '4', label: '个知识领域'},
   {value: '2022', label: '年开始记录'},
   {value: '持续', label: '迭代更新中'},
@@ -239,18 +239,18 @@ const stats = [
 
 /* ② 最近更新 */
 const recent = [
-  {tag: 'AI', tagClass: 'tag-ai', title: '本地大模型部署实践', date: '2026-02-28', link: '/ai/app/app'},
-  {tag: 'Dev', tagClass: 'tag-dev', title: 'CAP 分布式定理', date: '2026-02-10', link: '/dev/frame/CAP 分布式定理'},
-  {tag: 'Ops', tagClass: 'tag-ops', title: 'MySQL 基础到实战', date: '2026-01-22', link: '/ops/db/mysql-basis'},
-  {tag: 'Dev', tagClass: 'tag-dev', title: 'Git 核心实战', date: '2026-01-15', link: '/dev/tools/Git 核心实战'},
-  {tag: 'AI', tagClass: 'tag-ai', title: 'LLM 大模型理论导论', date: '2026-01-08', link: '/ai/llm/llm'},
-  {tag: 'Dev', tagClass: 'tag-dev', title: 'Python 实用工具库', date: '2025-12-20', link: '/dev/python/Python 实用工具库'},
+  {tag: 'AI', tagClass: 'tag-ai', title: '本地大模型部署实践', date: '2026-03-12', link: '/ai/app/app'},
+  {tag: 'Ops', tagClass: 'tag-ops', title: 'HTTPS 证书申请', date: '2026-03-12', link: '/ops/server/HTTPS 证书申请'},
+  {tag: 'Ops', tagClass: 'tag-dev', title: 'Rancher 安装与使用', date: '2026-03-11', link: '/ops/k8s/Rancher 安装与使用'},
+  {tag: 'Ops', tagClass: 'tag-ai', title: 'CentOS 运维手册', date: '2026-03-11', link: '/ops/server/CentOS 运维手册'},
+  {tag: 'Dev', tagClass: 'tag-dev', title: 'Docker 核心命令', date: '2025-03-01', link: '/ops/docker/Docker 核心命令'},
+  {tag: 'Dev', tagClass: 'tag-dev', title: 'Git 核心实战', date: '2026-02-28', link: '/dev/tools/Git 核心实战'},
 ]
 
 /* ③ 技术栈 */
 const tags = [
   {name: 'Java', level: 'level-high'},
-  {name: 'Spring Boot', level: 'level-high'},
+  {name: 'Spring Cloud', level: 'level-high'},
   {name: 'Python', level: 'level-high'},
   {name: 'Docker', level: 'level-mid'},
   {name: 'MySQL', level: 'level-high'},
@@ -268,56 +268,56 @@ const tags = [
 /* ④ 读书推荐 */
 const books = [
   {
-    title: '代码整洁之道', author: 'Robert C. Martin · Clean Code',
-    category: '工程实践', color: '#2d6a4f', score: '9.4',
-    badge: '强烈推荐', badgeClass: 'badge-must',
-    quote: '写代码是写给人看的，顺便让机器能跑。',
-    review: '这本书彻底改变了我看代码的方式。Martin 用大量真实的反例告诉你，"能跑"和"好代码"之间差了多远。读完之后写代码会不自觉地多问自己一句：这个函数的名字，三个月后的我还能看懂吗？',
-    tags: ['重构', '命名规范', '函数设计', '注释哲学'],
+    title: '凤凰项目',
+    author: 'Gene Kim · The Phoenix Project',
+    category: 'DevOps',
+    color: '#c0626a',
+    score: '9.2',
+    badge: '强烈推荐',
+    badgeClass: 'badge-must',
+    quote: '运维不是救火队，是防火队。',
+    review: '用小说的方式讲 DevOps，读起来根本停不下来。主角接手一个烂摊子项目，在不断救火的过程中领悟了精益生产、持续交付的精髓。技术人看了会频频点头，很多坑我也踩过。读完之后对"发布流程"、"技术债务"这些词有了全新的理解。',
+    tags: ['DevOps', '持续交付', '三步工作法', '精益生产'],
   },
   {
-    title: '深入理解Java虚拟机', author: '周志明 · JVM第三版',
-    category: 'Java 进阶', color: '#1d4ed8', score: '9.6',
-    badge: '经典必读', badgeClass: 'badge-classic',
-    quote: '真正理解 Java，要从 JVM 开始往上看。',
-    review: '国内 Java 技术书的天花板之一。GC 算法、类加载机制、即时编译器，被周志明写得清晰而有层次。面试可以背，但真正读进去之后会发现，很多"玄学"问题背后都有合理的解释。',
-    tags: ['JVM', 'GC调优', '类加载', '内存模型'],
-  },
-  {
-    title: '人月神话', author: 'Frederick P. Brooks Jr.',
-    category: '软件工程', color: '#7c3aed', score: '9.1',
-    badge: '思维拓展', badgeClass: 'badge-mind',
-    quote: '往一个已经延误的项目里加人，只会让它更延误。',
-    review: '1975 年写的书，放到今天依然字字戳心。软件的本质复杂性、概念完整性、人月不可互换，在 50 年后的敏捷时代仍然适用。这不是教你"怎么做"的书，而是让你理解"为什么这么难"。',
-    tags: ['项目管理', '团队协作', '软件复杂性', '经典思想'],
-  },
-  {
-    title: 'Python编程：从入门到实践', author: 'Eric Matthes · Python Crash Course',
-    category: 'Python', color: '#d97706', score: '8.9',
-    badge: '入门首选', badgeClass: 'badge-starter',
-    quote: '最好的入门书，是让你一直想打开下一章的那种。',
-    review: '节奏把握得非常好，前半部分夯实语法基础，后半部分用三个完整项目巩固。读完之后写一些小脚本自动化日常工作，成就感会让你上瘾。',
-    tags: ['Python基础', '项目驱动', '快速上手'],
+    title: '硅谷之火',
+    author: 'Michael Swaine · Fire in the Valley',
+    category: '科技史',
+    color: '#0891b2',
+    score: '9.0',
+    badge: '眼界拓展',
+    badgeClass: 'badge-mind',
+    quote: '个人电脑的诞生，是一群偏执狂对世界说"不"的结果。',
+    review: '从 Altair 到 Apple，从车库到改变世界——这本书记录了个人电脑革命最真实的来龙去脉。那些名字如今已是传奇，但当年不过是一群穷折腾的年轻人。读完会觉得，热爱一件事并且死磕到底，是有可能真的改变什么的。',
+    tags: ['科技史', 'PC革命', '创业精神', '乔布斯'],
   },
 ]
 
 /* ⑤ 成长时间线 */
 const timeline = [
   {
-    year: '2022',
+    year: '2021',
     title: '踏入编程世界',
     tag: '起点',
     color: '#6b7280',
-    desc: '开始系统学习 Java，接触面向对象编程思想，写下第一行 Hello World。',
-    milestones: ['Java 基础语法', '数据结构入门', '第一个课程项目'],
+    desc: '开始系统学习 Java、Vue等等，接触面向对象编程思想，写下第一行 Hello World。',
+    milestones: ['Java 基础语法', '数据结构入门', '第一个物流项目', '刷B站视频'],
   },
   {
-    year: '2023',
+    year: '2022',
     title: '全栈能力构建',
     tag: '成长',
     color: '#2d6a4f',
-    desc: '深入 Spring Boot 生态，同步学习 MySQL、Redis，开始接触 Linux 服务器运维。',
+    desc: '深入 Spring Boot 生态，同步学习 Nginx、MySQL、Redis等，开始接触 Linux 服务器运维。',
     milestones: ['Spring Boot', 'MySQL 调优', 'Linux 基础', 'Git 协作'],
+  },
+  {
+    year: '2023',
+    title: '架构视野初开',
+    tag: '专业',
+    color: '#35607e',
+    desc: '从单体走向微服务，开始理解"拆分"背后的设计哲学。学会了服务治理、链路追踪、接口限流，第一次感受到架构决策对系统的长远影响。',
+    milestones: ['Spring Cloud', '服务治理', '链路追踪', '性能调优'],
   },
   {
     year: '2024',
@@ -329,40 +329,43 @@ const timeline = [
   },
   {
     year: '2025',
-    title: '知识库建立 · AI 探索',
+    title: '大数据 · 知识库建立',
     tag: '沉淀',
     color: '#7c3aed',
-    desc: '创建本站，将零散笔记系统化整理。同步开始深入研究大模型应用与 Prompt 工程。',
-    milestones: ['VitePress 建站', 'LLM 理论学习', 'Ollama 本地部署', 'DeepSeek 实践'],
+    desc: '踏入大数据领域，学习数据处理与分析的核心体系。同步搭建本站，把多年零散的笔记系统化整理成可查阅的知识库，第一次认真地给自己的成长留档。',
+    milestones: ['Hadoop / Spark', 'Hive 数仓', 'VitePress 建站', '笔记体系化'],
   },
   {
     year: '2026',
-    title: '深耕 AI 应用开发',
+    title: '初识 AI，踏入新世界',
     tag: '进行中',
     color: '#d97706',
     current: true,
-    desc: '专注 LangChain、向量数据库等 AI 工程化方向，持续输出高质量技术笔记。',
-    milestones: ['LangChain 实战', '向量数据库', 'RAG 应用', '持续写作'],
+    desc: '开始系统学习 AI 与大模型方向，从理论到本地部署，从 Prompt 工程到 AI 应用开发。感觉像是又回到了 2021 年刚入门时的状态——什么都新鲜，什么都想弄懂。',
+    milestones: ['LLM 理论入门', 'Ollama 本地部署', 'Prompt 工程', 'AI 应用探索'],
   },
 ]
 
 /* ⑥ 当前状态 */
 const learning = {
+  // 正在学习（pct 为进度百分比 0~100）
   doing: [
-    {name: 'LangChain 框架', pct: 45, color: '#2d6a4f', note: '正在研究 Chain 和 Agent 的设计模式'},
-    {name: '向量数据库 Milvus', pct: 25, color: '#0891b2', note: '学习 embedding 原理与相似度检索'},
-    {name: 'Spring Cloud', pct: 70, color: '#1d4ed8', note: '微服务治理、服务网格持续完善'},
+    { name: '供应链系统业务深耕', pct: 45, color: '#2d6a4f', note: '持续钻研 ERP（SAP）、SRM、CRM 等供应链核心系统，理解业务比写代码更难' },
+    { name: '2026 读书计划',      pct: 25, color: '#0891b2', note: '目标：年内读完 10 本计算机相关书籍，目前已读 2-3 本' },
+    { name: 'AI 大模型搭建与微调', pct: 100, color: '#1d4ed8', note: '从理论到落地，完成 LLM 本地部署，正在探索微调方向' },
   ],
+  // 近期计划（done: true 自动显示划线+勾选）
   plan: [
-    {name: 'RAG 应用实战', time: '2026 Q2', done: false},
-    {name: 'Kubernetes 进阶', time: '2026 Q2', done: false},
-    {name: 'LangChain 笔记整理', time: '2026 Q1', done: false},
-    {name: 'DeepSeek 部署笔记', time: '已完成', done: true},
-    {name: 'VitePress 知识库搭建', time: '已完成', done: true},
+    { name: 'AI Agent 学习实践',   time: '2026 Q2', done: false },
+    { name: 'AI 部署微调',         time: '2026 Q3', done: false },
+    { name: 'RAG 应用实战',        time: '2026 Q4', done: false },
+    { name: 'LLM 大模型搭建',      time: '已完成',  done: true  },
+    { name: 'VitePress 知识库搭建', time: '已完成',  done: true  },
   ],
+  // 近期感悟
   thoughts: [
-    {text: '理解一个东西最好的方式，是试着把它讲给别人听。这也是我写笔记的理由。', from: '写作感悟'},
-    {text: '不要追着新技术跑，先把一个东西真正用熟，再说下一个。', from: '学习方法'},
+    { text: '专注当下这一件事，比同时做十件事更有力量。', from: '工作感悟' },
+    { text: '把大目标拆碎，一小块一小块地啃——每完成一块，就离终点近一步。', from: '学习方法' },
   ],
 }
 
@@ -402,9 +405,9 @@ const projects = [
 
 /* ⑧ 座右铭 */
 const motto = {
-  text: '先把一件事做对，再把它做快。慢下来思考的时间，从来不是浪费。',
-  from: '我的编程哲学',
-  note: '这句话提醒我在遇到问题时不要急着 Google 第一个答案，而是先想清楚问题本身是什么。',
+  text: '让事情流动起来，让问题暴露出来，让经验沉淀下来。',
+  from: '工作哲学 · 取意于《凤凰项目》中的三步工作法',
+  note: '专注一件事，把它做通；遇到困难不绕路，拆开来一块一块解决；做完之后复盘，把经验变成下一次的底气。流动、反馈、沉淀——这三件事想清楚了，做什么都不会太慌。',
 }
 </script>
 
