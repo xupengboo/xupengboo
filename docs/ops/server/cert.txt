@@ -1,0 +1,37 @@
+# 安装 certbot
+yum install certbot -y   # CentOS
+
+# 查看centos版本
+cat /etc/redhat-release
+
+# CentOS 7（Python2 环境）
+yum install -y python2-certbot-nginx
+
+# CentOS 8/9（Python3 环境，更常见）
+yum install -y python3-certbot-nginx
+
+# 方式一：有 nginx ，用这个命令
+certbot certonly --nginx -d 你的域名
+# 方式二：通过 Webroot 模式 
+# 通过Webroot 模式，申请证书
+certbot certonly --webroot -w /home/xupengboo/ssl -d www.xupengboo.top
+# 注意：这里必须要先映射一下：`-v /home/xupengboo/ssl:/usr/share/nginx/html` ，不然证书不会通过。
+docker run -d -p 80:80 -p 443:443 --name xupengboo -v /home/xupengboo/ssl:/usr/share/nginx/html --restart=always xupengboo:1.1.13
+
+# 现在证书文件已经存到宿主机的 /etc/letsencrypt/live/www.xupengboo.top/（真实：/etc/letsencrypt/archive/www.xupengboo.top） 目录下，之后对应 -v 映射过去即可，需注意软连接宿主机和docker容器无法使用。
+
+
+
+# 查看定时任务状态
+systemctl list-timers | grep certbot
+
+# 测试自动续期（不会真的生成证书，仅验证流程）
+certbot renew --dry-run
+
+# 方式1：通用续期（所有证书）
+certbot renew
+
+
+
+
+
