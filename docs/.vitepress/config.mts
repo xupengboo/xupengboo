@@ -23,7 +23,8 @@ export default defineConfig({
     image: {
       lazyLoading: true  // 图片懒加载
     },
-    lineNumbers: true    // 代码块显示行号
+    lineNumbers: true,    // 代码块显示行号
+    math: true
   },
 
   // 主题相关配置
