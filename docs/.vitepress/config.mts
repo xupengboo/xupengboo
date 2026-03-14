@@ -89,6 +89,7 @@ export default defineConfig({
           text: '🛠️ 开发工具箱',
           collapsed: false,
           items: [
+            { text: '实用软件工具', link: '/dev/tools/实用软件工具' },
             { text: 'Git 核心实战', link: '/dev/tools/Git核心实战' },
             { text: 'GitHub 图床配置', link: '/dev/tools/GitHub图床配置' },
             { text: '微信云托管', link: '/dev/tools/微信云托管' },
