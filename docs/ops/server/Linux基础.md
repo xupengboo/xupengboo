@@ -462,6 +462,15 @@ grep "keyword" file
 # 递归搜索目录下所有文件，显示行号
 grep "class" . -R -n
 
+# -r 递归搜索，用于目录或匹配多个文件
+grep -r "keyword" /var/log/
+
+# -l （lowercase）只打印包含匹配的文件名
+grep -l "ERROR" *.log
+
+# 组合使用：递归搜索并只显示匹配的文件名
+grep -rl "搜索内容" els.2026-01-23-*.log
+
 # 忽略大小写
 grep -i "HELLO" file
 
