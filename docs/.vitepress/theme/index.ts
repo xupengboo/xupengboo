@@ -3,10 +3,10 @@ declare global { interface Window { _hmt: any[] } }
 import DefaultTheme from 'vitepress/theme'
 import { useRouter } from 'vitepress'
 import { watch } from 'vue'
-import HomeStats from './components/HomeStats.vue'
-import Dreams from './components/Dreams.vue'
-import MyStory from './components/MyStory.vue'
-import Hobbies from './components/Hobbies.vue'
+import HomeStats from './components/HomeStats/HomeStats.vue'
+import Dreams from './components/Dreams/Dreams.vue'
+import MyStory from './components/MyStory/MyStory.vue'
+import Hobbies from './components/Hobbies/Hobbies.vue'
 import './custom.css'
 
 export default {
