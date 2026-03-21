@@ -217,6 +217,13 @@ export default defineConfig({
           items: [
             { text: '本地大模型部署', link: '/ai/app/app' }
           ]
+        },
+        {
+          text: '🛠️ OpenClaw',
+          collapsed: false,
+          items: [
+            { text: 'OpenClaw 常用命令', link: '/ai/openclaw/OpenClaw常用命令' }
+          ]
         }
       ],
     },
