@@ -47,6 +47,19 @@ openclaw config get agents.defaults.workspace
 openclaw gateway start --force --set agents.defaults.workspace=%CD%
 ```
 
+## OpenClaw 模型配置
+
+```bash
+# 查看模型相关的配置信息
+openclaw models --help
+
+# 查看当前模型列表
+openclaw models list
+
+```
+
+## OpenClaw 多智能体操作
+
 多智能体独立工作区（同一个Gateway下，多个Agent隔离）
 ```bash
 # 查看当前已有的智能体列表
