@@ -56,6 +56,14 @@ openclaw models --help
 # 查看当前模型列表
 openclaw models list
 
+# 添加模型
+openclaw models auth --help
+openclaw models auth add
+
+# 切换模型
+openclaw models set glm-5
+
+
 ```
 
 ## OpenClaw 多智能体操作
