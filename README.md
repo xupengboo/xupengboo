@@ -24,244 +24,370 @@
 
 ## 📚 内容导航
 
-<div class="content-grid">
+<div class="nav-wrapper">
 
-<div class="content-card">
-
-### 💻 软件开发
-
-<div class="category-section">
-<strong>🛠️ 开发工具箱</strong>
-<ul>
+<!-- 软件开发卡片 -->
+<div class="nav-card dev-card">
+<div class="card-header">
+<span class="card-icon">💻</span>
+<h3>软件开发</h3>
+</div>
+<div class="card-body">
+<div class="nav-section">
+<div class="section-title"><span class="dot"></span>🛠️ 开发工具箱</div>
+<ul class="nav-list">
 <li>NVM 使用指南</li>
 <li>包管理器速查</li>
 <li>Node 实用工具</li>
 <li>GitHub 图床配置</li>
 </ul>
 </div>
-
-<div class="category-section">
-<strong>🏗️ 架构基础</strong>
-<ul>
+<div class="nav-section">
+<div class="section-title"><span class="dot"></span>🏗️ 架构基础</div>
+<ul class="nav-list">
 <li>RESTful API 规范</li>
 <li>Web Service</li>
 <li>CAP 定理</li>
 <li>四种编程范式</li>
 </ul>
 </div>
-
-<div class="category-section">
-<strong>📐 算法 & 数据结构</strong>
-<ul>
+<div class="nav-section">
+<div class="section-title"><span class="dot"></span>📐 算法 & 数据结构</div>
+<ul class="nav-list">
 <li>时间 / 空间复杂度</li>
 </ul>
 </div>
-
-<div class="category-section">
-<strong>☕ Java 生态</strong>
-<ul>
+<div class="nav-section">
+<div class="section-title"><span class="dot"></span>☕ Java 生态</div>
+<ul class="nav-list">
 <li>Flowable 工作流引擎</li>
 </ul>
 </div>
-
-<div class="category-section">
-<strong>🐍 Python</strong>
-<ul>
+<div class="nav-section">
+<div class="section-title"><span class="dot"></span>🐍 Python</div>
+<ul class="nav-list">
 <li>Python 实用工具库</li>
 </ul>
 </div>
-
-<div class="category-section">
-<strong>🌐 前端开发</strong>
-<ul>
+<div class="nav-section">
+<div class="section-title"><span class="dot"></span>🌐 前端开发</div>
+<ul class="nav-list">
 <li>HTML / HTML5 全览</li>
 <li>CSS 速查手册</li>
 <li>Vue 生态工具速览</li>
 </ul>
 </div>
-
+</div>
 </div>
 
-<div class="content-card">
-
-### 🖥️ 运维与数据
-
-<div class="category-section">
-<strong>🐳 Docker</strong>
-<ul>
+<!-- 运维与数据卡片 -->
+<div class="nav-card ops-card">
+<div class="card-header">
+<span class="card-icon">🖥️</span>
+<h3>运维与数据</h3>
+</div>
+<div class="card-body">
+<div class="nav-section">
+<div class="section-title"><span class="dot"></span>🐳 Docker</div>
+<ul class="nav-list">
 <li>环境安装</li>
 <li>Dockerfile 构建</li>
 </ul>
 </div>
-
-<div class="category-section">
-<strong>☸️ Kubernetes</strong>
-<ul>
+<div class="nav-section">
+<div class="section-title"><span class="dot"></span>☸️ Kubernetes</div>
+<ul class="nav-list">
 <li>Rancher 安装与使用</li>
 </ul>
 </div>
-
-<div class="category-section">
-<strong>🛠️ 服务器 & 中间件</strong>
-<ul>
+<div class="nav-section">
+<div class="section-title"><span class="dot"></span>🛠️ 服务器 & 中间件</div>
+<ul class="nav-list">
 <li>Linux 基础</li>
 <li>CentOS 运维手册</li>
 <li>制作启动U盘</li>
 </ul>
 </div>
-
-<div class="category-section">
-<strong>🗄️ 数据库</strong>
-<ul>
+<div class="nav-section">
+<div class="section-title"><span class="dot"></span>🗄️ 数据库</div>
+<ul class="nav-list">
 <li>MySQL 核心速查</li>
 </ul>
 </div>
-
-<div class="category-section">
-<strong>📊 大数据</strong>
-<ul>
+<div class="nav-section">
+<div class="section-title"><span class="dot"></span>📊 大数据</div>
+<ul class="nav-list">
 <li>DolphinScheduler 调度工具</li>
 </ul>
 </div>
-
+</div>
 </div>
 
-<div class="content-card">
-
-### 🔍 日志系统
-
-<div class="category-section">
-<strong>ELK Stack</strong>
-<ul>
+<!-- AI与云服务卡片 -->
+<div class="nav-card ai-card">
+<div class="card-header">
+<span class="card-icon">🤖</span>
+<h3>AI & 云服务</h3>
+</div>
+<div class="card-body">
+<div class="nav-section">
+<div class="section-title"><span class="dot"></span>🔍 日志系统</div>
+<ul class="nav-list">
 <li>ELK Stack 概览与部署</li>
 <li>Logstash 数据管道</li>
 </ul>
 </div>
-
-<div class="category-section">
-<strong>☁️ 云服务</strong>
-<ul>
+<div class="nav-section">
+<div class="section-title"><span class="dot"></span>☁️ 云服务</div>
+<ul class="nav-list">
 <li>微信云托管</li>
 </ul>
 </div>
-
-<div class="category-section">
-<strong>🤖 AI 大模型</strong>
-<div class="ai-section">
-<p>🚧 持续建设中 ...</p>
-<p class="ai-subtext">大模型应用、微调、部署等</p>
+<div class="nav-section">
+<div class="section-title"><span class="dot"></span>🧠 AI 大模型</div>
+<div class="ai-badge">
+<div class="ai-badge-content">
+<span class="pulse-dot"></span>
+<span>持续建设中...</span>
+</div>
+<p class="ai-desc">大模型应用、微调、部署</p>
 </div>
 </div>
-
+</div>
 </div>
 
 </div>
 
 <style>
-.content-grid {
+.nav-wrapper {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 24px;
-  margin: 32px 0;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 28px;
+  margin: 40px 0;
+  padding: 4px;
 }
 
-.content-card {
-  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  padding: 24px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  transition: all 0.3s ease;
+.nav-card {
+  position: relative;
+  border-radius: 20px;
+  padding: 0;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   height: 100%;
 }
 
-.content-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  border-color: #cbd5e1;
+/* 软件开发卡片 - 紫蓝渐变 */
+.dev-card {
+  background: linear-gradient(145deg, rgba(99, 102, 241, 0.08) 0%, rgba(139, 92, 246, 0.05) 100%);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  box-shadow: 
+    0 4px 20px -4px rgba(99, 102, 241, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 
-.content-card h3 {
-  margin-top: 0;
+.dev-card:hover {
+  transform: translateY(-8px) scale(1.01);
+  box-shadow: 
+    0 20px 40px -12px rgba(99, 102, 241, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  border-color: rgba(99, 102, 241, 0.4);
+}
+
+.dev-card .card-header {
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+}
+
+.dev-card .dot { background: linear-gradient(135deg, #6366f1, #8b5cf6); }
+.dev-card .nav-list li:hover { color: #6366f1; }
+
+/* 运维与数据卡片 - 青绿渐变 */
+.ops-card {
+  background: linear-gradient(145deg, rgba(20, 184, 166, 0.08) 0%, rgba(6, 182, 212, 0.05) 100%);
+  border: 1px solid rgba(20, 184, 166, 0.2);
+  box-shadow: 
+    0 4px 20px -4px rgba(20, 184, 166, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.ops-card:hover {
+  transform: translateY(-8px) scale(1.01);
+  box-shadow: 
+    0 20px 40px -12px rgba(20, 184, 166, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  border-color: rgba(20, 184, 166, 0.4);
+}
+
+.ops-card .card-header {
+  background: linear-gradient(135deg, #14b8a6 0%, #06b6d4 100%);
+}
+
+.ops-card .dot { background: linear-gradient(135deg, #14b8a6, #06b6d4); }
+.ops-card .nav-list li:hover { color: #0d9488; }
+
+/* AI卡片 - 橙粉渐变 */
+.ai-card {
+  background: linear-gradient(145deg, rgba(249, 115, 22, 0.08) 0%, rgba(236, 72, 153, 0.05) 100%);
+  border: 1px solid rgba(249, 115, 22, 0.2);
+  box-shadow: 
+    0 4px 20px -4px rgba(249, 115, 22, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.ai-card:hover {
+  transform: translateY(-8px) scale(1.01);
+  box-shadow: 
+    0 20px 40px -12px rgba(249, 115, 22, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  border-color: rgba(249, 115, 22, 0.4);
+}
+
+.ai-card .card-header {
+  background: linear-gradient(135deg, #f97316 0%, #ec4899 100%);
+}
+
+.ai-card .dot { background: linear-gradient(135deg, #f97316, #ec4899); }
+.ai-card .nav-list li:hover { color: #ea580c; }
+
+/* 卡片头部 */
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 24px;
+  margin: 0;
+}
+
+.card-icon {
+  font-size: 1.8rem;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+}
+
+.card-header h3 {
+  margin: 0;
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+/* 卡片内容 */
+.card-body {
+  padding: 24px;
+}
+
+.nav-section {
   margin-bottom: 20px;
-  padding-bottom: 12px;
-  border-bottom: 2px solid #3b82f6;
-  color: #1e293b;
-  font-size: 1.25rem;
 }
 
-.category-section {
-  margin-bottom: 20px;
-}
-
-.category-section:last-child {
+.nav-section:last-child {
   margin-bottom: 0;
 }
 
-.category-section strong {
-  display: block;
-  margin-bottom: 8px;
-  color: #475569;
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  color: #374151;
+  font-weight: 600;
   font-size: 0.95rem;
 }
 
-.category-section ul {
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.nav-list {
   list-style: none;
-  padding-left: 0;
+  padding: 0;
   margin: 0;
+  display: grid;
+  gap: 6px;
 }
 
-.category-section li {
-  padding: 6px 0;
-  padding-left: 20px;
+.nav-list li {
+  padding: 8px 12px;
+  margin-left: 16px;
+  color: #6b7280;
+  font-size: 0.88rem;
+  border-radius: 8px;
+  transition: all 0.25s ease;
+  cursor: default;
   position: relative;
-  color: #64748b;
-  font-size: 0.9rem;
-  line-height: 1.4;
 }
 
-.category-section li:before {
-  content: "•";
+.nav-list li::before {
+  content: "";
   position: absolute;
   left: 0;
-  color: #3b82f6;
-  font-weight: bold;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #d1d5db;
+  transition: all 0.25s ease;
 }
 
-.category-section li:hover {
-  color: #1e293b;
-  transform: translateX(2px);
-  transition: all 0.2s ease;
+.nav-list li:hover {
+  background: rgba(0, 0, 0, 0.03);
+  transform: translateX(4px);
 }
 
-.ai-section {
-  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-  border: 1px solid #bae6fd;
-  border-radius: 8px;
-  padding: 16px;
+.nav-list li:hover::before {
+  width: 6px;
+  height: 6px;
+}
+
+/* AI 建设中徽章 */
+.ai-badge {
+  margin-left: 16px;
   margin-top: 8px;
+  padding: 14px 16px;
+  background: linear-gradient(135deg, rgba(249, 115, 22, 0.1) 0%, rgba(236, 72, 153, 0.08) 100%);
+  border: 1px dashed rgba(249, 115, 22, 0.3);
+  border-radius: 12px;
 }
 
-.ai-section p {
-  margin: 0;
-  color: #0369a1;
-  font-weight: 500;
+.ai-badge-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #ea580c;
+  font-weight: 600;
+  font-size: 0.92rem;
 }
 
-.ai-subtext {
-  font-size: 0.85rem;
-  color: #0c4a6e;
-  margin-top: 4px !important;
-  opacity: 0.8;
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #f97316;
+  animation: pulse 2s ease-in-out infinite;
 }
 
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.2); }
+}
+
+.ai-desc {
+  margin: 8px 0 0 0;
+  font-size: 0.82rem;
+  color: #9ca3af;
+}
+
+/* 响应式 */
 @media (max-width: 768px) {
-  .content-grid {
+  .nav-wrapper {
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 20px;
   }
   
-  .content-card {
+  .card-body {
     padding: 20px;
   }
 }
