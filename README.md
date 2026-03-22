@@ -24,248 +24,82 @@
 
 ## 📚 内容导航
 
-<div class="content-grid">
-
-<div class="content-card">
+<table>
+<tr>
+<td width="33%" valign="top">
 
 ### 💻 软件开发
 
-<div class="category-section">
-<strong>🛠️ 开发工具箱</strong>
-<ul>
-<li>NVM 使用指南</li>
-<li>包管理器速查</li>
-<li>Node 实用工具</li>
-<li>GitHub 图床配置</li>
-</ul>
-</div>
+**🛠️ 开发工具箱**
+- NVM 使用指南
+- 包管理器速查
+- Node 实用工具
+- GitHub 图床配置
 
-<div class="category-section">
-<strong>🏗️ 架构基础</strong>
-<ul>
-<li>RESTful API 规范</li>
-<li>Web Service</li>
-<li>CAP 定理</li>
-<li>四种编程范式</li>
-</ul>
-</div>
+**🏗️ 架构基础**
+- RESTful API 规范
+- Web Service
+- CAP 定理
+- 四种编程范式
 
-<div class="category-section">
-<strong>📐 算法 & 数据结构</strong>
-<ul>
-<li>时间 / 空间复杂度</li>
-</ul>
-</div>
+**📐 算法 & 数据结构**
+- 时间 / 空间复杂度
 
-<div class="category-section">
-<strong>☕ Java 生态</strong>
-<ul>
-<li>Flowable 工作流引擎</li>
-</ul>
-</div>
+**☕ Java 生态**
+- Flowable 工作流引擎
 
-<div class="category-section">
-<strong>🐍 Python</strong>
-<ul>
-<li>Python 实用工具库</li>
-</ul>
-</div>
+**🐍 Python**
+- Python 实用工具库
 
-<div class="category-section">
-<strong>🌐 前端开发</strong>
-<ul>
-<li>HTML / HTML5 全览</li>
-<li>CSS 速查手册</li>
-<li>Vue 生态工具速览</li>
-</ul>
-</div>
+**🌐 前端开发**
+- HTML / HTML5 全览
+- CSS 速查手册
+- Vue 生态工具速览
 
-</div>
-
-<div class="content-card">
+</td>
+<td width="33%" valign="top">
 
 ### 🖥️ 运维与数据
 
-<div class="category-section">
-<strong>🐳 Docker</strong>
-<ul>
-<li>环境安装</li>
-<li>Dockerfile 构建</li>
-</ul>
-</div>
+**🐳 Docker**
+- 环境安装
+- Dockerfile 构建
 
-<div class="category-section">
-<strong>☸️ Kubernetes</strong>
-<ul>
-<li>Rancher 安装与使用</li>
-</ul>
-</div>
+**☸️ Kubernetes**
+- Rancher 安装与使用
 
-<div class="category-section">
-<strong>🛠️ 服务器 & 中间件</strong>
-<ul>
-<li>Linux 基础</li>
-<li>CentOS 运维手册</li>
-<li>制作启动U盘</li>
-</ul>
-</div>
+**🛠️ 服务器 & 中间件**
+- Linux 基础
+- CentOS 运维手册
+- 制作启动U盘
 
-<div class="category-section">
-<strong>🗄️ 数据库</strong>
-<ul>
-<li>MySQL 核心速查</li>
-</ul>
-</div>
+**🗄️ 数据库**
+- MySQL 核心速查
 
-<div class="category-section">
-<strong>📊 大数据</strong>
-<ul>
-<li>DolphinScheduler 调度工具</li>
-</ul>
-</div>
+**📊 大数据**
+- DolphinScheduler 调度工具
 
-</div>
+</td>
+<td width="33%" valign="top">
 
-<div class="content-card">
+### 🤖 AI & 云服务
 
-### 🔍 日志系统
+**🔍 日志系统**
+- ELK Stack 概览与部署
+- Logstash 数据管道
 
-<div class="category-section">
-<strong>ELK Stack</strong>
-<ul>
-<li>ELK Stack 概览与部署</li>
-<li>Logstash 数据管道</li>
-</ul>
-</div>
+**☁️ 云服务**
+- 微信云托管
 
-<div class="category-section">
-<strong>☁️ 云服务</strong>
-<ul>
-<li>微信云托管</li>
-</ul>
-</div>
+**🧠 AI 大模型**
 
-<div class="category-section">
-<strong>🤖 AI 大模型</strong>
-<div class="ai-section">
-<p>🚧 持续建设中 ...</p>
-<p class="ai-subtext">大模型应用、微调、部署等</p>
-</div>
-</div>
+> 🚧 持续建设中...
+>
+> 大模型应用、微调、部署
 
-</div>
-
-</div>
-
-<style>
-.content-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 24px;
-  margin: 32px 0;
-}
-
-.content-card {
-  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  padding: 24px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  transition: all 0.3s ease;
-  height: 100%;
-}
-
-.content-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  border-color: #cbd5e1;
-}
-
-.content-card h3 {
-  margin-top: 0;
-  margin-bottom: 20px;
-  padding-bottom: 12px;
-  border-bottom: 2px solid #3b82f6;
-  color: #1e293b;
-  font-size: 1.25rem;
-}
-
-.category-section {
-  margin-bottom: 20px;
-}
-
-.category-section:last-child {
-  margin-bottom: 0;
-}
-
-.category-section strong {
-  display: block;
-  margin-bottom: 8px;
-  color: #475569;
-  font-size: 0.95rem;
-}
-
-.category-section ul {
-  list-style: none;
-  padding-left: 0;
-  margin: 0;
-}
-
-.category-section li {
-  padding: 6px 0;
-  padding-left: 20px;
-  position: relative;
-  color: #64748b;
-  font-size: 0.9rem;
-  line-height: 1.4;
-}
-
-.category-section li:before {
-  content: "•";
-  position: absolute;
-  left: 0;
-  color: #3b82f6;
-  font-weight: bold;
-}
-
-.category-section li:hover {
-  color: #1e293b;
-  transform: translateX(2px);
-  transition: all 0.2s ease;
-}
-
-.ai-section {
-  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-  border: 1px solid #bae6fd;
-  border-radius: 8px;
-  padding: 16px;
-  margin-top: 8px;
-}
-
-.ai-section p {
-  margin: 0;
-  color: #0369a1;
-  font-weight: 500;
-}
-
-.ai-subtext {
-  font-size: 0.85rem;
-  color: #0c4a6e;
-  margin-top: 4px !important;
-  opacity: 0.8;
-}
-
-@media (max-width: 768px) {
-  .content-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-  
-  .content-card {
-    padding: 20px;
-  }
-}
-</style>
+</td>
+</tr>
+</table>
 
 ---
 
