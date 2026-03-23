@@ -138,6 +138,7 @@ export default defineConfig({
             { text: 'Nvm 使用指南', link: '/dev/front/Nvm使用指南' },
             { text: 'Npm 包管理器', link: '/dev/front/Npm包管理器' },
             { text: 'Vue 生态工具', link: '/dev/front/Vue生态工具' },
+            { text: 'Node 常用语法', link: '/dev/front/Node常用语法' },
             { text: 'Node 实用工具', link: '/dev/front/Node实用工具' },
             { text: 'HTML5 全览', link: '/dev/front/HTML5全览' },
             { text: 'CSS 速查手册', link: '/dev/front/CSS速查手册' },
@@ -222,7 +223,8 @@ export default defineConfig({
           text: '🛠️ OpenClaw',
           collapsed: false,
           items: [
-            { text: 'OpenClaw 常用命令', link: '/ai/openclaw/OpenClaw常用命令' }
+            { text: 'OpenClaw 常用命令', link: '/ai/openclaw/OpenClaw常用命令' },
+            { text: 'OpenClaw 核心目录', link: '/ai/openclaw/OpenClaw核心目录' }
           ]
         }
       ],
