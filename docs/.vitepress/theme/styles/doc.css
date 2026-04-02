@@ -50,6 +50,14 @@
   border-radius: 2px;
 }
 
+/* 兼容自定义 h2 布局，修正 VitePress 默认锚点的纵向和横向偏移 */
+.vp-doc h2 .header-anchor {
+  top: 50%;
+  left: 14px;
+  margin-left: -1.8em;
+  transform: translateY(-50%);
+}
+
 .vp-doc h3 {
   font-family: 'Noto Serif SC', serif;
   font-size: 1.1rem;

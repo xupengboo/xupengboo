@@ -470,6 +470,79 @@ function runMainOrRootHelp(argv: string[]): void {
 
 ## 5. run-main.js
 
+核心代码，`program` 的使用：
+
+```js
+// 动态导入并构建 Commander.js 程序实例
+const { buildProgram } = await import("./program.js");
+const program = buildProgram();
+...
+// ========== 第八步：执行命令 ==========
+// 解析并执行命令行参数
+await program.parseAsync(parseArgv);
+```
+
+## 6. build-program.ts
+
+```ts
+import { Command } from "commander";
+import { registerProgramCommands } from "./command-registry.js";
+import { createProgramContext } from "./context.js";
+import { configureProgramHelp } from "./help.js";
+import { registerPreActionHooks } from "./preaction.js";
+import { setProgramContext } from "./program-context.js";
+
+/**
+ * 构建并配置 OpenClaw CLI 主程序。
+ *
+ * 该函数是 CLI 程序的入口点工厂，负责：
+ * 1. 创建 Commander.js Command 实例
+ * 2. 创建程序上下文（包含版本、配置等信息）
+ * 3. 配置帮助信息显示
+ * 4. 注册预执行钩子（如版本检查、全局选项处理）
+ * 5. 注册所有子命令
+ *
+ * @returns 配置完成的 Commander 程序实例，可直接调用 `.parse()` 执行。
+ */
+export function buildProgram() {
+  // 创建 Commander.js 命令实例
+  const program = new Command();
+
+  // 启用位置选项支持，允许在命令行中使用位置参数
+  program.enablePositionalOptions();
+
+  // 创建程序上下文，包含运行时所需的共享信息
+  // 如：程序版本、配置路径、环境变量等
+  const ctx = createProgramContext();
+
+  // 保存原始命令行参数，供后续命令解析使用
+  const argv = process.argv;
+
+  // 将上下文绑定到 program 实例上，便于后续命令访问
+  setProgramContext(program, ctx);
+
+  // 配置帮助信息的显示格式和内容
+  configureProgramHelp(program, ctx);
+
+  // 注册预执行钩子，在每个命令执行前运行
+  // 用于处理全局选项（如 --version、--help 等）
+  registerPreActionHooks(program, ctx.programVersion);
+
+  // 核心步骤：
+  // 注册所有 CLI 子命令（如 agents、channels、gateway 等）
+  registerProgramCommands(program, ctx, argv);
+
+  // 返回配置完成的程序实例
+  return program;
+}
+```
+
+
+
+
+
+
+
 
 
 
