@@ -216,7 +216,8 @@ export default defineConfig({
           text: '🛠️ AI 应用开发',
           collapsed: false,
           items: [
-            { text: '本地大模型部署', link: '/ai/app/app' }
+            { text: '本地大模型部署', link: '/ai/app/app' },
+            { text: '如何编写Skills', link: '/ai/skills/如何编写Skills' }
           ]
         },
         {
