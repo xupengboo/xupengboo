@@ -464,6 +464,8 @@ grep "class" . -R -n
 
 # -r 递归搜索，用于目录或匹配多个文件
 grep -r "keyword" /var/log/
+# 应用场景：根据 traceId 直接排查对应日志内容
+grep -r "faff2b9041180e5961bc592e140c1790" els.2026-05-22-*.log
 
 # -l （lowercase）只打印包含匹配的文件名
 grep -l "ERROR" *.log
