@@ -642,10 +642,6 @@ curl http://my-service.default.svc.cluster.local
 
 > Tips：通过这种方式，每个微服务通过配置对应的域名就可以去访问了。
 
-![image-20240813163054379](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20240813163054379.png)
-
-![image-20240813163904282](https://raw.githubusercontent.com/xupengboo/xupengboo-picture/main/img/image-20240813163904282.png)
-
 #### 6.2.2 service 的类型
 
 > **Tips：所有类型的 Kubernetes Service（无论是 ClusterIP、NodePort、LoadBalancer 还是 Headless）都可以通过 `servicename.namespace.svc.cluster.local` 的形式进行内部 DNS 解析访问**。
