@@ -48,12 +48,46 @@ docker run -d \
 
 :::tip 参数说明
 - `--privileged`：Rancher 需要特权模式来管理 K8s 组件
+
 - `--shm-size 1g`：共享内存建议至少 1g，过小会导致 Rancher 运行异常
+
 - `-p 1443:443`：将容器 443 端口映射到宿主机 1443，避免与已有服务冲突
+
 - `-v` 挂载目录：持久化数据，容器重启后不丢失
-  :::
+  
+
+:::
 
 启动后访问：`https://<宿主机IP>:1443`，首次登录会提示设置管理员密码。
+
+:::warning 慎重操作
+
+若机器曾经启动过相关的k8s服务，需要先清理遗留的内容，具体步骤如下：
+
+:::
+
+```shell
+# 1. 停止所有K8s/Docker服务，卡死进程
+systemctl stop kubelet
+systemctl stop docker
+docker rm -f $(docker ps -aq) &>/dev/null
+
+# 2. 删除【所有】K8s/Rancher残留（证书+认证+数据+配置，全覆盖）
+rm -rf /etc/kubernetes/
+rm -rf /var/lib/etcd/
+rm -rf /var/lib/rancher/
+rm -rf /var/lib/kubelet/
+rm -rf /opt/rke/
+rm -rf /root/.kube/
+rm -rf /var/run/kubernetes/
+
+# 3. 重启Docker，重置环境
+systemctl restart docker
+```
+
+
+
+
 
 ---
 
