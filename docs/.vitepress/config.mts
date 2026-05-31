@@ -162,8 +162,8 @@ export default defineConfig({
           text: '☸️ Kubernetes 集群',
           collapsed: false,
           items: [
-            { text: 'Yaml 配置', link: '/ops/k8s/yaml' },
             { text: 'Rancher 安装与使用', link: '/ops/k8s/Rancher安装与使用' },
+            { text: 'K8s Yaml 配置', link: '/ops/k8s/yaml' },
           ]
         },
         {
