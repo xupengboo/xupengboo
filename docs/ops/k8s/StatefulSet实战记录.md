@@ -70,7 +70,20 @@ spec:
       partition: 0    # 0 = 全部更新；设为 2 = 只更新序号≥2 的 Pod（金丝雀发布）
 ```
 
-## 3. 实战案例一：MySQL
+### 2.5 StatefulSet 遇到错误后，如何排查
+
+```yaml
+# 先看对应的 Pod Event 事件
+kubectl describe pod redis-0 -n procure
+
+# 再看下 statefulset 状态
+kubectl describe statefulset redis -n procure
+
+# 也有可能是资源不匹配导致，这个时候就要看各个node节点的资源占用情况了。
+kubectl describe node kcs-yd-qk-zhaocai-k8s-test-s-djsr2
+```
+
+## 3.  MySQL（本地部署）
 
 ```yaml
 # 命名空间
@@ -301,5 +314,220 @@ spec:
 
 ::: 
 
+## 4. Nacos（无状态）
 
+基于MySQL存储的无状态服务。
+
+```yaml
+# nacos app 服务（基于 MySQL ）
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nacos
+  namespace: procure
+  labels:
+    app: nacos
+spec:
+  replicas: 1 
+  selector:
+    matchLabels:
+      app: nacos
+  template:
+    metadata:
+      labels:
+        app: nacos
+    spec:
+      
+      nodeSelector:
+        kubernetes.io/hostname: kcs-yd-qk-zhaocai-k8s-test-s-djsr2
+      
+      containers:
+      - image: nacos/nacos-server:v3.1.2
+        name: nacos
+        ports:
+        - containerPort: 8848
+          name: http
+        - containerPort: 9848
+          name: grpc
+        - containerPort: 9849
+          name: raft
+
+        env:
+        - name: MODE
+          value: "standalone"
+        - name: SPRING_DATASOURCE_PLATFORM
+          value: "mysql"
+        - name: MYSQL_SERVICE_HOST
+          value: "mysql-svc.procure-mysql.svc.cluster.local"
+        - name: MYSQL_SERVICE_PORT
+          value: "3306"
+        - name: MYSQL_SERVICE_DB_NAME
+          value: "nacos"
+        - name: MYSQL_SERVICE_USER
+          value: "root"
+        - name: MYSQL_SERVICE_PASSWORD
+          value: "123456"
+        - name: MYSQL_SERVICE_DB_PARAM
+          value: "characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&useUnicode=true&useSSL=false&serverTimezone=UTC"
+        - name: JVM_XMS
+          value: "1g"
+        - name: JVM_XMX
+          value: "1g"
+        - name: JVM_XMN
+          value: "512m"
+
+        - name: NACOS_AUTH_TOKEN
+          value: "VGhpc0lzTXlDdXN0b21TZWNyZXRLZXkwMTIzNDU2Nzg="
+        - name: NACOS_AUTH_IDENTITY_KEY
+          value: "nacos"
+        - name: NACOS_AUTH_IDENTITY_VALUE
+          value: "nacos"
+
+        resources:
+          requests:
+            cpu: 200m
+            memory: 1Gi
+          limits:
+            cpu: 500m
+            memory: 2Gi
+---
+# nacos service 配置
+apiVersion: v1
+kind: Service
+metadata:
+  name: nacos-nodeport
+  namespace: procure
+  labels:
+    app: nacos-svc
+spec:
+  type: NodePort
+  selector:
+    app: nacos
+  ports:
+  - port: 8848
+    targetPort: 8848
+    nodePort: 30848
+    protocol: TCP
+    name: http-api
+  - port: 8080
+    targetPort: 8080
+    nodePort: 30808
+    protocol: TCP
+    name: console-ui
+```
+
+## 5. Redis（本地部署）
+
+```yaml
+# 构建中间层 sc
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: center-storage
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: WaitForFirstConsumer
+reclaimPolicy: Retain
+allowVolumeExpansion: true
+---
+# redis service NodePort
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-nodeport
+  namespace: procure
+  labels:
+    app: redis-svc
+spec:
+  type: NodePort
+  selector:
+    app: redis
+  ports:
+  - port: 6379
+    targetPort: 6379
+    nodePort: 30379
+    protocol: TCP
+    name: redis
+---
+# redis pv 构建
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: redis-pv-data-1
+spec:
+  capacity:
+    storage: 20Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: center-storage
+
+  local:
+    path: /var/lib/paascontainer/redis/data
+
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - kcs-yd-qk-zhaocai-k8s-test-s-djsr2
+---
+# redis statefulset app构建
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: redis
+  namespace: procure
+  labels:
+    app: redis
+spec:
+  replicas: 1
+  serviceName: redis-svc
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: kcs-yd-qk-zhaocai-k8s-test-s-djsr2
+      containers:
+      - name: redis
+        image: redis:7.2.4-alpine
+        ports:
+        - containerPort: 6379
+          name: redis
+        command:
+        - redis-server
+        - "--requirepass"
+        - "123456"         
+        - "--appendonly"   
+        - "yes"
+        - "--save"
+        - "60"
+        - "10000"
+        resources:
+          requests:
+            cpu: 100m
+            memory: 256Mi
+          limits:
+            cpu: 300m
+            memory: 512Mi
+        volumeMounts:
+        - name: redis-data
+          mountPath: /data  
+  volumeClaimTemplates:
+  - metadata:
+      name: redis-data
+    spec:
+      storageClassName: center-storage
+      accessModes: ["ReadWriteOnce"]
+      resources:
+        requests:
+          storage: 20Gi
+```
 
