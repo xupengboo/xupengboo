@@ -1,5 +1,8 @@
 # 使用 Node.js 镜像 , as build 别名构建阶段
 FROM node:20-slim AS build
+# 替换仓库源
+RUN sed -i "s@http://deb.debian.org@https://mirrors.tuna.tsinghua.edu.cn@g" /etc/apt/sources.list && \
+    sed -i "s@http://security.debian.org@https://mirrors.tuna.tsinghua.edu.cn@g" /etc/apt/sources.list
 # 指定工作目录
 WORKDIR /home
 # 复制宿主机文件到 home
