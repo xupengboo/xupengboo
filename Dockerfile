@@ -1,21 +1,17 @@
 # 使用 Node.js 镜像 , as build 别名构建阶段
 FROM node:20-slim AS build
 # 替换仓库源
-RUN cat > /etc/apt/sources.list.d/debian.sources << EOF
-Types: deb
-URIs: https://mirrors.tuna.tsinghua.edu.cn/debian
-Suites: bookworm bookworm-updates bookworm-security
-Components: main
-EOF
-
+RUN echo "deb https://mirrors.tuna.tsinghua.edu.cn/debian bookworm main" > /etc/apt/sources.list && \
+    echo "deb https://mirrors.tuna.tsinghua.edu.cn/debian bookworm-updates main" >> /etc/apt/sources.list && \
+    echo "deb https://mirrors.tuna.tsinghua.edu.cn/debian-security bookworm-security main" >> /etc/apt/sources.list
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends git && \
+    git --version && \
+    rm -rf /var/lib/apt/lists/* \
 # 指定工作目录
 WORKDIR /home
 # 复制宿主机文件到 home
 COPY . /home
-# 安装 git
-RUN apt-get update && \
-    apt-get install -y git && \
-    git --version
 # 安装项目依赖
 RUN npm install --verbose --registry=https://registry.npmmirror.com
 # 执行 npm run build:prod 命令
