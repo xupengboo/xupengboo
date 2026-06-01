@@ -4,6 +4,9 @@ FROM node:22.13.1-slim AS build
 WORKDIR /home
 # 复制宿主机文件到 home
 COPY . /home
+# 安装 Git（Debian 系统专用命令，解决 VitePress 报错）
+RUN apt-get update && apt-get install -y --no-install-recommends git \
+    && rm -rf /var/lib/apt/lists/*
 # 安装项目依赖
 RUN npm install --verbose --registry=https://registry.npmmirror.com
 # 执行 npm run build:prod 命令
