@@ -2169,6 +2169,47 @@ spec:
 - StorageClass Provisioner 自动创建对应 PV 并绑定
 - Pod 直接挂载使用
 
+
+**`StorageClass` 只是规则模板吗，它既可以配置为本地存储，也可以配置为云厂商存储。**
+
+- 它既可以，云厂商存储：
+
+  - `AWS EBS`
+
+  - `阿里云 ESSD`
+
+  - `腾讯云 CBS`
+
+- 也可以，本地/自建存储：
+
+  - `local-path-provisioner` 
+
+  - `NFS`
+
+  - `Longhorn`
+
+  - `Ceph`
+
+  - `OpenEBS`
+
+- **而 `StorageClass` 动态供应的核心是：`Provisioner / CSI Driver`，不用非要依赖云厂商，也可以做到动态供应。** 
+
+```shell
+PVC 创建
+    ↓
+StorageClass
+    ↓
+Provisioner 自动创建 PV
+```
+
+| Provisioner                     | 干的事           |
+| ------------------------------- | ---------------- |
+| ebs.csi.aws.com                 | 创建 AWS 云盘    |
+| diskplugin.csi.alibabacloud.com | 创建阿里云盘     |
+| rancher.io/local-path           | 创建本地目录     |
+| driver.longhorn.io              | 创建 Longhorn 卷 |
+| nfs.csi.k8s.io                  | 创建 NFS 卷      |
+
 ### 9.2 特殊场景：静态 PV（手动管理）
 
 只有在**没有默认 StorageClass** 或**必须使用特定静态 PV**（如本地存储、特殊硬件存储）时，才需要手动准备 PV：
