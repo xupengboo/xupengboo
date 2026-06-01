@@ -164,6 +164,7 @@ export default defineConfig({
           items: [
             { text: 'Rancher 安装与使用', link: '/ops/k8s/Rancher安装与使用' },
             { text: 'K8s Yaml 配置', link: '/ops/k8s/yaml' },
+            { text: 'StatefulSet 实战记录.md', link: '/ops/k8s/StatefulSet实战记录' },
           ]
         },
         {
