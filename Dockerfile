@@ -1,13 +1,5 @@
 # 使用 Node.js 镜像 , as build 别名构建阶段
 FROM node:20-slim AS build
-# 替换仓库源
-RUN echo "deb https://mirrors.tuna.tsinghua.edu.cn/debian bookworm main" > /etc/apt/sources.list && \
-    echo "deb https://mirrors.tuna.tsinghua.edu.cn/debian bookworm-updates main" >> /etc/apt/sources.list && \
-    echo "deb https://mirrors.tuna.tsinghua.edu.cn/debian-security bookworm-security main" >> /etc/apt/sources.list
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends git && \
-    git --version && \
-    rm -rf /var/lib/apt/lists/* \
 # 指定工作目录
 WORKDIR /home
 # 复制宿主机文件到 home

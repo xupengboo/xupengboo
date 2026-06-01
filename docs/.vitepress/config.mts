@@ -29,7 +29,7 @@ export default defineConfig({
   ],
 
   // 显示最后更新时间
-  lastUpdated: true,
+  lastUpdated: false,
 
   // Markdown 配置
   markdown: {
