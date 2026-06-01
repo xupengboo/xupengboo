@@ -72,17 +72,12 @@ spec:
 
 ## 3. 实战案例一：MySQL
 
-
-
 ```yaml
 # 命名空间
 apiVersion: v1
 kind: Namespace
 metadata:
-  creationTimestamp: null
   name: procure-mysql
-spec: {}
-status: {}
 ---
 # storageclass 本地静态（no-provisioner, 无供应云厂商）
 apiVersion: storage.k8s.io/v1
@@ -92,7 +87,10 @@ metadata:
 provisioner: kubernetes.io/no-provisioner
 volumeBindingMode: WaitForFirstConsumer
 reclaimPolicy: Retain
-allowVolumeExpansion: true
+# allowVolumeExpansion: true
+
+# 注意：no-provisioner 不支持动态供应，allowVolumeExpansion 对此类 StorageClass 无效
+# 如果需要扩容本地 PV，需手动操作：1)扩容宿主机存储 2)删除 PVC 3)重建更大的 PV 4)重建 PVC 绑定
 ---
 # mysql 配置文件
 apiVersion: v1
@@ -297,11 +295,11 @@ spec:
           storage: 10Gi
 ```
 
-::: tip 注意点：
+::: warning 注意点：kubelet 与本地 PV 路径限制
 
-正常 kubelet 目录扫描，默认只能是`/var/lib/kubelet`下面的，如需要挂在的宿主机其他位置，需要额外配置。
+当 `local` PV 的 `path`（如 `/opt/data/mysql`）不在 kubelet 默认根目录 `/var/lib/kubelet` 下时，可能 `kubelet` 识别不到对应的路径，抛出`path does not exist`。
 
-:::
+::: 
 
 
 
