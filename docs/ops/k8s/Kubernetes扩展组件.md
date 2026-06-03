@@ -81,15 +81,7 @@ kubectl top pods -n kube-system
 kubectl top pod <pod-name> --containers
 ```
 
-
-
-## 4. Dashboard
-
-
-
-
-
-## 5. KeepAlived 、 HAProxy  高可用
+## 4. KeepAlived 、 HAProxy  高可用
 
 KeepAlived 和 HAProxy 配合主要用于一些高可用架构上， 例如：K8s的 多 master 集群。
 
@@ -114,5 +106,6 @@ HAProxy-1 (master-1)      HAProxy-2 (master-2)
 多个 apiserver 节点
 ```
 
+## 4. Dashboard 集群可视化管理工具
 
-
+Kubernetes Dashboard 是官方提供的**基于 Web 的集群可视化管理界面**，是 `kubectl` 命令行的图形化补充，让你通过浏览器直观管理集群资源、监控状态、排查故障，特别适合快速浏览和日常运维。
