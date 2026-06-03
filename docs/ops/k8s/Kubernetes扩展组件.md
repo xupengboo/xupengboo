@@ -52,7 +52,7 @@ canal   1         1         1       1            1           kubernetes.io/os=li
 
 ## 3. Metrics 资源使用情况
 
-新版的k8s中，系统资源的采集使用 Metrics-server ，可以通过Metrics采集节点和Pod的内存、磁盘、CPU和网络的使用率。
+在k8s中，系统资源的采集使用 Metrics-server ，可以 **通过 Metrics 采集节点和Pod的内存、磁盘、CPU和网络的使用率。**
 
 ```shell
 [root@xupengboo ~]#  kubectl top node
@@ -62,10 +62,26 @@ kcs-yd-qk-zhaocai-k8s-test-s-2pdf6   104m         2%     2098Mi          15%
 kcs-yd-qk-zhaocai-k8s-test-s-djsr2   240m         6%     3198Mi          24%       
 [root@xupengboo ~]#  kubectl top po -A
 NAMESPACE       NAME                                                         CPU(cores)   MEMORY(bytes)   
-kube-system     calico-kube-controllers-cbc98576b-qrw5w                      2m           54Mi            
-kube-system     calico-node-4qnxj                                            14m          158Mi           
-kube-system     calico-node-dg7ck                                            16m          181Mi                    
+kube-system     calico-kube-controllers-cbc98576b-qrw5w                      2m           54Mi       
+kube-system     calico-node-4qnxj                                            14m          158Mi       
+kube-system     calico-node-dg7ck                                            16m          181Mi       
 ```
+
+```shell
+# 查看所有节点的资源使用情况
+kubectl top nodes
+
+# 查看所有命名空间下的Pod资源使用情况
+kubectl top pods --all-namespaces
+
+# 查看特定命名空间下的Pod资源使用情况
+kubectl top pods -n kube-system
+
+# 查看特定Pod中各个容器的资源使用情况
+kubectl top pod <pod-name> --containers
+```
+
+
 
 ## 4. Dashboard
 
@@ -73,9 +89,30 @@ kube-system     calico-node-dg7ck                                            16m
 
 
 
-## 5. KeepAlived 和 HAProxy
+## 5. KeepAlived 、 HAProxy  高可用
 
+KeepAlived 和 HAProxy 配合主要用于一些高可用架构上， 例如：K8s的 多 master 集群。
 
+- **HAProxy 负责 "分流量"**：是高性能的四层 / 七层负载均衡器，把请求合理分配到多个后端服务器
+- **KeepAlived 负责 "不挂掉"**：是轻量级的高可用组件，解决负载均衡器本身的单点故障问题
+
+生产级 K8s 集群架构，如下：
+
+```plaintext
+所有 K8s 组件
+        |
+        v
+VIP: 192.168.1.100:6443  <-- KeepAlived 管理
+        |
+        +------------------------+
+        |                        |
+HAProxy-1 (master-1)      HAProxy-2 (master-2)
+        |                        |
+        +------------------------+
+        |
+        v
+多个 apiserver 节点
+```
 
 
 
