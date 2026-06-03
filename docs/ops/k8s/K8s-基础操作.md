@@ -57,14 +57,12 @@ Taints:             node-role.kubernetes.io/master:NoSchedule
 kubectl taint nodes master01 node-role.kubernetes.io/master:NoSchedule
 ```
 
-3. **删除污点：**
+3. **删除污点：(加个 - 就行。)**
 
 ```shell
 # 通过 -l 选择器，删除污点
 kubectl taint node -l node-role.kubernetes.io/master node-role.kubernetes.io/master:NoSchedule-
 ```
-
-
 
 ## 3. 
 
