@@ -409,6 +409,11 @@ spec:
     nodePort: 30848
     protocol: TCP
     name: http-api
+  - port: 9848
+    targetPort: 9848
+    nodePort: 31848
+    protocol: TCP
+    name: grpc-api
   - port: 8080
     targetPort: 8080
     nodePort: 30808
