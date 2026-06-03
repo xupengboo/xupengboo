@@ -14,7 +14,7 @@
 
 
 
-## 2. Calico 组件
+## 2. Calico 网络通信
 
 **K8s 本身不自带网络功能**，必须安装 CNI（容器网络接口）插件才能让 Pod 之间、Pod 和 Service 之间正常通信。Calico 就是目前生产环境最推荐的 CNI 插件， 此外还有 Flannel 。
 
@@ -40,9 +40,7 @@ calico-typha-777547c9dd-qmgk5                                1/1     Running   0
 calico-node                 3         3         3       3            3           kubernetes.io/os=linux
 ```
 
-
-
-Rancher RKE/RKE2 集群的默认 CNI 插件是：`Canal = Flannel（负责网络通信） + Calico（负责网络策略）` 。
+**Rancher RKE/RKE2 集群的默认 CNI 插件是：`Canal = Flannel（负责网络通信） + Calico（负责网络策略）` 。**
 
 ```shell
 [root@k8s-master ~]# kubectl get pods -n kube-system | grep canal
@@ -52,15 +50,30 @@ NAME    DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR      
 canal   1         1         1       1            1           kubernetes.io/os=linux   2d12h
 ```
 
+## 3. Metrics 资源使用情况
+
+新版的k8s中，系统资源的采集使用 Metrics-server ，可以通过Metrics采集节点和Pod的内存、磁盘、CPU和网络的使用率。
+
+```shell
+[root@xupengboo ~]#  kubectl top node
+NAME                                 CPU(cores)   CPU%   MEMORY(bytes)   MEMORY%   
+kcs-yd-qk-zhaocai-k8s-test-m-r8dlq   197m         2%     2561Mi          9%        
+kcs-yd-qk-zhaocai-k8s-test-s-2pdf6   104m         2%     2098Mi          15%       
+kcs-yd-qk-zhaocai-k8s-test-s-djsr2   240m         6%     3198Mi          24%       
+[root@xupengboo ~]#  kubectl top po -A
+NAMESPACE       NAME                                                         CPU(cores)   MEMORY(bytes)   
+kube-system     calico-kube-controllers-cbc98576b-qrw5w                      2m           54Mi            
+kube-system     calico-node-4qnxj                                            14m          158Mi           
+kube-system     calico-node-dg7ck                                            16m          181Mi                    
+```
+
+## 4. Dashboard
 
 
-## 3. Metrics
 
 
 
-
-
-## 4. KeepAlived 和 HAProxy
+## 5. KeepAlived 和 HAProxy
 
 
 
