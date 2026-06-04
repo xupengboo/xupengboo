@@ -64,5 +64,18 @@ kubectl taint nodes master01 node-role.kubernetes.io/master:NoSchedule
 kubectl taint node -l node-role.kubernetes.io/master node-role.kubernetes.io/master:NoSchedule-
 ```
 
-## 3. 
+## 3. 常用命令
+
+```shell
+# 查询某个 node 下面的 Pod 信息。
+kubectl get pods -n procure -o wide  | grep k8s-node1
+```
+
+- `-o` = `--output`：指定 **输出格式**
+
+- `wide`：宽格式 / 扩展格式（比默认输出多显示几列关键信息）
+
+
+
+
 
