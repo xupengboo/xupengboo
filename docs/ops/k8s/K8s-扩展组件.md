@@ -1,10 +1,10 @@
 # Kubernetes 扩展组件
 
-> **K8s 采用插件化架构，核心只做最基础的容器编排，其他所有能力都通过扩展组件实现。**扩展组件非常重要，是几乎每个是生产机必备的组件。
+> **K8s 采用插件化架构，核心只做最基础的容器编排，其他所有能力都通过扩展组件实现**。扩展组件非常重要，是几乎每个是生产机必备的组件。
 
 ## 1. Ingress Controller
 
-### 1.1 介绍 Ingress Controller
+### 1.1 介绍 Ingress
 
 集群的 "统一入口大门"，替代 NodePort 管理所有 HTTP/HTTPS 流量。
 
@@ -18,13 +18,13 @@
 
 Ingress 和 Service、Deployment 等类似，也算是一个 Kubernetes的 资源对象，Deployment 是用来部署应用的，**Ingress就是实现用域名的方式访问应用**。
 
-Ingress 实现的方式有很多，比如 Nginx、HAProxy、Treafik 等，就 Nginx 而言，和上述提到的传统服务架构用Nginx类似。
-
-![PixPin_2026-06-04_23-02-27.png](/public/images/PixPin_2026-06-04_23-02-27.png)
-
 :::
 
-### 1.2  安装 Ingress Nginx Controller 
+### 1.2  安装 Ingress
+
+Ingress 实现的方式有很多，比如 Nginx、HAProxy、Treafik 等，就 Nginx 而言，和传统服务架构用Nginx类似。
+
+![PixPin_2026-06-04_23-02-27.png](/public/images/PixPin_2026-06-04_23-02-27.png)
 
 **Ingress-Nginx 与 传统的 Nginx 并没有很大差别，只是不同的配置方式而已。**
 
@@ -33,6 +33,10 @@ Ingress 实现的方式有很多，比如 Nginx、HAProxy、Treafik 等，就 Ng
 | 部署位置 | 物理服务器        | 节点 Pod 中        |
 | 配置方式 | 手动改 nginx.conf | 编写 Ingress YAML  |
 | 配置生成 | 人工编写          | 控制器自动生成配置 |
+
+
+
+### 1.3 配置 Ingress 
 
 
 

@@ -66,16 +66,7 @@ kubectl taint node -l node-role.kubernetes.io/master node-role.kubernetes.io/mas
 
 ## 3.  常用命令
 
-```shell
-# 查询某个 node 下面的 Pod 信息。
-kubectl get pods -n procure -o wide  | grep k8s-node1
-```
-
-- `-o` = `--output`：指定 **输出格式**
-
-- `wide`：宽格式 / 扩展格式（比默认输出多显示几列关键信息）
-
-
+### 3.1 Create 操作
 
 ```shell
 # 快速基于某个镜像创建 deployment 应用
@@ -116,6 +107,43 @@ kubectl create namespace my-namespace --dry-run=client -o yaml > namespace.yaml
 
 
 
+### 3.1 Pod 操作
+
+```shell
+# 查询某个 node 下面的 Pod 信息。
+kubectl get pods -n procure -o wide  | grep k8s-node1
+```
+
+- `-o` = `--output`：指定 **输出格式**
+
+- `wide`：宽格式 / 扩展格式（比默认输出多显示几列关键信息）
+
+
+
+### 3.2 Service 操作
+
+
+```shell
+# 一键自动创建 Service，不用你手写 YAML，直接把 Deployment 暴露给集群内部 / Ingress 使用。
+kubectl expose deploy backend-api --port 80 -n study-ingress
+
+# 假设：构建了一个 backedn-api 的 deployment 
+kubectl create deploy backend-api --image=registry.cn-beijing.aliyuncs.com/dotbalo/nginx:backend-api -n study-ingress
+```
+
+| 字段               | 含义                                      |
+| ------------------ | ----------------------------------------- |
+| `kubectl expose`   | K8s 专用命令：**给工作负载创建 Service**  |
+| `deploy`           | 缩写 = `Deployment`（你要暴露的资源类型） |
+| `backend-api`      | 你要暴露的 **Deployment 名称**            |
+| `--port 80`        | 生成的 Service 端口 = 80                  |
+| `-n study-ingress` | 在 `study-ingress` 命名空间执行           |
+
+
+
+### 3.3 api-resources 操作
+
+
 ```shell
 # 查看你的 Kubernetes 集群，到底支持创建哪些资源（对象，例如：Pod、Service、Ingress、Deployment 这些东西，集群认不认识、能不能用。）
 kubectl api-resources
@@ -123,4 +151,3 @@ kubectl api-resources
 # 例如：查看当前集群是否支持 ingress 资源
 kubectl api-resources | grep ingress
 ```
-
