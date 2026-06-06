@@ -64,7 +64,7 @@ kubectl taint nodes master01 node-role.kubernetes.io/master:NoSchedule
 kubectl taint node -l node-role.kubernetes.io/master node-role.kubernetes.io/master:NoSchedule-
 ```
 
-## 3. 常用命令
+## 3.  常用命令
 
 ```shell
 # 查询某个 node 下面的 Pod 信息。
@@ -77,5 +77,50 @@ kubectl get pods -n procure -o wide  | grep k8s-node1
 
 
 
+```shell
+# 快速基于某个镜像创建 deployment 应用
+kubectl create deploy nginx-name --image=registry.cn-beijing.aliyuncs.com/dotbalo/nginx:l.15.12 -n study-ingress
+```
 
+
+
+```bash
+# kubectl create --dry-run 快速生成基础模板（最常用）
+kubectl create <资源类型> <资源名称> [必要参数] --dry-run=client -o yaml > 输出文件.yaml
+
+# 1. 生成Deployment模板（最常用）
+kubectl create deployment nginx-deploy --image=nginx:1.27 --replicas=3 --port=80 --dry-run=client -o yaml > deployment.yaml
+
+# 2. 生成Service模板（ClusterIP类型）
+kubectl create service clusterip nginx-svc --tcp=80:80 --dry-run=client -o yaml > service-clusterip.yaml
+
+# 3. 生成Service模板（NodePort类型）
+kubectl create service nodeport nginx-svc --tcp=80:80 --node-port=30080 --dry-run=client -o yaml > service-nodeport.yaml
+
+# 4. 生成ConfigMap模板（从文件）
+kubectl create configmap app-config --from-file=app.properties --dry-run=client -o yaml > configmap.yaml
+
+# 5. 生成Secret模板（Opaque类型）
+kubectl create secret generic db-secret --from-literal=username=admin --from-literal=password=123456 --dry-run=client -o yaml > secret.yaml
+
+# 6. 生成ServiceAccount模板
+kubectl create serviceaccount my-sa --dry-run=client -o yaml > sa.yaml
+
+# 7. 生成Namespace模板
+kubectl create namespace my-namespace --dry-run=client -o yaml > namespace.yaml
+```
+
+- `--dry-run=client`：只在本地计算生成YAML，**不会实际创建任何资源**
+- `-o yaml`：指定输出格式为YAML
+- `> 文件名.yaml`：将输出重定向保存到文件
+
+
+
+```shell
+# 查看你的 Kubernetes 集群，到底支持创建哪些资源（对象，例如：Pod、Service、Ingress、Deployment 这些东西，集群认不认识、能不能用。）
+kubectl api-resources
+
+# 例如：查看当前集群是否支持 ingress 资源
+kubectl api-resources | grep ingress
+```
 
