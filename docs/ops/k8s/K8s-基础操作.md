@@ -70,7 +70,10 @@ kubectl taint node -l node-role.kubernetes.io/master node-role.kubernetes.io/mas
 
 ```shell
 # 快速基于某个镜像创建 deployment 应用
-kubectl create deploy nginx-name --image=registry.cn-beijing.aliyuncs.com/dotbalo/nginx:l.15.12 -n study-ingress
+kubectl create deploy nginx-name --image=nginx:1.26 -n study-ingress
+
+# 也可以指定固定的仓库名，来快速创建
+kubectl create deploy nginx-name --image=registry.cn-xxx.aliyuncs.com/xxx/nginx:1.26 -n study-ingress
 ```
 
 

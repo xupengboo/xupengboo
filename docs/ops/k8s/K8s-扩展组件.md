@@ -64,7 +64,169 @@ Ingress 实现的方式有很多，比如 Nginx、HAProxy、Treafik 等，就 Ng
 
 ### 1.3 配置 Ingress 
 
+1. **Ingress 域名配置规则。**
 
+```shell
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nginx-ingress
+  namespace: study-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: nginx.test.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: nginx
+            port:
+              number: 80
+        path: /
+        pathType: ImplementationSpecific
+```
+
+```shell
+# kubectl 1·19 + 支持 create ingress 命令：
+kubectl create ingress phone --rule=m.test.com/*=phone:80 -n study-ingress
+```
+
+2. **Ingress Nginx 域名重定向 Redirect 配置：**
+
+- `nginx.ingress.kubernetes.io/permanent-redirect: https://www.baidu.com` 
+
+```shell
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nginx-redirect
+  namespace: study-ingress
+  annotations:
+  	# Ingress Nginx 域名重定向 Redirect 配置：
+    nginx.ingress.kubernetes.io/permanent-redirect: https://www.baidu.com
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: xupengboo
+    http:
+      paths:
+      - backend:
+          service:
+            name: nginx
+            port:
+              number: 80
+        path: /
+        pathType: ImplementationSpecific
+```
+
+3. **Ingress Nginx 前后端分离 Rewrite。**
+
+- 后端接口采用 /api 进行访问，用来区分前端和后端。
+- 或者同时具有很多个后端，需要使用 /api-a 到A服务，/api-b 到B服务，但是由于A和B服务可能并没有 /api-a 和 /api-b 的路径，因此需要将/api-x重写为“/”，才可以正常到A或者B服务，否则将会出现404的报错。
+
+```shell
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    # 匹配第二个 捕获组
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+  name: nginx-ingress
+  namespace: study-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: nginx.test.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: nginx
+            port:
+              number: 80
+        path: /
+        pathType: ImplementationSpecific
+      - backend:
+          service:
+            name: backend-api
+            port:
+              number: 80
+        # 匹配路径规则
+        path: /api-a(/|$)(.*)
+        pathType: ImplementationSpecific
+```
+
+::: tip 正则表达式 - 捕获组
+
+路径写的是：`/api(/|$)(.*)`
+
+这是一个**正则表达式**，里面有 **两个小括号（捕获组）**：
+
+- 第 1 个括号 `(/|$)` → 对应 `$1`
+- 第 2 个括号 `(.*)` → 对应 `$2`（匹配 `/api` 后面的所有内容）
+
+`/$2` 的意思就是：**最终转发给后端的路径 = 斜杠 + 第二个捕获组的内容**
+
+:::
+
+4. **Ingress Nginx 错误代码重定向**， 当访问链接返回值为404、503等错误时，如何自动跳转到自定义的错误页面。
+
+- 通过 Helm ， 配置 defaultBackend  TODO 
+
+
+
+5. **Ingress Nginx SSL（Https）配置。**
+
+- `http` 自动跳转到`HTTPS` 
+
+```shell
+# 构建测试密钥
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout tls.key -out tls.crt -subj "/CN=nginx.test.com"
+
+# 配置 k8s 密钥
+kubectl create secret tls ca-secret --cert=tls.crt --key=tls.key -n study-ingress
+
+# 构建 tls 与 k8s-secret 密钥
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+  name: nginx-ingress
+  namespace: study-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: nginx.test.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: nginx
+            port:
+              number: 80
+        path: /
+        pathType: ImplementationSpecific
+      - backend:
+          service:
+            name: backend-api
+            port:
+              number: 80
+        path: /api-a(/|$)(.*)
+        pathType: ImplementationSpecific
+  # 配置 tls 密钥
+  tls:
+  - hosts:
+    - nginx.test.com
+    secretName: ca-secret
+```
+
+
+
+6. **`Ingress Nginx` 匹配请求头**
+
+- 例如：可以通过请求头，来判断客户端来源，是来自手机端还是PC端，然后将其路由到指定的服务上。
 
 
 
