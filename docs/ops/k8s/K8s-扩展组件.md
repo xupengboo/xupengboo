@@ -112,7 +112,7 @@ helm install ingress-nginx -n ingress-nginx .
 
 倘若，helm 安装失败，可以再卸载重新安装：
 
-- 安装失败，需要先排查 失败原因 ，一般是 Pod 异常。
+- 安装失败，需要先排查 失败原因 ，一般可以根据 Pod 推断出对应的异常。
 
 ```shell
 # 1. 先卸载
@@ -129,13 +129,9 @@ kubectl delete ns ingress-nginx
 namespace "ingress-nginx" deleted
 ```
 
-
-
-
-
 #### 1.2.2 YAML 安装
 
-
+TODO 
 
 
 
@@ -143,7 +139,7 @@ namespace "ingress-nginx" deleted
 
 1. **Ingress 域名配置规则。**
 
-```shell
+```yaml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -173,7 +169,7 @@ kubectl create ingress phone --rule=m.test.com/*=phone:80 -n study-ingress
 
 - `nginx.ingress.kubernetes.io/permanent-redirect: https://www.baidu.com` 
 
-```shell
+```yaml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -202,7 +198,7 @@ spec:
 - 后端接口采用 /api 进行访问，用来区分前端和后端。
 - 或者同时具有很多个后端，需要使用 /api-a 到A服务，/api-b 到B服务，但是由于A和B服务可能并没有 /api-a 和 /api-b 的路径，因此需要将/api-x重写为“/”，才可以正常到A或者B服务，否则将会出现404的报错。
 
-```shell
+```yaml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
