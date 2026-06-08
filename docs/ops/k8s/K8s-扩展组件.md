@@ -52,6 +52,83 @@ Ingress 实现的方式有很多，比如 Nginx、HAProxy、Treafik 等，就 Ng
 
 #### 1.2.1  Helm 安装
 
+> 以 helm 3.9.4 、 k8s 1.21.5 、 ingress-nginx Chart 4.0.19（官方已查，三者版本兼容）为例。
+
+1. **安装 Helm ， 拉去版本镜像：**
+
+```shell
+# 1. 安装 Helm 
+curl -LO https://get.helm.sh/helm-v3.9.4-linux-amd64.tar.gz
+tar -zxvf helm-v3.9.4-linux-amd64.tar.gz
+sudo mv linux-amd64/helm /usr/local/bin/helm
+helm version
+
+# 2. 添加仓库镜像
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+
+# 3. 更新
+helm repo update
+
+# 4. 查询对应版本
+helm search repo ingress-nginx/ingress-nginx --versions | grep 4.0.19
+
+# 5. 拉去对应版本
+helm pull ingress-nginx/ingress-nginx --version 4.0.19
+
+# 6. 
+```
+
+2. **修改 `values.yaml`** 
+
+```shell
+# 解压
+tar xf ingress-nginx-4.0.19.tgz 
+# 进入目录
+cd ingress-nginx/
+# 编辑values.yaml
+vim values.yaml
+
+1）Controller 和 admissionWebhook 的镜像地址，需要将公网镜像同步至公司内网镜像仓库。
+2）镜像的digest值注释，也可以设置为自己对应镜像地址的digest哈希值（安全性更好！更唯一）。
+3）hostNetwork设置为 true，Pod会直接使用节点网络，占用节点 80/443 端口。
+4）dnsPolicy设置为 ClusterFirstWithHostNet ，ClusterFirstWithHostNet 让 Pod 同时拥有：
+✅ 集群内部 DNS 解析能力（访问 CoreDNS 解析服务名）
+✅ 宿主机网络栈的优势（直接使用节点网络，如 ingress-nginx 占用 80/443 端口）。
+5）NodeSelector添加 `ingress: "true"` ，部署至指定节点。
+6）类型更改为kind: DaemonSet, 也可以是deployment。
+7）将 Ingress Nginx 设置为默认的 ingressClass 。
+```
+
+![PixPin_2026-06-08_17-57-17.png](/public/images/PixPin_2026-06-08_17-57-17.png)
+
+![PixPin_2026-06-08_18-07-28.png](/public/images/PixPin_2026-06-08_18-07-28.png)
+
+3. **helm install 安装部署 ingress-nginx-controller**
+
+```shell
+# 安装部署
+helm install ingress-nginx -n ingress-nginx .
+```
+
+倘若，helm 安装失败，可以再卸载重新安装：
+
+- 安装失败，需要先排查 失败原因 ，一般是 Pod 异常。
+
+```shell
+# 1. 先卸载
+helm uninstall ingress-nginx -n ingress-nginx
+release "ingress-nginx" uninstalled
+# 2. 删除角色
+kubectl delete clusterrole ingress-nginx-admission --ignore-not-found
+clusterrole.rbac.authorization.k8s.io "ingress-nginx-admission" deleted
+# 3. 删除角色绑定
+kubectl delete clusterrolebinding ingress-nginx-admission --ignore-not-found
+clusterrolebinding.rbac.authorization.k8s.io "ingress-nginx-admission" deleted
+# 4. 删除ns
+kubectl delete ns ingress-nginx
+namespace "ingress-nginx" deleted
+```
+
 
 
 
