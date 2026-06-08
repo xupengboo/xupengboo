@@ -227,6 +227,113 @@ spec:
 6. **`Ingress Nginx` 匹配请求头**
 
 - 例如：可以通过请求头，来判断客户端来源，是来自手机端还是PC端，然后将其路由到指定的服务上。
+- `nginx.ingress.kubernetes.io/server-snippet` ：`nginx-ingress` 控制器的专用注解，用于将原生 `NGINX` 配置片段注入到生成的 `server` 块中 `NGINX Documentation` 。
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    # 基于用户代理（User-Agent）的设备类型识别，自动将移动端访问重定向到移动版域名 
+    nginx.ingress.kubernetes.io/server-snippet: |
+      set $agentflag 0;
+      if ($http_user_agent ~* "(Android|iPhone|Windows Phone|UC|Kindle)" ){
+        set $agentflag 1;
+      }
+      if ( $agentflag = 1 ) {
+        return 301 http://m.test.com;
+      }
+  name: laptop
+  namespace: study-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: test.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: laptop
+            port:
+              number: 80
+        path: /
+        pathType: ImplementationSpecific
+```
+
+
+
+7. **Ingress Nginx 基本认证**
+
+```shell
+# 安装 httpd 
+yum install httpd -y
+
+# 生成账号密码（用户admin，密码自己设）
+htpasswd -c auth admin
+
+# 创建Secret
+kubectl create secret generic basic-auth --from-file=auth -n study-ingress
+
+# 编辑
+vim auth-ingress.yaml
+
+# 应用
+kubectl create -f auth-ingress.yaml
+```
+
+```yaml
+# auth-ingress.yaml 文件内容：
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+  	# 需要密码认证的消息提醒。
+    nginx.ingress.kubernetes.io/auth-realm: Please Input Your Username and Password
+    # 指定密码文件 secret 的名称
+    nginx.ingress.kubernetes.io/auth-secret: basic-auth
+    # 认证类型，可以是basic和digest。
+    nginx.ingress.kubernetes.io/auth-type: basic
+  name: nginx-ingress-auth
+  namespace: study-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: auth.test.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: nginx
+            port:
+              number: 80
+        path: /
+        pathType: ImplementationSpecific
+```
+
+8. **Ingress Nginx 黑/白名单**
+
+- 通过 Helm 配置 upgrade 升级 实现 TODO
+
+
+
+9. **Ingress Nginx 速率限制**
+
+- 有时候可能需要限制速率以降低后端压力，或者限制单个IP每秒的访问速率防止攻击，此时可以使用Nginx的ratelimit进行配置。
+
+```shell
+# 用 ApacheBench (ab) 对带 Basic 认证的 Ingress 服务做轻量压力测试
+# -c 10 并发数 10， -n 100 总请求数 100
+ab -c 10 -n 100 http://nginx.test.com/ | grep requests
+
+Complete requests:      100
+Failed requests:        0
+Time per request:       0.184 [ms] (mean, across all concurrent requests)
+Percentage of the requests served within a certain time (ms)
+```
+
+10. **使用 Nginx 实现灰度/金丝雀发布**
+
+
 
 
 
