@@ -19,6 +19,7 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
 
           script: |
+            set -e
             docker system prune -f
             cd ~/xupengboo/
             git pull origin main
