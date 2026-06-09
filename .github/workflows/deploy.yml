@@ -19,11 +19,12 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
 
           script: |
+            set -e
             docker system prune -f
             cd ~/xupengboo/
             git pull origin main
 
             VERSION=1.1.${{ github.run_number }}
             docker build -t xupengboo:$VERSION .
-            docker rm -f xupengboo
+            docker rm -f xupengboo || true
             docker run -d -p 80:80 -p 443:443 -v /etc/letsencrypt/archive/www.xupengboo.top:/etc/letsencrypt/archive/www.xupengboo.top --restart=always --name xupengboo xupengboo:$VERSION
