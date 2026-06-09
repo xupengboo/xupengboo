@@ -74,8 +74,7 @@ helm search repo ingress-nginx/ingress-nginx --versions | grep 4.0.19
 
 # 5. 拉去对应版本
 helm pull ingress-nginx/ingress-nginx --version 4.0.19
-
-# 6. 
+# 目录中，就会多了个 ingress-nginx-4.0.19.tgz  文件。
 ```
 
 2. **修改 `values.yaml`** 
@@ -88,7 +87,7 @@ cd ingress-nginx/
 # 编辑values.yaml
 vim values.yaml
 
-1）Controller 和 admissionWebhook 的镜像地址，需要将公网镜像同步至公司内网镜像仓库。
+1）替换 Controller 和 admissionWebhook 的镜像地址，需要将公网镜像同步至公司内网镜像仓库。
 2）镜像的digest值注释，也可以设置为自己对应镜像地址的digest哈希值（安全性更好！更唯一）。
 3）hostNetwork设置为 true，Pod会直接使用节点网络，占用节点 80/443 端口。
 4）dnsPolicy设置为 ClusterFirstWithHostNet ，ClusterFirstWithHostNet 让 Pod 同时拥有：
