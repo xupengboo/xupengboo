@@ -473,6 +473,9 @@ grep -l "ERROR" *.log
 # 组合使用：递归搜索并只显示匹配的文件名
 grep -rl "搜索内容" els.2026-01-23-*.log
 
+# 加上 -m 1 让 grep 找到第一条就立刻停止，不用继续扫描：( > 覆盖写到result.log ， >> 追加到result.log)
+grep -m 1 "PRN202506090486" els.2026-06-09-* >> result.log
+
 # 忽略大小写
 grep -i "HELLO" file
 
