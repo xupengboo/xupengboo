@@ -27,4 +27,4 @@ jobs:
             VERSION=1.1.${{ github.run_number }}
             docker build -t xupengboo:$VERSION .
             docker rm -f xupengboo || true
-            docker run -d -p 80:80 -p 443:443 -v /etc/letsencrypt/archive/www.xupengboo.top:/etc/letsencrypt/archive/www.xupengboo.top --restart=always --name xupengboo xupengboo:$VERSION
+            docker run -d -p 80:80 -p 443:443 -v /home/xupengboo/ssl:/home/xupengboo/ssl -v /etc/letsencrypt/archive/www.xupengboo.top:/etc/letsencrypt/archive/www.xupengboo.top --restart=always --name xupengboo xupengboo:$VERSION
