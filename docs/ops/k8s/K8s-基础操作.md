@@ -144,7 +144,72 @@ kubectl create deploy backend-api --image=registry.cn-beijing.aliyuncs.com/dotba
 
 
 
-### 3.3 api-resources 操作
+### 3.3 Deployment 操作
+
+Deployment 通过 ReplicaSet 管理Pod，可以查看此Deployment当前对应的ReplicaSet：
+
+```shell
+[root@k8s-master ~]# kubectl get rs -l app=nginx -A
+NAMESPACE       NAME               DESIRED   CURRENT   READY   AGE
+study-ingress   nginx-785999d887   1         1         1       9d
+```
+
+> ReplicaSet的命名格式为[DEPLOYMENT-NAME]-[POD-TEMPLATE-HASH-VALUE]POD-TEMPLATE-HASH- VALUE，是自动生成的，不用手动指定。
+
+1. `rollout status`: Deployment 默认采用「滚动更新」策略：不会一次性把所有旧 Pod 删掉，而是逐步启动新 Pod → 新 Pod 就绪后 → 再销毁一个旧 Pod，循环往复直到全部替换完成，保证发布过程中业务不中断。`rollout status` 就是全程跟踪这个替换过程，不用你反复手动执行 kubectl get pods 去刷状态。
+
+```shell
+kubectl rollout status deployment/nginx -nstudy-ingress
+# deployment "nginx" successfully rolled out
+```
+
+2. `rollout history`: 查看发布历史记录
+```shell
+kubectl rollout history deployment/nginx -nstudy-ingress
+# deployment.apps/nginx
+# REVISION  CHANGE-CAUSE
+# 1         <none>
+```
+
+3. `set image`: 假如更新某个Pod的image（例如：Nginx），并且使用 `--record` 记录当前更改的参数（后期回滚时可以查看到对应的信息）：
+```shell
+kubectl set image deployment nginx-deployment nginx=nginx:1.9.1 --record
+deployment.extensions/nginx-deployment image updated
+```
+> 也可以使用 `edit` 命令，直接编辑Deployment修改镜像。
+
+### 3.4 Deployment 回滚步骤
+
+```shell
+# 使用 `--record` 记录当前更改的参数（后期回滚时可以查看到对应的信息），模拟构建两个历史版本：
+kubectl set image deployment nginx-deploy nginx=nginx:1.27 --record
+kubectl set image deployment nginx-deploy nginx=nginx:1.28 --record
+```
+
+1. 使用 `kubectl rollout history` 查看更新历史， 查看Deployment某次更新的详细信息，**使用 `--revision` 指定某次更新的版本号**。
+
+```shell
+# kubectl rollout history deploy nginx-deploy
+deployment.apps/nginx-deploy
+REVISION  CHANGE-CAUSE
+1         kubectl set image deployment nginx-deploy nginx=nginx:1.27 --record=true
+2         kubectl set image deployment nginx-deploy nginx=nginx:1.28 --record=true
+```
+
+2. 使用 `kubectl rollout undo` 回滚上一个版本。
+
+```shell
+kubectl rollout undo deploy nginx-deploy
+```
+
+3. 使用 `kubectl rollout `, 通过 `--to-revision=2（histroy查看）` 回滚指定版本。
+
+```shell
+kubectl rollout undo deploy nginx-deploy --to-revision=2
+```
+
+
+### 3.5 api-resources 操作
 
 
 ```shell
