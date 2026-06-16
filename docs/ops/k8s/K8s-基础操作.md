@@ -64,9 +64,7 @@ kubectl taint nodes master01 node-role.kubernetes.io/master:NoSchedule
 kubectl taint node -l node-role.kubernetes.io/master node-role.kubernetes.io/master:NoSchedule-
 ```
 
-## 3.  常用命令
-
-### 3.1 Create 操作
+## 3. Kubectl Create 操作
 
 ```shell
 # 快速基于某个镜像创建 deployment 应用
@@ -108,9 +106,7 @@ kubectl create namespace my-namespace --dry-run=client -o yaml > namespace.yaml
 - `-o yaml`：指定输出格式为YAML
 - `> 文件名.yaml`：将输出重定向保存到文件
 
-
-
-### 3.1 Pod 操作
+## 4. Pod 操作
 
 ```shell
 # 查询某个 node 下面的 Pod 信息。
@@ -123,7 +119,7 @@ kubectl get pods -n procure -o wide  | grep k8s-node1
 
 
 
-### 3.2 Service 操作
+## 5. Service 操作
 
 
 ```shell
@@ -143,10 +139,11 @@ kubectl create deploy backend-api --image=registry.cn-beijing.aliyuncs.com/dotba
 | `-n study-ingress` | 在 `study-ingress` 命名空间执行           |
 
 
+## 5. Deployment 操作 
 
-### 3.3 Deployment 操作
+### 5.1 Deployment 基础操作
 
-Deployment 通过 ReplicaSet 管理Pod，可以查看此Deployment当前对应的ReplicaSet：
+**Deployment 通过 ReplicaSet 管理Pod，可以查看此Deployment当前对应的ReplicaSet：**
 
 ```shell
 [root@k8s-master ~]# kubectl get rs -l app=nginx -A
@@ -156,14 +153,14 @@ study-ingress   nginx-785999d887   1         1         1       9d
 
 > ReplicaSet的命名格式为[DEPLOYMENT-NAME]-[POD-TEMPLATE-HASH-VALUE]POD-TEMPLATE-HASH- VALUE，是自动生成的，不用手动指定。
 
-1. `rollout status`: Deployment 默认采用「滚动更新」策略：不会一次性把所有旧 Pod 删掉，而是逐步启动新 Pod → 新 Pod 就绪后 → 再销毁一个旧 Pod，循环往复直到全部替换完成，保证发布过程中业务不中断。`rollout status` 就是全程跟踪这个替换过程，不用你反复手动执行 kubectl get pods 去刷状态。
+1. **`rollout status`: Deployment 默认采用「滚动更新」策略**：不会一次性把所有旧 Pod 删掉，而是逐步启动新 Pod → 新 Pod 就绪后 → 再销毁一个旧 Pod，循环往复直到全部替换完成，保证发布过程中业务不中断。`rollout status` 就是全程跟踪这个替换过程，不用你反复手动执行 kubectl get pods 去刷状态。
 
 ```shell
 kubectl rollout status deployment/nginx -nstudy-ingress
 # deployment "nginx" successfully rolled out
 ```
 
-2. `rollout history`: 查看发布历史记录
+2. **`rollout history`: 查看发布历史记录**
 ```shell
 kubectl rollout history deployment/nginx -nstudy-ingress
 # deployment.apps/nginx
@@ -171,14 +168,14 @@ kubectl rollout history deployment/nginx -nstudy-ingress
 # 1         <none>
 ```
 
-3. `set image`: 假如更新某个Pod的image（例如：Nginx），并且使用 `--record` 记录当前更改的参数（后期回滚时可以查看到对应的信息）：
+3. **`set image`**: 假如更新某个Pod的image（例如：Nginx），并且使用 `--record` 记录当前更改的参数（后期回滚时可以查看到对应的信息）：
 ```shell
 kubectl set image deployment nginx-deployment nginx=nginx:1.9.1 --record
 deployment.extensions/nginx-deployment image updated
 ```
 > 也可以使用 `edit` 命令，直接编辑Deployment修改镜像。
 
-### 3.4 Deployment 回滚步骤
+### 5.2 Deployment 回滚步骤
 
 ```shell
 # 使用 `--record` 记录当前更改的参数（后期回滚时可以查看到对应的信息），模拟构建两个历史版本：
@@ -196,21 +193,60 @@ REVISION  CHANGE-CAUSE
 2         kubectl set image deployment nginx-deploy nginx=nginx:1.28 --record=true
 ```
 
-2. 使用 `kubectl rollout undo` 回滚上一个版本。
+2. **使用 `kubectl rollout undo` 回滚上一个版本。**
 
 ```shell
 kubectl rollout undo deploy nginx-deploy
 ```
 
-3. 使用 `kubectl rollout `, 通过 `--to-revision=2（histroy查看）` 回滚指定版本。
+3. **使用 `kubectl rollout `, 通过 `--to-revision=2（histroy查看）` 回滚指定版本。**
 
 ```shell
 kubectl rollout undo deploy nginx-deploy --to-revision=2
 ```
 
+### 5.3 Deployment 扩充步骤
 
-### 3.5 api-resources 操作
+**`kubectl scale`: 扩缩容**，支持操作四类控制器：`deployment / statefulset / replicaset / replicationcontroller`
 
+```shell
+# 按照名字来
+kubectl scale deploy nginx-deploy --replicas=5
+
+# 按照 资源完整 API 标识 
+kubectl scale deployment.v1.apps/nginx-deployment --replicas=5
+# apps：API 组（工作负载组，Deployment 归属 apps）
+# v1：API 版本
+# deployment：资源类型
+# nginx-deployment：deploy名称
+```
+
+### 5.4 Deployment 暂停恢复
+
+使用 Deployment 暂停功能，**临时禁用更新操作**，对 Deployment 进行多次**修改后再进行更新**。
+
+- **`kubectl rollout pause`: 暂停更新操作**
+- **`kubectl rollout resume`: 恢复更新操作**
+
+```bash
+# 1. 暂停更新操作
+kubectl rollout pause deployment/nginx-deployment
+
+...
+可以直接进行多次修改，无须暂停更新，kubectl set命令一般会集成在CICD流水线中
+...
+
+# 2. 恢复更新操作
+kubectl rollout resume deployment.v1.apps/nginx-deployment
+```
+
+
+
+
+
+
+
+## 6. api-resources 操作
 
 ```shell
 # 查看你的 Kubernetes 集群，到底支持创建哪些资源（对象，例如：Pod、Service、Ingress、Deployment 这些东西，集群认不认识、能不能用。）
