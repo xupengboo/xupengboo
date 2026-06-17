@@ -168,6 +168,7 @@ export default defineConfig({
             { text: 'K8s 扩展组件', link: '/ops/k8s/K8s-扩展组件' },
             { text: 'K8s Yaml 配置', link: '/ops/k8s/k8s-yaml配置' },
             { text: 'K8s StatefulSet 实战', link: '/ops/k8s/k8s-StatefulSet-实战' },
+            { text: 'K8s devops 搭建', link: '/ops/k8s/k8s-devops-搭建' },
           ]
         },
         {
