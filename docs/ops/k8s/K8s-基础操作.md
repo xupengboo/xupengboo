@@ -108,6 +108,214 @@ kubectl create namespace my-namespace --dry-run=client -o yaml > namespace.yaml
 
 ## 4. Pod 操作
 
+### 4.1 Pod 探针（Probe）
+
+**`Startup Probe（启动探针）`：K8s 1.16 后引入，为了解决应用启动特别慢。**
+
+- 启动期间， 只执行StartupProbe， 等 Startup 成功后， 才开始 Liveness 和 Readiness 。
+
+```yaml
+startupProbe:
+  httpGet:
+    path: /actuator/health
+    port: 8080
+  failureThreshold: 30
+  periodSeconds: 10
+```
+
+**`Liveness Probe（存活探针）` ：判断容器是不是已经"死掉"了**
+
+```yaml
+# 以 HTTP 方式为例：
+livenessProbe:
+  httpGet:
+    path: /actuator/health
+    port: 8080
+  initialDelaySeconds: 30      # 启动30秒后开始检查
+  periodSeconds: 10		       # 每10秒检查一次   
+```
+
+**`Readiness Probe（就绪探针）` ：**
+
+```bash
+kubectl get pod
+NAME      READY
+nginx     1/1  （此处 READY 就是 Readiness 的状态， 如果失败： 0/1）
+```
+
+```yaml
+# 以 HTTP 方式为例：
+readinessProbe:
+  httpGet:
+    path: /actuator/health
+    port: 8080
+  periodSeconds: 5
+```
+
+
+
+**K8s支持三种检测方法。**
+
+1. **HTTP 方式：**
+
+- 适合：**`SpringBoot`**、`Nacos`、`Prometheus`、`Grafana`
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springboot-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: springboot-demo
+  template:
+    metadata:
+      labels:
+        app: springboot-demo
+    spec:
+      containers:
+      - name: springboot-demo
+        image: springboot-demo:latest
+        ports:
+        - containerPort: 8080
+        
+        # 存活探针
+        livenessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 60
+          periodSeconds: 10
+          timeoutSeconds: 3
+          failureThreshold: 3
+        # 就绪探针
+        readinessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 30
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 2
+          
+# 等同于 curl http://PodIP:8080/actuator/health 
+```
+
+2. **TCP 探针：**
+
+- 适用于：`MySQL`、`Redis`、`Kafka`、`RabbitMQ`、`Elasticsearch` 等。
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+      - name: redis
+        image: redis:7
+        ports:
+        - containerPort: 6379
+	    
+	    # 存活探针
+        livenessProbe:
+          tcpSocket:
+            port: 6379
+          initialDelaySeconds: 20
+          periodSeconds: 10
+          timeoutSeconds: 3
+          failureThreshold: 3
+	    # 就绪探针
+        readinessProbe:
+          tcpSocket:
+            port: 6379
+          periodSeconds: 5
+          timeoutSeconds: 3
+# 等同于 telnet PodIP 6379
+```
+
+3. **Exec 探针：**
+
+- 适用于：特殊业务检查、非 HTTP 服务、需要执行命令判断状态
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - name: mysql
+        image: mysql:8.0
+
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: "123456"
+
+	    # 存活探针：
+        livenessProbe:
+          exec:
+            command:
+            - sh
+            - -c
+            - "pgrep mysqld"
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+        # 就绪探针：
+        readinessProbe:
+          exec:
+            command:
+              - sh
+              - -c
+              - mysqladmin ping -h 127.0.0.1 -uroot -p123456
+# 等同于： bash 命令的执行
+```
+
+### 4.2 Pod 镜像拉取策略和重启策略
+
+```yaml
+...
+    containers:
+    - name: app
+      image: harbor.xxx.com/test/demo:v1
+      imagePullPolicy: IfNotPresent
+```
+
+| 策略         | 行为                               | 本地有镜像 | 本地无镜像 | 适用场景                 | 推荐度 |
+| ------------ | ---------------------------------- | ---------- | ---------- | ------------------------ | ------ |
+| Always       | 每次启动都从镜像仓库检查并拉取镜像 | 仍会拉取   | 拉取       | 开发测试环境、latest标签 | ⭐⭐⭐    |
+| IfNotPresent | 本地存在镜像则直接使用，否则拉取   | 直接使用   | 拉取       | 生产环境（最常用）       | ⭐⭐⭐⭐⭐  |
+| Never        | 只使用本地镜像，绝不拉取           | 直接使用   | 启动失败   | 离线环境、内网环境       | ⭐⭐     |
+
+
+
+### 4.3 Pod 其他操作
+
+1. **查询某个 node 下面的 Pod 信息。**
+
 ```shell
 # 查询某个 node 下面的 Pod 信息。
 kubectl get pods -n procure -o wide  | grep k8s-node1
