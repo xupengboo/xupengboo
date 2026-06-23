@@ -327,29 +327,43 @@ kubectl get pods -n procure -o wide  | grep k8s-node1
 
 
 
-## 5. Service 操作
+## 5. RS 操作
 
+Replication Controller（复制控制器，RC）和 ReplicaSet（复制集，RS）是两种简单部署Pod的方式。
 
-```shell
-# 一键自动创建 Service，不用你手写 YAML，直接把 Deployment 暴露给集群内部 / Ingress 使用。
-kubectl expose deploy backend-api --port 80 -n study-ingress
+**ReplicaSet 是支持基于集合的标签选择器的下一代 Replication Controller ，它主要用作 Deployment 协调创建、删除和更新Pod，和Replication Controller 唯一的区别是，ReplicaSet支持标签选择器。**
 
-# 假设：构建了一个 backedn-api 的 deployment 
-kubectl create deploy backend-api --image=registry.cn-beijing.aliyuncs.com/dotbalo/nginx:backend-api -n study-ingress
+![PixPin_2026-06-23_16-32-03.png](/public/images/PixPin_2026-06-23_16-32-03.png)
+
+```yaml
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: nginx-rs
+  labels:
+    app: nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.28
+        ports:
+        - containerPort: 80
 ```
 
-| 字段               | 含义                                      |
-| ------------------ | ----------------------------------------- |
-| `kubectl expose`   | K8s 专用命令：**给工作负载创建 Service**  |
-| `deploy`           | 缩写 = `Deployment`（你要暴露的资源类型） |
-| `backend-api`      | 你要暴露的 **Deployment 名称**            |
-| `--port 80`        | 生成的 Service 端口 = 80                  |
-| `-n study-ingress` | 在 `study-ingress` 命名空间执行           |
 
 
-## 5. Deployment 操作 
+## 6. Deployment 操作 
 
-### 5.1 Deployment 基础操作
+### 6.1 Deploy 基础操作
 
 **Deployment 通过 ReplicaSet 管理Pod，可以查看此Deployment当前对应的ReplicaSet：**
 
@@ -369,6 +383,7 @@ kubectl rollout status deployment/nginx -nstudy-ingress
 ```
 
 2. **`rollout history`: 查看发布历史记录**
+
 ```shell
 kubectl rollout history deployment/nginx -nstudy-ingress
 # deployment.apps/nginx
@@ -377,13 +392,15 @@ kubectl rollout history deployment/nginx -nstudy-ingress
 ```
 
 3. **`set image`**: 假如更新某个Pod的image（例如：Nginx），并且使用 `--record` 记录当前更改的参数（后期回滚时可以查看到对应的信息）：
+
 ```shell
 kubectl set image deployment nginx-deployment nginx=nginx:1.9.1 --record
 deployment.extensions/nginx-deployment image updated
 ```
+
 > 也可以使用 `edit` 命令，直接编辑Deployment修改镜像。
 
-### 5.2 Deployment 回滚步骤
+### 6.2 Deploy 回滚步骤
 
 ```shell
 # 使用 `--record` 记录当前更改的参数（后期回滚时可以查看到对应的信息），模拟构建两个历史版本：
@@ -413,7 +430,7 @@ kubectl rollout undo deploy nginx-deploy
 kubectl rollout undo deploy nginx-deploy --to-revision=2
 ```
 
-### 5.3 Deployment 扩充步骤
+### 6.3 Deploy 扩充步骤
 
 **`kubectl scale`: 扩缩容**，支持操作四类控制器：`deployment / statefulset / replicaset / replicationcontroller`
 
@@ -429,7 +446,7 @@ kubectl scale deployment.v1.apps/nginx-deployment --replicas=5
 # nginx-deployment：deploy名称
 ```
 
-### 5.4 Deployment 暂停恢复
+### 6.4 Deploy 暂停恢复
 
 使用 Deployment 暂停功能，**临时禁用更新操作**，对 Deployment 进行多次**修改后再进行更新**。
 
@@ -448,13 +465,90 @@ kubectl rollout pause deployment/nginx-deployment
 kubectl rollout resume deployment.v1.apps/nginx-deployment
 ```
 
+## 7. StatefulSet 操作
+
+### 7.1 sts 基础概念
+
+**StatefulSet（有状态集，缩写为sts）常用于部署有状态的且需要有序启动的应用程序**。
+
+StatefulSet 主要用于管理有状态应用程序的工作负载API对象。比如在生产环境中，可以部署 ElasticSearch集群、MongoDB集群 或者 需要持久化的 RabbitMQ集群、Redis集群、Kafka集群 和 ZooKeeper集群 等。
+
+**StatefulSet创建的 Pod 一般使用 Headless Service（无头服务）进行通信**，和普通的 Service 的区别在于 **Headless Service 没有ClusterIP，它使用 Endpoint 进行互相通信**。
+
+YAML 案例，如下：
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx
+  labels:
+    app: nginx
+spec:
+  ports:
+  - port: 80
+    name: web
+  clusterIP: None
+  selector:
+    app: nginx
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: web
+spec:
+  serviceName: "nginx"
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - containerPort: 80
+          name: web
+```
+
+### 7.2 sts 扩容和缩容
 
 
 
 
 
 
-## 6. api-resources 操作
+
+
+
+
+## . Service 操作
+
+```shell
+# 一键自动创建 Service，不用你手写 YAML，直接把 Deployment 暴露给集群内部 Ingress 使用。
+kubectl expose deploy backend-api --port 80 -n study-ingress
+
+# 假设：构建了一个 backedn-api 的 deployment 
+kubectl create deploy backend-api --image=registry.xxx.aliyuncs.com/nginx:backend-api -n study-ingress
+```
+
+| 字段               | 含义                                      |
+| ------------------ | ----------------------------------------- |
+| `kubectl expose`   | K8s 专用命令：**给工作负载创建 Service**  |
+| `deploy`           | 缩写 = `Deployment`（你要暴露的资源类型） |
+| `backend-api`      | 你要暴露的 **Deployment 名称**            |
+| `--port 80`        | 生成的 Service 端口 = 80                  |
+| `-n study-ingress` | 在 `study-ingress` 命名空间执行           |
+
+
+
+
+
+## . api-resources 操作
 
 ```shell
 # 查看你的 Kubernetes 集群，到底支持创建哪些资源（对象，例如：Pod、Service、Ingress、Deployment 这些东西，集群认不认识、能不能用。）
