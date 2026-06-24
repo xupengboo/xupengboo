@@ -1,4 +1,4 @@
-# Kubernetes 基础操作
+Kubernetes 基础操作
 
 
 
@@ -363,7 +363,7 @@ spec:
 
 ## 6. Deployment 操作 
 
-### 6.1 Deploy 基础操作
+### 6.1 deploy 基础操作
 
 **Deployment 通过 ReplicaSet 管理Pod，可以查看此Deployment当前对应的ReplicaSet：**
 
@@ -400,7 +400,7 @@ deployment.extensions/nginx-deployment image updated
 
 > 也可以使用 `edit` 命令，直接编辑Deployment修改镜像。
 
-### 6.2 Deploy 回滚步骤
+### 6.2 deploy 回滚步骤
 
 ```shell
 # 使用 `--record` 记录当前更改的参数（后期回滚时可以查看到对应的信息），模拟构建两个历史版本：
@@ -430,7 +430,7 @@ kubectl rollout undo deploy nginx-deploy
 kubectl rollout undo deploy nginx-deploy --to-revision=2
 ```
 
-### 6.3 Deploy 扩充步骤
+### 6.3 deploy 扩充步骤
 
 **`kubectl scale`: 扩缩容**，支持操作四类控制器：`deployment / statefulset / replicaset / replicationcontroller`
 
@@ -446,7 +446,7 @@ kubectl scale deployment.v1.apps/nginx-deployment --replicas=5
 # nginx-deployment：deploy名称
 ```
 
-### 6.4 Deploy 暂停恢复
+### 6.4 deploy 暂停恢复
 
 使用 Deployment 暂停功能，**临时禁用更新操作**，对 Deployment 进行多次**修改后再进行更新**。
 
@@ -517,32 +517,383 @@ spec:
 
 ### 7.2 sts 扩容和缩容
 
+1. **扩容或缩容：`kubectl scale sts web --replicas=5`** 
+
+```bash
+kubectl get sts
+NAME   READY   AGE
+web    2/2     21h
+
+kubectl scale sts web --replicas=5
+statefulset.apps/web scaled
+```
+
+2. **命令动态查看：`kubectl get pods -w -l app=nginx`** 
+
+- `--selector`，简写 `-l` ：根据 Pod 的标签过滤，只查询匹配标签的资源。
+- `--watch `，     简写 `-w` ：持续监听资源变化，实时刷新输出。
+
+```yaml
+[root@k8s-master ~]# kubectl get pods -w -l app=nginx
+NAME    READY   STATUS    RESTARTS   AGE
+web-0   1/1     Running   1          21h
+web-1   1/1     Running   1          21h
+web-2   1/1     Running   0          108s
+web-3   1/1     Running   0          79s
+web-4   1/1     Running   0          70s
+```
+
+### 7.3 sts 更新策略
+
+| 更新策略                    | 是否自动更新 Pod | 更新触发方式                                                 | 更新顺序                                                     | 是否支持灰度更新               | 适用场景                                                     | 备注                                                         |
+| --------------------------- | ---------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| `RollingUpdate`             | 是               | 修改 StatefulSet 的 Pod 模板后自动触发                       | 按 **Pod 编号从大到小** 更新，例如 `mysql-2 -> mysql-1 -> mysql-0` | 支持（配合 `partition`）       | MySQL、Redis、Kafka、Elasticsearch 等有状态服务的常规升级    | **默认策略**，前一个 Pod Ready 后才会继续更新下一个          |
+| `OnDelete`                  | 否               | 修改 StatefulSet 后 **不会自动更新**，必须手动删除 Pod 才会按新模板重建 | 由你手动删除哪个 Pod 决定                                    | 不支持自动灰度，但可以人工控制 | 需要严格人工控制升级顺序的场景，例如数据库主从切换、中间件升级 | 适合“先切主、再删从、最后删主”这种场景                       |
+| `RollingUpdate + partition` | 是（部分 Pod）   | 修改 StatefulSet 后自动更新，但只更新 **序号 >= partition** 的 Pod | 仍然按 **Pod 编号从大到小** 更新                             | 支持                           | 灰度升级、先升级从节点、保留主节点不动                       | 常用于主从架构，例如先更新 `mysql-1/mysql-2`，保留 `mysql-0` |
+
+**常见配置示例：**
+
+1. **默认滚动更新**
+
+```yaml
+spec:
+  updateStrategy:
+    type: RollingUpdate
+```
+
+2. **灰度更新（保留 xxx-0 不动）**
+
+- **分段更新 将会使 StatefulSet 中其余的所有Pod（序号小于分区）保持当前版本，只更新序号大于等于分区的Pod，利用此特性可以简单实现金丝雀发布（灰度发布）**
+
+```yaml
+spec:
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      partition: 3
+# partition分区，分段更新（金丝雀发布）
+```
+
+3. **手动更新**
+
+```yaml
+spec:
+  updateStrategy:
+    type: OnDelete
+```
+
+### 7.4 sts 删除
+
+| 删除方式                    | 常用命令                                        | StatefulSet 对象 | Pod                                     | PVC        | 适用场景                                          | 备注                                                    |
+| --------------------------- | ----------------------------------------------- | ---------------- | --------------------------------------- | ---------- | ------------------------------------------------- | ------------------------------------------------------- |
+| 级联删除（默认）            | `kubectl delete sts mysql`                      | 删除             | 一般会一起删除                          | 不一定删除 | 正常下线 StatefulSet 服务                         | Pod 是否删除取决于级联；PVC 是否删除取决于 PVC 保留策略 |
+| 级联删除（显式 foreground） | `kubectl delete sts mysql --cascade=foreground` | 删除             | 一起删除，通常先删 Pod 再删 StatefulSet | 不一定删除 | 想明确按前台级联删除资源                          | 行为上和默认删除很接近，重点是“先处理子资源再删父资源”  |
+| 非级联删除（orphan）        | `kubectl delete sts mysql --cascade=orphan`     | 删除             | **保留**                                | 保留       | 想保留现有 Pod 做排障 / 临时脱离 StatefulSet 控制 | Pod 会继续运行，但不再受 StatefulSet 管理               |
 
 
 
+## 8. DaemonSet 操作
+
+### 8.1 ds 基础概念
+
+**DaemonSet（守护进程集，缩写为ds）和守护进程类似，它在符合匹配条件的节点上均部署一个Pod。**
+
+DaemonSet 确保全部（或者某些符合条件）节点上运行一个Pod副本 。当有新节点加入集群时，也会为它们新增一个Pod，当节点从集群中移除时，这些Pod也会被回收，删除DaemonSet将会删除它创建的所有Pod。
+
+### 8.2 ds 场景案例
+
+| 场景分类            | 典型用途                                        | 常见组件/案例                              | 为什么适合 DaemonSet                                         |
+| ------------------- | ----------------------------------------------- | ------------------------------------------ | ------------------------------------------------------------ |
+| 日志采集            | 采集每台节点上的容器日志、系统日志              | Filebeat、Fluent Bit、Fluentd、Vector      | 每个节点都有自己的容器日志和系统日志，需要每台机器部署一个采集器 |
+| 节点监控            | 采集 CPU、内存、磁盘、网络、inode 等主机指标    | Node Exporter、Datadog Agent、Zabbix Agent | 节点指标是每台机器本地的数据，需要每台节点都运行监控 Agent   |
+| 网络插件            | 负责 Pod 网络通信、路由、iptables/ipvs、eBPF 等 | Calico、Flannel、Cilium、kube-proxy        | 每个节点都要参与 Pod 网络通信，所以每台节点都要运行网络组件  |
+| 存储插件            | 节点级卷挂载、存储接入、本地磁盘管理            | CSI Node Plugin、Ceph CSI、Longhorn        | 每个节点都可能挂载卷或处理本地存储逻辑，因此需要节点级插件   |
+| Ingress / 边缘入口  | 在指定入口节点直接监听 80/443，对外提供访问入口 | Ingress Nginx（某些裸机/边缘场景）         | 希望每个入口节点都跑一个 Ingress Pod，对外提供统一入口       |
+| GPU / 硬件插件      | 向 Kubernetes 注册 GPU、网卡、FPGA 等硬件资源   | NVIDIA Device Plugin                       | 只有在有 GPU 的节点上部署一个插件，K8s 才能识别该节点的 GPU 能力 |
+| 安全巡检 / 主机安全 | 采集主机安全事件、运行时审计、入侵检测          | Falco、Wazuh Agent、安全巡检 Agent         | 安全事件很多发生在宿主机层面，所以每台节点都要运行安全 Agent |
+| 节点清理 / 节点维护 | 清理临时文件、巡检磁盘、同步配置、预热镜像      | 自定义 node-cleaner、运维巡检脚本          | 每个节点都需要执行本地清理或维护任务，适合节点级常驻服务     |
+
+**以 日志采集 案例：**
+
+```yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: logging
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: filebeat
+  namespace: logging
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: filebeat-config
+  namespace: logging
+data:
+  filebeat.yml: |
+    filebeat.inputs:
+      - type: container
+        paths:
+          - /var/log/containers/*.log
+
+    processors:
+      - add_kubernetes_metadata:
+          host: ${NODE_NAME}
+          matchers:
+            - logs_path:
+                logs_path: "/var/log/containers/"
+
+    output.elasticsearch:
+      hosts: ["http://elasticsearch.logging.svc.cluster.local:9200"]
+
+    setup.ilm.enabled: false
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: filebeat
+  namespace: logging
+  labels:
+    app: filebeat
+spec:
+  selector:
+    matchLabels:
+      app: filebeat
+  template:
+    metadata:
+      labels:
+        app: filebeat
+    spec:
+      serviceAccountName: filebeat
+      containers:
+        - name: filebeat
+          image: docker.elastic.co/beats/filebeat:8.14.0
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            runAsUser: 0
+          env:
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+          volumeMounts:
+            - name: varlog
+              mountPath: /var/log
+            - name: varlibdockercontainers
+              mountPath: /var/lib/docker/containers
+              readOnly: true
+            - name: filebeat-config
+              mountPath: /usr/share/filebeat/filebeat.yml
+              subPath: filebeat.yml
+      volumes:
+        - name: varlog
+          hostPath:
+            path: /var/log
+        - name: varlibdockercontainers
+          hostPath:
+            path: /var/lib/docker/containers
+        - name: filebeat-config
+          configMap:
+            name: filebeat-config
+```
+
+### 8.3 ds 更新和回滚
+
+```bash
+# DaemonSet 更新
+kubectl edit ds/<daemonset-name>
+kubectl patch ds/<daemonset-name> -p=<strategic-merge-patch>
+
+# 查看更新状态
+kubectl rollout status ds/<daemonset-name>
+
+# 列出所有修订版本
+kubectl rollout history daemonset <daemonset-name>
+
+# 回滚指定版本
+kubectl rollout undo daemonset <daemonset-name> --to-revision=<revision>
+```
+
+## 9. CronJob 操作
+
+### 9.1 cj 基础概念
+
+**CronJob（计划任务，缩写为cj）**
+
+CronJob（计划任务，缩写为cj）用于以时间为基准周期性地执行任务，这些自动化任务和运行在Linux或UNIX系统上的 CronJob 一样。
+
+**CronJob对于创建定期和重复任务非常有用，例如执行备份任务、周期性调度程序接口、发送电子邮件等。**
+
+### 9.2 cj 基础操作
+
+```bash
+# 1. 创建 CronJob（定时周期任务）
+kubectl create cronjob hello \
+  --schedule="*/1 * * * *" \
+  --image=busybox \
+  -- /bin/sh -c "date; echo Hello from the Kubernetes cluster"
+
+# 2. 创建一次性 Job
+kubectl create job hello \
+  --image=busybox \
+  -- /bin/sh -c "date; echo Hello from the Kubernetes cluster"
+ 
+# 3. 查看 cronjob
+kubectl get cronjob # kubectl get cj
+NAME    SCHEDULE      SUSPEND   ACTIVE   LAST SCHEDULE   AGE
+hello   */1 * * * *   False     0        <none>          9s
+
+# 4. 删除 cronjob
+kubectl delete cronjob hello
+```
+
+**CronJob 每次调用任务的时候会创建一个 Job，Job 会创建一个名为 `JOB_NAME-xxx` 的Pod执行命令，成功执行完任务后：**
+
+
+```bash
+[root@k8s-master rc]# kubectl get jobs
+NAME               COMPLETIONS   DURATION   AGE
+hello-1782288300   1/1           4s         2m41s
+hello-1782288360   1/1           6s         101s
+hello-1782288420   1/1           5s         41s
+```
+
+## 10. 标签与选择器 
+
+### 10.1 label 、selector  基础概念
+
+**标签（label）是给资源“贴名字/贴分类”。 选择器（selector）是“按标签找资源”。**
+
+- Service 就是 “ 通过选择器把流量转发给符合标签的 Pod ” 。
+
+```yaml
+# 标签定义：
+labels:
+  app: nginx
+  env: prod
+  version: v1
+  
+# 选择器定义：
+selector:
+  app: nginx
+```
+
+### 10.2 label 定义标签
+
+```bash
+# 1. 定义标签：key=value
+kubectl label node k8s-slave01 region=subnet7
+node/k8s-slave01 labeled
+
+# 2. 通过选择器对其筛选
+kubectl get no -l region=subnet7
+NAME          STATUS   ROLES    AGE   VERSION
+k8s-slave01   Ready    worker   8d    v1.20.15
+
+# 3. 也可以更新 svc 的标签内容：
+kubectl get svc -n study-ingress
+NAME          TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
+nginx         ClusterIP   10.43.210.129   <none>        80/TCP    18d
+# 可以一口气标记多个label标签。
+kubectl label svc nginx -n study-ingress env=test version=v1
+service/nginx labeled
+```
+
+::: tip 如何查看某些资源的标签有哪些？
+
+方式 1：`kubectl get ... --show-labels`：直接在列表里把标签显示出来。
+
+方式 2：`kubectl describe ...`：看某个具体资源的详细信息，里面会有 `Labels`。
+
+方式 3：`kubectl get ... -o yaml`：直接看资源 YAML，里面的 `metadata.labels` 最清楚。
+
+方式 4：`kubectl get ... -L 标签名`：只展示你关心的某几个标签列，最适合日常排查。 
+
+:::
+
+### 10.3 label 修改标签
+
+**通过 `--overwrite` 标签，来重写标签：**
+
+```bash
+# 1. 先获取
+kubectl get svc --show-labels -nstudy-ingress
+NAME          TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE   LABELS
+nginx         ClusterIP   10.43.210.129   <none>        80/TCP    18d   env=test,version=v2
+
+# 2. 修改标签
+kubectl label svc nginx -nstudy-ingress version=v3 --overwrite
+service/nginx labeled
+
+# 3. 后对比
+kubectl get svc --show-labels -nstudy-ingress
+NAME          TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE   LABELS
+nginx         ClusterIP   10.43.210.129   <none>        80/TCP    18d   env=test,version=v3
+```
+
+### 10.4 label 删除标签
+
+**有时候也会需要删除某资源的标签，在 label 的key名后面加一个减号即可删除：**
+
+```bash
+# 删除标签：
+kubectl label svc nginx -nstudy-ingress version-
+```
 
 
 
+## 11. Service 操作
 
+::: tip service 效果图：
 
+![PixPin_2026-06-24_18-07-46](/public/images/PixPin_2026-06-24_18-07-46.png)
 
-## . Service 操作
+:::
+
+### 11.1 svc 定义操作
+
+```yaml
+kind: Service
+apiVersion: v1
+metadata:
+  name: my-service
+spec:
+  selector:
+    app: myapp
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 9376
+```
+
+### 11.2 svc 
 
 ```shell
 # 一键自动创建 Service，不用你手写 YAML，直接把 Deployment 暴露给集群内部 Ingress 使用。
-kubectl expose deploy backend-api --port 80 -n study-ingress
+kubectl expose deploy <deployment-name> --port 80 -n study-ingress
 
 # 假设：构建了一个 backedn-api 的 deployment 
 kubectl create deploy backend-api --image=registry.xxx.aliyuncs.com/nginx:backend-api -n study-ingress
 ```
 
-| 字段               | 含义                                      |
-| ------------------ | ----------------------------------------- |
-| `kubectl expose`   | K8s 专用命令：**给工作负载创建 Service**  |
-| `deploy`           | 缩写 = `Deployment`（你要暴露的资源类型） |
-| `backend-api`      | 你要暴露的 **Deployment 名称**            |
-| `--port 80`        | 生成的 Service 端口 = 80                  |
-| `-n study-ingress` | 在 `study-ingress` 命名空间执行           |
+| 字段                | 含义                                      |
+| ------------------- | ----------------------------------------- |
+| `kubectl expose`    | K8s 专用命令：**给工作负载创建 Service**  |
+| `deploy`            | 缩写 = `Deployment`（你要暴露的资源类型） |
+| `<deployment-name>` | 你要暴露的 **Deployment 名称**            |
+| `--port 80`         | 生成的 Service 端口 = 80                  |
+| `-n study-ingress`  | 在 `study-ingress` 命名空间执行           |
+
+
+
+
+
+
+
+
 
 
 
