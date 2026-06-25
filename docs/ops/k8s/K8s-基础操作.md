@@ -68,10 +68,10 @@ kubectl taint node -l node-role.kubernetes.io/master node-role.kubernetes.io/mas
 
 ```shell
 # 快速基于某个镜像创建 deployment 应用
-kubectl create deploy nginx-name --image=nginx:1.26 -n study-ingress
+kubectl create deploy nginx-name --image=nginx:1.26 -n xupengboo
 
 # 也可以指定固定的仓库名，来快速创建
-kubectl create deploy nginx-name --image=registry.cn-xxx.aliyuncs.com/xxx/nginx:1.26 -n study-ingress
+kubectl create deploy nginx-name --image=registry.cn-xxx.aliyuncs.com/xxx/nginx:1.26 -n xupengboo
 ```
 
 
@@ -370,7 +370,7 @@ spec:
 ```shell
 [root@k8s-master ~]# kubectl get rs -l app=nginx -A
 NAMESPACE       NAME               DESIRED   CURRENT   READY   AGE
-study-ingress   nginx-785999d887   1         1         1       9d
+xupengboo   nginx-785999d887   1         1         1       9d
 ```
 
 > ReplicaSet的命名格式为[DEPLOYMENT-NAME]-[POD-TEMPLATE-HASH-VALUE]POD-TEMPLATE-HASH- VALUE，是自动生成的，不用手动指定。
@@ -378,14 +378,14 @@ study-ingress   nginx-785999d887   1         1         1       9d
 1. **`rollout status`: Deployment 默认采用「滚动更新」策略**：不会一次性把所有旧 Pod 删掉，而是逐步启动新 Pod → 新 Pod 就绪后 → 再销毁一个旧 Pod，循环往复直到全部替换完成，保证发布过程中业务不中断。`rollout status` 就是全程跟踪这个替换过程，不用你反复手动执行 kubectl get pods 去刷状态。
 
 ```shell
-kubectl rollout status deployment/nginx -nstudy-ingress
+kubectl rollout status deployment/nginx -nxupengboo
 # deployment "nginx" successfully rolled out
 ```
 
 2. **`rollout history`: 查看发布历史记录**
 
 ```shell
-kubectl rollout history deployment/nginx -nstudy-ingress
+kubectl rollout history deployment/nginx -nxupengboo
 # deployment.apps/nginx
 # REVISION  CHANGE-CAUSE
 # 1         <none>
@@ -794,11 +794,11 @@ NAME          STATUS   ROLES    AGE   VERSION
 k8s-slave01   Ready    worker   8d    v1.20.15
 
 # 3. 也可以更新 svc 的标签内容：
-kubectl get svc -n study-ingress
+kubectl get svc -n xupengboo
 NAME          TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
 nginx         ClusterIP   10.43.210.129   <none>        80/TCP    18d
 # 可以一口气标记多个label标签。
-kubectl label svc nginx -n study-ingress env=test version=v1
+kubectl label svc nginx -n xupengboo env=test version=v1
 service/nginx labeled
 ```
 
@@ -820,16 +820,16 @@ service/nginx labeled
 
 ```bash
 # 1. 先获取
-kubectl get svc --show-labels -nstudy-ingress
+kubectl get svc --show-labels -nxupengboo
 NAME          TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE   LABELS
 nginx         ClusterIP   10.43.210.129   <none>        80/TCP    18d   env=test,version=v2
 
 # 2. 修改标签
-kubectl label svc nginx -nstudy-ingress version=v3 --overwrite
+kubectl label svc nginx -nxupengboo version=v3 --overwrite
 service/nginx labeled
 
 # 3. 后对比
-kubectl get svc --show-labels -nstudy-ingress
+kubectl get svc --show-labels -nxupengboo
 NAME          TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE   LABELS
 nginx         ClusterIP   10.43.210.129   <none>        80/TCP    18d   env=test,version=v3
 ```
@@ -840,7 +840,7 @@ nginx         ClusterIP   10.43.210.129   <none>        80/TCP    18d   env=test
 
 ```bash
 # 删除标签：
-kubectl label svc nginx -nstudy-ingress version-
+kubectl label svc nginx -nxupengboo version-
 ```
 
 
@@ -853,7 +853,7 @@ kubectl label svc nginx -nstudy-ingress version-
 
 :::
 
-### 11.1 svc 定义操作
+### 11.1 svc 基础概念
 
 Service 四种类型：
 
@@ -879,16 +879,16 @@ spec:
       targetPort: 9376
 ```
 
-### 11.2 svc 基础操作
+---
 
-1. **`kubectl expose` 用法：将已有的工作负载（Deployment、Pod、ReplicaSet 等）快速暴露为一个新的 Service（服务）资源。**
+**`kubectl expose` 用法：将已有的工作负载（Deployment、Pod、ReplicaSet 等）快速暴露为一个新的 Service（服务）资源。**
 
 ```shell
 # 一键自动创建 Service，不用你手写 YAML，直接根据 Deployment 构建出对应的 Service 服务。
-kubectl expose deploy <deployment-name> --port 80 -n study-ingress
+kubectl expose deploy <deployment-name> --port 80 -n xupengboo
 
 # 假设：构建了一个 backedn-api 的 deployment 
-kubectl create deploy backend-api --image=registry.xxx.aliyuncs.com/nginx:backend-api -n study-ingress
+kubectl create deploy backend-api --image=registry.xxx.aliyuncs.com/nginx:backend-api -n xupengboo
 ```
 
 | 字段                | 含义                                      |
@@ -897,7 +897,7 @@ kubectl create deploy backend-api --image=registry.xxx.aliyuncs.com/nginx:backen
 | `deploy`            | 缩写 = `Deployment`（你要暴露的资源类型） |
 | `<deployment-name>` | 你要暴露的 **Deployment 名称**            |
 | `--port 80`         | 生成的 Service 端口 = 80                  |
-| `-n study-ingress`  | 在 `study-ingress` 命名空间执行           |
+| `-n xupengboo`      | 在 `xupengboo` 命名空间执行               |
 
 
 
@@ -939,7 +939,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: mysql-db
-  namespace: study-ingress
+  namespace: study
 spec:
   type: ExternalName
   externalName: db-xxx.mysql.rds.aliyuncs.com  # 外部服务的真实域名
@@ -952,6 +952,137 @@ spec:
 iptables 是线性逐条匹配规则，当集群里 Service 数量达到几百上千个时，节点上的 iptables 规则会有上万条，匹配和更新的效率都会大幅下降。而 ipvs 是内核专门的负载均衡模块，用哈希表匹配规则，性能更稳定，所以**生产环境大规模集群更推荐 ipvs 模式**。
 
 ## 12. ConfigMap 操作
+
+### 12.1 cm 基础概念
+
+ConfigMap 中的数据是以 **键-值对（key-value pair）** 的形式保存的：
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-config
+  namespace: xupengboo
+data:
+  # 文件名作为 key，文件内容作为 value（用 | 保留换行格式）
+  default.conf: |
+    server {
+        listen 80;
+        server_name localhost;
+
+        location / {
+            root /usr/share/nginx/html;
+            index index.html index.htm;
+        }
+
+        location /api {
+            proxy_pass http://backend-api:80;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+        }
+    }
+
+  # 可以同时放多个配置文件
+  nginx.conf: |
+    user nginx;
+    worker_processes auto;
+    error_log /var/log/nginx/error.log warn;
+    pid /var/run/nginx.pid;
+
+    events {
+        worker_connections 1024;
+    }
+
+    http {
+        include /etc/nginx/mime.types;
+        default_type application/octet-stream;
+        sendfile on;
+        keepalive_timeout 65;
+        include /etc/nginx/conf.d/*.conf;
+    }
+```
+
+**使用 kubectl 创建一个 ConfigMap 的命令格式：**
+
+```bash
+ kubectl create configmap <map-name> <data-source>
+ 
+ # map-name：ConfigMap的名称。
+ # data-source：数据源，可以是数据的目录、文件或字符值。
+```
+
+### 12.2 cm 目录创建
+
+`--from-file=conf` 根据目录创建 cm 。
+
+```bash
+# 根据目录进行创建
+kubectl create configmap test-config --from-file=conf -n xupengboo
+
+cat conf/ui.properties
+color.good=purple
+color.bad=yellow
+
+cat conf/user.properties
+username=xupengboo
+password=1234
+
+# 查看 cm 信息
+kubectl get cm test-config -nxupengboo -oyaml
+apiVersion: v1
+data:
+  user.properties: |
+    username=xupengboo
+    password=1234
+  ui.properties: |
+    color.good=purple
+    color.bad=yellow
+kind: ConfigMap
+...
+```
+
+### 12.3 cm 文件创建
+
+`--from-file=conf/user.properties`：基于文件创建 ConfigMap
+
+```bash
+kubectl create cm test-config2 --from-file=conf/user.properties -n xupengboo
+configmap/test-config2 created
+
+# 也可以使用--from-file多次传入参数以从多个数据源创建ConfigMap
+kubectl create cm test-config3 --from-file=conf/user.properties --from-file=conf/ui.properties -n xupengboo
+configmap/test-config3 created
+```
+
+### 12.4 cm ENV 文件创建
+
+**`key=value` 形式的数据，此类文件可以当作某个应用的环境变量配置**，此时可以使用`--from-env-file` 从 ENV 文件创建 ConfigMap：
+
+`--from-env-file=conf/user.properties`：构建 ENV 文件
+
+```bash
+kubectl create cm test-env-config --from-env-file=conf/user.properties
+configmap/test-env-config created
+
+kubectl get cm test-env-config -oyaml
+apiVersion: v1
+data:
+  password: "1234"
+  username: xupengboo
+kind: ConfigMap
+...
+```
+
+```bash
+# 少量的内容，可以通过 --from-literal 进行快速创建。
+kubectl create configmap special-config --from-literal=special.how=very --from-literal=special.type=charm
+```
+
+## 13. Secret 操作
+
+
+
+
 
 
 
