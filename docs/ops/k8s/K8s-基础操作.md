@@ -855,6 +855,16 @@ kubectl label svc nginx -nstudy-ingress version-
 
 ### 11.1 svc 定义操作
 
+Service 四种类型：
+
+- `ClusterIP`：在集群内部使用，默认值，只能从集群中访问。
+
+- `NodePort`：在所有安装了Kube-Proxy的节点上打开一个端口，此端口可以代理至后端Pod，可以通过NodePort从集群外部访问集群内的服务，格式为NodeIP:NodePort。
+
+- `LoadBalancer`：使用云提供商的负载均衡器公开服务，成本较高。
+
+- `ExternalName`：通过返回定义的CNAME别名，将 Service 映射到可被 DNS 解析的其他域名，需要1.7或更高版本kube-dns的支持。
+
 ```yaml
 kind: Service
 apiVersion: v1
@@ -869,10 +879,12 @@ spec:
       targetPort: 9376
 ```
 
-### 11.2 svc 
+### 11.2 svc 基础操作
+
+1. **`kubectl expose` 用法：将已有的工作负载（Deployment、Pod、ReplicaSet 等）快速暴露为一个新的 Service（服务）资源。**
 
 ```shell
-# 一键自动创建 Service，不用你手写 YAML，直接把 Deployment 暴露给集群内部 Ingress 使用。
+# 一键自动创建 Service，不用你手写 YAML，直接根据 Deployment 构建出对应的 Service 服务。
 kubectl expose deploy <deployment-name> --port 80 -n study-ingress
 
 # 假设：构建了一个 backedn-api 的 deployment 
@@ -888,6 +900,56 @@ kubectl create deploy backend-api --image=registry.xxx.aliyuncs.com/nginx:backen
 | `-n study-ingress`  | 在 `study-ingress` 命名空间执行           |
 
 
+
+### 11.3 Endpoint 与 Service 
+
+情况一：有选择器的 Service 
+
+- **创建一个带有选择器的 Service 后，集群会在该 Service 所在的 Namespace 下自动创建一个同名的 Endpoint（缩写 ep）。**
+
+- **这个Endpoint（缩写为ep）记录了选择器匹配到的Pod的IP地址和端口。**
+
+```bash
+[root@k8s-master ~]#  kubectl get ep -nprocure 
+NAME             ENDPOINTS                                                  AGE
+blade-gateway    10.238.252.46:80                                           6d15h
+nacos-nodeport   10.238.252.28:8848,10.238.252.28:9848,10.238.252.28:8080   23d
+redis-nodeport   10.238.252.32:6379                                         23d
+saber3           10.238.155.110:80                                          6d17h
+```
+
+
+
+情况二：没有选择器的 Service 
+
+- **由于这个Service没有选择器，就不会创建相关的 Endpoints 对象，可以手动创建一个同名的Endpoints（同名的 Service 和Endpoints 会自动建立链接）**
+
+- 有时需要通过Service代理集群外部服务时，**可以创建一个没有 Selector 字段的Service，之后再手动创建 Endpoint 添加外部服务即可，以下情况均可使用无选择器的Service。**
+
+> Endpoint IP地址不能是loopback（127.0.0.0/8）、link-loca（l169.254.0.0/16）或者link-local多播地址（224.0.0.0/24）。
+
+### 11.4 ExternalName Service 类型
+
+ExternalName Service 是 Service 的特例，它没有选择器，也没有定义任何端口和 Endpoint ，它通过返回该外部服务的别名来提供服务。
+
+例如：可以定义一个Service，后端设置为一个外部域名，这样通过Service的名称即可访问该域名。
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-db
+  namespace: study-ingress
+spec:
+  type: ExternalName
+  externalName: db-xxx.mysql.rds.aliyuncs.com  # 外部服务的真实域名
+```
+
+### 11.5 svc 代理模式
+
+**iptables** 是 Linux 系统内核原生的网络数据包处理工具，也是 Kubernetes Service 实现流量转发的核心底层技术之一，你可以把它通俗理解成 Linux 服务器自带的「网络规则处理器」。
+
+iptables 是线性逐条匹配规则，当集群里 Service 数量达到几百上千个时，节点上的 iptables 规则会有上万条，匹配和更新的效率都会大幅下降。而 ipvs 是内核专门的负载均衡模块，用哈希表匹配规则，性能更稳定，所以**生产环境大规模集群更推荐 ipvs 模式**。
 
 
 
