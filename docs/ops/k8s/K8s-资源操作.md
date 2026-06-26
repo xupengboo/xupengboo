@@ -406,6 +406,14 @@ deployment.extensions/nginx-deployment image updated
 
 > 也可以使用 `edit` 命令，直接编辑Deployment修改镜像。
 
+4. **`rollout restart`**：不修改配置，YAML等，重启Pod命令。
+
+```bash
+kubectl rollout restart deployment <deploy名称> -n <命名空间>
+```
+
+
+
 ### 6.2 deploy 回滚步骤
 
 ```shell
