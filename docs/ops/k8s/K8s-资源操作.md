@@ -1,6 +1,12 @@
-Kubernetes 基础操作
+# Kubernetes 基础操作
 
+```bash
+# 查看你的 Kubernetes 集群，到底支持创建哪些资源（对象，例如：Pod、Service、Ingress、Deployment 这些东西，集群认不认识、能不能用。）
+kubectl api-resources
 
+# 例如：查看当前集群是否支持 ingress 资源
+kubectl api-resources | grep ingress
+```
 
 ## 1. K8s 中心化架构
 
@@ -1224,14 +1230,4 @@ kubectl create secret generic mysecret \
   --from-literal=password=654321 \
   --dry-run=client -o yaml \
   | kubectl replace -f -
-```
-
-## api-resources 操作
-
-```shell
-# 查看你的 Kubernetes 集群，到底支持创建哪些资源（对象，例如：Pod、Service、Ingress、Deployment 这些东西，集群认不认识、能不能用。）
-kubectl api-resources
-
-# 例如：查看当前集群是否支持 ingress 资源
-kubectl api-resources | grep ingress
 ```

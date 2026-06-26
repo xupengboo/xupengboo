@@ -163,12 +163,13 @@ export default defineConfig({
           collapsed: false,
           items: [
             { text: 'Rancher 安装与使用', link: '/ops/k8s/Rancher安装与使用' },
-            { text: 'K8s 基础操作', link: '/ops/k8s/K8s-基础操作' },
             // { text: 'K8s 安装部署', link: '/ops/k8s/k8s-安装部署' },
+            { text: 'K8s 资源操作', link: '/ops/k8s/K8s-资源操作' },
+            { text: 'K8s 存储操作', link: '/ops/k8s/K8s-存储操作' },
             { text: 'K8s 扩展组件', link: '/ops/k8s/K8s-扩展组件' },
-            { text: 'K8s Yaml 配置', link: '/ops/k8s/k8s-yaml配置' },
-            { text: 'K8s DevOps 搭建', link: '/ops/k8s/k8s-devops-搭建' },
-            { text: 'K8s StatefulSet 实战', link: '/ops/k8s/k8s-StatefulSet-实战' },
+            { text: 'K8s 实战配置', link: '/ops/k8s/k8s-实战配置' },
+            { text: 'K8s CI/CD搭建', link: '/ops/k8s/k8s-cicd' },
+            { text: 'StatefulSet 实战', link: '/ops/k8s/k8s-StatefulSet-实战' },
           ]
         },
         {
