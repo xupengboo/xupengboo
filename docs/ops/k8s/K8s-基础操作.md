@@ -1080,17 +1080,151 @@ kubectl create configmap special-config --from-literal=special.how=very --from-l
 
 ## 13. Secret 操作
 
+### 13.1 Secret 基础概念
+
+**ConfigMap 主要用于非安全的数据，与其对应的是 Secret 对象类型，用来保存敏感信息，例如密码、令牌和SSH Key，将这些信息放在Secret中比较安全和灵活。**
+
+| 命令案例                                                     | Secret 分类     | type 字段值                           | 核心说明                                                     | 典型适用场景                                                 | 关键特性                                                     |
+| ------------------------------------------------------------ | --------------- | ------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| `kubectl create secret generic mysecret --from-literal=username=admin --from-literal=password=123456` | 通用不透明密钥  | `Opaque`                              | 默认类型，支持存储任意自定义敏感数据，内容以 base64 编码存储 | 存储业务自定义的账号密码、API 密钥、加密密钥、配置敏感项等任意键值对数据 | 最灵活通用，无格式约束；`data` 字段值需 base64 编码，也可使用 `stringData` 字段直接写入明文 |
+| 通常由系统自动创建，手动创建：`kubectl create secret generic my-sa-token --type=kubernetes.io/service-account-token` | 服务账号令牌    | `kubernetes.io/service-account-token` | 用于标识 Kubernetes 服务账号（ServiceAccount）的 API 访问令牌 | Pod 访问 Kubernetes API Server 时的身份认证；系统会自动为每个 ServiceAccount 创建对应 Secret | 默认自动挂载到 Pod 的 `/var/run/secrets/kubernetes.io/serviceaccount` 路径；固定包含 `token`、`ca.crt`、`namespace` 三个键 |
+| `kubectl create secret docker-registry myregistrykey --docker-server=DOCKER_REGISTRY_SERVER --docker-username=DOCKER_USER --docker-password=DOCKER_PASSWORD --docker-email=DOCKER_EMAIL` | Docker 仓库认证 | `kubernetes.io/dockerconfigjson`      | 适配 Docker 新版 `~/.docker/config.json` 格式的镜像仓库认证凭据 | Harbor、Docker Hub 私有库、阿里云镜像服务等私有镜像仓库的拉取认证，是当前主流用法 | `data` 中固定键为 `.dockerconfigjson`；支持专用子命令快速创建 |
+| `kubectl create secret generic my-basic-auth --type=kubernetes.io/basic-auth --from-literal=username=admin --from-literal=password=123456` | 基础认证密钥    | `kubernetes.io/basic-auth`            | 专门用于存储 HTTP 基础认证（Basic Auth）的用户名与密码       | Nginx 基础认证、内部服务接口鉴权、需要 Basic Auth 的第三方服务访问 | `data` 固定包含 `username` 和 `password` 两个键；语义化强，便于统一管理基础认证类凭据 |
+| `kubectl create secret generic my-ssh-key --type=kubernetes.io/ssh-auth --from-file=ssh-privatekey=~/.ssh/id_rsa` | SSH 认证密钥    | `kubernetes.io/ssh-auth`              | 专门存储 SSH 身份认证的私钥文件                              | Git 仓库 SSH 协议拉取代码、服务器 SSH 免密登录、SFTP 服务认证等场景 | `data` 固定键为 `ssh-privatekey`，存储 SSH 私钥的 base64 内容 |
+| `kubectl create secret tls my-tls-secret --cert=./tls.crt --key=./tls.key` | TLS 证书密钥    | `kubernetes.io/tls`                   | 专门存储 TLS 证书与私钥对                                    | Ingress 资源的 HTTPS 加密、服务端 TLS 证书配置、服务双向认证场景 | `data` 固定包含 `tls.crt`（证书文件）和 `tls.key`（私钥文件）；支持专用子命令快速创建 |
+| 通常由 kubeadm 自动生成，手动创建需指定完整 token 字段，生产不建议手动构造 | 集群引导令牌    | `bootstrap.kubernetes.io/token`       | Kubernetes 集群引导阶段的节点接入令牌                        | kubeadm 集群初始化时，新节点执行 `kubeadm join` 加入集群的身份认证 | 生命周期短，仅用于集群搭建阶段；包含 `token-id`、`token-secret` 等固定字段，支持过期自动失效 |
+
+### 13.2 Secret 基础操作
+
+```bash
+cat username.txt
+admin
+cat password.txt
+123123
+
+# 1. 构建 secret 密钥
+kubectl create secret generic db-user-pass --from-file=./username.txt --from-file=./password.txt
+
+# 2. 查看 secret 密钥
+kubectl get secret db-user-pass -oyaml
+apiVersion: v1
+data:
+  password.txt: MTIzMTIz
+  username.txt: YWRtaW4K
+kind: Secret
+
+# 3. 解码 secret 密钥
+echo "MTIzMTIz" | base64 --decode
+123123
+```
+
+### 13.3 Secret 文件挂载
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mypod
+spec:
+  containers:
+  - name: mypod
+    image: redis
+    # 挂载目录 
+    volumeMounts:
+    - name: foo
+      mountPath: "/etc/foo"
+      readOnly: true
+  # 挂载 secret 
+  volumes:
+  - name: foo
+    secret:
+      secretName: mysecret 
+```
+
+### 13.4 Secret 环境变量
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: secret-env-pod
+spec:
+  containers:
+  - name: mycontainer
+    image: redis
+    env:
+      - name: SECRET_USERNAME
+        valueFrom:
+          # Secret 作为环境变量
+          secretKeyRef:
+            name: mysecret
+            key: username
+      - name: SECRET_PASSWORD
+        valueFrom:
+          # Secret 作为环境变量
+          secretKeyRef:
+            name: mysecret
+            key: password
+  restartPolicy: Never
+```
 
 
 
+## 14. ConfigMap 与 Secret 注意点
 
+### 14.1 SubPath 实现精准挂载
 
+`subPath` 是 Kubernetes 中 `volumeMounts` 的字段，用来解决**整卷挂载会覆盖容器目标目录原有文件**的问题，实现「精准挂载单个文件 / 子目录，不破坏目录原有内容」。
 
+- 用 `subPath` ：卷里的单个文件 → 只覆盖目标目录里的对应文件，其他文件不受影响
 
+```yaml
+# 会覆盖 /etc/foo 下面的所有内容
+volumeMounts:
+- name: foo
+  mountPath: "/etc/foo"
+  readOnly: true
+volumes:
+- name: foo
+  secret:
+    secretName: mysecret
+   
+# 使用 subPath 实现精准挂载
+volumeMounts:
+- name: foo
+  mountPath: "/etc/foo/username"  # 容器内的目标文件完整路径
+  subPath: "username"             # Secret/Volume 中对应的 key 名
+  readOnly: true
+- name: foo
+  mountPath: "/etc/foo/password"
+  subPath: "password"
+  readOnly: true
+volumes:
+- name: foo
+  secret:
+    secretName: mysecret
+```
 
+### 14.2 Secret 与 ConfigMap 文件替换
 
+`kubectl replace -f -` ：**通过文件创建的 Secret 和 ConfigMap 不能被直接替换**，但是通过 YAML 文件创建可以被替换，所以先使用`dry-run -oyaml` 生成YAML文件，再进行 `replace` 即可实现热更新，该方法可以用于其他资源类型，通过YAML文件替换已经创建的资源也是可以的。
 
+> 管道 + `kubectl replace -f -`
+>
+> - 管道 `|`：把前面生成的 YAML 内容，作为后面命令的输入。
+> - `kubectl replace -f -` 里的 `-` 是约定写法：表示从 **标准输入** 读取资源定义，而不是从本地文件读取。
 
+```bash
+# 初始创建
+kubectl create secret generic mysecret --from-literal=username=admin --from-literal=password=123456
+
+# 一行命令完成全量替换
+kubectl create secret generic mysecret \
+  --from-literal=username=admin \
+  --from-literal=password=654321 \
+  --dry-run=client -o yaml \
+  | kubectl replace -f -
+```
 
 ## api-resources 操作
 
