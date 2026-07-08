@@ -170,6 +170,7 @@ export default defineConfig({
             { text: 'K8s 实战配置', link: '/ops/k8s/k8s-实战配置' },
             { text: 'K8s CI/CD搭建', link: '/ops/k8s/k8s-cicd' },
             { text: 'StatefulSet 实战', link: '/ops/k8s/k8s-StatefulSet-实战' },
+            { text: 'Elk 使用操作', link: '/ops/server/elk-使用操作' },
           ]
         },
         {
@@ -180,7 +181,6 @@ export default defineConfig({
             { text: 'HTTPS 证书申请', link: '/ops/server/HTTPS证书申请' },
             { text: 'Nginx 使用指南', link: '/ops/server/Nginx使用指南' },
             { text: 'CentOS 运维手册', link: '/ops/server/CentOS运维手册' },
-            { text: 'ELK Stack 概览与部署', link: '/ops/server/ELKStack概览与部署' },
             { text: 'Logstash 数据管道', link: '/ops/server/Logstash数据管道' },
           ]
         },

@@ -47,12 +47,24 @@ Nginx 日志文件
 
 ### 微服务（Spring Boot + Kafka）
 
-```
+1. **基于 Logback + Kafka Topic 方式，推送日志到ELK：**
+
+```shell
 Spring Boot + Logback → Kafka Topic
                             └─ Logstash 消费
                                 └─ Elasticsearch
                                     └─ Kibana
 ```
+
+2. **在 Kubernetes 环境下，还可以通过 `Filebeat`  挂载宿主机的标准日志路径来采集容器的标准输出（stdout）：**
+
+![PixPin_2026-07-08_17-39-24.png](/public/images/PixPin_2026-07-08_17-39-24.png)
+
+> **Kubernetes 节点的 Pod 日志路径主要包含以下三类（彼此间存在软链接关联）：**
+>
+> 1. 首选入口：`/var/log/containers/`（软链接目录）
+> 2. 核心目录：`/var/log/pods/`（K8S 标准路径）
+> 3. 运行时底层（仅限 Docker 运行时）：`/var/lib/docker/containers/`
 
 ---
 
