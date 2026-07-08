@@ -208,12 +208,12 @@
 
     <!-- ⑧ 座右铭 -->
     <div class="motto-section">
-      <div class="motto-card">
+      <div class="motto-card" v-for="(item, index) in motto" :key="index">
         <div class="motto-deco">"</div>
-        <p class="motto-text">{{ motto.text }}</p>
+        <p class="motto-text">{{ item.text }}</p>
         <div class="motto-divider"></div>
-        <span class="motto-from">{{ motto.from }}</span>
-        <p class="motto-note">{{ motto.note }}</p>
+        <span class="motto-from">{{ item.from }}</span>
+        <p class="motto-note">{{ item.note }}</p>
       </div>
     </div>
 
@@ -1124,6 +1124,9 @@ function toggleBook(title) {
 /* ===== ⑧ 座右铭 ===== */
 .motto-section {
   margin-bottom: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .motto-card {
