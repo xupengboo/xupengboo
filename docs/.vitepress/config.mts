@@ -170,7 +170,7 @@ export default defineConfig({
             { text: 'K8s 实战配置', link: '/ops/k8s/k8s-实战配置' },
             { text: 'K8s CI/CD搭建', link: '/ops/k8s/k8s-cicd' },
             { text: 'StatefulSet 实战', link: '/ops/k8s/k8s-StatefulSet-实战' },
-            { text: 'Elk 使用操作', link: '/ops/k8s/elk-使用操作' },
+            { text: 'ELK Stack 架构操作', link: '/ops/k8s/elk-stack-架构操作' },
           ]
         },
         {
