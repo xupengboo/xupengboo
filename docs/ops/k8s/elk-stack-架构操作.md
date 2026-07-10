@@ -548,7 +548,26 @@ services:
 
 ## 四、基于 Kubernetes 集群部署 ELK
 
+### 1. 搭建 ES 集群
 
+3 节点 master + data 混合模式
+
+- 3 个节点（都是 Master 和 Data）
+- 日志量不算特别夸张
+- K8s 学习环境
+- 甚至小型生产环境
+
+![PixPin_2026-07-10_09-07-53.png](/public/images/PixPin_2026-07-10_09-07-53.png)
+
+![PixPin_2026-07-10_09-27-26.png](/public/images/PixPin_2026-07-10_09-27-26.png)
+
+倘若，日志量很大（比如每天几十 GB、上百 GB），需要考虑多个节点，并且将其拆成：
+
+- 3个专用 Master 节点
+
+- 3个专用 Data 节点
+
+![PixPin_2026-07-10_09-26-27.png](/public/images/PixPin_2026-07-10_09-26-27.png)
 
 
 
