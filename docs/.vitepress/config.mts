@@ -165,7 +165,7 @@ export default defineConfig({
             { text: 'Rancher 安装与使用', link: '/ops/k8s/Rancher安装与使用' },
             // { text: 'K8s 安装部署', link: '/ops/k8s/k8s-安装部署' },
             { text: 'K8s 资源操作', link: '/ops/k8s/K8s-资源操作' },
-            { text: 'K8s 存储操作', link: '/ops/k8s/K8s-存储操作' },
+            { text: 'K8s 存储操作', link: '/ops/k8s/k8s-存储操作' },
             { text: 'K8s 扩展组件', link: '/ops/k8s/K8s-扩展组件' },
             { text: 'K8s 实战配置', link: '/ops/k8s/k8s-实战配置' },
             { text: 'K8s CI/CD搭建', link: '/ops/k8s/k8s-cicd' },
