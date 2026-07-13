@@ -550,7 +550,7 @@ services:
 
 ### 1. 搭建 ES 集群
 
-3 节点 master + data 混合模式
+方式一：3 节点 master + data 混合模式
 
 - 3 个节点（都是 Master 和 Data）
 - 日志量不算特别夸张
@@ -561,13 +561,48 @@ services:
 
 ![PixPin_2026-07-10_09-27-26.png](/public/images/PixPin_2026-07-10_09-27-26.png)
 
-倘若，日志量很大（比如每天几十 GB、上百 GB），需要考虑多个节点，并且将其拆成：
+方式二：倘若，日志量很大（比如每天几十 GB、上百 GB），需要考虑多个节点，并且将其拆成：
 
 - 3个专用 Master 节点
 
 - 3个专用 Data 节点
 
 ![PixPin_2026-07-10_09-26-27.png](/public/images/PixPin_2026-07-10_09-26-27.png)
+
+::: tip 大型日志平台架构图（几十台，每天 20TB 日志），Master 只负责管理，Data 专门负责存储，Ingest 做数据处理，Coordinating 对外提供查询入口。
+
+- **3 个专用 Master、多个 Data、2 个 Coordinating、根据需要增加 Ingest**
+
+```bash
+                Kibana
+                   │
+                   ▼
+        Coordinating Node
+          │        │
+          ▼        ▼
+     Ingest     Ingest
+          │        │
+          └────────┘
+               │
+     ┌─────────┴─────────┐
+     ▼         ▼         ▼
+   Data1     Data2     Data3 ...
+               ▲
+               │
+      Master1 Master2 Master3
+```
+
+:::
+
+2. ES 部署 YAML 文件：
+
+
+
+
+
+
+
+
 
 
 
