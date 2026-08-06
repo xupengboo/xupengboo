@@ -127,6 +127,7 @@ export default defineConfig({
           text: '🐍 Python',
           collapsed: false,
           items: [
+            { text: 'Python 环境', link: '/dev/python/Python环境' },
             { text: 'Python 基础', link: '/dev/python/Python基础' },
             { text: 'Python 实用工具库', link: '/dev/python/Python实用工具库' },
           ]
