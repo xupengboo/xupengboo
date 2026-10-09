@@ -1292,3 +1292,231 @@ kubectl create secret generic mysecret \
   --dry-run=client -o yaml \
   | kubectl replace -f -
 ```
+
+## 16. 节点调度操作（cordon / uncordon / drain）
+
+### 16.1 cordon 基础概念
+
+**`kubectl cordon`（封锁）用于将一个节点标记为「不可调度」，即把节点的 `spec.unschedulable` 字段置为 `true`。**
+
+- 它的作用是**只阻止新的 Pod 调度到该节点**，节点上**已经在运行的 Pod 不受任何影响**，不会被驱逐、不会被删除，继续正常提供服务。
+- 执行后的节点状态会显示为 `Ready,SchedulingDisabled`。
+- 与之相反，`kubectl uncordon`（解除封锁）会把该节点重新标记为「可调度」，让后续新建的 Pod 又能落到这台节点上。
+
+三者对比：
+
+| 命令                    | 是否阻止新 Pod 调度 | 是否驱逐已有 Pod | 对业务的影响                         | 典型场景                                     |
+| ----------------------- | ------------------- | ---------------- | ------------------------------------ | -------------------------------------------- |
+| `kubectl cordon`        | ✅ 阻止              | ❌ 不驱逐         | 无影响，存量 Pod 继续运行            | 节点负载过高、准备进入维护、临时隔离节点      |
+| `kubectl drain`         | ✅ 阻止              | ✅ 驱逐           | 会触发 Pod 迁移，可能有短暂服务抖动  | 节点下线、硬件维修、系统升级、缩容节点        |
+| `kubectl uncordon`      | ❌ 恢复调度          | ❌ 不驱逐         | 无影响，仅恢复调度能力               | 维护结束、负载均衡后恢复节点                  |
+
+> 简单记：**cordon 只「关门」，drain 是「清场 + 关门」，uncordon 是「重新开门」。**
+>
+> 所以纯「防止新 Pod 再落入某节点」的需求用 `cordon` 就够了；只有当节点真的要关机 / 下线，必须把上面的 Pod 全部挪走时，才用 `drain`。
+
+### 16.2 cordon 常用命令
+
+```bash
+# 1. 封锁节点（标记为不可调度）
+kubectl cordon <node-name>
+
+# 2. 解除封锁（恢复可调度）
+kubectl uncordon <node-name>
+
+# 3. 批量封锁 / 解除（借助标签选择器）
+kubectl cordon -l <label-key>=<label-value>
+kubectl uncordon -l <label-key>=<label-value>
+
+# 4. 查看节点可调度状态
+kubectl get node
+kubectl get node <node-name>
+```
+
+命令参数详解：
+
+- `kubectl cordon`：K8s 专用命令，直接修改节点的 `unschedulable` 字段，**无需重启任何组件，立即生效**。
+- `<node-name>`：目标节点名称，可通过 `kubectl get node` 获取完整名称（**注意必须是完整节点名，不是简写**）。
+- `-l` ：`--selector`（标签选择器），配合标签可一次性操作多台节点，适合批量维护场景。
+
+### 16.3 实操案例：隔离负载过高节点
+
+**场景**：集群中节点 3（`s-djsr2`）负载明显高于节点 2（`s-2pdf6`），需要把该节点上 `procure` 命名空间的服务重新分配，让负载趋于均衡。
+
+**思路**：先封锁节点 3 → 再滚动重启工作负载触发 Pod 重新调度 → 待负载均衡后解除封锁。
+
+**1. 临时禁用节点 3 调度：隔离负载过高节点**
+
+将节点 3（`s-djsr2`）标记为不可调度，防止重启产生的新 Pod 再次落入该节点：
+
+```bash
+kubectl cordon kcs-yd-qk-zhaocai-k8s-test-s-djsr2
+```
+
+**验证方式**：运行 `kubectl get node`，确认节点 `s-djsr2` 的 `STATUS` 显示为 `Ready,SchedulingDisabled`。
+
+**2. 滚动重启 procure 命名空间下的所有工作负载：触发 Pod 重新分配**
+
+对该命名空间下的所有 Deployment 执行平滑重启：
+
+```bash
+kubectl rollout restart deployment -n procure
+```
+
+**验证方式**：运行 `kubectl get pod -n procure -o wide -w`，观察旧 Pod 逐渐销毁，新 Pod 调度至节点 `s-2pdf6` 上并变为 `Running` 状态。
+
+**3. 恢复节点 3 的可调度状态：解除限制**
+
+待所有服务启动稳定后，解除节点 3 的隔离限制，使其后续参与正常调度：
+
+```bash
+kubectl uncordon kcs-yd-qk-zhaocai-k8s-test-s-djsr2
+```
+
+**验证方式**：运行 `kubectl top nodes`，确认 `s-2pdf6` 与 `s-djsr2` 的 CPU 及内存百分比已趋于均衡。
+
+:::: tip 几个容易踩的坑：
+
+1. **`cordon` 之后 Pod 不会自动搬走**：如果只执行 `cordon` 不重启工作负载，原本在节点 3 上的 Pod 会一直留在那，负载不会有任何变化。必须配合 `rollout restart`（或手动删 Pod）才会产生新的调度。
+2. **`rollout restart` 只影响 Deployment**：如果命名空间里还有 `StatefulSet`、`DaemonSet`、裸 `Pod`，需要单独处理：
+   ```bash
+   kubectl rollout restart statefulset -n procure
+   kubectl rollout restart daemonset -n procure
+   ```
+   另外 `DaemonSet` 是每节点一个 Pod，天然不受 `cordon` 影响的场景要特别留意。
+3. **重启期间留意副本数与 PDB**：`rollout restart` 是滚动式的，若 `replicas: 1` 且没有 `PodDisruptionBudget`，重启瞬间可能出现短暂不可用，建议在业务低峰期执行。
+4. **解除封锁的时机**：一定要等新 Pod 全部 `Running` 且就绪探针通过后再 `uncordon`；否则立刻解除限制后，后续创建的新 Pod 可能又被调度回负载还没降下来的节点。
+5. **确认节点已恢复**：`uncordon` 后照例用 `kubectl get node` 复查一次，`STATUS` 应恢复为 `Ready`（不再带 `SchedulingDisabled`）。
+
+::::
+
+### 16.4 drain 驱逐节点（延伸）
+
+与 `cordon` 相比，`drain` 多了一步「驱逐 Pod」，用于节点需要真正下线维护的场景：
+
+```bash
+# 驱逐节点上的 Pod（默认跳过 DaemonSet 管理的 Pod）
+kubectl drain <node-name> --ignore-daemonsets --delete-emptydir-data
+
+# 维护完成后恢复调度
+kubectl uncordon <node-name>
+```
+
+- `--ignore-daemonsets`：忽略 DaemonSet 管理的 Pod（这类 Pod 无法被驱逐，不加此参数会直接报错中断）。
+- `--delete-emptydir-data`：确认可以删除使用 `emptyDir` 的 Pod 数据（不加此参数，存在此类 Pod 时会报错中断）。
+- `--force`：强制驱逐没有被控制器管理的裸 Pod（例如手动创建的 Pod），**慎用**。
+
+> **drain 会先自动执行一次 cordon**，所以只需要 `drain` + `uncordon` 配对使用，不需要单独再 cordon 一次。
+
+```plain
+节点维护标准流程：
+
+  kubectl drain <node>        kubectl uncordon <node>
+        │                              ▲
+        │  ① 封锁 + 驱逐 Pod            │  ③ 恢复调度
+        ▼                              │
+   [ 节点不可调度 / Pod 迁走 ] ─────────┘
+        │
+        │  ② 执行维护：升级内核、换硬件、重装系统…
+        ▼
+```
+
+## 17. requests 填写的数值远低于 JVM 实际消耗
+
+### 17.1 问题本质
+
+**K8s 调度器在计算节点剩余容量时，完全依据 YAML 中的 `requests` 累加值，而不是 `kubectl top` 看到的真实占用。**
+
+也就是说：调度器眼里只有「**账面上的 requests 相加**」，它**看不到**也不关心容器运行时实际吃了多少内存（那是 `kubectl top` / 监控系统才看得到的数据）。
+
+### 17.2 典型场景
+
+Java 微服务**启动后实际内存要占 1.5Gi ~ 2Gi**，但 YAML 里 `requests.memory` **只写了 256Mi 或 512Mi**。
+
+```yaml
+resources:
+  requests:
+    memory: 256Mi   # ← 账面只报 256Mi
+    cpu: 100m
+  limits:
+    memory: 2Gi     # ← 实际能吃到 2Gi
+    cpu: 1000m
+```
+
+因为 JVM 的内存构成复杂（堆内存 + 元空间 + 线程栈 + 直接内存 + JIT 代码缓存…），**堆内存用 `-Xmx` 限制了，非堆部分却不受 `requests` 约束**，所以实际占用往往远大于 `requests`。
+
+### 17.3 后果：调度器被「账面数据」骗了
+
+- 对调度器来说，节点 3 上挂了 10 个 Pod，**账面上只消耗了 2.5Gi 的 requests**（10 × 256Mi），调度器认为该节点**还非常空**；
+- 但**物理内存实际已经被 Java 堆内存和非堆内存打到了 101%**；
+- 因此发版时，调度器**仍然放心把新 Pod 往节点 3 上塞**，导致节点内存被压爆 → 触发 OOM Killer → Pod 被强杀、业务抖动甚至雪崩。
+
+```plain
+调度器的视角（只看 requests）          真实的节点情况（top 看到的）
+
+  requests 汇总：2.5Gi                 物理内存占用：101% 💥
+  ┌──────────────────────┐            ┌──────────────────────┐
+  │ 节点剩余容量：充足 ✔ │            │ 节点剩余容量：已爆满 │
+  │ 新 Pod 可以调度过来  │            │ OOM Killer 已就位    │
+  └──────────────────────┘            └──────────────────────┘
+              │                                   ▲
+              └─────────── 两者严重脱节 ──────────┘
+```
+
+### 17.4 排查与解决
+
+**① 先对比账面与实际，确认偏差有多大：**
+
+```bash
+# 看节点上的 requests 汇总（账面）
+kubectl describe node <node-name> | grep -A 8 "Allocated resources"
+
+# 看节点真实内存占用（实际）
+kubectl top node
+kubectl top pod -n procure --sort-by=memory
+
+# 对比某个 Pod 的 requests 与实际占用
+kubectl get pod <pod-name> -n procure -o jsonpath='{.spec.containers[*].resources.requests.memory}'
+kubectl top pod <pod-name> -n procure
+```
+
+**② 修正 `requests`，让它贴近真实水位：**
+
+```yaml
+resources:
+  requests:
+    memory: 1.5Gi   # ← 按 JVM 实际稳定占用来填，而不是拍脑袋写小值
+    cpu: 500m
+  limits:
+    memory: 2Gi
+    cpu: 1000m
+```
+
+> 关键原则：**`requests` 不是「越小越好」，而是「越准越好」**。填小了会让调度器误判节点容量，填大了会浪费资源、降低部署密度。
+
+**③ 让 JVM 感知容器内存上限（推荐搭配）：**
+
+从 JDK 8u191 / JDK 10 起，JVM 支持容器感知，可用 `-XX:MaxRAMPercentage` 按容器 limit 的百分比设置堆大小，避免 JVM 按宿主机物理内存来分配堆：
+
+```yaml
+env:
+  - name: JAVA_OPTS
+    value: >-
+      -XX:MaxRAMPercentage=70.0
+      -XX:InitialRAMPercentage=50.0
+```
+
+```bash
+# 旧版本 JDK 可显式指定堆大小
+JAVA_OPTS="-Xms1g -Xmx1280m -XX:MaxMetaspaceSize=256m"
+```
+
+- `MaxRAMPercentage=70.0`：堆内存最大只占容器 limit 的 70%，**留出 30% 给非堆内存、线程栈、直接内存等**，防止总占用突破 limit 被 OOM Killer 干掉。
+
+:::: warning 和上一章的关联
+
+这正是 **16.3 那个案例的「病根」之一**：只看 `kubectl top nodes` 发现节点 3 负载高，但如果 `requests` 本身就填得偏小，那么**即使把 Pod 重新调度走，账面上的 requests 依然不合理**，下次发版调度器还是会把新 Pod 塞回来。
+
+所以：**`cordon` + `rollout restart` 是「治标」（把当前负载挪走），修正 `requests` 才是「治本」（让调度器不再误判）。** 两者要配合做。
+
+::::
