@@ -1151,15 +1151,110 @@ kubectl create configmap special-config --from-literal=special.how=very --from-l
 
 **ConfigMap 主要用于非安全的数据，与其对应的是 Secret 对象类型，用来保存敏感信息，例如密码、令牌和SSH Key，将这些信息放在Secret中比较安全和灵活。**
 
-| 命令案例                                                     | Secret 分类     | type 字段值                           | 核心说明                                                     | 典型适用场景                                                 | 关键特性                                                     |
-| ------------------------------------------------------------ | --------------- | ------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `kubectl create secret generic mysecret --from-literal=username=admin --from-literal=password=123456` | 通用不透明密钥  | `Opaque`                              | 默认类型，支持存储任意自定义敏感数据，内容以 base64 编码存储 | 存储业务自定义的账号密码、API 密钥、加密密钥、配置敏感项等任意键值对数据 | 最灵活通用，无格式约束；`data` 字段值需 base64 编码，也可使用 `stringData` 字段直接写入明文 |
-| 通常由系统自动创建，手动创建：`kubectl create secret generic my-sa-token --type=kubernetes.io/service-account-token` | 服务账号令牌    | `kubernetes.io/service-account-token` | 用于标识 Kubernetes 服务账号（ServiceAccount）的 API 访问令牌 | Pod 访问 Kubernetes API Server 时的身份认证；系统会自动为每个 ServiceAccount 创建对应 Secret | 默认自动挂载到 Pod 的 `/var/run/secrets/kubernetes.io/serviceaccount` 路径；固定包含 `token`、`ca.crt`、`namespace` 三个键 |
-| `kubectl create secret docker-registry myregistrykey --docker-server=DOCKER_REGISTRY_SERVER --docker-username=DOCKER_USER --docker-password=DOCKER_PASSWORD --docker-email=DOCKER_EMAIL` | Docker 仓库认证 | `kubernetes.io/dockerconfigjson`      | 适配 Docker 新版 `~/.docker/config.json` 格式的镜像仓库认证凭据 | Harbor、Docker Hub 私有库、阿里云镜像服务等私有镜像仓库的拉取认证，是当前主流用法 | `data` 中固定键为 `.dockerconfigjson`；支持专用子命令快速创建 |
-| `kubectl create secret generic my-basic-auth --type=kubernetes.io/basic-auth --from-literal=username=admin --from-literal=password=123456` | 基础认证密钥    | `kubernetes.io/basic-auth`            | 专门用于存储 HTTP 基础认证（Basic Auth）的用户名与密码       | Nginx 基础认证、内部服务接口鉴权、需要 Basic Auth 的第三方服务访问 | `data` 固定包含 `username` 和 `password` 两个键；语义化强，便于统一管理基础认证类凭据 |
-| `kubectl create secret generic my-ssh-key --type=kubernetes.io/ssh-auth --from-file=ssh-privatekey=~/.ssh/id_rsa` | SSH 认证密钥    | `kubernetes.io/ssh-auth`              | 专门存储 SSH 身份认证的私钥文件                              | Git 仓库 SSH 协议拉取代码、服务器 SSH 免密登录、SFTP 服务认证等场景 | `data` 固定键为 `ssh-privatekey`，存储 SSH 私钥的 base64 内容 |
-| `kubectl create secret tls my-tls-secret --cert=./tls.crt --key=./tls.key` | TLS 证书密钥    | `kubernetes.io/tls`                   | 专门存储 TLS 证书与私钥对                                    | Ingress 资源的 HTTPS 加密、服务端 TLS 证书配置、服务双向认证场景 | `data` 固定包含 `tls.crt`（证书文件）和 `tls.key`（私钥文件）；支持专用子命令快速创建 |
-| 通常由 kubeadm 自动生成，手动创建需指定完整 token 字段，生产不建议手动构造 | 集群引导令牌    | `bootstrap.kubernetes.io/token`       | Kubernetes 集群引导阶段的节点接入令牌                        | kubeadm 集群初始化时，新节点执行 `kubeadm join` 加入集群的身份认证 | 生命周期短，仅用于集群搭建阶段；包含 `token-id`、`token-secret` 等固定字段，支持过期自动失效 |
+**先看速查表，记住「类型 → 用哪个子命令 → data 里固定叫什么 key」就够了：**
+
+| Secret 分类     | type 字段值                           | 创建子命令                          | 固定 data 键               | 典型场景                                        |
+| --------------- | ------------------------------------- | ----------------------------------- | -------------------------- | ----------------------------------------------- |
+| 通用不透明密钥  | `Opaque`（默认）                      | `generic`                           | 无，key 自定义             | 业务账号密码、API Key、加密密钥                 |
+| Docker 仓库认证 | `kubernetes.io/dockerconfigjson`      | `docker-registry`                   | `.dockerconfigjson`        | Harbor、Docker Hub、ACR 等私有仓库拉取镜像      |
+| TLS 证书密钥    | `kubernetes.io/tls`                   | `tls`                               | `tls.crt`、`tls.key`       | Ingress HTTPS、服务端证书配置                   |
+| 基础认证密钥    | `kubernetes.io/basic-auth`            | `generic --type=...`                | `username`、`password`     | Nginx Basic Auth、内部接口鉴权                  |
+| SSH 认证密钥    | `kubernetes.io/ssh-auth`              | `generic --type=...`                | `ssh-privatekey`           | Git SSH 拉代码、SFTP/SSH 登录                   |
+| 服务账号令牌    | `kubernetes.io/service-account-token` | `generic --type=...`（一般自动创建） | `token`、`ca.crt`、`namespace` | Pod 访问 apiserver 的身份凭证                   |
+| 集群引导令牌    | `bootstrap.kubernetes.io/token`       | kubeadm 自动生成                    | `token-id`、`token-secret` | `kubeadm join` 新节点入集群，生命周期短         |
+
+**下面按类型看具体命令：**
+
+**1. Opaque（最常用，不写 `--type` 就是它）**
+
+```bash
+kubectl create secret generic mysecret \
+  --from-literal=username=admin \
+  --from-literal=password=123456
+```
+
+- 最灵活，无格式约束，任何自定义键值对都能放。
+- YAML 里 `data` 的值必须是 base64；想直接写明文就用 `stringData`，apiserver 会自动帮你编码。
+
+**2. dockerconfigjson（私有仓库拉取，实战最常配）**
+
+```bash
+# 通用写法
+kubectl create secret docker-registry myregistrykey \
+  --docker-server=DOCKER_REGISTRY_SERVER \
+  --docker-username=DOCKER_USER \
+  --docker-password=DOCKER_PASSWORD \
+  --docker-email=DOCKER_EMAIL
+
+# 实战：为 Harbor 私有仓库创建拉取凭据
+kubectl create secret docker-registry cmecloud-secret \
+  --docker-server=xupengboo.xxx.harbor.com \
+  --docker-username=admin \
+  --docker-password=123456 \
+  -n xupengboo
+```
+
+- 内容等价于 Docker 新版 `~/.docker/config.json` 的认证片段（旧版 `.dockercfg` 已基本不用）。
+- `--docker-email` 可以不写，留空即可。
+- **建好不等于生效**，还要在 Pod 模板里引用：
+
+```yaml
+spec:
+  imagePullSecrets:
+  - name: cmecloud-secret
+```
+
+- Secret 与 Pod 必须**同命名空间**，跨命名空间引用会直接 `ImagePullBackOff`。
+
+**3. tls（证书 + 私钥）**
+
+```bash
+kubectl create secret tls my-tls-secret --cert=./tls.crt --key=./tls.key
+```
+
+- 固定生成 `tls.crt` 和 `tls.key` 两个键，直接给 Ingress 的 `spec.tls[].secretName` 用。
+
+**4. basic-auth（HTTP 基础认证）**
+
+```bash
+kubectl create secret generic my-basic-auth \
+  --type=kubernetes.io/basic-auth \
+  --from-literal=username=admin \
+  --from-literal=password=123456
+```
+
+- 本质是 `generic` 加了个语义化的 `--type`，好处是能约束 key 名必须为 `username` / `password`。
+- 注意：它**只存凭据，不做认证**，还得配合 Nginx `auth_basic` 之类的配置才生效。
+
+**5. ssh-auth（SSH 私钥）**
+
+```bash
+kubectl create secret generic my-ssh-key \
+  --type=kubernetes.io/ssh-auth \
+  --from-file=ssh-privatekey=~/.ssh/id_rsa
+```
+
+- key 名固定为 `ssh-privatekey`，`--from-file` 时**必须**用 `ssh-privatekey=文件路径` 这种显式命名，不能只给路径。
+
+**6. service-account-token（Pod 访问 apiserver）**
+
+```bash
+kubectl create secret generic my-sa-token --type=kubernetes.io/service-account-token
+```
+
+- 一般不用手建：系统会为每个 ServiceAccount 自动创建。
+- 默认挂载到 Pod 的 `/var/run/secrets/kubernetes.io/serviceaccount` 目录。
+
+**7. bootstrap.kubernetes.io/token（集群引导）**
+
+- 由 kubeadm 在 `kubeadm init` 时自动生成，`token` 有有效期，过期自动失效。
+- 生产环境**不建议手动构造**，需要时用 `kubeadm token create` 重新签发。
+
+:::: tip 一句话记忆
+- 命令只有三个：`generic`（自己塞数据）、`docker-registry`（拉私有镜像）、`tls`（证书密钥）。
+- 其余类型都是 `generic --type=xxx` 的语义化变体，区别只在于 **data 里的 key 名被固定了**。
+::::
+
 
 ### 14.2 Secret 基础操作
 
